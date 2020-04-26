@@ -1,0 +1,8 @@
+Start (3,3,0)
+Target (185,189,45)
+Obstacle [30,200]x[0,50]
+Obstacle [0,100]x[54,100]
+Obstacle [120,200]x[50,100]
+Obstacle [0,116]x[80,100]
+Obstacle [30,200]x[120,140]
+Obstacle [30,50]x[100,115]

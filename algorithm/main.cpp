@@ -93,9 +93,110 @@ void merge_sort(int input_array[], int lower_index, int higher_index) {
 	}
 }
 
+#include <fstream>
+#include <unistd.h>
+#include <regex>
+#include <vector>
+/*
+ Start (3,3,0)
+ Target (185,189,45)
+ Obstacle [30,200]x[0,50]
+ Obstacle [0,100]x[54,100]
+ Obstacle [120,200]x[50,100]
+ Obstacle [0,116]x[80,100]
+ Obstacle [30,200]x[120,140]
+ Obstacle [30,50]x[100,115]
+ */
+// Will hold the 'Start' and 'Target' positions
+struct Position {
+	Position() {}
+	Position(float x_coord, float y_coord, float z_coord) {
+		x = x_coord;
+		y = y_coord;
+		z = z_coord;
+	}
+	float x=0.f, y=0.f, z=0.f;
+};
+
+// Will hold the points of obstacles
+struct Point {
+	Point() {}
+	Point(float x_coord, float y_coord) {
+		x = x_coord;
+		y = y_coord;
+	}
+	float x = 0.f;
+	float y = 0.f;
+};
+
+struct Obstacle {
+	Obstacle() {}
+	Obstacle(const Point& min, const Point& max) {
+		min_point = min;
+		max_point = max;
+	}
+	Point min_point;
+	Point max_point;
+};
+
+// Will hold the coordinates given in the coordinates.txt file
+struct Coordinates {
+	Coordinates() {}
+	Position start;
+	Position target;
+	std::vector<Obstacle> obstacles;
+};
+
+void get_vertex(const std::string& vertex_value, Position& position) {
+	static std::regex vertex_regex(R"((\d+),(\d+),(\d+)\))");
+	std::smatch match;
+	if(std::regex_search(vertex_value.begin(), vertex_value.end(), match, vertex_regex)) {
+		position = Position(std::stof(match[1]), std::stof(match[2]), std::stof(match[3]));
+	}
+}
+
+void get_obstacle_bounds(const std::string& obstacle_value, std::vector<Obstacle>& obstacle) {
+	static std::regex obstacle_regex(R"(\[(\d+),(\d+)\]x\[(\d+),(\d+)\])");
+	std::smatch match;
+	if(std::regex_search(obstacle_value.begin(), obstacle_value.end(), match, obstacle_regex)) {
+		obstacle.push_back(Obstacle(Point(std::stof(match[1]), std::stof(match[2])), Point(std::stof(match[3]), std::stof(match[4]))));
+	}
+}
+
+// Populate the coordinates from coordinates.txt file
+bool populate_coordinates(Coordinates& coordinates) {
+	// The file coordinates.txt should be in the same directory where the executable file of this code exists
+	// Parse the file and store the vertices and points of needle and obstacles
+	std::ifstream coordinates_text_file("/Users/aseshshrestha/Code/XCode Projects/algorithm/coordinates.txt");
+	std::string key, value;
+	if(coordinates_text_file.is_open()) {
+		while(coordinates_text_file >> key >> value) {
+			std::cout << "Key: " << key << ", value: " << value << std::endl;
+			if(key == "Start") {
+				get_vertex(value, coordinates.start);
+			} else if(key == "Target") {
+				get_vertex(value, coordinates.target);
+			} else if(key == "Obstacle") {
+				get_obstacle_bounds(value, coordinates.obstacles);
+			}
+		}
+		coordinates_text_file.close();
+	} else {
+		std::cout <<"Failed to open coordinates.txt file. Pleaes make sure the file is in the same directory where this executable exists" << std::endl;
+		return false;
+	}
+	return true;
+}
+
 int main(int argc, const char* argv[]) {
+//	char path[200];
+//	::getcwd(path, 200);
+//	std::cout << path << std::endl;
 	
-	
+	Coordinates coord;
+	if(populate_coordinates(coord)) {
+	}
+
 	
 	
 	// Merge sort

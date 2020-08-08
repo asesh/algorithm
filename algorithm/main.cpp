@@ -14,6 +14,8 @@
 #include <type_traits>
 #include <memory>
 #include <string_view>
+#include <map>
+#include <set>
 
 #include "binary_tree.hpp"
 
@@ -58,12 +60,6 @@ void reverse_array(const std::array<DataType, 7>& input_array, std::array<DataTy
 	}
 }
 
-template<typename DataType>
-class CFoo {
-	static_assert(std::is_pointer<DataType>::value, "DataType must be of integral type");
-public:
-};
-
 // Incomplete implementation of sliding window
 int get_max_sum_of_consecutive_numbers(int array[], int number_of_elements, int number_of_consecutive_elements) {
 	// array: 1, 2, 3, 4, 5, 6
@@ -84,16 +80,6 @@ int get_max_sum_of_consecutive_numbers(int array[], int number_of_elements, int 
 	
 	return max_sum_of_consecutive_numbers;
 }
-
-// Merge sort
-// input_array = {2, 1, 5, 4, 8, 9, 6, 3}
-// lower_index = 0 = 2
-// higher_index = 4 = 8
-void merge_sort(int input_array[], int lower_index, int higher_index) {
-	if(higher_index > lower_index) {
-	}
-}
-
 
 /*
  ABC
@@ -120,13 +106,117 @@ void permutation_of_string(std::string& input_string, int lower_index, int highe
 	}
 }
 
+// The sum of two numbers equals target, return the indices of those two numbers
+std::pair<int, int> two_sum_equals_specific_target(const int* input_numbers, int number_of_elements, int target) {
+	for(int index = 0; index < number_of_elements; index++) {
+		for(int sub_index = index + 1; sub_index < number_of_elements; sub_index++) {
+			if(input_numbers[index] + input_numbers[sub_index] == target) {
+				return std::make_pair(index, sub_index);
+			}
+		}
+	}
+	return std::make_pair(0, 0);
+}
 
+// Merge sort
+// input_array = {38, 27, 43, 3, 9, 82, 10}
+// lower_index = 0 = 12
+// higher_index = 4 = 8
+/*
+ 1: 7/2 -> 3
+ 38 27 43 3 | 9 82 10
+ */
+void merge_sort_implementation(int input_array[], int lower_index, int median_index, int higher_index) {
+}
+
+void merge_sort(int input_array[], int lower_index, int higher_index) {
+	if(lower_index < higher_index) {
+		int median = (lower_index + higher_index) / 2;
+	}
+}
+
+// Longest substring without repeating characters
+// https://leetcode.com/problems/longest-substring-without-repeating-characters/
+/*
+ input: pwwkew
+ characters: wke
+ output: 3
+ */
+// Naive approach
+int32_t longest_substring_without_repeating_characters(const std::string& input_string) {
+	int32_t max_length = 0, counter = 0;
+	std::set<char> char_set;
+	for(const auto& character: input_string) {
+		if(char_set.find(character) == char_set.end()) {
+			char_set.insert(character);
+		} else {
+			counter = 0;
+			char_set.clear();
+			char_set.insert(character);
+		}
+		counter++;
+		if(counter > max_length) {
+			max_length = counter;
+		}
+	}
+	return max_length;
+}
+
+
+// Recursive way to print braces (((( ))))
+void recursive_print_braces(int number_of_braces) {
+	if(number_of_braces < 1) {
+		return;
+	} else {
+		std::cout<<"(";
+		recursive_print_braces(--number_of_braces);
+	}
+}
+
+int recursiveFun1(int n)
+{
+	if (n <= 0)
+		return 1;
+	else
+		return 1 + recursiveFun1(n-1);
+}
+
+int recursive_sum(int input_number) {
+	if(input_number <= 1) {
+		return 1;
+	} else {
+		return input_number + recursive_sum(--input_number);
+	}
+}
 
 int main(int argc, const char* argv[]) {
-	// Play with entry point arguments
-//	if(argc < 1) {
-//		return -1;
-//	}
+//	std::cout<< "The longest is: " << longest_substring_without_repeating_characters("pwwkew") << std::endl;
+	
+	
+	CBinaryTree<int32_t> binary_tree(1);
+	binary_tree.m_left_node = new CBinaryTree<int32_t>(2);
+	binary_tree.m_left_node->m_left_node = new CBinaryTree<int32_t>(3);
+	binary_tree.m_left_node->m_right_node = new CBinaryTree<int32_t>(4);
+	binary_tree.m_left_node->m_left_node->m_left_node = new CBinaryTree<int32_t>(5);
+	binary_tree.m_left_node->m_right_node->m_right_node = new CBinaryTree<int32_t>(6);
+	
+	binary_tree.m_right_node = new CBinaryTree<int32_t>(7);
+	binary_tree.m_right_node->m_left_node = new CBinaryTree<int32_t>(8);
+	binary_tree.m_right_node->m_left_node->m_left_node = new CBinaryTree<int32_t>(9);
+	binary_tree.m_right_node->m_right_node = new CBinaryTree<int32_t>(10);
+	
+	
+	binary_tree.remove_subtree(binary_tree.m_left_node);
+	binary_tree.remove_subtree(binary_tree.m_right_node);
+	
+//	std::cout<<recursive_sum(5)<<std::endl;
+	
+//	recursive_print_braces(5);
+	
+	//
+//	const int input_array[] = {1, 2, 3, 4, 6, 2, 11, 7, 15};
+//	auto indices_pair = two_sum_equals_specific_target(input_array, sizeof(input_array)/sizeof(input_array[0]), 9);
+//	std::cout<<"First index: " << indices_pair.first << ", 2nd index: " << indices_pair.second << std::endl;
 	
 	
 	// Permutation of string
@@ -136,7 +226,7 @@ int main(int argc, const char* argv[]) {
 	
 	
 	// Merge sort
-//	int input_merge_sort_array[] = {2, 1, 5, 7, 6, 10, 8, 4, 3};
+//	int input_merge_sort_array[] = {38, 27, 43, 3, 9, 82, 10};
 //	int number_of_elements = sizeof(input_merge_sort_array) / sizeof(input_merge_sort_array[0]);
 //	merge_sort(input_merge_sort_array, 0, number_of_elements / 2);
 	

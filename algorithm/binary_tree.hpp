@@ -19,6 +19,7 @@ public:
 		m_data = input_data;
 	}
 	/*
+	 Visualization of binary tree
 							*
 						/		\
 					*				*
@@ -28,13 +29,6 @@ public:
 			*	*		*	*
 	 
 	 */
-	~CBinaryTree() {
-		// Remove all the nodes from the left subtree
-//		remove_subtree(m_left_node);
-		
-		// Remove all the nodes from the right subtree
-//		remove_subtree(m_right_node);
-	}
 	
 	void remove_subtree(CBinaryTree<GenericData>* parent_node) {
 		while(parent_node) {
@@ -52,11 +46,6 @@ public:
 			}
 		}
 	}
-	
-	// 1, 2, 3, 4, 5
-//	CBinaryTree(const std::array<GenericData, number_of_items>& input_array) {
-//		
-//	}
   
 	bool add_new_item(GenericData new_value) {
 		return true;

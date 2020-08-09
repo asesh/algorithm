@@ -194,18 +194,20 @@ int main(int argc, const char* argv[]) {
 	
 	
 	CBinaryTree<int32_t> binary_tree(1);
+	// Fill left-subtree
 	binary_tree.m_left_node = new CBinaryTree<int32_t>(2);
 	binary_tree.m_left_node->m_left_node = new CBinaryTree<int32_t>(3);
 	binary_tree.m_left_node->m_right_node = new CBinaryTree<int32_t>(4);
 	binary_tree.m_left_node->m_left_node->m_left_node = new CBinaryTree<int32_t>(5);
 	binary_tree.m_left_node->m_right_node->m_right_node = new CBinaryTree<int32_t>(6);
 	
+	// Fill right-subtree
 	binary_tree.m_right_node = new CBinaryTree<int32_t>(7);
 	binary_tree.m_right_node->m_left_node = new CBinaryTree<int32_t>(8);
 	binary_tree.m_right_node->m_left_node->m_left_node = new CBinaryTree<int32_t>(9);
 	binary_tree.m_right_node->m_right_node = new CBinaryTree<int32_t>(10);
 	
-	
+	// Remove the left and right subtrees
 	binary_tree.remove_subtree(binary_tree.m_left_node);
 	binary_tree.remove_subtree(binary_tree.m_right_node);
 	

@@ -196,20 +196,35 @@ int main(int argc, const char* argv[]) {
 	CBinaryTree<int32_t> binary_tree(1);
 	// Fill left-subtree
 	binary_tree.m_left_node = new CBinaryTree<int32_t>(2);
-	binary_tree.m_left_node->m_left_node = new CBinaryTree<int32_t>(3);
-	binary_tree.m_left_node->m_right_node = new CBinaryTree<int32_t>(4);
-	binary_tree.m_left_node->m_left_node->m_left_node = new CBinaryTree<int32_t>(5);
-	binary_tree.m_left_node->m_right_node->m_right_node = new CBinaryTree<int32_t>(6);
-	
+	binary_tree.m_left_node->m_left_node = new CBinaryTree<int32_t>(4);
+	binary_tree.m_left_node->m_right_node = new CBinaryTree<int32_t>(5);
+	binary_tree.m_left_node->m_left_node->m_left_node = new CBinaryTree<int32_t>(8);
+	binary_tree.m_left_node->m_left_node->m_right_node = new CBinaryTree<int32_t>(9);
+	binary_tree.m_left_node->m_right_node->m_left_node = new CBinaryTree<int32_t>(10);
+	binary_tree.m_left_node->m_right_node->m_right_node = new CBinaryTree<int32_t>(11);
+
 	// Fill right-subtree
-	binary_tree.m_right_node = new CBinaryTree<int32_t>(7);
-	binary_tree.m_right_node->m_left_node = new CBinaryTree<int32_t>(8);
-	binary_tree.m_right_node->m_left_node->m_left_node = new CBinaryTree<int32_t>(9);
-	binary_tree.m_right_node->m_right_node = new CBinaryTree<int32_t>(10);
-	
+	binary_tree.m_right_node = new CBinaryTree<int32_t>(3);
+	binary_tree.m_right_node->m_left_node = new CBinaryTree<int32_t>(6);
+	binary_tree.m_right_node->m_right_node = new CBinaryTree<int32_t>(7);
+	binary_tree.m_right_node->m_left_node->m_left_node = new CBinaryTree<int32_t>(12);
+	binary_tree.m_right_node->m_left_node->m_right_node = new CBinaryTree<int32_t>(13);
+	binary_tree.m_right_node->m_right_node->m_left_node = new CBinaryTree<int32_t>(14);
+	binary_tree.m_right_node->m_right_node->m_right_node = new CBinaryTree<int32_t>(15);
+
+	binary_tree.traverse_bfs(&binary_tree);
+
+	std::cout<<std::endl<<"Height of left subtree: "<<binary_tree.get_height(&binary_tree)<<std::endl;
+
+	std::cout<<std::endl<<"Removing all the nodes"<<std::endl;
 	// Remove the left and right subtrees
 	binary_tree.remove_subtree(binary_tree.m_left_node);
 	binary_tree.remove_subtree(binary_tree.m_right_node);
+
+	std::cout<<std::endl;
+	
+	
+	
 	
 //	std::cout<<recursive_sum(5)<<std::endl;
 	

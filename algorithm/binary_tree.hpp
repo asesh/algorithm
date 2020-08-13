@@ -20,13 +20,13 @@ public:
 	}
 	/*
 	 Visualization of binary tree
-							*
-						/		\
-					*				*
-				/		\		/		\
-				*		*		*		*
-			/	\		/	\
-			*	*		*	*
+								1
+						/				\
+					2						3
+				/		\				/		\
+				4		5				6			7
+			/	\		/	\		 / \   /  \
+			8	9	 10	 11	12 13  14  15
 	 
 	 */
 	
@@ -34,7 +34,7 @@ public:
 		while(parent_node) {
 			auto left_child_node = parent_node->m_left_node;
 			auto right_child_node = parent_node->m_right_node;
-			std::cout<<"Deleting: " << parent_node->m_data << std::endl;
+			std::cout<<"Deleting: " << parent_node->m_data << " ";
 			delete parent_node;
 			parent_node = nullptr;
 			
@@ -43,6 +43,35 @@ public:
 			}
 			if(right_child_node) {
 				remove_subtree(right_child_node);
+			}
+		}
+	}
+	
+	int32_t get_height(CBinaryTree<GenericData>* node) {
+		if(node == nullptr) {
+			return 0;
+		} else {
+			auto left_subtree_height = get_height(node->m_left_node) + 1;
+			auto right_subtree_height = get_height(node->m_right_node) + 1;
+			return left_subtree_height > right_subtree_height ? left_subtree_height : right_subtree_height;
+		}
+	}
+	
+	void traverse_bfs(CBinaryTree<GenericData>* node, int32_t level) {
+		if(!node) {
+			return;
+		}
+		else if(level == 1) {
+			std::cout<<"*"<<node->m_data<<" ";
+		}
+	}
+	
+	void print_nodes_at_level(CBinaryTree<GenericData>* node, int32_t height) {
+		if(node) {
+			if(height == 1) {
+				std::cout<<node->m_data;
+			} else if(height > 1) {
+				
 			}
 		}
 	}

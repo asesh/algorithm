@@ -32,6 +32,38 @@ public:
 															/
 														17
 	 */
+	void traverse_inorder(CBinaryTree<GenericData>* node) {
+		if(!node) {
+			return;
+		}
+		
+		traverse_inorder(node->m_left_node);
+		std::cout<<node->m_data<<" ";
+		traverse_inorder(node->m_right_node);
+	}
+	
+	void traverse_postorder(CBinaryTree<GenericData>* node) {
+		if(!node) {
+			return;
+		}
+		
+		traverse_postorder(node->m_left_node);
+		
+		traverse_postorder(node->m_right_node);
+		
+		std::cout<<node->m_data<<" ";
+	}
+	
+	void traverse_preorder(CBinaryTree<GenericData>* node) {
+		if(!node) {
+			return;
+		} else {
+			std::cout<<node->m_data << " ";
+			
+			traverse_preorder(node->m_left_node);
+			traverse_preorder(node->m_right_node);
+		}
+	}
 	
 	void remove_subtree(CBinaryTree<GenericData>* parent_node) {
 		while(parent_node) {

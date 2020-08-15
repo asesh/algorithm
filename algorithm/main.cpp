@@ -220,8 +220,17 @@ int main(int argc, const char* argv[]) {
 	
 	std::cout<<"Traversing in BFS:"<<std::endl;
 	binary_tree.traverse_bfs();
+	
+	std::cout<<std::endl<<"Traversing in pre-order: "<<std::endl;
+	binary_tree.traverse_preorder(&binary_tree);
+	
+	std::cout<<std::endl<<std::endl<<"Traversing in in-order: "<<std::endl;
+	binary_tree.traverse_inorder(&binary_tree);
+	
+	std::cout<<std::endl<<std::endl<<"Traversing in post-order: "<<std::endl;
+	binary_tree.traverse_postorder(&binary_tree);
 
-	std::cout<<std::endl<<"Removing all the nodes"<<std::endl;
+	std::cout<<std::endl<<std::endl<<"Removing all the nodes"<<std::endl;
 	// Remove the left and right subtrees
 	binary_tree.remove_subtree(binary_tree.m_left_node);
 	binary_tree.remove_subtree(binary_tree.m_right_node);

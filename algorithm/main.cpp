@@ -211,10 +211,15 @@ int main(int argc, const char* argv[]) {
 	binary_tree.m_right_node->m_left_node->m_right_node = new CBinaryTree<int32_t>(13);
 	binary_tree.m_right_node->m_right_node->m_left_node = new CBinaryTree<int32_t>(14);
 	binary_tree.m_right_node->m_right_node->m_right_node = new CBinaryTree<int32_t>(15);
+	binary_tree.m_right_node->m_right_node->m_right_node->m_right_node = new CBinaryTree<int32_t>(16);
+	binary_tree.m_right_node->m_right_node->m_right_node->m_right_node->m_left_node = new CBinaryTree<int32_t>(17);
 
-	binary_tree.traverse_bfs(&binary_tree);
+//	binary_tree.traverse_bfs(&binary_tree);
 
-	std::cout<<std::endl<<"Height of left subtree: "<<binary_tree.get_height(&binary_tree)<<std::endl;
+	std::cout<<std::endl<<"Height of the tree: "<<binary_tree.get_height(&binary_tree)<<std::endl;
+	
+	std::cout<<"Traversing in BFS:"<<std::endl;
+	binary_tree.traverse_bfs();
 
 	std::cout<<std::endl<<"Removing all the nodes"<<std::endl;
 	// Remove the left and right subtrees

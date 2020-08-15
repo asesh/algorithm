@@ -27,7 +27,10 @@ public:
 				4		5				6			7
 			/	\		/	\		 / \   /  \
 			8	9	 10	 11	12 13  14  15
-	 
+															\
+																16
+															/
+														17
 	 */
 	
 	void remove_subtree(CBinaryTree<GenericData>* parent_node) {
@@ -57,22 +60,22 @@ public:
 		}
 	}
 	
-	void traverse_bfs(CBinaryTree<GenericData>* node, int32_t level) {
+	void print_level(CBinaryTree<GenericData>* node, int32_t level) {
 		if(!node) {
 			return;
-		}
-		else if(level == 1) {
-			std::cout<<"*"<<node->m_data<<" ";
+		} else if(level == 0) {
+			std::cout<<node->m_data<< " ";
+		} else {
+			print_level(node->m_left_node, level - 1);
+			print_level(node->m_right_node, level - 1);
 		}
 	}
 	
-	void print_nodes_at_level(CBinaryTree<GenericData>* node, int32_t height) {
-		if(node) {
-			if(height == 1) {
-				std::cout<<node->m_data;
-			} else if(height > 1) {
-				
-			}
+	void traverse_bfs() {
+		for(int32_t level_counter = 0; level_counter < get_height(this); ++level_counter) {
+			std::cout<<"Level " << level_counter + 1 << ": ";
+			print_level(this, level_counter);
+			std::cout<<std::endl;
 		}
 	}
   

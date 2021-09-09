@@ -6,194 +6,157 @@
 //  Copyright © 2020 Asesh Shrestha. All rights reserved.
 //
 
-#include <iostream>
-#include <filesystem>
-#include <array>
-#include <regex>
-#include <list>
-#include <type_traits>
-#include <memory>
-#include <string_view>
-#include <map>
-#include <set>
+#include "header.h"
 
 #include "binary_tree.hpp"
 
 #include "linked_list.h"
-
-//void sort_array(std::array<int, 7>& integer_array, int number_of_items);
-void binary_tree();
-
-// Recursive implementation for binary search
-int binary_search(int input_array[], int number_to_search, int lower_index, int higher_index) {
-	// index: 0  1  2  3  4  5   6
-	// input: 1, 3, 4, 7, 9, 11, 13
-	// search: 13
-	if(higher_index >= 1) {
-		// Calculate median
-		int median = (lower_index + higher_index) / 2;
-		
-		if(input_array[median] == number_to_search) {
-			return median;
-		}
-
-		// Search lower bound
-		if(input_array[median] > number_to_search) {
-			return binary_search(input_array, number_to_search, lower_index, median);
-		}
-		
-		// Search higher bound
-		return binary_search(input_array, number_to_search, median + 1, higher_index);
-	}
-	
-	return -1;
-}
-
-// Given an array: 1, 2, 3, 4, 5, 6
-template<typename DataType>
-void reverse_array(const std::array<DataType, 7>& input_array, std::array<DataType, 7>& output_array) {
-	output_array = input_array; // Assign the values of input array
-//	const size_t array_size = input_array.size();
-//	static_assert(array_size % 2 == 0, "The input array must be divisible by 2");
-	for(size_t index_count = 0; index_count < input_array.size() / 2; index_count++) {
-		output_array[index_count] = input_array[input_array.size() - index_count - 1];
-		output_array[input_array.size() - index_count - 1] = input_array[index_count];
-	}
-}
-
-// Incomplete implementation of sliding window
-int get_max_sum_of_consecutive_numbers(int array[], int number_of_elements, int number_of_consecutive_elements) {
-	// array: 1, 2, 3, 4, 5, 6
-	// number_of_elements: 6
-	// number_of_consecutive_elements: 3
-	int32_t max_sum_of_consecutive_numbers = 0;
-	for(uint8_t counter = 0; counter < number_of_elements - number_of_consecutive_elements + 1; counter++) {
-//		std::wcout << counter << std::endl;
-		int32_t sum_of_consecutive_numbers = 0;
-		for(uint8_t sub_counter = counter; sub_counter < counter + number_of_consecutive_elements; sub_counter++) {
-			std::wcout << sub_counter << L": " << array[sub_counter] << L" ";
-			sum_of_consecutive_numbers += array[sub_counter];
-		}
-		std::wcout << std::endl;
-		
-		max_sum_of_consecutive_numbers = std::max(max_sum_of_consecutive_numbers, sum_of_consecutive_numbers);
-	}
-	
-	return max_sum_of_consecutive_numbers;
-}
+#include "algorithm_impl.h"
+#include "path_finding.h"
+#include "number_algorithm.hpp"
+#include "string_algorithm.hpp"
 
 /*
- ABC
-	 ABC				BAC					CBA
-		ABC ACB			BAC BCA			CBA CAB
- 
- AB -> 2! = 2 * 1 = 2
-	AB BA
- 
- Source: https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
-*/
-void permutation_of_string(std::string& input_string, int lower_index, int higher_index) {
-	
-	if(lower_index == higher_index) {
-		std::cout<<input_string<<std::endl;
-	} else {
-		for(int index = lower_index; index<= higher_index; index++) {
-			// 1: I: 0 LI: 0 HI: 1 = AB
-			// 2: I: 1 LI: 0 HI: 1
-			std::swap(input_string[index], input_string[lower_index]);
-			permutation_of_string(input_string, lower_index + 1, higher_index);
-			std::swap(input_string[index], input_string[lower_index]);
-		}
-	}
-}
-
-// The sum of two numbers equals target, return the indices of those two numbers
-std::pair<int, int> two_sum_equals_specific_target(const int* input_numbers, int number_of_elements, int target) {
-	for(int index = 0; index < number_of_elements; index++) {
-		for(int sub_index = index + 1; sub_index < number_of_elements; sub_index++) {
-			if(input_numbers[index] + input_numbers[sub_index] == target) {
-				return std::make_pair(index, sub_index);
-			}
-		}
-	}
-	return std::make_pair(0, 0);
-}
-
-// Merge sort
-// input_array = {38, 27, 43, 3, 9, 82, 10}
-// lower_index = 0 = 12
-// higher_index = 4 = 8
-/*
- 1: 7/2 -> 3
- 38 27 43 3 | 9 82 10
+ Implementation of native messaging host
  */
-void merge_sort_implementation(int input_array[], int lower_index, int median_index, int higher_index) {
+void send_message_to_chromium(size_t length, const std::string& message) {
+	size_t len = length;
+	std::cout<< char(len & 0xFF)
+	<< char(((len >> 8) & 0xFF))
+	<< char(((len >> 16) & 0xFF))
+	<< char(((len >> 24) & 0xFF))
+	<< message
+	<< std::flush;
 }
-
-void merge_sort(int input_array[], int lower_index, int higher_index) {
-	if(lower_index < higher_index) {
-		int median = (lower_index + higher_index) / 2;
-	}
-}
-
-// Longest substring without repeating characters
-// https://leetcode.com/problems/longest-substring-without-repeating-characters/
-/*
- input: pwwkew
- characters: wke
- output: 3
- */
-// Naive approach
-int32_t longest_substring_without_repeating_characters(const std::string& input_string) {
-	int32_t max_length = 0, counter = 0;
-	std::set<char> char_set;
-	for(const auto& character: input_string) {
-		if(char_set.find(character) == char_set.end()) {
-			char_set.insert(character);
-		} else {
-			counter = 0;
-			char_set.clear();
-			char_set.insert(character);
-		}
-		counter++;
-		if(counter > max_length) {
-			max_length = counter;
-		}
-	}
-	return max_length;
-}
-
-
-// Recursive way to print braces (((( ))))
-void recursive_print_braces(int number_of_braces) {
-	if(number_of_braces < 1) {
+bool g_exit = false;
+void read_message() {
+	auto message = ::getchar();
+	if(message == -1) {
+		g_exit = true;
 		return;
-	} else {
-		std::cout<<"(";
-		recursive_print_braces(--number_of_braces);
 	}
 }
-
-int recursiveFun1(int n)
-{
-	if (n <= 0)
-		return 1;
-	else
-		return 1 + recursiveFun1(n-1);
+void native_messaging_host_impl() {
+	std::thread wait_for_msg_thread(read_message);
+	
+	while(!g_exit) {
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+		
+		std::string message_to_extension = R"({"type": "start", "message": "Should be discarded"})";
+		send_message_to_chromium(2*1024*1024, message_to_extension);
+		
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+		
+		message_to_extension = R"({"type": "start", "message": "Should be visible"})";
+		send_message_to_chromium(message_to_extension.length(), message_to_extension);
+	}
+	
+	wait_for_msg_thread.join();
 }
 
-int recursive_sum(int input_number) {
-	if(input_number <= 1) {
-		return 1;
-	} else {
-		return input_number + recursive_sum(--input_number);
+// Check cv signal
+std::mutex condition_mutex;
+std::condition_variable check_cv;
+void check_condition_variable() {
+	std::unique_lock<std::mutex> lock_mutex(condition_mutex);
+	
+	std::wcout<<L"Waiting for the cv to be signaled"<<std::endl;
+	while(1) {
+		auto cv_status = check_cv.wait_for(lock_mutex, std::chrono::seconds(1));
+		if(cv_status == std::cv_status::timeout) {
+			std::wcout<<L"Waiting for the cv to be signaled"<<std::endl;
+			continue;
+		}
+		
+		std::wcout<<L"The cv has been signaled"<<std::endl;
+		break;
 	}
 }
 
 int main(int argc, const char* argv[]) {
+	
+	// My string_permutation
+	char input_string[] = "ABCD";
+	string_permutation(input_string, 0, 4);
+	
+	
+	// Min integer limit
+//	short shortest_number = -0x8000;
+//	std::wcout<< std::showbase << std::hex << shortest_number << std::endl;
+//	std::wcout<< std::showbase << std::hex << std::numeric_limits<short>::min() << std::endl;
+	
+//	std::wcout<< std::hex << std::showbase << "INT_MAX: " << INT_MAX << ", INT_MIN: " << INT_MIN << ", UINT_MAX: " << UINT_MAX << std::endl;
+	
+	// Check cv signal
+//	check_cv.notify_one();
+//	std::this_thread::sleep_for(std::chrono::milliseconds(500));
+//	check_condition_variable();
+	
+	
+//	std::wcout << (is_number_palindrome(121) == true ? L"It's palindrome" : L"It's not palindrome") << std::endl;
+	
+	/*
+	 2 -> 4 -> 3
+	 5 -> 6 -> 4
+	 */
+//	ReverseLinkedList rll(1);
+//	rll.add(2);
+//	rll.add(3);
+//	rll.add(4);
+//	ReverseLinkedList rl2(5);
+//	rl2.add(6);
+//	rl2.add(4);
+//	rll.traverse();
+	
+	
+	// Merge sort
+//	int input_merge_sort_array[] = {1, 2, 3, 4, 5, 6, 7, 8};
+//	int number_of_elements = sizeof(input_merge_sort_array) / sizeof(input_merge_sort_array[0]);
+//
+//	merge_sort(input_merge_sort_array, 0, number_of_elements - 1);
+	
+	// Ref 1
+//	print_reverse(input_merge_sort_array, 0, number_of_elements);
+	
+	//split_merge(input_merge_sort_array, 0, number_of_elements);
+	
+	// 1100
+//	std::cout<< (3 << 2) << std::endl;
+	
+//	int32_t input_array[] = {1, 2, 3, 4};
+//	split_and_print(input_array, 0, (sizeof(input_array)/sizeof(input_array[0])) -1);
+//	sliding_window_print(input_array, 2, 0, 3);
+	
+	// Higher to lower
+//	int input_array[] = {2, 3, 5, 1, 4, 6};
+//	int number_of_elements = (sizeof(input_array)/sizeof(input_array[0])-1);
+//	high_to_low(input_array, number_of_elements - 1, number_of_elements);
+	
+	// Native messaging host
+//	std::filesystem::current_path("/Users/aseshshrestha/Library/Developer/Xcode/DerivedData/algorithm-gxqdxcwbhwlaotdrxhscwxsxzwai/Build/Products/Debug");
+//	std::cout<<std::filesystem::current_path()<<std::endl;
+	
+
+	
+//	std::this_thread::sleep_for(std::chrono::seconds(15));
+//
+//	message_to_extension = R"({"type": "start", "message": "Should be discarded"})";
+//	send_message_to_chromium(2*1024*1024, message_to_extension);
+//
+//	std::this_thread::sleep_for(std::chrono::seconds(15));
+//
+//	message_to_extension = R"({"type": "start", "message": "Should be visible"})";
+//	send_message_to_chromium(message_to_extension.length(), message_to_extension);
+
+
+
+//	// Path finding
+//	draw_grid(50, 50);
+	
+	
 //	std::cout<< "The longest is: " << longest_substring_without_repeating_characters("pwwkew") << std::endl;
 	
-	binary_tree();
+//	binary_tree();
 	
 	
 //	std::cout<<recursive_sum(5)<<std::endl;
@@ -210,28 +173,13 @@ int main(int argc, const char* argv[]) {
 //	std::string input_string = "ABC";
 //	permutation_of_string(input_string, 0, input_string.length() - 1);
 	
-	
-	
-	// Merge sort
-//	int input_merge_sort_array[] = {38, 27, 43, 3, 9, 82, 10};
-//	int number_of_elements = sizeof(input_merge_sort_array) / sizeof(input_merge_sort_array[0]);
-//	merge_sort(input_merge_sort_array, 0, number_of_elements / 2);
-	
-	
-	
-	
-	
+
 	// Sum of consecutive numbers using sliding window technique
 //	int array[] = {5, 2, 7, 1, 3, 8};
 //	auto max_sum = get_max_sum_of_consecutive_numbers(array, sizeof(array) / sizeof(array[0]), 3);
 //	std::wcout << std::endl << "The max sum is: " << max_sum << std::endl;
 	
 	
-	
-	
-	
-	
-
 //	// Swap array items
 //	std::array<int, 7> input_array = {1, 2, 3, 4, 5, 6, 7};
 //	std::array<int, 7> output_array;
@@ -315,6 +263,8 @@ int main(int argc, const char* argv[]) {
 //      break;
 //    }
 //  }
+	
+	std::cout<<std::endl;
 }
 
 void binary_tree() {
@@ -354,6 +304,9 @@ void binary_tree() {
 	
 	std::cout<<std::endl<<std::endl<<"Traversing in post-order: "<<std::endl;
 	binary_tree.traverse_postorder(&binary_tree);
+	
+	std::cout<<std::endl<<std::endl<<"Traversing outer layer: "<<std::endl;
+	binary_tree.print_outer_layer(&binary_tree);
 	
 	std::cout<<std::endl<<std::endl<<"Removing all the nodes"<<std::endl;
 	// Remove the left and right subtrees

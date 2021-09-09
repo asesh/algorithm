@@ -32,6 +32,15 @@ public:
 															/
 														17
 	 */
+	void print_outer_layer(CBinaryTree<GenericData>* node) {
+		if(!node) {
+			return;
+		}
+		std::cout<<node->m_data<<" ";
+		
+		print_outer_layer(node->m_right_node);
+	}
+	
 	void traverse_inorder(CBinaryTree<GenericData>* node) {
 		if(!node) {
 			return;

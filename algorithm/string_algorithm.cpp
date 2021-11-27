@@ -9,27 +9,13 @@
 #include "header.h"
 #include "string_algorithm.hpp"
 
-void string_permutation(char input_string[], int lower_index, int higher_index) {
-	// A B C
-	// 0 1 2
-	// 0 1 2 -> 0 2 1
-	// 1 0 2 -> 1 2 0
-	// 2 1 0 -> 2 0 1
-	
-	//	if(lower_index == higher_index) {
-	//		std::cout<<input_string<<std::endl;
-	//	}
-	// 1: 0 2 ->
-	for(int index = lower_index; index <= higher_index; index++) {
-		std::swap(input_string[index], input_string[lower_index]);
-		std::cout<<input_string<<std::endl;
-	}
-}
-
 /*
  ABC
  ABC				BAC					CBA
  ABC ACB			BAC BCA			CBA CAB
+ 
+ 012			102				210
+ 012 021	102 120		210 201
  
  AB -> 2! = 2 * 1 = 2
  AB BA
@@ -51,33 +37,6 @@ void permutation_of_string(std::string& input_string, int lower_index, int highe
 	}
 }
 
-// Longest substring without repeating characters
-// https://leetcode.com/problems/longest-substring-without-repeating-characters/
-/*
- input: pwwkew
- characters: wke
- output: 3
- */
-// Naive approach
-int32_t longest_substring_without_repeating_characters(const std::string& input_string) {
-	int32_t max_length = 0, counter = 0;
-	std::set<char> char_set;
-	for(const auto& character: input_string) {
-		if(char_set.find(character) == char_set.end()) {
-			char_set.insert(character);
-		} else {
-			counter = 0;
-			char_set.clear();
-			char_set.insert(character);
-		}
-		counter++;
-		if(counter > max_length) {
-			max_length = counter;
-		}
-	}
-	return max_length;
-}
-
 /*
  1 2 3 4 5
  1 2 3 | 4 5
@@ -90,4 +49,22 @@ void split_and_print(int32_t input_array[], int32_t lower_index, int32_t higher_
 		//		split_and_print(input_array, median + 1, higher_index);
 		std::cout<<input_array[median]<<" ";
 	}
+}
+
+/*
+ 3. Longest substring without repeating characters
+ https://leetcode.com/problems/longest-substring-without-repeating-characters/
+ 
+ Problem:
+ input: pwwkew
+ characters: wke
+ output: 3
+ */
+int longest_substring_without_repeating_characters(const std::string& input_string) {
+	return 0;
+}
+
+void invoke_longest_substring_without_repeating_characters() {
+	std::string input_string = "pwwkew";
+	std::cout << longest_substring_without_repeating_characters(input_string);
 }

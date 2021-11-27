@@ -137,4 +137,6 @@ public:
   std::size_t m_number_of_items;
 };
 
+void invoke_binary_tree();
+
 #endif /* BINARY_TREE_HPP */

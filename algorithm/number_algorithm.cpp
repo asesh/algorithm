@@ -7,6 +7,7 @@
 //
 
 #include "header.h"
+#include "linked_list.h"
 #include "number_algorithm.hpp"
 
 // Ref 1: Print the reverse of an array by using recursion
@@ -122,7 +123,7 @@ std::pair<int, int> two_sum_equals_specific_target(const int* input_numbers, int
  1 -> 2
  1
  */
-void high_to_low(int input_array[], int lower_index, int higher_index, int smaller_value = 0) {
+void high_to_low(int input_array[], int lower_index, int higher_index, int smaller_value) {
 	if(lower_index >= 0 && lower_index < higher_index) {
 		smaller_value = input_array[lower_index] < input_array[higher_index] ? input_array[lower_index] : input_array[higher_index]; // Assign smaller value between the tow
 		high_to_low(input_array, lower_index - 2, higher_index - 2, smaller_value);
@@ -168,4 +169,39 @@ void reverse_array(const std::array<DataType, 7>& input_array, std::array<DataTy
 		output_array[index_count] = input_array[input_array.size() - index_count - 1];
 		output_array[input_array.size() - index_count - 1] = input_array[index_count];
 	}
+}
+
+/*
+ 2: Add Two Numbers: https://leetcode.com/problems/add-two-numbers/
+ 
+ Problem:
+ 2 -> 4 -> 3
+ 5 -> 6 -> 4
+ output: 807
+ */
+template<typename Data>
+void add_reverse_linked_list(const CSingleLinkedList<Data>& first,
+														 const CSingleLinkedList<Data>& second,
+														 CSingleLinkedList<Data>& output) {
+}
+
+void invoke_add_reverse_linked_list() {
+	CSingleLinkedList<int> output;
+	CSingleLinkedList<int> first;
+	first.add_node(2);
+	first.add_node(4);
+	first.add_node(3);
+	CSingleLinkedList<int> second;
+	second.add_node(5);
+	second.add_node(6);
+	second.add_node(4);
+	add_reverse_linked_list(first, second, output);
+	first.clear_nodes();
+	second.clear_nodes();
+}
+
+int search_in_rotated_sorted_array(int input_array[]) {
+	// array = [0, 1, 2, 4, 5, 6, 7]
+	// array = [4, 5, 6, 7, 0, 1, 2]
+	return -1;
 }

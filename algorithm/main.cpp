@@ -73,12 +73,39 @@ void check_condition_variable() {
 	}
 }
 
+
+/*
+ 3 - 2 - 1
+ 
+        3
+    2      2
+  1   1  1    1
+ */
+void recursive_call(int number) {
+	if(number < 1) {
+		return;
+	}
+	
+	std::cout << number << std::endl;
+	recursive_call(number - 1);
+	recursive_call(number - 1);
+//	recursive_call(number - 1);
+//	recursive_call(number - 1);
+}
+
 int main(int argc, const char* argv[]) {
 	
-	// My string_permutation
-	char input_string[] = "ABCD";
-	string_permutation(input_string, 0, 4);
+	invoke_reverse_linked_list();
 	
+//	invoke_binary_search();
+	
+//	int array[] = {0, 1};
+//	std::swap(array[0], array[1]);
+//	std::cout<<array[0]<<", "<<array[1]<<std::endl;
+	
+	//recursive_call(3);
+	
+//	invoke_longest_substring_without_repeating_characters();
 	
 	// Min integer limit
 //	short shortest_number = -0x8000;
@@ -263,55 +290,6 @@ int main(int argc, const char* argv[]) {
 //      break;
 //    }
 //  }
-	
-	std::cout<<std::endl;
-}
-
-void binary_tree() {
-	CBinaryTree<int32_t> binary_tree(1);
-	// Fill left-subtree
-	binary_tree.m_left_node = new CBinaryTree<int32_t>(2);
-	binary_tree.m_left_node->m_left_node = new CBinaryTree<int32_t>(4);
-	binary_tree.m_left_node->m_right_node = new CBinaryTree<int32_t>(5);
-	binary_tree.m_left_node->m_left_node->m_left_node = new CBinaryTree<int32_t>(8);
-	binary_tree.m_left_node->m_left_node->m_right_node = new CBinaryTree<int32_t>(9);
-	binary_tree.m_left_node->m_right_node->m_left_node = new CBinaryTree<int32_t>(10);
-	binary_tree.m_left_node->m_right_node->m_right_node = new CBinaryTree<int32_t>(11);
-	
-	// Fill right-subtree
-	binary_tree.m_right_node = new CBinaryTree<int32_t>(3);
-	binary_tree.m_right_node->m_left_node = new CBinaryTree<int32_t>(6);
-	binary_tree.m_right_node->m_right_node = new CBinaryTree<int32_t>(7);
-	binary_tree.m_right_node->m_left_node->m_left_node = new CBinaryTree<int32_t>(12);
-	binary_tree.m_right_node->m_left_node->m_right_node = new CBinaryTree<int32_t>(13);
-	binary_tree.m_right_node->m_right_node->m_left_node = new CBinaryTree<int32_t>(14);
-	binary_tree.m_right_node->m_right_node->m_right_node = new CBinaryTree<int32_t>(15);
-	binary_tree.m_right_node->m_right_node->m_right_node->m_right_node = new CBinaryTree<int32_t>(16);
-	binary_tree.m_right_node->m_right_node->m_right_node->m_right_node->m_left_node = new CBinaryTree<int32_t>(17);
-	
-	//	binary_tree.traverse_bfs(&binary_tree);
-	
-	std::cout<<std::endl<<"Height of the tree: "<<binary_tree.get_height(&binary_tree)<<std::endl;
-	
-	std::cout<<"Traversing in BFS:"<<std::endl;
-	binary_tree.traverse_bfs();
-	
-	std::cout<<std::endl<<"Traversing in pre-order: "<<std::endl;
-	binary_tree.traverse_preorder(&binary_tree);
-	
-	std::cout<<std::endl<<std::endl<<"Traversing in in-order: "<<std::endl;
-	binary_tree.traverse_inorder(&binary_tree);
-	
-	std::cout<<std::endl<<std::endl<<"Traversing in post-order: "<<std::endl;
-	binary_tree.traverse_postorder(&binary_tree);
-	
-	std::cout<<std::endl<<std::endl<<"Traversing outer layer: "<<std::endl;
-	binary_tree.print_outer_layer(&binary_tree);
-	
-	std::cout<<std::endl<<std::endl<<"Removing all the nodes"<<std::endl;
-	// Remove the left and right subtrees
-	binary_tree.remove_subtree(binary_tree.m_left_node);
-	binary_tree.remove_subtree(binary_tree.m_right_node);
 	
 	std::cout<<std::endl;
 }

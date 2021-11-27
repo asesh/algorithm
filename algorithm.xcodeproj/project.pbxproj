@@ -10,6 +10,7 @@
 		CF657F83244B2C6200A61FBD /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF657F82244B2C6200A61FBD /* main.cpp */; };
 		CF657F8D244B2DA100A61FBD /* binary_tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF657F89244B2DA100A61FBD /* binary_tree.cpp */; };
 		CF7B579225FCED5B002D458D /* algorithm_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF7B579125FCED5B002D458D /* algorithm_impl.cpp */; };
+		CFB71B07272EE45D00724C26 /* linked_list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFB71B06272EE45D00724C26 /* linked_list.cpp */; };
 		CFC588CE26EA64BD00ECB76A /* string_algorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFC588CC26EA64BD00ECB76A /* string_algorithm.cpp */; };
 		CFC588D126EA654300ECB76A /* number_algorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFC588CF26EA654300ECB76A /* number_algorithm.cpp */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		CF753399251EEEC000229318 /* path_finding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = path_finding.h; sourceTree = "<group>"; };
 		CF7B579125FCED5B002D458D /* algorithm_impl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = algorithm_impl.cpp; sourceTree = "<group>"; };
 		CF7B579425FCED9C002D458D /* algorithm_impl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = algorithm_impl.h; sourceTree = "<group>"; };
+		CFB71B06272EE45D00724C26 /* linked_list.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = linked_list.cpp; sourceTree = "<group>"; };
 		CFC588CC26EA64BD00ECB76A /* string_algorithm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = string_algorithm.cpp; sourceTree = "<group>"; };
 		CFC588CD26EA64BD00ECB76A /* string_algorithm.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = string_algorithm.hpp; sourceTree = "<group>"; };
 		CFC588CF26EA654300ECB76A /* number_algorithm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = number_algorithm.cpp; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				CF657F89244B2DA100A61FBD /* binary_tree.cpp */,
 				CF657F8A244B2DA100A61FBD /* binary_tree.hpp */,
 				CF657F8B244B2DA100A61FBD /* linked_list.h */,
+				CFB71B06272EE45D00724C26 /* linked_list.cpp */,
 				CF657F8C244B2DA100A61FBD /* sorted_linked_list.h */,
 				CF657F82244B2C6200A61FBD /* main.cpp */,
 				CF753399251EEEC000229318 /* path_finding.h */,
@@ -155,6 +158,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFB71B07272EE45D00724C26 /* linked_list.cpp in Sources */,
 				CF657F8D244B2DA100A61FBD /* binary_tree.cpp in Sources */,
 				CF657F83244B2C6200A61FBD /* main.cpp in Sources */,
 				CFC588D126EA654300ECB76A /* number_algorithm.cpp in Sources */,
@@ -170,9 +174,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -228,9 +233,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;

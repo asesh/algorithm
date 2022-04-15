@@ -205,3 +205,167 @@ int search_in_rotated_sorted_array(int input_array[]) {
 	// array = [4, 5, 6, 7, 0, 1, 2]
 	return -1;
 }
+
+CSingleLinkedList<int> invoke_reverse_linked_list(CSingleLinkedList<int> input_linked_list) {
+	CSingleLinkedList<int> reverse_linked_list;
+	return reverse_linked_list;
+}
+
+/*
+ 268. Missing Number
+ input: [3, 0, 1]
+ 
+ i	v
+ 3	0 -> 3
+ 0	3 -> 3
+ 1	3 -> 01 11 -> 10 = 2
+ */
+int missing_number() {
+	std::vector<int> input_array{9,6,4,2,3,5,7,0,1};
+	int missing_number = 0;
+	
+	for(int index = 0; index <= input_array.size(); index++) {
+		missing_number += index;
+	}
+
+	return missing_number - std::accumulate(input_array.begin(), input_array.end(), 0);
+}
+
+/*
+ https://leetcode.com/problems/median-of-two-sorted-arrays/
+ Input: nums1 = [1,3], nums2 = [2]
+ Output: 2.00000
+ */
+void median_of_two_sorted_arrays(const std::vector<int>& array_one, const std::vector<int>& array_two) {
+	auto array_one_count = array_one.size();
+	auto array_two_count = array_two.size();
+	
+	// Assign an array with the max number of items
+	auto max_array = array_one_count >= array_two_count ? array_one : array_two;
+	
+	std::vector<int> total(max_array.size());
+	
+	// Iterate through all the elements of the max array
+	/*
+	 1, 2 -> 3, 4
+	 */
+	for(int index = 0; index < max_array.size(); index++) {
+		
+	}
+}
+
+void invoke_median_of_two_sorted_arrays() {
+	std::vector<int> input_one{1, 3}, input_two{2};
+	median_of_two_sorted_arrays(input_one, input_two);
+}
+
+/*
+ 11. Container With Most Water
+ https://leetcode.com/problems/container-with-most-water/
+ */
+int container_with_most_water(const std::vector<int>& container_height) {
+	int max_amount_of_water = 0;
+	
+	for(const auto& height: container_height) {
+		
+	}
+	
+	return 0;
+}
+void invoke_container_with_most_water() {
+	std::vector<int> container_height{1,8,6,2,5,4,8,3,7};
+	std::cout << "Max amount of water: " << container_with_most_water(container_height) << std::endl;
+}
+
+int sliding_window_max_sum_result(const std::vector<int>& input, int sequence_count) {
+	if(input.size() <= 0 || input.size() < sequence_count) {
+		return 0;
+	}
+	int max = 0;
+	int window_sum = 0;
+	
+	// Sum 0-(k-1) elements
+	for(int index = 0; index < sequence_count; index++) {
+		max += input[index];
+	}
+	
+	window_sum = max;
+	
+	/*
+	 1, 4, 2, 10, 2, 3, 1, 0, 20
+	 -----------
+		max = 17
+			-----------
+				-------------
+										----------
+	 */
+	// Loop through the k + remaining elements
+	for(int index = sequence_count; index < input.size(); index++) {
+		window_sum = ((window_sum + input[index]) - input[index - sequence_count]);
+		max = std::max(max, window_sum);
+	}
+	
+	return max;
+}
+void invoke_sliding_window() {
+	std::vector<int> input_vector { 1, 4, 2, 10, 2, 3, 1, 0, 20 };
+	std::cout<< sliding_window_max_sum_result(input_vector, 4);
+}
+
+/*
+ 724. Find Pivot Index
+ https://leetcode.com/problems/find-pivot-index/
+ */
+int find_pivot_index(const std::vector<int>& input_array) {
+	int sum = 0;
+	int total_sum = std::accumulate(input_array.begin(), input_array.end(), 0);
+	/*
+	 ----- 28 - 11 - 6
+	 1,7,3,6,5,6
+	 Sum: 28
+	 */
+	for(int index = 0; index < input_array.size(); index++) {
+		sum += input_array[index];
+		
+		if(total_sum - sum == sum - input_array[index]) {
+			return index;
+		}
+	}
+	
+	return -1;
+}
+void invoke_find_pivot_index() {
+	std::vector<int> array{1,2,3};
+	std::cout<<"Pivot index: " << find_pivot_index(array) << std::endl;
+}
+
+/*
+ Three number sum
+ https://www.algoexpert.io/questions/Three%20Number%20Sum
+ */
+std::vector<std::vector<int>> find_three_number_sum(std::vector<int>& input_array) {
+	// O(nlogn)
+	std::sort(input_array.begin(), input_array.end());
+	
+	for(const auto& number: input_array) {
+		std::cout<<number<<std::endl;
+	}
+	
+	/*
+	 Implementation:
+	 Input: 	12, 3, 1, 2, -6, 5, -8, 6
+	 Target: 	0
+	 Sort:
+			Data: -8 -6 1 2 3 5 6 12
+			Time: O(nlogn)
+	 
+	 // Found triplets:
+	 1: -8+2+6
+	 */
+	
+	return {};
+}
+void invoke_find_three_number_sum() {
+	std::vector<int> input{12, 3, 1, 2, -6, 5, -8, 6};
+	auto triplets = find_three_number_sum(input);
+}

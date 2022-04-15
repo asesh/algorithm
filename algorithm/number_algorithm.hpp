@@ -29,4 +29,25 @@ void invoke_add_reverse_linked_list();
 
 int search_in_rotated_sorted_array(int input_array[]);
 
+CSingleLinkedList<int> invoke_reverse_linked_list(CSingleLinkedList<int> input_linked_list);
+
+int missing_number();
+
+/*
+ */
+void median_of_two_sorted_arrays(const std::vector<int>& array_one, const std::vector<int>& array_two);
+void invoke_median_of_two_sorted_arrays();
+
+int container_with_most_water(const std::vector<int>& container_height);
+void invoke_container_with_most_water();
+
+int sliding_window_max_sum_result(const std::vector<int>& input);
+void invoke_sliding_window();
+
+int find_pivot_index(const std::vector<int>& input_array);
+void invoke_find_pivot_index();
+
+std::vector<std::vector<int>> find_three_number_sum(std::vector<int>& input_array);
+void invoke_find_three_number_sum();
+
 #endif /* number_algorithm_hpp */

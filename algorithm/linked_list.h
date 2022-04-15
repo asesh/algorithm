@@ -10,13 +10,59 @@
 #define linked_list_h
 
 template<typename Data>
+class CLinkedList {
+public:
+	CLinkedList(Data input_data) {
+		m_next_node = new CLinkedList<Data>(input_data);
+		m_next_node = m_next_node->m_next_node;
+	}
+	CLinkedList(const std::initializer_list<Data>& input_list) {
+		for(const auto& input_data: input_list) {
+			m_next_node = new CLinkedList<Data>(input_data);
+			m_next_node = m_next_node->m_next_node;
+		}
+	}
+	~CLinkedList() {
+		while(m_next_node) {
+			auto next_node = m_next_node->m_next_node;
+			delete m_next_node;
+			m_next_node = next_node;
+		}
+	}
+	
+	void add_node(Data input_data) {
+		m_next_node = new CLinkedList<Data>(input_data);
+		m_next_node = m_next_node->m_next_node;
+	}
+	
+	CLinkedList* m_next_node = nullptr;
+	Data m_data;
+};
+
+template<typename Data>
 class CSingleLinkedList {
 public:
 	CSingleLinkedList() = default;
 	CSingleLinkedList(Data data) {
 		m_data = data;
 	}
-	~CSingleLinkedList() = default;
+	CSingleLinkedList(const std::initializer_list<Data>& input_list) {
+		for(const auto& input_data: input_list) {
+			add_node(input_data);
+		}
+	}
+	~CSingleLinkedList() {
+		if(m_root_node) {
+			// Free all the nodes starting from the root node
+			auto current_node = m_root_node;
+			while(current_node) {
+				auto buffer_node = current_node->m_next_node;
+				delete current_node;
+				current_node = buffer_node;
+			}
+			m_root_node = nullptr;
+		}
+	}
 
 	void add_node(Data data) {
 		if(m_root_node) {
@@ -40,6 +86,17 @@ public:
 			m_root_node->m_data = input_data;
 		} else {
 			m_next_node->m_data = input_data;
+		}
+	}
+	
+	CSingleLinkedList<Data>* next() {
+		if(m_next_node) {
+			auto current_node = m_next_node;
+			m_next_node = m_next_node->m_next_node;
+			return current_node;
+		} else {
+			m_next_node = m_root_node->m_next_node;
+			return m_root_node;
 		}
 	}
 
@@ -69,7 +126,7 @@ public:
 		}
 	}
 
-private:
+public:
 	CSingleLinkedList<Data>* m_root_node = nullptr;
 	CSingleLinkedList<Data>* m_next_node = nullptr;
 	Data m_data = 0;

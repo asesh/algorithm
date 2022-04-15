@@ -13,6 +13,7 @@
 		CFB71B07272EE45D00724C26 /* linked_list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFB71B06272EE45D00724C26 /* linked_list.cpp */; };
 		CFC588CE26EA64BD00ECB76A /* string_algorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFC588CC26EA64BD00ECB76A /* string_algorithm.cpp */; };
 		CFC588D126EA654300ECB76A /* number_algorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFC588CF26EA654300ECB76A /* number_algorithm.cpp */; };
+		CFCEE8A7279C19190013E603 /* linked_list_algorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFCEE8A6279C19190013E603 /* linked_list_algorithm.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,8 @@
 		CFC588CF26EA654300ECB76A /* number_algorithm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = number_algorithm.cpp; sourceTree = "<group>"; };
 		CFC588D026EA654300ECB76A /* number_algorithm.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = number_algorithm.hpp; sourceTree = "<group>"; };
 		CFC588D226EA6A0F00ECB76A /* header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = header.h; sourceTree = "<group>"; };
+		CFCEE8A5279C19050013E603 /* linked_list_algorithm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = linked_list_algorithm.h; sourceTree = "<group>"; };
+		CFCEE8A6279C19190013E603 /* linked_list_algorithm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = linked_list_algorithm.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +83,8 @@
 				CF657F8A244B2DA100A61FBD /* binary_tree.hpp */,
 				CF657F8B244B2DA100A61FBD /* linked_list.h */,
 				CFB71B06272EE45D00724C26 /* linked_list.cpp */,
+				CFCEE8A5279C19050013E603 /* linked_list_algorithm.h */,
+				CFCEE8A6279C19190013E603 /* linked_list_algorithm.cpp */,
 				CF657F8C244B2DA100A61FBD /* sorted_linked_list.h */,
 				CF657F82244B2C6200A61FBD /* main.cpp */,
 				CF753399251EEEC000229318 /* path_finding.h */,
@@ -159,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFB71B07272EE45D00724C26 /* linked_list.cpp in Sources */,
+				CFCEE8A7279C19190013E603 /* linked_list_algorithm.cpp in Sources */,
 				CF657F8D244B2DA100A61FBD /* binary_tree.cpp in Sources */,
 				CF657F83244B2C6200A61FBD /* main.cpp in Sources */,
 				CFC588D126EA654300ECB76A /* number_algorithm.cpp in Sources */,

@@ -16,9 +16,16 @@
 #include <list>
 #include <type_traits>
 #include <memory>
+
 #include <string_view>
+
 #include <map>
+#include <unordered_map>
+
 #include <set>
+#include <unordered_set>
+
+#include <vector>
 
 #include <cmath>
 
@@ -34,5 +41,11 @@
 #include <fstream>
 
 #include <limits>
+
+#include <numeric>
+
+#include <algorithm>
+
+#include <initializer_list>
 
 #endif /* header_h */

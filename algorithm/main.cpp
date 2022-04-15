@@ -15,44 +15,7 @@
 #include "path_finding.h"
 #include "number_algorithm.hpp"
 #include "string_algorithm.hpp"
-
-/*
- Implementation of native messaging host
- */
-void send_message_to_chromium(size_t length, const std::string& message) {
-	size_t len = length;
-	std::cout<< char(len & 0xFF)
-	<< char(((len >> 8) & 0xFF))
-	<< char(((len >> 16) & 0xFF))
-	<< char(((len >> 24) & 0xFF))
-	<< message
-	<< std::flush;
-}
-bool g_exit = false;
-void read_message() {
-	auto message = ::getchar();
-	if(message == -1) {
-		g_exit = true;
-		return;
-	}
-}
-void native_messaging_host_impl() {
-	std::thread wait_for_msg_thread(read_message);
-	
-	while(!g_exit) {
-		std::this_thread::sleep_for(std::chrono::seconds(1));
-		
-		std::string message_to_extension = R"({"type": "start", "message": "Should be discarded"})";
-		send_message_to_chromium(2*1024*1024, message_to_extension);
-		
-		std::this_thread::sleep_for(std::chrono::seconds(1));
-		
-		message_to_extension = R"({"type": "start", "message": "Should be visible"})";
-		send_message_to_chromium(message_to_extension.length(), message_to_extension);
-	}
-	
-	wait_for_msg_thread.join();
-}
+#include "linked_list_algorithm.h"
 
 // Check cv signal
 std::mutex condition_mutex;
@@ -73,29 +36,63 @@ void check_condition_variable() {
 	}
 }
 
-
-/*
- 3 - 2 - 1
- 
-        3
-    2      2
-  1   1  1    1
- */
-void recursive_call(int number) {
-	if(number < 1) {
-		return;
-	}
-	
-	std::cout << number << std::endl;
-	recursive_call(number - 1);
-	recursive_call(number - 1);
-//	recursive_call(number - 1);
-//	recursive_call(number - 1);
-}
-
 int main(int argc, const char* argv[]) {
+	/*
+	 max heap:
+	 input:
+			70
+		10	50
+	 80
+	 
+	 output:
+	    80
+		70  50
+	 10
+	 */
 	
-	invoke_reverse_linked_list();
+//	invoke_longest_palindromic_substring();
+	
+//	std::map<std::string, int> hash_map;
+//	hash_map.insert(std::pair<std::string, int>("hello", 1));
+//	hash_map.insert(std::pair<std::string, int>("world", 2));
+//	hash_map.insert(std::pair<std::string, int>("hello", 4));
+//	for(const auto& data: hash_map) {
+//		std::cout<<"Key: "<<data.first<<",value: "<<data.second<<std::endl;
+//	}
+	
+	invoke_find_three_number_sum();
+	
+	//invoke_longest_substring_without_repeating_characters();
+	
+//	invoke_find_pivot_index();
+
+//	invoke_sliding_window();
+	
+	// Rotate linked list
+//	rotate_linked_list();
+	
+//	add_two_numbers();
+	
+	//int input_array[] = {38, 27, 43, 3, 9, 82, 10};
+	/*
+	 38, 27, 43, 3, 9, 82, 10
+	 */
+//	fake_merge_sort(input_array, 0, sizeof(input_array)/sizeof(input_array[0]));
+	
+	
+	// Convert vector into heap
+//	std::vector<int> numbers {1, 9, 2, 3, 4, 5, 6, 7, 8, 10, 9};
+//	std::make_heap(numbers.begin(), numbers.end());
+//	for(const auto& number: numbers) {
+//		std::cout << number << std::endl;
+//	}
+	
+//	std::cout<< std::boolalpha << min_adjancent_swaps_for_palindromic_string("nitin");
+	
+	// Reorganize string
+//	std::cout<<reorganize_string("aaabc");
+
+//	invoke_reverse_linked_list();
 	
 //	invoke_binary_search();
 	

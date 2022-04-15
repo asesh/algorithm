@@ -15,4 +15,12 @@ void split_and_print(int32_t input_array[], int32_t lower_index, int32_t higher_
 int longest_substring_without_repeating_characters(const std::string& input_string);
 void invoke_longest_substring_without_repeating_characters();
 
+bool is_palindrome(const std::string& input_string);
+int min_adjancent_swaps(const std::string& input_string);
+
+std::string reorganize_string(const std::string& input_string);
+
+std::string longest_palindromic_substring(const std::string& input_string);
+void invoke_longest_palindromic_substring();
+
 #endif /* string_algorithm_hpp */

@@ -36,7 +36,93 @@ void check_condition_variable() {
 	}
 }
 
+bool is_increasing(std::vector<int> input_array) {
+	for(int index = 0; index < input_array.size() - 1; index++) {
+		if(input_array[index] > input_array[index + 1]) {
+			return false;
+		}
+	}
+	return true;
+}
+
+bool is_decreasing(std::vector<int> input_array) {
+	for(int index = 0; index < input_array.size() - 1; index++) {
+		if(input_array[index] < input_array[index + 1]) {
+			return false;
+		}
+	}
+	return true;
+}
+
+bool isMonotonic(std::vector<int> array) {
+	/*
+	 -1 -5 -10 -1100 -1100 -1101 -1102 -9001
+	 
+	 1 2 3 4 5 -> Diff > 0
+	 
+	 1 2 4 7 9
+	 Sum: 23
+	 I: 1: 23-1 = 22
+	 I: 2: 23-2 = 21
+	 I: 4: 23-4 = 19
+	 I: 7: 23-7 = 16
+	 I: 9: 23-9 = 14
+	 
+	 1 2 4 5 9
+	 
+	 -1 -2 -3 -4 -> Diff < 0
+	 */
+	
+	return is_increasing(array) || is_decreasing(array);
+}
+
+bool return_true() {
+	std::cout<<"Returning true"<<std::endl;
+	return true;
+}
+bool return_false() {
+	std::cout<<"Returning false"<<std::endl;
+	return false;
+}
+bool return_true_or_false() {
+	return return_true() || return_false() || return_false() || return_true() || return_false();
+}
+
 int main(int argc, const char* argv[]) {
+	
+	float result = (float) 11 / 9;
+	std::cout<<result<<std::endl;
+	
+//	std::vector<std::any> container;
+//	container.push_back(12);
+//	container.push_back('[');
+//	container.push_back("hello");
+//	for(const auto& data: container) {
+//		if(data.type() == typeid(int)) {
+//			std::cout<<std::any_cast<int>(data)<<std::endl;
+//		} else if(data.type() == typeid(const char*)) {
+//			std::cout<<std::any_cast<const char*>(data)<<std::endl;
+//		} else if(data.type() == typeid(std::string)) {
+//			std::cout<<std::any_cast<std::string>(data)<<std::endl;
+//		} else if(data.type() == typeid(char)) {
+//			std::cout<<std::any_cast<char>(data)<<std::endl;
+//		}
+//	}
+	
+	
+//	std::cout<<std::boolalpha<<isMonotonic({1,3,2});
+	
+//	std::cout<<0x7fffffff<<std::endl;
+	
+//	std::string output;
+//	output.reserve(5);
+//
+//	output.push_back(0x41);
+//	output.push_back(0x42);
+//	output.push_back(0x43);
+//	output.push_back(0x44);
+//	std::cout<<output<<std::endl;
+	
 	/*
 	 max heap:
 	 input:
@@ -60,7 +146,7 @@ int main(int argc, const char* argv[]) {
 //		std::cout<<"Key: "<<data.first<<",value: "<<data.second<<std::endl;
 //	}
 	
-	invoke_find_three_number_sum();
+//	invoke_find_three_number_sum();
 	
 	//invoke_longest_substring_without_repeating_characters();
 	

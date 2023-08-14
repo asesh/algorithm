@@ -50,4 +50,10 @@ void invoke_find_pivot_index();
 std::vector<std::vector<int>> find_three_number_sum(std::vector<int>& input_array);
 void invoke_find_three_number_sum();
 
+void bubble_sort(std::vector<int> array);
+
+void insertion_sort(std::vector<int>& array);
+
+void missing_numbers(std::vector<int>& array);
+
 #endif /* number_algorithm_hpp */

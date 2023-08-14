@@ -44,6 +44,7 @@
 		CFC588CF26EA654300ECB76A /* number_algorithm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = number_algorithm.cpp; sourceTree = "<group>"; };
 		CFC588D026EA654300ECB76A /* number_algorithm.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = number_algorithm.hpp; sourceTree = "<group>"; };
 		CFC588D226EA6A0F00ECB76A /* header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = header.h; sourceTree = "<group>"; };
+		CFCCEF3A2830A9D400EEDAC9 /* graph_algorithm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = graph_algorithm.h; sourceTree = "<group>"; };
 		CFCEE8A5279C19050013E603 /* linked_list_algorithm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = linked_list_algorithm.h; sourceTree = "<group>"; };
 		CFCEE8A6279C19190013E603 /* linked_list_algorithm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = linked_list_algorithm.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,7 +63,6 @@
 		CF657F76244B2C6200A61FBD = {
 			isa = PBXGroup;
 			children = (
-				CF7CEF7F24B07CE90081256C /* GoogleTest */,
 				CF657F81244B2C6200A61FBD /* algorithm */,
 				CF657F80244B2C6200A61FBD /* Products */,
 			);
@@ -95,15 +95,9 @@
 				CFC588CF26EA654300ECB76A /* number_algorithm.cpp */,
 				CFC588D026EA654300ECB76A /* number_algorithm.hpp */,
 				CFC588D226EA6A0F00ECB76A /* header.h */,
+				CFCCEF3A2830A9D400EEDAC9 /* graph_algorithm.h */,
 			);
 			path = algorithm;
-			sourceTree = "<group>";
-		};
-		CF7CEF7F24B07CE90081256C /* GoogleTest */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = GoogleTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

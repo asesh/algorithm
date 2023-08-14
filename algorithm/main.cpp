@@ -16,6 +16,7 @@
 #include "number_algorithm.hpp"
 #include "string_algorithm.hpp"
 #include "linked_list_algorithm.h"
+#include "graph_algorithm.h"
 
 // Check cv signal
 std::mutex condition_mutex;
@@ -76,22 +77,210 @@ bool isMonotonic(std::vector<int> array) {
 	return is_increasing(array) || is_decreasing(array);
 }
 
-bool return_true() {
-	std::cout<<"Returning true"<<std::endl;
-	return true;
+void format_string(std::string& output, char single_character, int occurrence) {
+	output += std::to_string(occurrence) + single_character;
 }
-bool return_false() {
-	std::cout<<"Returning false"<<std::endl;
+
+/*
+ input one: aaka
+ input two: akka
+ */
+bool is_anagram(const std::string& first_word, const std::string& second_word) {
+	if(first_word.length() == second_word.length()) {
+		auto second_copy = second_word;
+		
+		for(const auto& character: first_word) {
+			auto position = second_copy.find(character);
+			if(position != std::string::npos) {
+				// This character exists so remove it from the second word
+				second_copy.erase(position, position + 1);
+				
+				if(second_copy.empty()) {
+					return true;
+				}
+			}
+		}
+	}
+	
 	return false;
 }
-bool return_true_or_false() {
-	return return_true() || return_false() || return_false() || return_true() || return_false();
+
+void rat_in_a_maze_impl(const std::vector<std::vector<int>>& input, std::vector<std::vector<int>>& output, const std::vector<int>& destination) {
+	
+}
+
+void rat_in_a_maze() {
+	std::vector<std::vector<int>> output;
+	std::vector<std::vector<int>> input {
+		{1, 1, 1, 1},
+		{0, 1, 0, 1},
+		{0, 1, 0, 0},
+		{1, 1, 1, 1}
+	};
+	rat_in_a_maze_impl(input, output, {3, 3});
+}
+
+/*
+
+*/
+void print_pyramid(char character) {
+	
+}
+
+class LinkedList {
+public:
+	int value;
+	LinkedList *next;
+	
+	LinkedList(int value) {
+		this->value = value;
+		next = nullptr;
+	}
+};
+
+LinkedList *shiftLinkedList(LinkedList *head, int k) {
+	// int number_of_rotation = k % head;
+	LinkedList* head_node = head;
+	
+	// Time complexity: O(n)
+	int number_of_nodes = 0;
+	while(head_node) {
+		number_of_nodes++;
+		head_node = head_node->next;
+	}
+	head_node = head; // Reset head node
+	
+	int number_of_shifts = k % number_of_nodes;
+	
+	// If number of shifts = 0 then there's no need to shift
+	if(number_of_shifts == 0) {
+		return head;
+	}
+	
+	auto difference = number_of_nodes - number_of_shifts;
+	
+	int counter = 0;
+	//LinkedList* old_head = head_node;
+	LinkedList* new_head = nullptr;
+	while(head_node) {
+		counter++;
+		if(difference == counter) {
+			// This is where we have to break the link and assign the new head node
+			new_head = head_node->next; // New head: 4
+			head_node->next = nullptr; // 3 break from 4
+			head_node = new_head; // Assign the new head as the current node-> 4
+		}
+		
+		head_node = head_node->next;
+		
+		// If it's the last node then point it's next node to the head node
+		if(head_node == nullptr) {
+			head_node = head;
+			std::cout<<"Joining the old head node: "<<head_node->value<<std::endl;
+			break;
+		}
+	}
+	
+	return new_head;
 }
 
 int main(int argc, const char* argv[]) {
+  
+//  auto missing_numbers = missingNumbers({1, 2, 4, 5, 7});
+//  std::cout<<std::endl;
+//  for(auto& number: missing_numbers) {
+//    std::cout<<number<<", ";
+//  }
+  
+//  char character = 'c';
+//  std::cout<<(char) character<<std::endl;
+//  std::string converted_character(character);
+  
 	
-	float result = (float) 11 / 9;
-	std::cout<<result<<std::endl;
+//	std::vector<std::string> output = {"abc", "bcd", "cdef"};
+//	std::unordered_set<char> unique_characters(output[0].begin(), output[0].end());
+//	for(const auto& character: unique_characters) {
+//		std::cout<<character<<" ";
+//	}
+	
+	// (b + (a%b)) % b
+//	int number = -2;
+//	int max = 6;
+//	int value = (max + (number % max)) % max;
+//	std::cout<<value<<std::endl;
+	
+//	std::unordered_map<int, std::string> hash_map{
+//		{0, "a"},
+//		{1, "b"},
+//		{2, "c"},
+//	};
+//	for(const auto& key: hash_map) {
+//		std::cout<<key.first<<std::endl;
+//	}
+	
+//	LinkedList* head = new LinkedList(0);
+//	head->next = new LinkedList(1);
+//	head->next->next = new LinkedList(2);
+//	head->next->next->next = new LinkedList(3);
+//	head->next->next->next->next = new LinkedList(4);
+//	head->next->next->next->next->next = new LinkedList(5);
+//	shiftLinkedList(head, 2);
+//	delete head->next->next->next->next->next;
+//	delete head->next->next->next->next;
+//	delete head->next->next->next;
+//	delete head->next->next;
+//	delete head->next;
+	
+//	rat_in_a_maze();
+	
+//	std::string input = "cinema";
+//	std::cout<<std::boolalpha<<is_anagram(input, "iceman");
+	
+//	auto position = input.find("H");
+//	input.erase(position, 1);
+//	std::cout<<"After: "<< input << std::endl;
+//	auto iter = input.begin();
+//	while(iter != input.end()) {
+//		if(*iter == 'l') {
+//			iter = input.erase(iter);
+//		} else {
+//			++iter;
+//		}
+//	}
+//	std::cout<<input<<std::endl;
+	
+//	invoke_binary_search_tree();
+//	std::string input_string = "Hello world!!";
+//	if(input_string.find('H', 1) == std::string::npos) {
+//		std::cout<<"Not found"<<std::endl;
+//	} else {
+//		std::cout<<"Found"<<std::endl;
+//	}
+	
+//	std::vector<std::vector<int>> array_of_array = {{1, 2}, {4, 7}, {9, 11}, {4, 5}, {6, 8}};
+//	std::sort(array_of_array.begin(), array_of_array.end());
+//	for(auto& list: array_of_array) {
+//		std::cout<<list[0]<<std::endl;
+//	}
+	
+//	std::string output;
+//	format_string(output, 'A', 10);
+//	std::cout<<output<<std::endl;
+	
+//	std::vector<int> output = {INT_MIN, INT_MIN, INT_MIN};
+//	for(const auto& number: output) {
+//		std::cout<<number<<", ";
+//	}
+	
+//	std::vector<int> array = {-4, 5, 10, 8, -10, -6, -4, -2, -5, 3, 5, -4, -5, -1, 1, 6, -7, -6, -7, 8};
+//	insertion_sort(array);
+//	for(const auto& current_number: array) {
+//		std::cout<<current_number<<", ";
+//	}
+	
+//	bubble_sort({5, 1, 4, 2, 8});
+	
+//	test_coroutine();
 	
 //	std::vector<std::any> container;
 //	container.push_back(12);

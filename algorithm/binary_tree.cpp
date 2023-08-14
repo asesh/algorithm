@@ -13,6 +13,11 @@
 //
 //
 
+void invoke_binary_search_tree() {
+	CBinarySearchTree<int> binary_search_tree(5);
+//	binary_search_tree.insert({1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+}
+
 void invoke_binary_tree() {
 	CBinaryTree<int32_t> binary_tree(1);
 	// Fill left-subtree

@@ -369,3 +369,71 @@ void invoke_find_three_number_sum() {
 	std::vector<int> input{12, 3, 1, 2, -6, 5, -8, 6};
 	auto triplets = find_three_number_sum(input);
 }
+
+void bubble_sort(std::vector<int> array) {
+	/*
+	 {5 1 4 2 8}
+	 index: 		0 1 2 3 4
+	 subindex:	0
+	 */
+	for(int index = 0; index < array.size() - 1; ++index) {
+		for(int sub_index = index; sub_index < array.size() - index - 1; ++sub_index) {
+			std::cout<<array[sub_index]<<", ";
+		}
+	}
+}
+
+/*
+ 11 12 13 5 6
+ 11 12 5  13
+ 11 5  12 13 6
+ 5  11 12 13 6
+ 5  11 12 6 13
+ 5  11 6 12 13
+ 5  6  11 12 13
+ */
+void insertion_sort(std::vector<int>& array) {
+	if(array.size() <= 1) {
+		return;
+	}
+	
+	for(int current_index = 0; current_index < array.size() - 1; ++current_index) {
+		if(array[current_index] > array[current_index + 1]) {
+			std::swap(array[current_index], array[current_index + 1]);
+		}
+		
+		int reversal_index = current_index;
+		while(reversal_index > 0 && array[reversal_index] < array[reversal_index - 1]) {
+			std::swap(array[reversal_index], array[reversal_index - 1]);
+			reversal_index--;
+		}
+	}
+}
+
+// https://www.algoexpert.io/questions/missingNumbers
+/*
+Test case 14:
+  Input: 1 2 4 5 7
+  Add:   1 2 4 5 7 Max Max
+  Index: 0 1 2 3 4  5  6
+  Neg:   X X | X X  |  X
+  Output: 3 6
+*/
+std::vector<int> missingNumbers(std::vector<int> nums) {
+  nums.push_back(INT_MAX);
+  nums.push_back(INT_MAX);
+  for(int index = 0; index < nums.size() - 2; ++index) {
+
+    int value = nums[index];
+    std::cout<<"Value: "<<value<<", nums: "<<nums[value - 1]<<", index: "<<index<<std::endl;
+    nums[value - 1] *= -1;
+  }
+
+  std::vector<int> output;
+  for(int index = 0; index < nums.size(); ++index) {
+    if(nums[index] > 0) {
+      output.push_back(index + 1);
+    }
+  }
+  return output;
+}

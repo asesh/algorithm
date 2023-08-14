@@ -189,7 +189,6 @@ std::string reorganize_string(const std::string& input_string) {
 	
 	// Insert the characters and their count in a hashmap
 	for(const auto& input: input_string) {
-		
 	}
 	return "";
 }

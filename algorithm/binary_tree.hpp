@@ -9,6 +9,36 @@
 #ifndef BINARY_TREE_HPP
 #define BINARY_TREE_HPP
 
+template<typename GenericData>
+class CBinarySearchTree {
+public:
+	CBinarySearchTree(GenericData generic_data) {
+		
+	}
+	
+	/*
+	 1 2 3 4 5 6 7 8 9 10
+								5
+							4		5
+						3
+	 */
+	void insert(std::vector<GenericData>& generic_data) {
+		// Sort the numbers: O(nlogn)
+//		std::sort(generic_data.begin(), generic_data.end());
+	}
+	
+	void remove(GenericData generic_data) {
+	}
+	
+	void lookup(GenericData generic_data) {
+	}
+	
+private:
+	GenericData m_generic_data;
+	std::unique_ptr<CBinarySearchTree> m_left_node;
+	std::unique_ptr<CBinarySearchTree> m_right_node;
+};
+
 // Insertion methods:
 //	Between two nodes
 //	After a leaf node
@@ -57,9 +87,7 @@ public:
 		}
 		
 		traverse_postorder(node->m_left_node);
-		
 		traverse_postorder(node->m_right_node);
-		
 		std::cout<<node->m_data<<" ";
 	}
 	
@@ -138,5 +166,6 @@ public:
 };
 
 void invoke_binary_tree();
+void invoke_binary_search_tree();
 
 #endif /* BINARY_TREE_HPP */

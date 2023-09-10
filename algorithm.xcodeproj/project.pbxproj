@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CF657F83244B2C6200A61FBD /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF657F82244B2C6200A61FBD /* main.cpp */; };
 		CF657F8D244B2DA100A61FBD /* binary_tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF657F89244B2DA100A61FBD /* binary_tree.cpp */; };
+		CF7297D92AAC6A5B00D2DE84 /* graph_algorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF7297D82AAC6A5B00D2DE84 /* graph_algorithm.cpp */; };
 		CF7B579225FCED5B002D458D /* algorithm_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF7B579125FCED5B002D458D /* algorithm_impl.cpp */; };
 		CFB71B07272EE45D00724C26 /* linked_list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFB71B06272EE45D00724C26 /* linked_list.cpp */; };
 		CFC588CE26EA64BD00ECB76A /* string_algorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFC588CC26EA64BD00ECB76A /* string_algorithm.cpp */; };
@@ -35,6 +36,7 @@
 		CF657F8A244B2DA100A61FBD /* binary_tree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = binary_tree.hpp; sourceTree = "<group>"; };
 		CF657F8B244B2DA100A61FBD /* linked_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = linked_list.h; sourceTree = "<group>"; };
 		CF657F8C244B2DA100A61FBD /* sorted_linked_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sorted_linked_list.h; sourceTree = "<group>"; };
+		CF7297D82AAC6A5B00D2DE84 /* graph_algorithm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = graph_algorithm.cpp; sourceTree = "<group>"; };
 		CF753399251EEEC000229318 /* path_finding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = path_finding.h; sourceTree = "<group>"; };
 		CF7B579125FCED5B002D458D /* algorithm_impl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = algorithm_impl.cpp; sourceTree = "<group>"; };
 		CF7B579425FCED9C002D458D /* algorithm_impl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = algorithm_impl.h; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				CFC588D026EA654300ECB76A /* number_algorithm.hpp */,
 				CFC588D226EA6A0F00ECB76A /* header.h */,
 				CFCCEF3A2830A9D400EEDAC9 /* graph_algorithm.h */,
+				CF7297D82AAC6A5B00D2DE84 /* graph_algorithm.cpp */,
 			);
 			path = algorithm;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 				CFCEE8A7279C19190013E603 /* linked_list_algorithm.cpp in Sources */,
 				CF657F8D244B2DA100A61FBD /* binary_tree.cpp in Sources */,
 				CF657F83244B2C6200A61FBD /* main.cpp in Sources */,
+				CF7297D92AAC6A5B00D2DE84 /* graph_algorithm.cpp in Sources */,
 				CFC588D126EA654300ECB76A /* number_algorithm.cpp in Sources */,
 				CFC588CE26EA64BD00ECB76A /* string_algorithm.cpp in Sources */,
 				CF7B579225FCED5B002D458D /* algorithm_impl.cpp in Sources */,

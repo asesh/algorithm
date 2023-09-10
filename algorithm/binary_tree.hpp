@@ -125,7 +125,7 @@ public:
 		} else {
 			auto left_subtree_height = get_height(node->m_left_node) + 1;
 			auto right_subtree_height = get_height(node->m_right_node) + 1;
-			return left_subtree_height > right_subtree_height ? left_subtree_height : right_subtree_height;
+			return std::max(left_subtree_height, right_subtree_height);
 		}
 	}
 	

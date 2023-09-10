@@ -231,3 +231,28 @@ void invoke_longest_palindromic_substring() {
 	std::string input_string = "baad";
 	std::cout << "Longest palidromic substring: " << longest_palindromic_substring(input_string);
 }
+
+
+/*
+ input one: aaka
+ input two: akka
+ */
+bool is_anagram(const std::string& first_word, const std::string& second_word) {
+  if(first_word.length() == second_word.length()) {
+    auto second_copy = second_word;
+    
+    for(const auto& character: first_word) {
+      auto position = second_copy.find(character);
+      if(position != std::string::npos) {
+        // This character exists so remove it from the second word
+        second_copy.erase(position, position + 1);
+        
+        if(second_copy.empty()) {
+          return true;
+        }
+      }
+    }
+  }
+  
+  return false;
+}

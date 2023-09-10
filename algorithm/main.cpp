@@ -18,183 +18,15 @@
 #include "linked_list_algorithm.h"
 #include "graph_algorithm.h"
 
-// Check cv signal
-std::mutex condition_mutex;
-std::condition_variable check_cv;
-void check_condition_variable() {
-	std::unique_lock<std::mutex> lock_mutex(condition_mutex);
-	
-	std::wcout<<L"Waiting for the cv to be signaled"<<std::endl;
-	while(1) {
-		auto cv_status = check_cv.wait_for(lock_mutex, std::chrono::seconds(1));
-		if(cv_status == std::cv_status::timeout) {
-			std::wcout<<L"Waiting for the cv to be signaled"<<std::endl;
-			continue;
-		}
-		
-		std::wcout<<L"The cv has been signaled"<<std::endl;
-		break;
-	}
-}
-
-bool is_increasing(std::vector<int> input_array) {
-	for(int index = 0; index < input_array.size() - 1; index++) {
-		if(input_array[index] > input_array[index + 1]) {
-			return false;
-		}
-	}
-	return true;
-}
-
-bool is_decreasing(std::vector<int> input_array) {
-	for(int index = 0; index < input_array.size() - 1; index++) {
-		if(input_array[index] < input_array[index + 1]) {
-			return false;
-		}
-	}
-	return true;
-}
-
-bool isMonotonic(std::vector<int> array) {
-	/*
-	 -1 -5 -10 -1100 -1100 -1101 -1102 -9001
-	 
-	 1 2 3 4 5 -> Diff > 0
-	 
-	 1 2 4 7 9
-	 Sum: 23
-	 I: 1: 23-1 = 22
-	 I: 2: 23-2 = 21
-	 I: 4: 23-4 = 19
-	 I: 7: 23-7 = 16
-	 I: 9: 23-9 = 14
-	 
-	 1 2 4 5 9
-	 
-	 -1 -2 -3 -4 -> Diff < 0
-	 */
-	
-	return is_increasing(array) || is_decreasing(array);
-}
-
-void format_string(std::string& output, char single_character, int occurrence) {
-	output += std::to_string(occurrence) + single_character;
-}
-
-/*
- input one: aaka
- input two: akka
- */
-bool is_anagram(const std::string& first_word, const std::string& second_word) {
-	if(first_word.length() == second_word.length()) {
-		auto second_copy = second_word;
-		
-		for(const auto& character: first_word) {
-			auto position = second_copy.find(character);
-			if(position != std::string::npos) {
-				// This character exists so remove it from the second word
-				second_copy.erase(position, position + 1);
-				
-				if(second_copy.empty()) {
-					return true;
-				}
-			}
-		}
-	}
-	
-	return false;
-}
-
-void rat_in_a_maze_impl(const std::vector<std::vector<int>>& input, std::vector<std::vector<int>>& output, const std::vector<int>& destination) {
-	
-}
-
-void rat_in_a_maze() {
-	std::vector<std::vector<int>> output;
-	std::vector<std::vector<int>> input {
-		{1, 1, 1, 1},
-		{0, 1, 0, 1},
-		{0, 1, 0, 0},
-		{1, 1, 1, 1}
-	};
-	rat_in_a_maze_impl(input, output, {3, 3});
-}
-
-/*
-
-*/
-void print_pyramid(char character) {
-	
-}
-
-class LinkedList {
-public:
-	int value;
-	LinkedList *next;
-	
-	LinkedList(int value) {
-		this->value = value;
-		next = nullptr;
-	}
-};
-
-LinkedList *shiftLinkedList(LinkedList *head, int k) {
-	// int number_of_rotation = k % head;
-	LinkedList* head_node = head;
-	
-	// Time complexity: O(n)
-	int number_of_nodes = 0;
-	while(head_node) {
-		number_of_nodes++;
-		head_node = head_node->next;
-	}
-	head_node = head; // Reset head node
-	
-	int number_of_shifts = k % number_of_nodes;
-	
-	// If number of shifts = 0 then there's no need to shift
-	if(number_of_shifts == 0) {
-		return head;
-	}
-	
-	auto difference = number_of_nodes - number_of_shifts;
-	
-	int counter = 0;
-	//LinkedList* old_head = head_node;
-	LinkedList* new_head = nullptr;
-	while(head_node) {
-		counter++;
-		if(difference == counter) {
-			// This is where we have to break the link and assign the new head node
-			new_head = head_node->next; // New head: 4
-			head_node->next = nullptr; // 3 break from 4
-			head_node = new_head; // Assign the new head as the current node-> 4
-		}
-		
-		head_node = head_node->next;
-		
-		// If it's the last node then point it's next node to the head node
-		if(head_node == nullptr) {
-			head_node = head;
-			std::cout<<"Joining the old head node: "<<head_node->value<<std::endl;
-			break;
-		}
-	}
-	
-	return new_head;
-}
-
 int main(int argc, const char* argv[]) {
+  
+  create_directed_graph();
   
 //  auto missing_numbers = missingNumbers({1, 2, 4, 5, 7});
 //  std::cout<<std::endl;
 //  for(auto& number: missing_numbers) {
 //    std::cout<<number<<", ";
 //  }
-  
-//  char character = 'c';
-//  std::cout<<(char) character<<std::endl;
-//  std::string converted_character(character);
   
 	
 //	std::vector<std::string> output = {"abc", "bcd", "cdef"};
@@ -262,10 +94,6 @@ int main(int argc, const char* argv[]) {
 //	for(auto& list: array_of_array) {
 //		std::cout<<list[0]<<std::endl;
 //	}
-	
-//	std::string output;
-//	format_string(output, 'A', 10);
-//	std::cout<<output<<std::endl;
 	
 //	std::vector<int> output = {INT_MIN, INT_MIN, INT_MIN};
 //	for(const auto& number: output) {

@@ -56,4 +56,12 @@ void insertion_sort(std::vector<int>& array);
 
 void missing_numbers(std::vector<int>& array);
 
+// Anagram
+bool isMonotonic(std::vector<int> array);
+bool is_increasing(std::vector<int> input_array);
+bool is_decreasing(std::vector<int> input_array);
+
+void rat_in_a_maze_impl(const std::vector<std::vector<int>>& input, std::vector<std::vector<int>>& output, const std::vector<int>& destination);
+void rat_in_a_maze();
+
 #endif /* number_algorithm_hpp */

@@ -437,3 +437,63 @@ std::vector<int> missingNumbers(std::vector<int> nums) {
   }
   return output;
 }
+
+// Anagram
+//
+bool is_increasing(std::vector<int> input_array) {
+  for(int index = 0; index < input_array.size() - 1; index++) {
+    if(input_array[index] > input_array[index + 1]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool is_decreasing(std::vector<int> input_array) {
+  for(int index = 0; index < input_array.size() - 1; index++) {
+    if(input_array[index] < input_array[index + 1]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool isMonotonic(std::vector<int> array) {
+  /*
+   -1 -5 -10 -1100 -1100 -1101 -1102 -9001
+   
+   1 2 3 4 5 -> Diff > 0
+   
+   1 2 4 7 9
+   Sum: 23
+   I: 1: 23-1 = 22
+   I: 2: 23-2 = 21
+   I: 4: 23-4 = 19
+   I: 7: 23-7 = 16
+   I: 9: 23-9 = 14
+   
+   1 2 4 5 9
+   
+   -1 -2 -3 -4 -> Diff < 0
+   */
+  
+  return is_increasing(array) || is_decreasing(array);
+}
+
+//
+// Anagram
+
+void rat_in_a_maze_impl(const std::vector<std::vector<int>>& input, std::vector<std::vector<int>>& output, const std::vector<int>& destination) {
+  
+}
+
+void rat_in_a_maze() {
+  std::vector<std::vector<int>> output;
+  std::vector<std::vector<int>> input {
+    {1, 1, 1, 1},
+    {0, 1, 0, 1},
+    {0, 1, 0, 0},
+    {1, 1, 1, 1}
+  };
+  rat_in_a_maze_impl(input, output, {3, 3});
+}

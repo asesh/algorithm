@@ -23,4 +23,6 @@ std::string reorganize_string(const std::string& input_string);
 std::string longest_palindromic_substring(const std::string& input_string);
 void invoke_longest_palindromic_substring();
 
+bool is_anagram(const std::string& first_word, const std::string& second_word);
+
 #endif /* string_algorithm_hpp */

@@ -20,7 +20,12 @@
 
 int main(int argc, const char* argv[]) {
   
-  create_directed_graph();
+  invoke_calculate_minimum_coins();
+  
+//  std::cout<<(-1%10)<<std::endl;
+  
+//  create_undirected_graph();
+//  create_directed_graph();
   
 //  auto missing_numbers = missingNumbers({1, 2, 4, 5, 7});
 //  std::cout<<std::endl;

@@ -497,3 +497,39 @@ void rat_in_a_maze() {
   };
   rat_in_a_maze_impl(input, output, {3, 3});
 }
+
+int calculate_minimum_coins(int target, const std::vector<int>& denoms, int coins_needed, std::unordered_map<int, int>& computed_targets) {
+  if(target < 0) {
+    return INT_MAX;
+  }
+  
+  if(computed_targets.contains(target) && computed_targets.at(target) <= coins_needed) {
+    std::cout<<"Using pre-computed data: "<<target<<" : "<<computed_targets[target]<<std::endl;
+    return computed_targets[target];
+  }
+
+  if(target == 0) {
+    std::cout<<"Coins needed: "<<coins_needed<<std::endl;
+    return coins_needed;
+  }
+  
+  coins_needed++;
+
+  int minimum_coins = INT_MAX;
+  for(const auto& denom: denoms) {
+//    std::cout<<"Target "<<target<<" - "<<"Denom "<<denom<<" = "<<(target - denom)<<std::endl;
+    int possible_min_coins = calculate_minimum_coins(target - denom, denoms, coins_needed, computed_targets);
+    minimum_coins = std::min(minimum_coins, possible_min_coins);
+  }
+  
+  computed_targets[target] = minimum_coins;
+  std::cout<<"Target key: "<<target<<"-> value: "<<minimum_coins<<std::endl;
+  
+  return minimum_coins;
+}
+
+void invoke_calculate_minimum_coins() {
+  std::unordered_map<int, int> computed_targets;
+  int minimum_coins = calculate_minimum_coins(11, {1, 2, 5}, 0, computed_targets);
+  std::cout<<"Min. coins needed: "<<minimum_coins<<std::endl;
+}

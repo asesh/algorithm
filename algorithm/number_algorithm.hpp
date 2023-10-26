@@ -64,4 +64,7 @@ bool is_decreasing(std::vector<int> input_array);
 void rat_in_a_maze_impl(const std::vector<std::vector<int>>& input, std::vector<std::vector<int>>& output, const std::vector<int>& destination);
 void rat_in_a_maze();
 
+void calculate_minimum_coins(int target, const std::vector<int>& denoms, int coins_needed, int& min_coins, std::unordered_map<int, int>& computed_targets);
+void invoke_calculate_minimum_coins();
+
 #endif /* number_algorithm_hpp */

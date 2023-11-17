@@ -256,3 +256,79 @@ bool is_anagram(const std::string& first_word, const std::string& second_word) {
   
   return false;
 }
+
+int levenshtein_distance(const std::string &first_word, const std::string& second_word) {
+  // Space: O(mn)
+  std::vector<std::vector<int>> edit_distance_table(first_word.size() + 1);
+
+  // Runtime: O(mn)
+  // Pre-populate the first-row and first-column of our table
+  std::for_each(edit_distance_table.begin(), edit_distance_table.end(), [number = 1, current_row = 0, second_word](std::vector<int> &row) mutable {
+   if(current_row == 0) {
+     // Construct first row
+     for(int row_value = 0; row_value <= second_word.size(); ++row_value) {
+       row.push_back(row_value);
+     }
+   } else {
+     // Construct the first column
+     row.reserve(second_word.size());
+     for(int row_value = 0; row_value <= second_word.size(); ++row_value) {
+       row.push_back(0);
+     }
+     row[0] = number++;
+   }
+   ++current_row;
+  });
+
+  // Runtime: O(mn)
+  int row = 1, column = 1;
+  for(const auto& from_char: first_word) {
+   for(const auto& to_char: second_word) {
+     if(from_char == to_char) {
+       // Take the value of upper-left cell
+       edit_distance_table[row][column] = edit_distance_table[row - 1][column - 1];
+     } else {
+       // Take the min. of three neighbors and add 1 to it
+       edit_distance_table[row][column] = 1 + std::min(std::min(edit_distance_table[row - 1][column - 1],
+         edit_distance_table[row - 1][column]), edit_distance_table[row][column - 1]);
+     }
+     ++column;
+   }
+   ++row;
+   column = 1;
+  }
+
+  return edit_distance_table[first_word.size()][second_word.size()];
+}
+
+// R: O(nm) S: O(min(n,m))
+void invoke_levenshtein_distance() {
+  std::cout<<"The number of edit operations required: "<<levenshtein_distance("abcdefghij", "1234567890")<<std::endl;
+}
+
+int river_sizes(std::vector<std::vector<int>>& input_matrix) {
+  return 0;
+}
+
+// T: O(wh), S(wh)
+void invoke_river_sizes() {
+  // Output: 2, 2, 5, 1, 2
+  std::vector<std::vector<int>> matrix = {
+    {1, 0, 0, 1, 0},
+    {1, 0, 1, 0, 0},
+    {0, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1},
+    {1, 0, 1, 1, 0}
+  };
+  
+  std::cout<<"The river size is: "<<river_sizes(matrix)<<std::endl;
+}
+
+void valid_ip_address(const std::string& ip_addresses) {
+  
+}
+
+// R: O(1) S: O(1)
+void invoke_valid_ip_address() {
+  valid_ip_address("1921680");
+}

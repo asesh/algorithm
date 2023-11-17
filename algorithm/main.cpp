@@ -20,7 +20,24 @@
 
 int main(int argc, const char* argv[]) {
   
-  invoke_calculate_minimum_coins();
+//  std::vector<int> denoms = {1, 2, 5};
+//  test_recursion(denoms, 5);
+  
+//  std::vector<std::vector<int>> visted(5, std::vector<int>(10, false));
+  
+  invoke_river_size();
+  
+//  invoke_levenshtein_distance();
+  
+//  invoke_river_sizes();
+  
+//  invoke_number_of_ways_to_traverse_graph();
+  
+//  invoke_calculate_minimum_number_of_steps();
+  
+//  invoke_calculate_number_of_steps();
+  
+//  invoke_calculate_minimum_coins();
   
 //  std::cout<<(-1%10)<<std::endl;
   

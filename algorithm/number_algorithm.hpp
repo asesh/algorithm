@@ -67,4 +67,16 @@ void rat_in_a_maze();
 void calculate_minimum_coins(int target, const std::vector<int>& denoms, int coins_needed, int& min_coins, std::unordered_map<int, int>& computed_targets);
 void invoke_calculate_minimum_coins();
 
+int calculate_four_number_sum(int target, const std::vector<int>& array, int sum);
+void invoke_calculate_four_number_sum();
+
+void calculate_total_number_of_steps(int number_of_steps, int& total_number_of_steps, std::unordered_map<int, int>& computed_values);
+void invoke_calculate_total_number_of_steps();
+
+void invoke_calculate_minimum_number_of_steps();
+
+void invoke_number_of_ways_to_traverse_graph();
+
+void invoke_river_size();
+
 #endif /* number_algorithm_hpp */

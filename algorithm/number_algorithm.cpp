@@ -533,3 +533,161 @@ void invoke_calculate_minimum_coins() {
   int minimum_coins = calculate_minimum_coins(11, {1, 2, 5}, 0, computed_targets);
   std::cout<<"Min. coins needed: "<<minimum_coins<<std::endl;
 }
+
+int calculate_four_number_sum(int target, const std::vector<int>& array, int sum) {
+  if(sum > target) {
+    return INT_MAX;
+  }
+  
+  int calculated_sum = 0;
+  for(const auto& current_number: array) {
+    
+  }
+  
+  return INT_MAX;
+}
+
+void invoke_calculate_four_number_sum() {
+  std::vector<int> array = {7, 6, 4, -1, 1, 2};
+  calculate_four_number_sum(16, array, 0);
+}
+
+// Using top-down DP
+void calculate_total_number_of_steps(int number_of_steps, int& total_number_of_steps, std::unordered_map<int, int>& computed_values) {
+  static std::vector<int> steps = {1, 2};
+  
+  if(number_of_steps < 0) {
+    return;
+  }
+  if(computed_values.contains(number_of_steps)) {
+//    std::cout<<"Returning cached number of steps: "<<number_of_steps<<std::endl;
+    total_number_of_steps += computed_values.at(number_of_steps);
+    return;
+  }
+  
+  if(number_of_steps == 0) {
+//    std::cout<<"Number of steps is 0 when : "<<number_of_steps<<std::endl;
+    total_number_of_steps++;
+    return;
+  }
+  
+  for(const auto& step: steps) {
+    calculate_total_number_of_steps(number_of_steps - step, total_number_of_steps, computed_values);
+  }
+  
+//  std::cout<<"Storing Key: "<<number_of_steps<<", value: "<<total_number_of_steps<<std::endl;
+  computed_values[number_of_steps] = total_number_of_steps;
+}
+
+void invoke_calculate_total_number_of_steps() {
+  int total_number_of_steps = 0;
+  std::unordered_map<int, int> computed_values;
+  calculate_total_number_of_steps(4, total_number_of_steps, computed_values);
+  std::cout<<std::endl<<"Number of steps that can be taken: "<<total_number_of_steps<<std::endl;
+}
+
+// https://leetcode.com/problems/climbing-stairs/description/
+// Using bottom-up DP
+int get_total_number_of_steps(int total_steps) {
+  int previous = 1, next = 1;
+  int sum = 0;
+  total_steps -= 2;
+  while(total_steps >= 0) {
+    --total_steps;
+    
+    sum = previous + next;
+    previous = next;
+    next = sum;
+  }
+  
+  return sum;
+}
+
+int calculate_minimum_number_of_steps(int destination_steps, int total_steps = 0) {
+  static std::vector<int> steps = {1, 2};
+  if(destination_steps < 0) {
+    return INT_MAX;
+  }
+  
+  if(destination_steps == 0) {
+    return total_steps;
+  }
+
+  ++total_steps;
+  
+  int min_steps = INT_MAX;
+  for(const auto& step: steps) {
+    int total_possible_steps = calculate_minimum_number_of_steps(destination_steps - step, total_steps);
+    min_steps = std::min(min_steps, total_possible_steps);
+  }
+  
+  return min_steps;
+}
+
+void invoke_calculate_minimum_number_of_steps() {
+  std::cout<<"Minimum number of steps: "<<calculate_minimum_number_of_steps(25)<<std::endl;
+}
+
+// https://www.algoexpert.io/questions/number-of-ways-to-traverse-graph
+int number_of_ways_to_traverse_graph(int total_width, int total_height) {
+  std::vector<int> computed_cells(total_width + 1, 1); // = {1, 1, 1, 1, 0};
+  computed_cells[total_width] = 0;
+  
+  for(int current_row = total_height - 2; current_row >= 0; --current_row) {
+    std::vector<int> new_row(total_width + 1, 0);
+    for(int current_column = total_width - 1; current_column >= 0; --current_column) {
+      new_row[current_column] = new_row[current_column + 1] + computed_cells[current_column];
+    }
+    
+    computed_cells = new_row;
+  }
+  
+  return computed_cells[0];
+}
+
+void invoke_number_of_ways_to_traverse_graph() {
+  std::cout<<"Number of ways to traverse graph: "<<number_of_ways_to_traverse_graph(4, 3);
+}
+
+void river_size_dfs(const std::vector<std::vector<int>>& matrix, std::vector<std::vector<int>>& visited, int& river_size, int row, int column) {
+  auto column_size = matrix[0].size();
+  auto row_size = matrix.size();
+  if(row >= 0 && row < row_size && column >= 0 && column < column_size && matrix[row][column] == 1 &&
+    !visited[row][column]) {
+    ++river_size;
+    visited[row][column] = true;
+    river_size_dfs(matrix, visited, river_size, row, column - 1); // Move left
+    river_size_dfs(matrix, visited, river_size, row - 1, column); // Move to top
+    river_size_dfs(matrix, visited, river_size, row, column + 1); // Move to right
+    river_size_dfs(matrix, visited, river_size,  row + 1, column); // Move to bottom
+  }
+}
+
+// Time: O(wh), Space: O(wh)
+void invoke_river_size() {
+  std::vector<int> output;
+  
+  std::vector<std::vector<int>> matrix = {
+    {1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0}
+  };
+
+  // Space: O(wh)
+  std::vector<std::vector<int>> visited(matrix.size(), std::vector<int>(matrix[0].size(), false));
+
+  // Time: O(wh)
+  for(int row = 0; row < matrix.size(); ++row) {
+    for(int column = 0; column < matrix[0].size(); ++column) {
+
+      if(matrix[row][column] == 1 && !visited[row][column]) {
+        int river_size = 0;
+        river_size_dfs(matrix, visited, river_size, row, column);
+        output.push_back(river_size);
+      }
+    }
+  }
+  
+  std::cout<<"The river sizes are: ";
+  for(const auto& size: output) {
+    std::cout<<size<<", ";
+  }
+}

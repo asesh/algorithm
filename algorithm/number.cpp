@@ -691,3 +691,59 @@ void invoke_river_size() {
     std::cout<<size<<", ";
   }
 }
+
+void invoke_valid_starting_city() {
+  
+}
+
+// https://www.algoexpert.io/questions/valid-starting-city
+int valid_starting_city(std::vector<int> distances, std::vector<int> fuel, int mpg) {
+  int output_index = 0;
+  int min_distance_covered = 0;
+  int last_distance_covered = 0;
+  for(int index = 1; index < distances.size(); ++index) {
+    // Distance covered from the previous city to the current one
+    int distance_covered = ((fuel[index - 1] * mpg) + last_distance_covered) - distances[index - 1]; // 5
+    if(distance_covered < min_distance_covered) {
+      min_distance_covered = distance_covered;
+      output_index = index;
+    }
+    last_distance_covered = distance_covered;
+  }
+  return output_index;
+}
+
+// https://leetcode.com/problems/valid-palindrome-ii/
+bool valid_palindrome_2(std::string& input_string) {
+  int correction_counter = 0;
+  for(int current_index = 0, last_index = input_string.size() - 1;
+      current_index < input_string.size() / 2 && current_index < last_index;
+      ++current_index, --last_index) {
+    if(input_string[current_index] == input_string[last_index]) {
+      continue;
+    }
+    
+    if(correction_counter >= 1) {
+      return false;
+    }
+    
+    // Discard the current index or last index
+    if(input_string[current_index + 1] == input_string[last_index]) {
+      ++correction_counter;
+      current_index++;
+      continue;
+    } else if(input_string[current_index] == input_string[last_index - 1]) {
+      ++correction_counter;
+      last_index--;
+      continue;
+    }
+    
+    return false;
+  }
+  return true;
+}
+
+void invoke_valid_palindrome_2() {
+  std::string input_string = "caba"; // abac
+  std::cout<<std::boolalpha<<valid_palindrome_2(input_string);
+}

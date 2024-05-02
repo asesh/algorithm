@@ -263,7 +263,8 @@ int levenshtein_distance(const std::string &first_word, const std::string& secon
 
   // Runtime: O(mn)
   // Pre-populate the first-row and first-column of our table
-  std::for_each(edit_distance_table.begin(), edit_distance_table.end(), [number = 1, current_row = 0, second_word](std::vector<int> &row) mutable {
+  std::for_each(edit_distance_table.begin(), edit_distance_table.end(), 
+                [number = 1, current_row = 0, second_word](std::vector<int> &row) mutable {
    if(current_row == 0) {
      // Construct first row
      for(int row_value = 0; row_value <= second_word.size(); ++row_value) {

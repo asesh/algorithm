@@ -19,13 +19,20 @@
 #include "graph_algorithm.h"
 
 int main(int argc, const char* argv[]) {
+  // Minheap
+  MinHeap min_heap({48, 12, 24, 7, 8, -5, 24, 391, 24, 56, 2, 6, 8, 41});
+  min_heap.insert(76);
+  min_heap.remove();
+  min_heap.remove();
+  
+//  invoke_valid_palindrome_2();
   
 //  std::vector<int> denoms = {1, 2, 5};
 //  test_recursion(denoms, 5);
   
 //  std::vector<std::vector<int>> visted(5, std::vector<int>(10, false));
   
-  invoke_river_size();
+//  invoke_river_size();
   
 //  invoke_levenshtein_distance();
   

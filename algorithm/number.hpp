@@ -79,4 +79,108 @@ void invoke_number_of_ways_to_traverse_graph();
 
 void invoke_river_size();
 
+void invoke_valid_starting_city();
+
+void invoke_valid_palindrome_2();
+
+class MinHeap {
+ public:
+  std::vector<int> heap;
+
+  MinHeap(std::vector<int> vector) { heap = buildHeap(vector); }
+
+  int get_parent_index(int current_node_index) {
+    return (current_node_index - 1) / 2;
+  }
+
+  int get_left_child(int current_node_index) {
+    return (2 * current_node_index) + 1;
+  }
+
+  int get_right_child(int current_node_index) {
+    return (2 * current_node_index) + 2;
+  }
+
+  std::vector<int> buildHeap(std::vector<int>& vector) {
+    for(int index = 0; index < vector.size(); ++index) {
+      heap.push_back(vector[index]);
+      siftUp(index, vector);
+    }
+    return vector;
+  }
+
+  bool is_valid(int index) {
+    return index < heap.size();
+  }
+
+  void siftDown(int currentIdx, int endIdx, std::vector<int>& heap) {
+    for(int current_index = currentIdx; current_index < endIdx;) {
+      auto left_child_index = get_left_child(current_index);
+      auto right_child_index = get_right_child(current_index);
+
+      if(!is_valid(left_child_index) && !is_valid(right_child_index)) {
+        break;
+      }
+      
+      if(is_valid(left_child_index) && is_valid(right_child_index)) {
+        if(heap[left_child_index] <= heap[right_child_index]) {
+          std::swap(heap[left_child_index], heap[current_index]);
+          current_index = left_child_index;
+        } else {
+          std::swap(heap[right_child_index], heap[current_index]);
+          current_index = right_child_index;
+        }
+      } else if(is_valid(left_child_index) &&
+        heap[current_index] > heap[left_child_index]) {
+        std::swap(heap[left_child_index], heap[current_index]);
+        current_index = left_child_index;
+      } else if(is_valid(right_child_index) &&
+        heap[current_index] > heap[right_child_index]) {
+        std::swap(heap[right_child_index], heap[current_index]);
+        current_index = right_child_index;
+      } else {
+        ++current_index;
+      }
+    }
+  }
+
+  void siftUp(int currentIdx, std::vector<int>& heap) {
+    for(int current_index = currentIdx; current_index < heap.size(); --current_index) {
+      auto parent_index = get_parent_index(current_index);
+      if(parent_index < 0) {
+        continue;
+      }
+      
+      if(heap[current_index] < heap[parent_index]) {
+        std::swap(heap[current_index], heap[parent_index]);
+      }
+    }
+  }
+
+  int peek() {
+    return heap[0];
+  }
+
+  int remove() {
+    std::swap(heap[0], heap[heap.size() - 1]);
+    auto last_item = heap.back();
+    heap.pop_back();
+    siftDown(0, heap.size() - 1, heap);
+    for(auto item: heap) {
+      std::cout<<item<<", ";
+    }
+    std::cout<<std::endl;
+    return last_item;
+  }
+
+  void insert(int value) {
+    if(heap.empty()) {
+      heap.push_back(value);
+    } else {
+      heap[heap.size() - 1] = value;
+    }
+    siftUp(heap.size() - 1, heap);
+  }
+};
+
 #endif /* number_algorithm_hpp */

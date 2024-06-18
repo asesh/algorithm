@@ -6,11 +6,11 @@
 //  Copyright © 2021 Asesh Shrestha. All rights reserved.
 //
 
-#ifndef number_algorithm_hpp
-#define number_algorithm_hpp
+#ifndef NUMBER_HPP
+#define NUMBER_HPP
 
 void print_reverse(int input_array[], int index, int max_items);
-void merge_sort(int array[], int lower_index, int higher_index);
+void merge_sort(std::array<int, 6>, int lower_index, int higher_index);
 bool is_number_palindrome(int number);
 int get_max_sum_of_consecutive_numbers(int array[], int number_of_elements, int number_of_consecutive_elements);
 std::pair<int, int> two_sum_equals_specific_target(const int* input_numbers, int number_of_elements, int target);
@@ -183,4 +183,25 @@ class MinHeap {
   }
 };
 
-#endif /* number_algorithm_hpp */
+/* https://leetcode.com/discuss/interview-question/5091692/FacebookMeta-MLSWE-Phone-Screenor-Pass-or-TLV-or-Random-pick-with-weight
+ */
+void cut_cake_make_strawberries(std::vector<int> starwberries, int number_of_cuts);
+
+void invoke_insertAndShiftNumbers();
+
+/*
+ https://leetcode.com/problems/merge-sorted-array
+*/
+void invoke_merge_sorted_arrays();
+
+/*
+ 27. Remove Element: https://leetcode.com/problems/remove-element
+*/
+void invoke_remove_element();
+
+/*
+26. Remove Duplicates from Sorted Array https://leetcode.com/problems/remove-duplicates-from-sorted-array
+*/
+void invoke_remove_duplicates_from_sorted_array();
+
+#endif /* NUMBER_HPP */

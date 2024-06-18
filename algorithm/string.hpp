@@ -6,8 +6,8 @@
 //  Copyright © 2021 Asesh Shrestha. All rights reserved.
 //
 
-#ifndef string_algorithm_hpp
-#define string_algorithm_hpp
+#ifndef string_hpp
+#define string_hpp
 
 void string_permutation(char input_string[], int lower_index, int higher_index);
 void split_and_print(int32_t input_array[], int32_t lower_index, int32_t higher_index);
@@ -29,4 +29,4 @@ void invoke_levenshtein_distance();
 
 void invoke_valid_ip_address();
 
-#endif /* string_algorithm_hpp */
+#endif /* string_hpp */

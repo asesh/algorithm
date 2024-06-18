@@ -8,7 +8,7 @@
 
 #include "header.h"
 #include "linked_list.h"
-#include "number_algorithm.hpp"
+#include "number.hpp"
 
 // Ref 1: Print the reverse of an array by using recursion
 void print_reverse(int input_array[], int index, int max_items) {
@@ -23,25 +23,30 @@ void print_reverse(int input_array[], int index, int max_items) {
 
 /*
  Ref 2: Merge sort implementation
- */
-void merge_sort(int array[], int lower_index, int higher_index) {
+ 5 | 4 | 2 | 7 | 6 | 1 => (0, 2) => (0, 1) => (0, 0) 1st half
+ 5 | 4   2 | 7   6 | 1 => (3, 5) => (3, 4) => (3, 3) 2nd half
+ 4 | 5   2 | 7   1 | 6
+ 2 | 4 | 5 | 7   1 | 6
+=> 1 | 2 | 4 | 5 | 6 | 7
+ 
+1 2 3 4
+(0, 3)
+  -> (0, *1)
+    -> (0, *0)
+    -> (1, 3)
+  ->
+*/
+void merge_sort(std::array<int, 6> input_array, int lower_index, int higher_index) {
 	// Base case
-	if(lower_index >= higher_index) {
+	if(higher_index > input_array.size() - 1 || lower_index == higher_index || lower_index > higher_index) {
 		return;
 	}
 	
-	/*
-	 func(0, 7)
-	 median -> 3
-	 func(0, 3)
-	 median -> 1
-	 func(0, 1)
-	 median -> 0
-	 */
-	
 	int median = (lower_index + higher_index) / 2;
-	merge_sort(array, lower_index, median);
-	std::cout<< array[median] << std::endl;
+	merge_sort(input_array, lower_index, median);
+  merge_sort(input_array, median + 1, higher_index);
+  std::cout<<"Lower index: "<<lower_index<<", median: "<<median<<", higher_index: "<<higher_index<<std::endl;
+//	std::cout<< "Median: "<<median<<", value: "<<input_array[median] << std::endl;
 }
 
 /*
@@ -746,4 +751,113 @@ bool valid_palindrome_2(std::string& input_string) {
 void invoke_valid_palindrome_2() {
   std::string input_string = "caba"; // abac
   std::cout<<std::boolalpha<<valid_palindrome_2(input_string);
+}
+
+/* https://leetcode.com/discuss/interview-question/5091692/FacebookMeta-MLSWE-Phone-Screenor-Pass-or-TLV-or-Random-pick-with-weight
+ Example 1:
+ strawberries: [1, 2, 3]
+ n: 1
+ Result: true because 1+2 | 3
+ 
+ Example 2:
+ strawberries: [1, 2, 3]
+ n: 2
+ Result: false
+ */
+void cut_cake_make_strawberries(std::vector<int> starwberries, int number_of_cuts) {
+}
+
+/*
+
+Input: [1, 3, 4, 5, 0]
+Insert: 2
+Index: 1
+
+ temp: 3
+        *
+ [1, 2, 4, 5, 0]
+*/
+void insert_and_shift_numbers(std::vector<int>& array, int insert_index, int number) {
+  for(int index = 0; index < array.size(); ++index) {
+    if(index == insert_index) {
+      auto temp = array[index];
+      array[index++] = number;
+      while(index < array.size()) {
+        std::swap(temp, array[index++]);
+      }
+    }
+  }
+}
+void invoke_insert_and_shift_numbers() {
+  std::vector<int> input_array = {1, 3, 4, 5, 0};
+  insert_and_shift_numbers(input_array, 1, 2);
+  
+  for(auto& num: input_array) {
+    std::cout<<num<<", ";
+  }
+}
+
+/*
+            F
+1, 2, 2, 3, 0, 0
+   S
+2, 5, 6
+*/
+void merge_sorted_arrays(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n) {
+  for(int second = 0, first = m; second < n; ++first, ++second) {
+      nums1[first] = nums2[second];
+  }
+  std::sort(nums1.begin(), nums1.end());
+}
+void invoke_merge_sorted_arrays() {
+  std::vector<int> nums1 = {1,2,3,0,0,0}, nums2 = {2,5,6};
+  merge_sorted_arrays(nums1, 3, nums2, 3);
+  
+  for(auto& num: nums1) {
+    std::cout<<num<<", ";
+  }
+}
+
+int remove_element(std::vector<int>& array, int target) {
+  int counter = 0;
+  for(int index = 0; index < array.size(); ++index) {
+      if(array[index] == target) {
+        array[index] = -1;
+      }
+  }
+  std::sort(array.begin(), array.end(), [](int val1, int val2) {
+      return val2 < val1;
+  });
+  while(counter < array.size() && array[counter] != -1) {
+      ++counter;
+  }
+  return counter;
+}
+void invoke_remove_element() {
+  std::vector<int> array = {3,2,2,3};
+  auto num_not_equal_val = remove_element(array, 3);
+  std::cout<<num_not_equal_val<<std::endl;
+  for(auto& num: array) {
+    std::cout<<num<<", ";
+  }
+}
+
+int remove_duplicates_from_sorted_array(std::vector<int>& nums) {
+  int unique_elements = 1;
+  for(int index = 1; index < nums.size(); ++index) {
+      if(nums[index] != nums[index -1]) {
+          nums[unique_elements] = nums[index];
+          ++unique_elements;
+      }
+  }
+
+  return unique_elements;
+}
+void invoke_remove_duplicates_from_sorted_array() {
+  std::vector<int> nums = {0,0,1,1,1,2,2,3,3,4};
+  auto num = remove_duplicates_from_sorted_array(nums);
+  std::cout<<num<<std::endl;
+  for(auto& num: nums) {
+    std::cout<<num<<", ";
+  }
 }

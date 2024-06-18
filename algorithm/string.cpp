@@ -7,7 +7,7 @@
 //
 
 #include "header.h"
-#include "string_algorithm.hpp"
+#include "string.hpp"
 
 /*
  ABC
@@ -19,22 +19,8 @@
  
  AB -> 2! = 2 * 1 = 2
  AB BA
- 
- Source: https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
  */
 void permutation_of_string(std::string& input_string, int lower_index, int higher_index) {
-	
-	if(lower_index == higher_index) {
-		std::cout<<input_string<<std::endl;
-	} else {
-		for(int index = lower_index; index <= higher_index; index++) {
-			// 1: I: 0 LI: 0 HI: 1 = AB
-			// 2: I: 1 LI: 0 HI: 1
-			std::swap(input_string[index], input_string[lower_index]);
-			permutation_of_string(input_string, lower_index + 1, higher_index);
-			std::swap(input_string[index], input_string[lower_index]);
-		}
-	}
 }
 
 /*

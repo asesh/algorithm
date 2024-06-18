@@ -6,8 +6,8 @@
 //  Copyright © 2021 Asesh Shrestha. All rights reserved.
 //
 
-#ifndef header_h
-#define header_h
+#ifndef HEADER_H
+#define HEADER_H
 
 #include <iostream>
 #include <filesystem>
@@ -46,6 +46,8 @@
 
 #include <algorithm>
 
+#include <array>
+
 #include <queue>
 
 #include <stack>
@@ -58,4 +60,4 @@
 
 //#include <coroutine>
 
-#endif /* header_h */
+#endif /* HEADER_H */

@@ -6,8 +6,8 @@
 //  Copyright © 2020 Asesh Shrestha. All rights reserved.
 //
 
-#ifndef path_finding_h
-#define path_finding_h
+#ifndef PATH_FINDING_H
+#define PATH_FINDING_H
 
 void draw_grid(int32_t row, int column) {
 	for(int32_t row_count = 0; row_count < row; row_count++) {
@@ -18,4 +18,4 @@ void draw_grid(int32_t row, int column) {
 	}
 }
 
-#endif /* path_finding_h */
+#endif /* PATH_FINDING_H */

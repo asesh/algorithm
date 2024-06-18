@@ -6,8 +6,8 @@
 //  Copyright © 2022 Asesh Shrestha. All rights reserved.
 //
 
-#ifndef GRAPH_ALGORITHM_H
-#define GRAPH_ALGORITHM_H
+#ifndef GRAPH_H
+#define GRAPH_H
 
 template<typename NodeType>
 class CBaseGraph {
@@ -96,4 +96,4 @@ private:
 void create_undirected_graph();
 void create_directed_graph();
 
-#endif /* GRAPH_ALGORITHM_H */
+#endif /* GRAPH_H */

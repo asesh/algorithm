@@ -7,7 +7,7 @@
 //
 
 #include "header.h"
-#include "graph_algorithm.h"
+#include "graph.hpp"
 
 void create_undirected_graph() {
   // Adjacency list representation of graph

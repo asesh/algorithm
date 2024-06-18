@@ -11,19 +11,27 @@
 #include "binary_tree.hpp"
 
 #include "linked_list.h"
-#include "algorithm_impl.h"
 #include "path_finding.h"
-#include "number_algorithm.hpp"
-#include "string_algorithm.hpp"
-#include "linked_list_algorithm.h"
-#include "graph_algorithm.h"
+#include "number.hpp"
+#include "string.hpp"
+#include "graph.hpp"
 
 int main(int argc, const char* argv[]) {
+  
+  invoke_remove_element();
+  
+//  invoke_merge_sorted_arrays();
+  
+//  invoke_insert_and_shift_numbers();
+  
+//  std::array<int, 6> input_array = {1, 2, 3, 4};
+//  merge_sort(input_array, 0, input_array.size() - 1);
+  
   // Minheap
-  MinHeap min_heap({48, 12, 24, 7, 8, -5, 24, 391, 24, 56, 2, 6, 8, 41});
-  min_heap.insert(76);
-  min_heap.remove();
-  min_heap.remove();
+//  MinHeap min_heap({48, 12, 24, 7, 8, -5, 24, 391, 24, 56, 2, 6, 8, 41});
+//  min_heap.insert(76);
+//  min_heap.remove();
+//  min_heap.remove();
   
 //  invoke_valid_palindrome_2();
   
@@ -372,9 +380,9 @@ int main(int argc, const char* argv[]) {
 	
 	// Single linked list
 //	auto single_linked_list = std::make_unique<CSingleLinkedList<int>>();
-//	single_linked_list->add_data(2);
-//	single_linked_list->add_data(3);
-//	single_linked_list->add_data(4);
+//	single_linked_list->add_node(2);
+//	single_linked_list->add_node(3);
+//	single_linked_list->add_node(4);
 //
 //	single_linked_list->print_all();
 //

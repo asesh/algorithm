@@ -18,7 +18,13 @@
 
 int main(int argc, const char* argv[]) {
   
-  invoke_remove_element();
+//  invoke_four_number_sum();
+  
+  invoke_reverse_integer();
+  
+//  invoke_rotate_array();
+  
+//  invoke_remove_element();
   
 //  invoke_merge_sorted_arrays();
   

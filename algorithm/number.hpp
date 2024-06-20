@@ -204,4 +204,26 @@ void invoke_remove_element();
 */
 void invoke_remove_duplicates_from_sorted_array();
 
+
+/*
+80. Remove Duplicates from Sorted Array II: https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/
+*/
+void invoke_remove_duplicates_more_than_two();
+
+
+/*
+https://www.algoexpert.io/questions/four-number-sum
+*/
+void invoke_four_number_sum();
+
+/*
+189. https://leetcode.com/problems/rotate-array
+*/
+void invoke_rotate_array();
+
+/*
+7. Reverse Integer https://leetcode.com/problems/reverse-integer/description/
+*/
+void invoke_reverse_integer();
+
 #endif /* NUMBER_HPP */

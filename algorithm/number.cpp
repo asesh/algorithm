@@ -861,3 +861,84 @@ void invoke_remove_duplicates_from_sorted_array() {
     std::cout<<num<<", ";
   }
 }
+
+/*
+
+    I
+1 1 1 2 2 3
+      *
+*/
+int remove_duplicates_more_than_two(std::vector<int>& nums) {
+  int index = 0;
+  for(auto& num: nums) {
+    if(index == 0 || index == 1 || nums[index - 2] != num) {
+      nums[index] = num;
+      ++index;
+    }
+  }
+
+  return index;
+}
+void invoke_remove_duplicates_more_than_two() {
+  std::vector<int> nums = {0,0,1,1,1,1,2,3,3};
+  auto answer = remove_duplicates_more_than_two(nums);
+  std::cout<<answer<<std::endl;
+  for(auto& num: nums) {
+    std::cout<<num<<", ";
+  }
+}
+
+/*
+Input: [1, -100, 12, 4, 20, 5, 60, -5, -7] Target: 5
+Output: [1, 4, 5, -5], [12, 5, -5, -7]
+ *            *      *      *                      *         *       *   *
+[1, -100, 12, 4, 20, 5, 60, -5, -7] and [1, -100, 12, 4, 20, 5, 60, -5, -7]
+*/
+std::vector<std::vector<int>> four_number_sum(std::vector<int>& nums) {
+  std::vector<std::vector<int>> output;
+  return output;
+}
+void invoke_four_number_sum() {
+  std::vector<int> nums = {1, -100, 12, 4, 20, 5, 60, -5, -7};
+  auto output = four_number_sum(nums);
+  for(auto& nums_array: output) {
+    for(auto& num: nums_array) {
+      std::cout<<num<<", ";
+    }
+    std::cout<<std::endl;
+  }
+}
+
+void rotate_array(std::vector<int> nums, int k) {
+  k = k % nums.size();
+  std::reverse(nums.begin(), nums.end()); // Reverse the entire array
+  std::reverse(nums.begin(), nums.begin() + k); // Reverse the first k elements
+  std::reverse(nums.begin() + k, nums.end()); // Reverse the k+ elements
+}
+void invoke_rotate_array() {
+  std::vector<int> nums = {1,2,3,4,5,6,7};
+  rotate_array(nums, 3);
+  for(auto& num: nums) {
+    std::cout<<num<<", ";
+  }
+}
+
+/*
+123
+3*100 + 2*10 + 1*1 = 300+20+1 = 321
+ 
+1234
+4*1000 + 3*100 + 2*10 + 1 = 4321
+*/
+int reverse_integer(int input) {
+  int output = 0;
+  do {
+    auto last_number = input % 10; // 3
+    input /= 10;
+    output = (output * 10) + last_number;
+  } while(input != 0);
+  return output;
+}
+void invoke_reverse_integer() {
+  std::cout<<reverse_integer(-123);
+}

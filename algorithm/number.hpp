@@ -33,11 +33,6 @@ CSingleLinkedList<int> invoke_reverse_linked_list(CSingleLinkedList<int> input_l
 
 int missing_number();
 
-/*
- */
-void median_of_two_sorted_arrays(const std::vector<int>& array_one, const std::vector<int>& array_two);
-void invoke_median_of_two_sorted_arrays();
-
 int container_with_most_water(const std::vector<int>& container_height);
 void invoke_container_with_most_water();
 
@@ -225,5 +220,28 @@ void invoke_rotate_array();
 7. Reverse Integer https://leetcode.com/problems/reverse-integer/description/
 */
 void invoke_reverse_integer();
+
+/*
+4. Median of Two Sorted Arrays: https://leetcode.com/problems/median-of-two-sorted-arrays/description/
+ https://www.algoexpert.io/questions/median-of-two-sorted-arrays
+*/
+void invoke_median_of_two_sorted_arrays();
+
+/*
+ 122. Best Time to Buy and Sell Stock II https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii
+*/
+void invoke_best_time_to_buy_and_sell_stock_ii();
+
+/*
+ 55. Jump Game https://leetcode.com/problems/jump-game
+*/
+void invoke_jump_game();
+
+void invoke_jump_game_ii();
+
+/*
+12. Integer to Roman https://leetcode.com/problems/integer-to-roman
+*/
+void invoke_integer_to_roman();
 
 #endif /* NUMBER_HPP */

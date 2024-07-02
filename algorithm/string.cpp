@@ -243,6 +243,7 @@ bool is_anagram(const std::string& first_word, const std::string& second_word) {
   return false;
 }
 
+// R: O(nm) S: O(min(n,m))
 int levenshtein_distance(const std::string &first_word, const std::string& second_word) {
   // Space: O(mn)
   std::vector<std::vector<int>> edit_distance_table(first_word.size() + 1);
@@ -287,17 +288,14 @@ int levenshtein_distance(const std::string &first_word, const std::string& secon
 
   return edit_distance_table[first_word.size()][second_word.size()];
 }
-
-// R: O(nm) S: O(min(n,m))
 void invoke_levenshtein_distance() {
   std::cout<<"The number of edit operations required: "<<levenshtein_distance("abcdefghij", "1234567890")<<std::endl;
 }
 
+// T: O(wh), S(wh)
 int river_sizes(std::vector<std::vector<int>>& input_matrix) {
   return 0;
 }
-
-// T: O(wh), S(wh)
 void invoke_river_sizes() {
   // Output: 2, 2, 5, 1, 2
   std::vector<std::vector<int>> matrix = {
@@ -318,4 +316,51 @@ void valid_ip_address(const std::string& ip_addresses) {
 // R: O(1) S: O(1)
 void invoke_valid_ip_address() {
   valid_ip_address("1921680");
+}
+
+bool valid_palindrome(std::string s) {
+  int backward_index = s.size() - 1;
+  for(int forward_index = 0; forward_index < backward_index;) {
+    if(!isalnum(s[forward_index])) {
+      ++forward_index;
+      continue;
+    }
+    if(!isalnum(s[backward_index])) {
+      --backward_index;
+      continue;
+    }
+
+    if(std::tolower(s[forward_index]) != std::tolower(s[backward_index])) {
+      return false;
+    }
+    --backward_index;
+    ++forward_index;
+  }
+  return true;
+}
+void invoke_valid_palindrome() {
+  std::cout<<std::boolalpha<<valid_palindrome("A man, a plan, a canal: Panama")<<std::endl;
+}
+
+/*
+a: abc
+b: ahbgdc
+ 
+a: axc
+b: ahbgdc
+*/
+bool is_subsequence(std::string str1, std::string str2) {
+  int first_index = 0;
+  for(int second_index = 0; second_index < str2.size() && first_index < str1.size(); ++second_index) {
+    if(str1[first_index] == str2[second_index]) {
+      ++first_index;
+      if(first_index == str1.size()) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+void invoke_is_subsequence() {
+  std::cout<<std::boolalpha<<is_subsequence("axc", "ahbgdc");
 }

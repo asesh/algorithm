@@ -29,4 +29,8 @@ void invoke_levenshtein_distance();
 
 void invoke_valid_ip_address();
 
+void invoke_valid_palindrome();
+
+void invoke_is_subsequence();
+
 #endif /* string_hpp */

@@ -237,34 +237,6 @@ int missing_number() {
 }
 
 /*
- https://leetcode.com/problems/median-of-two-sorted-arrays/
- Input: nums1 = [1,3], nums2 = [2]
- Output: 2.00000
- */
-void median_of_two_sorted_arrays(const std::vector<int>& array_one, const std::vector<int>& array_two) {
-	auto array_one_count = array_one.size();
-	auto array_two_count = array_two.size();
-	
-	// Assign an array with the max number of items
-	auto max_array = array_one_count >= array_two_count ? array_one : array_two;
-	
-	std::vector<int> total(max_array.size());
-	
-	// Iterate through all the elements of the max array
-	/*
-	 1, 2 -> 3, 4
-	 */
-	for(int index = 0; index < max_array.size(); index++) {
-		
-	}
-}
-
-void invoke_median_of_two_sorted_arrays() {
-	std::vector<int> input_one{1, 3}, input_two{2};
-	median_of_two_sorted_arrays(input_one, input_two);
-}
-
-/*
  11. Container With Most Water
  https://leetcode.com/problems/container-with-most-water/
  */
@@ -942,3 +914,183 @@ int reverse_integer(int input) {
 void invoke_reverse_integer() {
   std::cout<<reverse_integer(-123);
 }
+
+/*
+nums1 = [1,2], nums2 = [3,4]; Output: 2.50000
+nums1 = [[1,3,4,5], nums = [2,3,6,7]; Output: 3.50000
+*/
+double median_of_two_sorted_arrays(std::vector<int>& nums1, std::vector<int>& nums2) {
+  double output = 0.0;
+  return output;
+}
+void invoke_median_of_two_sorted_arrays() {
+  std::vector<int> nums1 = {1,2}, nums2 = {3,4};
+  std::cout<<median_of_two_sorted_arrays(nums1, nums2);
+}
+
+/*
+prices = [7,1,5,3,6,4]; Output = 5-1 + 6-3 => 7
+prices = [1,2,3,4,5]; Output = 5-1 => 4
+prices = [7,6,4,3,1]; Output = 0
+*/
+int best_time_to_buy_and_sell_stock_ii(std::vector<int>& prices) {
+  int output = 0;
+  for(int index = 1; index < prices.size(); ++index) {
+    auto diff = prices[index] - prices[index - 1];
+    if(diff > 0) {
+      output += diff;
+      continue;
+    }
+  }
+  return output;
+}
+void invoke_best_time_to_buy_and_sell_stock_ii() {
+  std::vector<int> prices = {7,1,5,3,6,4};
+  std::cout<<"Max profit: "<<best_time_to_buy_and_sell_stock_ii(prices);
+}
+
+/*
+nums: [3,2,1,0,4] => false
+ 
+nums: [2,3,1,1,4] => true
+0 1 2 3 4
+2 3 1 1 4 => 1 1$; 2 1 1$
+ 
+nums: [6,5,5,7,4] => true
+ 
+nums: [1 1 1 1 1]
+*/
+bool jump_game(std::vector<int>& nums) {
+  int last_index = nums.size() - 1;
+  for(int index = nums.size() - 2; index >= 0; --index) {
+    if(index + nums[index] >= last_index) {
+      last_index = index;
+    }
+  }
+
+  return last_index <= 0;
+}
+void invoke_jump_game() {
+  std::vector<int> nums = {2,3,1,1,4};
+  std::cout<<std::boolalpha<<jump_game(nums);
+}
+
+/*
+ 1 3     *
+[2,3,1,1,4] => 2
+/\
+1 2
+| |
+3 1
+ 0 1 2 3 4 5 6
+[2,3,1,2,1,1,4] => 3
+/\
+1 2
+| |
+3 1
+|
+1
+|\
+1 2
+ 
+[1,2] => 1
+
+[1,2,3] => 2
+|
+1
+|\
+1 2
+   \
+    1*
+ 
+[1,1,1,1,2,4] = 5
+         |\
+         1 2
+*/
+int jump_game_ii(std::vector<int>& nums) {
+  int min_jumps = 0;
+  
+  return min_jumps;
+}
+void invoke_jump_game_ii() {
+  std::vector<int> nums = {2,3,1,2,1,1,4};
+  std::cout<<jump_game_ii(nums)<<std::endl;
+}
+
+/*
+Hashmap:
+1: I
+5: V
+10: X
+50: L
+100: C
+500: D
+1000: M
+ 
+3749 => MMMDCCXLIX
+3000: MMM: 1000 + 1000 + 1000
+700:  DCC: 500 + 100 + 100
+40:   XL:  50 - 10
+9:    IX:  10 - 1
+ 
+3749 % 10 = 9 = IX
+3749 % 10 = 374 => 374 % 10 = 4 * 10 = 40 = XL
+37   % 10 = 7   => 7 * 100 = 700 = DCC
+3    % 10 = 3   => 3 * 1000 = 3000 = MMM
+*/
+std::string integer_to_roman(int number) {
+  std::string output;
+  
+  std::vector<std::string> symbol = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
+  std::vector<int> symbol_value = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+  
+  for(int index = 0; number != 0; ++index) {
+    while(number >= symbol_value[index]) {
+      number -= symbol_value[index];
+      output += symbol[index];
+    }
+  }
+  
+  return output;
+  
+//  static std::unordered_map<int, std::string_view> roman_map = {
+//    {1, "I"},
+//    {5, "V"},
+//    {9,  "IX"},
+//    {10, "X"},
+//    {40, "XL"},
+//    {50, "L"},
+//    {100, "C"},
+//    {500, "D"},
+//    {700, "DCC"},
+//    {1000, "M"},
+//    {3000, "MMM"},
+//  };
+//
+//  std::vector<std::string_view> temp_output;
+//  
+//  int multiplicant = 0;
+//  
+//  do {
+//    auto last_number = number % 10;
+//    number /= 10;
+//    
+//    multiplicant *= 10;
+//    if(multiplicant == 0) {
+//      multiplicant = 1;
+//    }
+//    
+//    std::cout<<last_number * multiplicant<<" => "<<roman_map[last_number * multiplicant]<<std::endl;
+//    temp_output.push_back(roman_map[last_number * multiplicant]);
+//    
+//  } while(number != 0);
+//
+//  for(int index = temp_output.size() - 1; index >= 0; --index) {
+//    output.append(temp_output[index]);
+//  }
+//  return output;
+}
+void invoke_integer_to_roman() {
+  std::cout<<integer_to_roman(3749)<<std::endl;
+}
+

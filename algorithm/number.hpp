@@ -178,19 +178,20 @@ class MinHeap {
   }
 };
 
-/* https://leetcode.com/discuss/interview-question/5091692/FacebookMeta-MLSWE-Phone-Screenor-Pass-or-TLV-or-Random-pick-with-weight
+/*
+ https://leetcode.com/discuss/interview-question/5091692/FacebookMeta-MLSWE-Phone-Screenor-Pass-or-TLV-or-Random-pick-with-weight
  */
 void cut_cake_make_strawberries(std::vector<int> starwberries, int number_of_cuts);
 
 void invoke_insertAndShiftNumbers();
 
 /*
- https://leetcode.com/problems/merge-sorted-array
+https://leetcode.com/problems/merge-sorted-array
 */
 void invoke_merge_sorted_arrays();
 
 /*
- 27. Remove Element: https://leetcode.com/problems/remove-element
+27. Remove Element: https://leetcode.com/problems/remove-element
 */
 void invoke_remove_element();
 
@@ -228,12 +229,12 @@ void invoke_reverse_integer();
 void invoke_median_of_two_sorted_arrays();
 
 /*
- 122. Best Time to Buy and Sell Stock II https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii
+122. Best Time to Buy and Sell Stock II https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii
 */
 void invoke_best_time_to_buy_and_sell_stock_ii();
 
 /*
- 55. Jump Game https://leetcode.com/problems/jump-game
+55. Jump Game https://leetcode.com/problems/jump-game
 */
 void invoke_jump_game();
 
@@ -243,5 +244,15 @@ void invoke_jump_game_ii();
 12. Integer to Roman https://leetcode.com/problems/integer-to-roman
 */
 void invoke_integer_to_roman();
+
+/*
+238. Product of Array Except Self https://leetcode.com/problems/product-of-array-except-self
+*/
+void invoke_product_of_array_except_itself();
+
+/*
+ 215. Kth Largest Element in an Array https://leetcode.com/problems/kth-largest-element-in-an-array
+*/
+void invoke_kth_largest_element_in_an_array();
 
 #endif /* NUMBER_HPP */

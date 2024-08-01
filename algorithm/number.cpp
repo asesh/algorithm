@@ -982,6 +982,7 @@ void invoke_jump_game() {
 1 2
 | |
 3 1
+ 
  0 1 2 3 4 5 6
 [2,3,1,2,1,1,4] => 3
 /\
@@ -993,7 +994,7 @@ void invoke_jump_game() {
 |\
 1 2
  
-[1,2] => 1
+[1,2,1] => 2
 
 [1,2,3] => 2
 |
@@ -1004,11 +1005,17 @@ void invoke_jump_game() {
     1*
  
 [1,1,1,1,2,4] = 5
-         |\
-         1 2
+ 
+ * *   * *
+[1,2,4,1,5]
 */
 int jump_game_ii(std::vector<int>& nums) {
-  int min_jumps = 0;
+  int min_jumps = 0, destination = nums.size() - 1;
+  
+  // O(n)
+  for(int index = 0; index < nums.size(); ) {
+    
+  }
   
   return min_jumps;
 }
@@ -1094,3 +1101,38 @@ void invoke_integer_to_roman() {
   std::cout<<integer_to_roman(3749)<<std::endl;
 }
 
+/*
+1,2,3,4 = [24,12,8,6]
+
+-1,1,0,-3,3 = [0,0,9,0,0]
+*/
+std::vector<int> product_of_array_except_itself(std::vector<int>& input) {
+  std::vector<int> output;
+  
+  return output;
+}
+void invoke_product_of_array_except_itself() {
+  std::vector<int> input = {1,2,3,4};
+  auto output = product_of_array_except_itself(input);
+}
+
+/*
+Input: [3,2,1,5,6,4], k: 2, Output: 5
+Using priority queue:
+pq: [1,2,3,4,5,6]
+*/
+int kth_largest_element_in_an_array(std::vector<int>& nums, int k) {
+  std::priority_queue<int, std::vector<int>, std::greater<int>> priority_queue;
+  for(auto& num: nums) {
+    priority_queue.push(num);
+    if(priority_queue.size() > k) {
+      priority_queue.pop();
+    }
+  }
+
+  return priority_queue.top();
+}
+void invoke_kth_largest_element_in_an_array() {
+  std::vector<int> nums = {3,2,1,5,6,4};
+  std::cout<<kth_largest_element_in_an_array(nums, 2)<<std::endl;
+}

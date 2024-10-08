@@ -1008,6 +1008,8 @@ void invoke_jump_game() {
  
  * *   * *
 [1,2,4,1,5]
+ 
+[1,2,2,3,1,1,2]
 */
 int jump_game_ii(std::vector<int>& nums) {
   int min_jumps = 0, destination = nums.size() - 1;
@@ -1102,18 +1104,38 @@ void invoke_integer_to_roman() {
 }
 
 /*
-1,2,3,4 = [24,12,8,6]
+Input: [1,2,3,4] Output: [24,12,8,6]
+LP: [1,   1, 2, 6]
+RP: [24, 12, 4, 1]
+Op: [24, 12, 8, 6]
+ 
+Prefix product array: [1, 2*1, 3*2*1, 4*3*2*1] = [1,  2,  6,  24]
+Suffix product array: [1*2*3*4, 2*3*4, 3*4, 4] = [24, 24, 12, 4]
 
 -1,1,0,-3,3 = [0,0,9,0,0]
 */
 std::vector<int> product_of_array_except_itself(std::vector<int>& input) {
-  std::vector<int> output;
-  
+  int size = input.size();
+  std::vector<int> output(size);
+  std::vector<int> left_product(size), right_product(size);
+  left_product[0] = 1; right_product[size - 1] = 1;
+  for(int index = 1; index < size;  ++index) {
+    left_product[index] = left_product[index - 1] * input[index - 1];
+  }
+  for(int index = size - 2; index >= 0; --index) {
+    right_product[index] = right_product[index + 1] * input[index + 1];
+  }
+  for(int index = 0; index < size; ++index) {
+    output[index] = left_product[index] * right_product[index];
+  }
   return output;
 }
 void invoke_product_of_array_except_itself() {
   std::vector<int> input = {1,2,3,4};
   auto output = product_of_array_except_itself(input);
+  std::for_each(output.begin(), output.end(), [](const auto& value) {
+    std::cout<<value<<", ";
+  });
 }
 
 /*
@@ -1135,4 +1157,87 @@ int kth_largest_element_in_an_array(std::vector<int>& nums, int k) {
 void invoke_kth_largest_element_in_an_array() {
   std::vector<int> nums = {3,2,1,5,6,4};
   std::cout<<kth_largest_element_in_an_array(nums, 2)<<std::endl;
+}
+
+/*
+LeetCode
+Input: PAYPALISHIRING
+
+0 1 2 3 4 5 6 7 8 9 0 1 2 3
+P A Y P A L I S H I R I N G
+
+Rows: 3
+* 0 1 2 3 4 5 6
+0 P   A   H   N
+1 A P L S I I G
+2 Y   I   R
+Output: PAHNAPLSIIGYIR
+
+Ex. 2: Rows: 4
+* 0 1 2 3 4 5 6
+0 P     I     N
+1 A   L S   I G
+2 Y A   H R
+3 P     I
+Output: PINALSIGYAHRPI
+ 
+Custom, Rows: 2
+* 0 1 2 3 4 5 6
+0 P Y A I H R N
+1 A P L S I I G
+Output: PYAIHRNAPLSIIG
+*/
+std::string zig_zag_conversion_lc(std::string input, int rows) {
+  std::string output;
+  return output;
+}
+
+/*
+AlgoExpert:
+Input:
+[1,3,4,10]
+[2,5,9,11]   => [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+[6,8,12,15]
+[7,13,14,16]
+ 
+    A   A   A   A
+    0   1   2   3
+B0  00  10  20  30
+B1  01  11  21  31
+B2  02  12  22  32
+B3  03  13  23  33
+
+Output: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+Index:  [00 01 10 20 11 02 03 12 21 30 31 22 13 23 32 33]
+*/
+std::string zig_zag_conversion_ae(std::vector<std::vector<int>>& matrix) {
+  std::string output;
+  auto rows = matrix[0].size();
+  auto columns = matrix.size();
+  
+  for(int row = 0; row < rows; ++row) {
+    
+  }
+  
+  return output;
+}
+void invoke_zig_zag_conversion() {
+  std::vector<std::vector<int>> matrix = {
+    {1,3,4,10},
+    {2,5,9,11},
+    {6,8,12,15},
+    {7,13,14,16}
+  };
+  std::cout<<zig_zag_conversion_ae(matrix)<< std::endl;
+}
+
+/*
+*/
+int trapping_rain_water(std::vector<int>& input) {
+  int output = 0;
+  return output;
+}
+void invoke_trapping_rain_water() {
+  std::vector<int> input = {0,1,0,2,1,0,1,3,2,1,2,1};
+  std::cout<<trapping_rain_water(input)<<std::endl;
 }

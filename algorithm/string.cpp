@@ -224,23 +224,25 @@ void invoke_longest_palindromic_substring() {
  input two: akka
  */
 bool is_anagram(const std::string& first_word, const std::string& second_word) {
-  if(first_word.length() == second_word.length()) {
-    auto second_copy = second_word;
-    
-    for(const auto& character: first_word) {
-      auto position = second_copy.find(character);
-      if(position != std::string::npos) {
-        // This character exists so remove it from the second word
-        second_copy.erase(position, position + 1);
-        
-        if(second_copy.empty()) {
-          return true;
-        }
-      }
+  std::unordered_map<char, int> char_map;
+  for(const auto& character: first_word) {
+    char_map[character]++;
+  }
+
+  for(const auto& character: second_word) {
+    char_map[character]--;
+  }
+
+  for(const auto& character: char_map) {
+    if(character.second != 0) {
+      return false;
     }
   }
-  
-  return false;
+  return true;
+}
+void invoke_is_anagram() {
+  std::string first_word = "anagram", second_word = "nagaram";
+  std::cout<<std::boolalpha<<is_anagram(first_word, second_word)<<std::endl;
 }
 
 // R: O(nm) S: O(min(n,m))
@@ -363,4 +365,50 @@ bool is_subsequence(std::string str1, std::string str2) {
 }
 void invoke_is_subsequence() {
   std::cout<<std::boolalpha<<is_subsequence("axc", "ahbgdc");
+}
+
+/*
+012345678901234
+the sky is blue
+eulb si yks eht
+blue is sky the
+q
+0         1         2
+0123456789012345678901234567
+  hello        world
+    dlrow        olleh
+dlrow olleh
+world hello
+*/
+std::string reverse_words_in_a_string(std::string& input) {
+  // Using stringstream
+  //
+//  std::string output, word;
+//  std::vector<std::string> words;
+//  std::stringstream stream(input);
+//  while(stream >> word) {
+//    words.push_back(word);
+//  }
+//  int current_index = words.size() - 1;
+//  while(current_index >= 0) {
+//    if(current_index != words.size() - 1) {
+//      output += " ";
+//    }
+//    output += words[current_index];
+//    --current_index;
+//  }
+  
+  size_t first_offset = 0;
+  std::string output = input;
+  std::reverse(output.begin(), output.end()); // O(n)
+  
+  // O(n)
+  for(int index = 0; index < input.size(); ++index) {
+  }
+  
+  return output;
+}
+void invoke_reverse_words_in_a_string() {
+  std::string input = "       hello    world   test!!    ";
+  std::cout<<reverse_words_in_a_string(input)<<std::endl;
 }

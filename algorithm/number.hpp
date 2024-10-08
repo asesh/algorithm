@@ -238,6 +238,9 @@ void invoke_best_time_to_buy_and_sell_stock_ii();
 */
 void invoke_jump_game();
 
+/*
+ 45. Jump Game II https://leetcode.com/problems/jump-game-ii
+*/
 void invoke_jump_game_ii();
 
 /*
@@ -254,5 +257,15 @@ void invoke_product_of_array_except_itself();
  215. Kth Largest Element in an Array https://leetcode.com/problems/kth-largest-element-in-an-array
 */
 void invoke_kth_largest_element_in_an_array();
+
+/*
+6. Zigzag Conversion: https://leetcode.com/problems/zigzag-
+*/
+void invoke_zig_zag_conversion();
+
+/*
+42. Trapping Rain Water: https://leetcode.com/problems/trapping-rain-water
+*/
+void invoke_trapping_rain_water();
 
 #endif /* NUMBER_HPP */

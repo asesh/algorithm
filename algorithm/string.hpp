@@ -24,6 +24,7 @@ std::string longest_palindromic_substring(const std::string& input_string);
 void invoke_longest_palindromic_substring();
 
 bool is_anagram(const std::string& first_word, const std::string& second_word);
+void invoke_is_anagram();
 
 void invoke_levenshtein_distance();
 
@@ -32,5 +33,10 @@ void invoke_valid_ip_address();
 void invoke_valid_palindrome();
 
 void invoke_is_subsequence();
+
+/*
+151. Reverse Words in a String: https://leetcode.com/problems/reverse-words-in-a-string
+*/
+void invoke_reverse_words_in_a_string();
 
 #endif /* string_hpp */

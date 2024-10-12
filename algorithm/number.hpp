@@ -268,4 +268,9 @@ void invoke_zig_zag_conversion();
 */
 void invoke_trapping_rain_water();
 
+/*
+73. invoke_set_matrix_zeroes: https://leetcode.com/problems/set-matrix-zeroes
+*/
+void invoke_set_matrix_zeroes();
+
 #endif /* NUMBER_HPP */

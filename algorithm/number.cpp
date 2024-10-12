@@ -1241,3 +1241,71 @@ void invoke_trapping_rain_water() {
   std::vector<int> input = {0,1,0,2,1,0,1,3,2,1,2,1};
   std::cout<<trapping_rain_water(input)<<std::endl;
 }
+
+/*
+Input:       Output:
+ {0,1,2,0}    {0,0,0,0}
+ {3,1,5,2} => {0,1,5,0}
+ {1,3,1,5}    {0,3,1,0}
+*/
+std::vector<std::vector<int>> set_matrix_zeroes(std::vector<std::vector<int>>& input) {
+  // Overall RC: O(m*n) = O(mn(m+n)) = O(m^2n+n^2m)
+//  std::vector<std::vector<int>> output = input;
+//  for(int row = 0; row < input.size(); ++row) {
+//    for(int column = 0; column < input[0].size(); ++column) {
+//      if(input[row][column] == 0) {
+//        // RC: O(n)
+//        // Zero out column
+//        int start_column = 0;
+//        while(start_column < output[0].size()) {
+//          output[row][start_column] = 0;
+//          ++start_column;
+//        }
+//        
+//        // O(m)
+//        // Zero out row
+//        int start_row = 0;
+//        while(start_row < output.size()) {
+//          output[start_row][column] = 0;
+//          ++start_row;
+//        }
+//      }
+//    }
+//  }
+//  return output;
+  
+  // Overall RC: O(mn)
+  std::unordered_set<int> rows, columns;
+  for(int row = 0; row < input.size(); ++row) {
+    for(int column = 0; column < input[0].size(); ++column) {
+      if(input[row][column] == 0) {
+        rows.insert(row);
+        columns.insert(column);
+      }
+    }
+  }
+  
+  // RC: O(mn)
+  for(int row = 0; row < input.size(); ++row) {
+    for(int column = 0; column < input[0].size(); ++column) {
+      if(rows.contains(row) || columns.contains(column)) {
+        input[row][column] = 0;
+      }
+    }
+  }
+  return input;
+}
+void invoke_set_matrix_zeroes() {
+  std::vector<std::vector<int>> input = {
+    {0,1,2,0},
+    {3,1,5,2},
+    {1,3,1,5},
+  };
+  auto output = set_matrix_zeroes(input);
+  for(auto& row: output) {
+    std::for_each(row.begin(), row.end(), [](int& element) {
+      std::cout<<element<<", ";
+    });
+    std::cout<<std::endl;
+  }
+}

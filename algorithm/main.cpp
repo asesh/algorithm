@@ -17,6 +17,8 @@
 #include "graph.hpp"
 
 int main(int argc, const char* argv[]) {
+  invoke_set_matrix_zeroes();
+  
 //  invoke_product_of_array_except_itself();
   
 //  invoke_reverse_words_in_a_string();
@@ -25,7 +27,7 @@ int main(int argc, const char* argv[]) {
   
 //  invoke_four_number_sum();
   
-  invoke_jump_game_ii();
+//  invoke_jump_game_ii();
   
 //  invoke_kth_largest_element_in_an_array();
   

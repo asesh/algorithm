@@ -1232,9 +1232,51 @@ void invoke_zig_zag_conversion() {
 }
 
 /*
+Input: [0,1,0,2,1,0,1,3,2,1,2,1]
+Output: 6
+|
+|             |X|
+|     |X|     |X|X| |X|
+|_|X| |X|X| |X|X|X|X|X|X|
+ 
+Input: [3,2,1,2,1]
+Output: 1
+|
+|X|
+|X|X| |X|
+|X|X|X|X|X|
+ 
+Input: [4,2,0,3,2,5]
+Output: 9
+          |X|
+|X|       |X|
+|X|   |X| |X|
+|X|X| |X|X|X|
+|X|X| |X|X|X|
 */
 int trapping_rain_water(std::vector<int>& input) {
   int output = 0;
+  int left = 0, right= input.size() - 1;
+  int max_left = 0, max_right = 0;
+  while(left < right) {
+    // Left block is smaller than right block
+    if(input[left] <= input[right]) {
+      if(input[left] >= max_left) {
+        max_left = input[left];
+      } else {
+        output += max_left - input[left];
+      }
+      ++left;
+    } else {
+      // Left block is greater than right block
+      if(input[right] >= max_right) {
+        max_right = input[right];
+      } else {
+        output += max_right - input[right];
+      }
+      --right;
+    }
+  }
   return output;
 }
 void invoke_trapping_rain_water() {
@@ -1308,4 +1350,53 @@ void invoke_set_matrix_zeroes() {
     });
     std::cout<<std::endl;
   }
+}
+
+/*
+Input: "101"
+Output: 1
+ 
+Input: "100"
+Output: 2
+Process:
+ LR      LR      LR
+ 100 => 010 -> 001
+ 
+Input: "1100"
+Output:
+ 1100 => 1010 -> 0110 -> 0101 -> 0011
+ 
+Input: "11000"
+Output: 6
+ LR
+ 11000 => 10100 -> 01100 -> 01010 -> 00110 -> 00101 -> 00011
+ 
+Input: "11010"
+Output: 5
+Process:
+ LR       L R
+ 11010 => 10110 -> 01110
+ 
+Input: "1101000"
+Output: 11
+Process:
+    L  R                            L  R                                       L  R
+ 1101000 => 1100100 -> 1100010 -> 1100001 -> 1010001 -> 1001001 -> 1000101 -> 1000011...
+*/
+int separate_black_and_white_balls(std::string& input) {
+  int output = 0, counter = 0;
+  for(int index = 0; index < input.size(); ++index) {
+    if(input[index] == '1') {
+      ++counter;
+    } else {
+      output += counter;
+    }
+  }
+  return output;
+}
+void invoke_separate_black_and_white_balls() {
+  std::string input = "11000";
+  std::cout<<"Min. steps to separate black and white balls: "
+    <<separate_black_and_white_balls(input)
+    <<std::endl;
 }

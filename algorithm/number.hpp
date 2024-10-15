@@ -273,4 +273,9 @@ void invoke_trapping_rain_water();
 */
 void invoke_set_matrix_zeroes();
 
+/*
+2938. Separate Black and White Balls: https://leetcode.com/problems/separate-black-and-white-balls
+*/
+void invoke_separate_black_and_white_balls();
+
 #endif /* NUMBER_HPP */

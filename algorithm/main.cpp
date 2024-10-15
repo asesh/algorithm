@@ -17,7 +17,11 @@
 #include "graph.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_set_matrix_zeroes();
+  invoke_separate_black_and_white_balls();
+  
+//  invoke_trapping_rain_water();
+  
+//  invoke_set_matrix_zeroes();
   
 //  invoke_product_of_array_except_itself();
   

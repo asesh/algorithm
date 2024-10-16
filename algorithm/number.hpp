@@ -39,10 +39,14 @@ void invoke_container_with_most_water();
 int sliding_window_max_sum_result(const std::vector<int>& input);
 void invoke_sliding_window();
 
-int find_pivot_index(const std::vector<int>& input_array);
+/*
+724. Find Pivot Index: https://leetcode.com/problems/find-pivot-index/
+*/
 void invoke_find_pivot_index();
 
-std::vector<std::vector<int>> find_three_number_sum(std::vector<int>& input_array);
+/*
+15. 3Sum: https://leetcode.com/problems/3sum
+*/
 void invoke_find_three_number_sum();
 
 void bubble_sort(std::vector<int> array);

@@ -17,7 +17,9 @@
 #include "graph.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_separate_black_and_white_balls();
+    invoke_find_three_number_sum();
+  
+//  invoke_separate_black_and_white_balls();
   
 //  invoke_trapping_rain_water();
   
@@ -228,8 +230,6 @@ int main(int argc, const char* argv[]) {
 //	for(const auto& data: hash_map) {
 //		std::cout<<"Key: "<<data.first<<",value: "<<data.second<<std::endl;
 //	}
-	
-//	invoke_find_three_number_sum();
 	
 	//invoke_longest_substring_without_repeating_characters();
 	

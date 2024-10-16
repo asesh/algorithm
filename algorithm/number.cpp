@@ -290,9 +290,7 @@ void invoke_sliding_window() {
 }
 
 /*
- 724. Find Pivot Index
- https://leetcode.com/problems/find-pivot-index/
- */
+*/
 int find_pivot_index(const std::vector<int>& input_array) {
 	int sum = 0;
 	int total_sum = std::accumulate(input_array.begin(), input_array.end(), 0);
@@ -317,34 +315,51 @@ void invoke_find_pivot_index() {
 }
 
 /*
- Three number sum
- https://www.algoexpert.io/questions/Three%20Number%20Sum
- */
+Input: [-1,0,1,2,-1,-4]
+Output: [[-1,-1,2],[-1,0,1]]
+ 
+Process:
+ sort: [-4,-1,-1,0,1,2]
+      C  L     R
+ [-4,-1,-1,0,1,2] =
+         C L   R
+ [-4,-1,-1,0,1,2] =
+*/
 std::vector<std::vector<int>> find_three_number_sum(std::vector<int>& input_array) {
+  std::vector<std::vector<int>> output;
+  std::set<std::vector<int>> unique_output;
 	// O(nlogn)
 	std::sort(input_array.begin(), input_array.end());
+  
+  // O(n^2)
+  for(int current_index = 0; current_index < input_array.size() - 2; ++current_index) {
+    int right_index = input_array.size() - 1;
+    for(int left_index = current_index + 1; left_index < input_array.size() && left_index != right_index;) {
+      auto sum = input_array[current_index] + input_array[left_index] + input_array[right_index];
+      if(sum == 0) {
+        unique_output.insert({input_array[current_index], input_array[left_index], input_array[right_index]});
+        ++left_index;
+      } else if(sum > 0) {
+        --right_index;
+      } else {
+        ++left_index;
+      }
+    }
+  }
+  
+  for(auto& item: unique_output) {
+    output.push_back(item);
+  }
 	
-	for(const auto& number: input_array) {
-		std::cout<<number<<std::endl;
-	}
-	
-	/*
-	 Implementation:
-	 Input: 	12, 3, 1, 2, -6, 5, -8, 6
-	 Target: 	0
-	 Sort:
-			Data: -8 -6 1 2 3 5 6 12
-			Time: O(nlogn)
-	 
-	 // Found triplets:
-	 1: -8+2+6
-	 */
-	
-	return {};
+	return output;
 }
 void invoke_find_three_number_sum() {
-	std::vector<int> input{12, 3, 1, 2, -6, 5, -8, 6};
+	std::vector<int> input{-1,0,1,2,-1,-4};
 	auto triplets = find_three_number_sum(input);
+  std::cout<<"The triplets are: "<<std::endl;
+  std::for_each(triplets.begin(), triplets.end(), [](std::vector<int>& triplet) {
+    std::cout<<triplet[0]<<", "<<triplet[1]<<", "<<triplet[2]<<std::endl;
+  });
 }
 
 void bubble_sort(std::vector<int> array) {

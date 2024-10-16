@@ -39,4 +39,9 @@ void invoke_is_subsequence();
 */
 void invoke_reverse_words_in_a_string();
 
+/*
+1405. Longest Happy String: https://leetcode.com/problems/longest-happy-string
+*/
+void invoke_longest_happy_string();
+
 #endif /* string_hpp */

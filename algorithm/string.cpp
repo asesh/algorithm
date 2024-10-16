@@ -412,3 +412,10 @@ void invoke_reverse_words_in_a_string() {
   std::string input = "       hello    world   test!!    ";
   std::cout<<reverse_words_in_a_string(input)<<std::endl;
 }
+
+std::string longest_happy_string(int a, int b, int c) {
+  return "";
+}
+void invoke_longest_happy_string() {
+  std::cout<<"Longest happy string: "<<longest_happy_string(1, 2, 3)<<std::endl;
+}

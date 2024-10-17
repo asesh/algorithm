@@ -1415,3 +1415,30 @@ void invoke_separate_black_and_white_balls() {
     <<separate_black_and_white_balls(input)
     <<std::endl;
 }
+
+/*
+Input: [2,7,11,15], Target: 22
+Output: [1, 3]
+*/
+std::vector<int> two_sum_ii(std::vector<int>& numbers, int target) {
+  int low = 0, high = numbers.size() - 1;
+  while(low < high) {
+    auto sum = numbers[low] + numbers[high];
+    if(sum == target) {
+      return {low + 1, high + 1};
+    } else if(sum < target) {
+      ++low;
+    } else {
+      --high;
+    }
+  }
+  return {};
+}
+void invoke_two_sum_ii() {
+  std::vector<int> input = {2,7,11,15};
+  auto output = two_sum_ii(input, 22);
+  std::cout<<"The indices of two sum ii are: ";
+  std::for_each(output.begin(), output.end(), [](auto& number) {
+    std::cout<<number<<", ";
+  });
+}

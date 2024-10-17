@@ -17,7 +17,9 @@
 #include "graph.hpp"
 
 int main(int argc, const char* argv[]) {
-    invoke_find_three_number_sum();
+  invoke_two_sum_ii();
+  
+//    invoke_find_three_number_sum();
   
 //  invoke_separate_black_and_white_balls();
   

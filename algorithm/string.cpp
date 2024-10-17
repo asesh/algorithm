@@ -413,6 +413,28 @@ void invoke_reverse_words_in_a_string() {
   std::cout<<reverse_words_in_a_string(input)<<std::endl;
 }
 
+/*
+Input: a = 1, b = 1, c = 7
+Output: "ccaccbcc"
+cc -> c = 5
+a -> a = 0
+cc -> c = 3
+b -> b = 0
+cc
+
+Input: a = 7, b = 7, c = 7
+Output: "abcabcabcabcabcabcabc"
+
+Pseudocode:
+output = ""
+max1, max2, max3
+while(max1 >= 0) {
+ 
+}
+ 
+Input: a = 7, b = 1, c = 0
+Output: "aabaa"
+*/
 std::string longest_happy_string(int a, int b, int c) {
   return "";
 }

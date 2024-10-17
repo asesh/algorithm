@@ -282,4 +282,9 @@ void invoke_set_matrix_zeroes();
 */
 void invoke_separate_black_and_white_balls();
 
+/*
+167. Two Sum II - Input Array Is Sorted
+*/
+void invoke_two_sum_ii();
+
 #endif /* NUMBER_HPP */

@@ -1442,3 +1442,21 @@ void invoke_two_sum_ii() {
     std::cout<<number<<", ";
   });
 }
+
+std::vector<int> two_sum(std::vector<int>& nums, int target) {
+  std::unordered_map<int, int> hash_map;
+  for(int index = 0; index < nums.size(); ++index) {
+    auto diff = target - nums[index];
+    if(hash_map.count(diff)) {
+      return {hash_map[diff], index};
+    }
+    hash_map[nums[index]] = index;
+  }
+
+  return {};
+}
+void invoke_two_sum() {
+  std::vector<int> input = {2,7,11,15};
+  auto output = two_sum(input, 22);
+  std::cout<<"The indices of two sums are: "<<output[0]<<", "<<output[1]<<std::endl;
+}

@@ -287,4 +287,9 @@ void invoke_separate_black_and_white_balls();
 */
 void invoke_two_sum_ii();
 
+/*
+1. Two Sum: https://leetcode.com/problems/two-sum/
+*/
+void invoke_two_sum();
+
 #endif /* NUMBER_HPP */

@@ -237,20 +237,49 @@ int missing_number() {
 }
 
 /*
- 11. Container With Most Water
- https://leetcode.com/problems/container-with-most-water/
- */
-int container_with_most_water(const std::vector<int>& container_height) {
-	int max_amount_of_water = 0;
+Input: [1,8,6,2,5,4,8,3,7]
+Output: 49
+ 
+Input: [1,2,4,4,2,2,2]
+Output: 10
+|     | |
+|     | |
+|   | | | | | |
+| | | | | | | |
+-----------------
+     2 2 2 2 2
+ 
+Input: [8,7,2,1]
+Output: 7
+| |
+| | |
+| | |
+| | |
+| | |
+| | |
+| | | |
+| | | | |
+------------------------
+*/
+int container_with_most_water(const std::vector<int>& input) {
+	int output = 0;
+  
+  int left = 0, right = input.size() - 1;
+  while(left < right) {
+    auto current_amount = (right - left) * std::min(input[left], input[right]);
+    output = std::max(output, current_amount);
+    if(input[left] > input[right]) {
+      --right;
+    } else {
+      ++left;
+    }
+  }
 	
-	for(const auto& height: container_height) {
-		
-	}
-	
-	return 0;
+	return output;
 }
 void invoke_container_with_most_water() {
-	std::vector<int> container_height{1,8,6,2,5,4,8,3,7};
+//	std::vector<int> container_height{1,8,6,2,5,4,8,3,7};
+  std::vector<int> container_height{8,7,2,1};
 	std::cout << "Max amount of water: " << container_with_most_water(container_height) << std::endl;
 }
 

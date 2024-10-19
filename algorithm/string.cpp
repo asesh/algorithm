@@ -311,13 +311,81 @@ void invoke_river_sizes() {
   std::cout<<"The river size is: "<<river_sizes(matrix)<<std::endl;
 }
 
-void valid_ip_address(const std::string& ip_addresses) {
+/*
+Input: "1921680"
+Output: ["1.9.216.80", "1.92.16.80", "1.92.168.0", "19.2.16.80", "19.2.168.0", "19.21.6.80", "19.21.68.0", "19.216.8.0", "192.1.6.80", "192.1.68.0", "192.16.8.0"]
+*/
+bool is_ip_valid(const std::string& ip) {
+  if(ip.size() > 1 && ip[0] == '0') {
+    return false;
+  }
   
+  auto ip_number = std::stoi(ip);
+  if(ip_number > 255) {
+    return false;
+  }
+
+  return true;
+}
+
+std::string get_merged_ips(const std::vector<std::string>& ip_parts) {
+  std::string output;
+  for(int index = 0; index < ip_parts.size(); ++index) {
+    output.append(ip_parts[index]);
+    if(index != ip_parts.size() - 1) {
+      output.append(".");
+    }
+  }
+  return output;
+}
+std::vector<std::string> valid_ip_address(const std::string& ip_addresses) {
+  std::vector<std::string> output;
+
+  int input_size = ip_addresses.size() - 1;
+
+  for(int first = 0; first < input_size - 2; ++first) {
+    auto first_ip = ip_addresses.substr(0, first + 1);
+    if(!is_ip_valid(first_ip)) {
+      continue;
+    }
+    // std::cout<<"First IP: "<<first_ip<<std::endl;
+    
+    for(int second = first + 1; second < input_size - 1; ++second) {
+      auto second_ip = ip_addresses.substr(first + 1, second - first);
+      if(!is_ip_valid(second_ip)) {
+        continue;
+      }
+      // std::cout<<first_ip<<"."<<second_ip<<std::endl;
+
+      for(int third = second + 1; third < input_size; ++third) {
+        auto third_ip = ip_addresses.substr(second + 1, third - second);
+        if(!is_ip_valid(third_ip)) {
+          continue;
+        }
+        // std::cout<<first_ip<<"."<<second_ip<<"."<<third_ip<<std::endl;
+
+        auto fourth_ip = ip_addresses.substr(third + 1, input_size - third);
+        if(!is_ip_valid(fourth_ip)) {
+          continue;
+        }
+
+        std::vector<std::string> ip = {first_ip, second_ip, third_ip, fourth_ip};
+        output.push_back(get_merged_ips(ip));
+        // std::cout<<first_ip<<"."<<second_ip<<"."<<third_ip<<"."<<fourth_ip<<std::endl;
+      }
+    }
+  }
+
+  return output;
 }
 
 // R: O(1) S: O(1)
 void invoke_valid_ip_address() {
-  valid_ip_address("1921680");
+  auto valid_ip_addresses = valid_ip_address("1921680");
+  std::cout<<"Valid IP addresses are: ";
+  std::for_each(valid_ip_addresses.begin(), valid_ip_addresses.end(), [](std::string& valid_ip) {
+    std::cout<<valid_ip<<", ";
+  });
 }
 
 bool valid_palindrome(std::string s) {

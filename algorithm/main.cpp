@@ -17,7 +17,9 @@
 #include "graph.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_two_sum();
+  invoke_zig_zag_conversion();
+  
+//  invoke_two_sum();
   
 //  invoke_two_sum_ii();
   

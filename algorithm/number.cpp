@@ -1177,7 +1177,7 @@ void invoke_kth_largest_element_in_an_array() {
 /*
 LeetCode
 Input: PAYPALISHIRING
-
+Process:
 0 1 2 3 4 5 6 7 8 9 0 1 2 3
 P A Y P A L I S H I R I N G
 
@@ -1201,9 +1201,41 @@ Custom, Rows: 2
 0 P Y A I H R N
 1 A P L S I I G
 Output: PYAIHRNAPLSIIG
+ 
+Rows / 2 = X => number of diagonal columns
+ 
 */
 std::string zig_zag_conversion_lc(std::string input, int rows) {
   std::string output;
+  std::vector<std::vector<char>> data(rows);
+  
+  if(rows <= 1) {
+    return input;
+  }
+  
+  // SC O(n)
+  output.reserve(input.size());
+  
+  int index = 0, direction = 1;
+  
+  // RC O(n)
+  for(auto& character: input) {
+    data[index].push_back(character);
+    if(index == 0) {
+      direction = 1;
+    } else if(index == rows - 1) {
+      direction = -1;
+    }
+    index += direction;
+  }
+  
+  // RC O(n)
+  for(const auto& row_data: data) {
+    for(auto& character: row_data) {
+      output += character;
+    }
+  }
+  
   return output;
 }
 
@@ -1231,19 +1263,20 @@ std::string zig_zag_conversion_ae(std::vector<std::vector<int>>& matrix) {
   auto columns = matrix.size();
   
   for(int row = 0; row < rows; ++row) {
-    
   }
   
   return output;
 }
 void invoke_zig_zag_conversion() {
-  std::vector<std::vector<int>> matrix = {
-    {1,3,4,10},
-    {2,5,9,11},
-    {6,8,12,15},
-    {7,13,14,16}
-  };
-  std::cout<<zig_zag_conversion_ae(matrix)<< std::endl;
+  // For AE
+//  std::vector<std::vector<int>> matrix = {
+//    {1,3,4,10},
+//    {2,5,9,11},
+//    {6,8,12,15},
+//    {7,13,14,16}
+//  };
+  std::string input = "PAYPALISHIRING";
+  std::cout<<zig_zag_conversion_lc(input, 4)<< std::endl;
 }
 
 /*
@@ -1443,6 +1476,13 @@ void invoke_two_sum_ii() {
   });
 }
 
+/*
+Input: [2,7,11,15]
+Output: [1,3]
+Solution:
+Target = a + b -> a = Target - b
+7 == 22 - 15
+*/
 std::vector<int> two_sum(std::vector<int>& nums, int target) {
   std::unordered_map<int, int> hash_map;
   for(int index = 0; index < nums.size(); ++index) {

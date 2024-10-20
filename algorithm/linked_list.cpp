@@ -83,7 +83,7 @@ void rotate_linked_list() {
 }
 
 /*
- Head                  Tail
+ H                   T
  1 -> 2 -> 3 -> 4 -> 5
  
  5 -> 4 -> 3 -> 2 -> 1
@@ -101,23 +101,51 @@ void reverse_linked_list() {
   
 }
 
-/*
- 2. Add Two Numbers
- https://leetcode.com/problems/add-two-numbers/
- 
- 2 -> 4 -> 3
- 5 -> 6 -> 4
- Sum:
- 7 -> 0 -> 8
- 
- */
-void add_two_numbers() {
-  CLinkedList<int> head_linked_list{1, 2, 3, 4, 5};
-  CLinkedList<int>* current_node = &head_linked_list;
-//  CSingleLinkedList<int> final_linked_list{1, 2, 3, 4, 5};
-//  CSingleLinkedList<int>* current_node = nullptr;
-//  do {
-//    current_node = final_linked_list.next();
-//    std::cout<<current_node->m_data<< ", ";
-//  } while(current_node);
+/*ListNode* add_two_linked_list_number(ListNode* l1, ListNode* l2) {
+  ListNode* output = nullptr, *new_node = nullptr;
+  int total = 0, val1 = 0, val2 = 0;
+  int carry_over = 0;
+  while(l1 || l2) {
+    val1 = val2 = 0;
+    if(l1) {
+      val1 = l1->val;
+      l1 = l1->next;
+    }
+    if(l2) {
+      val2 = l2->val;
+      l2 = l2->next;
+    }
+    auto sum = val1 + val2 + carry_over;
+    carry_over = 0;
+    if(sum >= 10) {
+      carry_over = sum / 10;
+      sum %= 10;
+    }
+
+    if(new_node) {
+      if((!l1 || !l2)) {
+        new_node->next = new ListNode(sum);
+        if(!l1 && !l2 && carry_over != 0) {
+          new_node->next->next = new ListNode(carry_over);
+          break;
+        }
+      } else {
+        new_node->next = new ListNode(sum);
+      }
+      new_node = new_node->next;
+    } else {
+      new_node = new ListNode(sum);
+      if(!l1 && !l2 && carry_over != 0) {
+        new_node->next = new ListNode(carry_over);
+      }
+      output = new_node;
+    }
+  }
+
+  return output == nullptr ? new ListNode(0) : output;
+}*/
+void invoke_add_two_linked_list_numbers() {
+  // Call the above method which was done on LeetCode.
+  // We will have to modify the used linked list to run locally
+//  add_two_linked_list_number(...);
 }

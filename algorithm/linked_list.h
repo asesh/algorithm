@@ -224,4 +224,9 @@ protected:
 void invoke_reverse_linked_list();
 CSingleLinkedList<int>&& reverse_linked_list(const CSingleLinkedList<int>& input_linked_list);
 
+/*
+2. Add Two Numbers: https://leetcode.com/problems/add-two-numbers/
+*/
+void invoke_add_two_linked_list_numbers();
+
 #endif /* linked_list_h */

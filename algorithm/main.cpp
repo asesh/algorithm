@@ -17,7 +17,9 @@
 #include "graph.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_container_with_most_water();
+  invoke_minimum_remove_to_make_valid_parenthesses();
+  
+//  invoke_container_with_most_water();
   
 //  invoke_zig_zag_conversion();
   

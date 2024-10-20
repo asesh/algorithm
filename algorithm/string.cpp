@@ -509,3 +509,56 @@ std::string longest_happy_string(int a, int b, int c) {
 void invoke_longest_happy_string() {
   std::cout<<"Longest happy string: "<<longest_happy_string(1, 2, 3)<<std::endl;
 }
+
+/*
+Input: "lee(t(c)o)de)"
+Output: lee(t(c)o)de", "lee(t(co)de)", "lee(t(c)ode)"
+ 
+Input: "a)b(c)d"
+Output: "ab(c)d"
+ 
+Input: "))(("
+Output: ""
+ 
+Input: "(a(b(c)d)"
+Output: "a(b(c)d)"
+ 
+Input: "())()((("
+Output: "()()"
+ 
+Input: ")i()()((fm(((()"
+Output: "i()((fm)"
+ 
+Overall RC: O(n) SC: O(n)
+*/
+std::string minimum_remove_to_make_valid_parenthesses(std::string& input) {
+  std::string output;
+  std::stack<int> stack_output; //
+  std::vector<bool> exists(input.size()); //
+  
+  for(int index = 0; index < input.size(); ++index) {
+    if(input[index] == '(') {
+      stack_output.push(index);
+    } else if(input[index] == ')') {
+      if(!stack_output.empty()) {
+        exists[index] = true;
+        exists[stack_output.top()] = true;
+        stack_output.pop();
+      }
+    } else {
+      exists[index] = true;
+    }
+  }
+  
+  for(int index = 0; index < input.size(); ++index) {
+    if(exists[index]) {
+      output += input[index];
+    }
+  }
+  
+  return output;
+}
+void invoke_minimum_remove_to_make_valid_parenthesses() {
+  std::string input = "(a(b(c)d)";
+  std::cout<<"Minimum remove to make valid parentheses: "<<minimum_remove_to_make_valid_parenthesses(input)<<std::endl;
+}

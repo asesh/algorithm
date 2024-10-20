@@ -47,4 +47,9 @@ void invoke_reverse_words_in_a_string();
 */
 void invoke_longest_happy_string();
 
+/*
+1249. Minimum Remove to Make Valid Parentheses: https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses
+*/
+void invoke_minimum_remove_to_make_valid_parenthesses();
+
 #endif /* string_hpp */

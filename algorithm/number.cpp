@@ -947,21 +947,38 @@ void invoke_rotate_array() {
 4*1000 + 3*100 + 2*10 + 1 = 4321
 */
 int reverse_integer(int input) {
-  int output = 0;
+  int reverse_number = 0;
+
+  int carry = 0;
+  int number = input;
+
   do {
-    auto last_number = input % 10; // 3
-    input /= 10;
-    output = (output * 10) + last_number;
-  } while(input != 0);
-  return output;
+    // Input: 123
+    auto last_number = number % 10;                      //  3 ->  2 -> 1
+    number /= 10;                                        // 12 ->  1 -> 0
+    
+    if (reverse_number > INT_MAX/10 ||
+      (reverse_number == INT_MAX / 10 && last_number > 7))
+      return 0;
+    if (reverse_number < INT_MIN/10 ||
+      (reverse_number == INT_MIN / 10 && last_number < -8))
+      return 0;
+    
+    reverse_number = reverse_number * 10 + last_number;  //  3 -> 32 -> 321
+  } while(number != 0);
+
+  return reverse_number;
 }
 void invoke_reverse_integer() {
   std::cout<<reverse_integer(-123);
 }
 
 /*
-nums1 = [1,2], nums2 = [3,4]; Output: 2.50000
-nums1 = [[1,3,4,5], nums = [2,3,6,7]; Output: 3.50000
+nums1: [1,3], nums2: [2] => Output: 2.0
+ 
+nums1: [1,2], nums2: [3,4] => Output: 2.50000
+ 
+nums1: [1,3,4,5], nums: [2,3,6,7] => Output: 3.50000
 */
 double median_of_two_sorted_arrays(std::vector<int>& nums1, std::vector<int>& nums2) {
   double output = 0.0;

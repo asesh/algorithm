@@ -20,7 +20,9 @@ int min_adjancent_swaps(const std::string& input_string);
 
 std::string reorganize_string(const std::string& input_string);
 
-std::string longest_palindromic_substring(const std::string& input_string);
+/*
+5. Longest Palindromic Substring: https://leetcode.com/problems/longest-palindromic-substring/
+*/
 void invoke_longest_palindromic_substring();
 
 bool is_anagram(const std::string& first_word, const std::string& second_word);
@@ -51,5 +53,10 @@ void invoke_longest_happy_string();
 1249. Minimum Remove to Make Valid Parentheses: https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses
 */
 void invoke_minimum_remove_to_make_valid_parenthesses();
+
+/*
+ 
+*/
+void invoke_string_to_integer();
 
 #endif /* string_hpp */

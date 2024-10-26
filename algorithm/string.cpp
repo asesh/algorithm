@@ -180,24 +180,20 @@ std::string reorganize_string(const std::string& input_string) {
 }
 
 /*
- https://leetcode.com/problems/longest-palindromic-substring/
- 5. Longest Palindromic Substring
- */
+Input: babad
+Type:  Odd
+
+Input: cbbd
+
+Input: caeeeeaz
+
+Input:  aleveldefe
+Index: 0123456789
+Mid:        |
+Mid string: aleve ldefe
+Type:  Even
+*/
 std::string longest_palindromic_substring(const std::string& input_string) {
-	/*
-	 Input: babad
-	 Type:	Odd
-	 
-	 Input: cbbd
-	 
-	 Input: caeeeeaz
-	 
-	 Input:	aleveldefe
-	 Index: 0123456789
-	 Mid:        |
-	 Mid string: aleve ldefe
-	 Type:	Even
-	 */
 	std::string longest_substring;
 	
 	// Input string is empty
@@ -214,10 +210,9 @@ std::string longest_palindromic_substring(const std::string& input_string) {
 	return longest_substring;
 }
 void invoke_longest_palindromic_substring() {
-	std::string input_string = "baad";
+	std::string input_string = "babad";
 	std::cout << "Longest palidromic substring: " << longest_palindromic_substring(input_string);
 }
-
 
 /*
  input one: aaka
@@ -561,4 +556,35 @@ std::string minimum_remove_to_make_valid_parenthesses(std::string& input) {
 void invoke_minimum_remove_to_make_valid_parenthesses() {
   std::string input = "(a(b(c)d)";
   std::cout<<"Minimum remove to make valid parentheses: "<<minimum_remove_to_make_valid_parenthesses(input)<<std::endl;
+}
+
+/*
+Input: "1337c0d3"
+Output: 1337
+ 
+Input: "  -042"
+Output: -42
+*/
+int string_to_integer(std::string& input) {
+  int output = 0, sign = 1;
+  int low = 0, high = input.size();
+  
+  while(low < high) {
+    int element = input[low];
+    if(element >= 0 && element <= 9) {
+      if(low == high - 1) {
+        output += element;
+      } else {
+        output += element * 10;
+      }
+    } else if(input[low] == '-') {
+      sign *= -1;
+    }
+    ++low;
+  }
+  return output;
+}
+void invoke_string_to_integer() {
+  std::string input = "42";
+  std::cout<<"Converted string to integer: "<<string_to_integer(input)<<std::endl;
 }

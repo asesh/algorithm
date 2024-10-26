@@ -229,4 +229,9 @@ CSingleLinkedList<int>&& reverse_linked_list(const CSingleLinkedList<int>& input
 */
 void invoke_add_two_linked_list_numbers();
 
+/*
+92. Reverse Linked List II: https://leetcode.com/problems/reverse-linked-list-ii
+*/
+void invoke_reverse_linked_list();
+
 #endif /* linked_list_h */

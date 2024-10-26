@@ -26,23 +26,6 @@
  }
  
  */
-void invoke_reverse_linked_list() {
-	CSingleLinkedList<int> input_linked_list;
-	input_linked_list.add_node(1);
-	input_linked_list.add_node(2);
-	input_linked_list.add_node(3);
-	input_linked_list.add_node(4);
-	input_linked_list.add_node(5);
-	auto reversed_linked_list = reverse_linked_list(input_linked_list);
-	reversed_linked_list.clear_nodes();
-	input_linked_list.clear_nodes();
-}
-CSingleLinkedList<int>&& reverse_linked_list(const CSingleLinkedList<int>& input_linked_list) {
-	CSingleLinkedList<int> final_linked_list;
-	final_linked_list.add_node(100);
-	return std::move(final_linked_list);
-}
-
 
 /*
  61. Rotate List
@@ -83,22 +66,41 @@ void rotate_linked_list() {
 }
 
 /*
- H                   T
- 1 -> 2 -> 3 -> 4 -> 5
+ L    C    R
+ 1 -> 2 -> 3 -> 4 -> 5     =>      1 -> 4 -> 3 -> 2 -> 5
+ L         C    R
+ 1 -> 3 -> 2 -> 4 -> 5
+ 1 -> 3 -> 4 -> 2 -> 5
+ 1 -> 4 -> 3 -> 2 -> 5
  
- 5 -> 4 -> 3 -> 2 -> 1
- 
- head_node = null
- current_node = root_node
- while(current_node) {
-  next_node = current_node->next
-  curent_node->head = head_node
-  next_node->next = current_node
-  current_node = next_node
- }
+ L    C
+ 3 -> 5
+ 5 -> 3
  */
-void reverse_linked_list() {
-  
+//void reverse_linked_list(ListNode* head, int left, int right) {
+//  // Dummy node to handle cases where left = 1
+//  ListNode* dummy_node = new ListNode(0);
+//  dummy_node->next = head;
+//  ListNode* left_node = dummy_node;
+//
+//  for(int counter = 0; counter < left - 1; ++counter) {
+//    left_node = left_node->next;
+//  }
+//
+//  ListNode* current_node = left_node->next;
+//
+//  for(int counter = 0; counter < right - left; ++counter) {
+//    auto right_node = current_node->next; // 3
+//    current_node->next = right_node->next; // 2 -> 4
+//    right_node->next = left_node->next; // 3 -> 2
+//    left_node->next = right_node; // 1 -> 3
+//  }
+//
+//  return dummy_node->next;
+//}
+void invoke_reverse_linked_list() {
+  // Modify the following function to use our own linked list wrapper instead
+//  reverse_linked_list(head_node, 2, 4);
 }
 
 /*ListNode* add_two_linked_list_number(ListNode* l1, ListNode* l2) {

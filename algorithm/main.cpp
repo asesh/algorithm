@@ -17,9 +17,11 @@
 #include "graph.hpp"
 
 int main(int argc, const char* argv[]) {
+  invoke_longest_substring_without_repeating_characters();
+  
 //  invoke_string_to_integer();
   
-  invoke_longest_palindromic_substring();
+//  invoke_longest_palindromic_substring();
   
 //  invoke_minimum_remove_to_make_valid_parenthesses();
   
@@ -244,8 +246,6 @@ int main(int argc, const char* argv[]) {
 //	for(const auto& data: hash_map) {
 //		std::cout<<"Key: "<<data.first<<",value: "<<data.second<<std::endl;
 //	}
-	
-	//invoke_longest_substring_without_repeating_characters();
 	
 //	invoke_find_pivot_index();
 

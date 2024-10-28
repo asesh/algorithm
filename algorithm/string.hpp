@@ -9,10 +9,16 @@
 #ifndef string_hpp
 #define string_hpp
 
-void string_permutation(char input_string[], int lower_index, int higher_index);
+/*
+46. Permutations: https://leetcode.com/problems/permutations
+*/
+void invoke_permutations();
+
 void split_and_print(int32_t input_array[], int32_t lower_index, int32_t higher_index);
 
-int longest_substring_without_repeating_characters(const std::string& input_string);
+/*
+3. Longest substring without repeating characters: https://leetcode.com/problems/longest-substring-without-repeating-characters/
+*/
 void invoke_longest_substring_without_repeating_characters();
 
 bool is_palindrome(const std::string& input_string);

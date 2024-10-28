@@ -10,17 +10,33 @@
 #include "string.hpp"
 
 /*
- ABC
- ABC				BAC					CBA
- ABC ACB			BAC BCA			CBA CAB
- 
- 012			102				210
- 012 021	102 120		210 201
- 
- AB -> 2! = 2 * 1 = 2
- AB BA
+ABC
+ABC				BAC					CBA
+ABC ACB			BAC BCA			CBA CAB
+
+012			102				210
+012 021	102 120		210 201
+
+AB -> 2! = 2 * 1 = 2
+AB BA
+
+Input: [1,2,3]
+Output: [[123],[132],[231][213],[312][321]]
+
+Input: [1,2,3,4]
+Output: [[123],[132],[231][213],[312][321]]
  */
-void permutation_of_string(std::string& input_string, int lower_index, int higher_index) {
+std::vector<std::vector<int>> permutations(std::vector<int>& input) {
+  std::vector<std::vector<int>> output;
+  return output;
+}
+void invoke_permutations() {
+  std::vector<int> input = {1,2,3};
+  auto permutation = permutations(input);
+  std::cout<<"Permutation of the input: ";
+  std::for_each(permutation.begin(), permutation.end(), [](std::vector<int>& array) {
+    std::cout<<array[0]<<array[1]<<array[2]<<" ";
+  });
 }
 
 /*
@@ -38,46 +54,75 @@ void split_and_print(int32_t input_array[], int32_t lower_index, int32_t higher_
 }
 
 /*
- 3. Longest substring without repeating characters
- https://leetcode.com/problems/longest-substring-without-repeating-characters/
+Problem:
+input: abcabcbb
+characters: abc
+output: 3
+Solution:
+ S
+ E
+ a b c a b c b b
  
- Problem:
- input: abcabcbb
- characters: abc
- output: 3
+ S-->E
+ a b c a b c b b => 3
+   S-->E
+ a b c a b c b b => 3
+     S-->E
+ a b c a b c b b => 3
+       S-->E
+ a b c a b c b b => 3
+
+input: ababca
+Index: 01234
+max: 	3
  
- input: ababca
- Imp:   **
- Index: 01234
- max: 	2
+Input: pwwkew
+max: 3
+Solution:
+ S
+ E
+ p w w k e w
+ S E
+ p w w k e w => 2
+ S   E
+ p w w k e w => 2
  */
-int longest_substring_without_repeating_characters(const std::string& input_string) {
-	// Implementation using sliding window
-	std::unordered_set<char> unique_characters;
-	int left_pointer = 0;
-	int max = 0;
+int longest_substring_without_repeating_characters(const std::string& input) {
+  int max_substring = 0;
+  std::unordered_map<char, int> char_map;
+  
+  // RC: O(n) SC: O(k)
+  int start = 0, end = 0;
+  while(end < input.size()) {
+    char_map[input[end]] += 1;
+    while(char_map[input[end]] > 1) {
+      char_map[input[start]] -= 1;
+      ++start;
+    }
+    
+    max_substring = std::max(max_substring, end - start + 1);
+    ++end;
+  }
+  
+  // RC: O(n^2), SC:O(k)
+//  for(int index = 0; index < input.size(); ++index) {
+//    int length = 0;
+//    int window = index;
+//    while(window < input.size()) {
+//      if(!char_set.contains(input[window])) {
+//        ++length;
+//        char_set.insert(input[window]);
+//        max_substring = std::max(max_substring, length);
+//      } else {
+//        char_set.clear();
+//        length = 0;
+//        break;
+//      }
+//      ++window;
+//    }
+//  }
 	
-	for(int index = 0; index < input_string.length(); ++index) {
-		// Check if this character is in the set
-		if(unique_characters.find(input_string[index]) == unique_characters.end()) {
-			// This character is not in the set
-			// So insert the character and update the max count
-			unique_characters.insert(input_string[index]);
-			max = std::max(max, index - left_pointer + 1);
-		} else {
-			// This character already exists in the set
-			// So remove the characters already in the set, increasing the left pointer
-			while(left_pointer != index && input_string[index] != input_string[left_pointer]) {
-				unique_characters.erase(input_string[left_pointer++]);
-			}
-			
-			unique_characters.erase(input_string[left_pointer++]);
-			unique_characters.insert(input_string[index]);
-			max = std::max(max, index - left_pointer + 1);
-		}
-	}
-	
-	return max;
+	return max_substring;
 }
 
 void invoke_longest_substring_without_repeating_characters() {

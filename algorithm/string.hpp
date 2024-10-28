@@ -65,4 +65,9 @@ void invoke_minimum_remove_to_make_valid_parenthesses();
 */
 void invoke_string_to_integer();
 
+/*
+209. Minimum Size Subarray Sum: https://leetcode.com/problems/minimum-size-subarray-sum
+*/
+void invoke_minimum_size_subarray_sum();
+
 #endif /* string_hpp */

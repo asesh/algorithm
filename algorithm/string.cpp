@@ -127,7 +127,9 @@ int longest_substring_without_repeating_characters(const std::string& input) {
 
 void invoke_longest_substring_without_repeating_characters() {
 	std::string input_string = "pwwkew";
-	std::cout << longest_substring_without_repeating_characters(input_string) << std::endl;
+	std::cout 
+    << "Longest substring without repeating characters: "
+    <<longest_substring_without_repeating_characters(input_string) << std::endl;
 }
 
 // https://leetcode.com/discuss/interview-question/351783/
@@ -632,4 +634,56 @@ int string_to_integer(std::string& input) {
 void invoke_string_to_integer() {
   std::string input = "42";
   std::cout<<"Converted string to integer: "<<string_to_integer(input)<<std::endl;
+}
+
+/*
+Input: [2,3,1,2,4,3], Target: 7
+Output: 2 => 4 + 3
+Process:
+ sort: 1 2 2 3 3 4
+ L         R
+ 1 2 2 3 3 4
+
+Input: [1,4,4], Target: 4
+Output: 1
+ 
+Input: [1,2,3,4,5], Target: 11
+Output: 3
+Process:
+LR
+ 1 2 3 4 5
+ L R
+ 1 2 3 4 5
+ L   R
+ 1 2 3 4 5
+ L     R
+ 1 2 3 4 5
+ L       R
+ 1 2 3 4 5 ...
+     L   R
+ 1 2 3 4 5
+*/
+int minimum_size_subarray_sum(std::vector<int>& input, int target) {
+  int output = INT_MAX, sliding_sum = 0;
+  int left = 0, right = 0;
+  while(right < input.size()) {
+    sliding_sum += input[right];
+    while(sliding_sum > target) {
+      if(sliding_sum >= target) {
+        output = std::min(output, right - left + 1);
+      }
+      sliding_sum -= input[left];
+      ++left;
+    }
+    if(sliding_sum >= target) {
+      output = std::min(output, right - left + 1);
+    }
+    ++right;
+  }
+  
+  return output == INT_MAX ? 0 : output;
+}
+void invoke_minimum_size_subarray_sum() {
+  std::vector<int> input = {2,3,1,2,4,3};
+  std::cout<<"Minimum size subarray sum: "<<minimum_size_subarray_sum(input, 7);
 }

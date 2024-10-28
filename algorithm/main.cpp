@@ -17,7 +17,9 @@
 #include "graph.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_longest_substring_without_repeating_characters();
+  invoke_minimum_size_subarray_sum();
+  
+//  invoke_longest_substring_without_repeating_characters();
   
 //  invoke_string_to_integer();
   

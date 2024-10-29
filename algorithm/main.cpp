@@ -17,13 +17,13 @@
 #include "graph.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_minimum_size_subarray_sum();
+  invoke_longest_palindromic_substring();
+  
+//  invoke_minimum_size_subarray_sum();
   
 //  invoke_longest_substring_without_repeating_characters();
   
 //  invoke_string_to_integer();
-  
-//  invoke_longest_palindromic_substring();
   
 //  invoke_minimum_remove_to_make_valid_parenthesses();
   

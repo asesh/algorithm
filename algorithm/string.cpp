@@ -221,40 +221,72 @@ std::string reorganize_string(const std::string& input_string) {
 	std::map<char, int32_t> character_map;
 	
 	// Insert the characters and their count in a hashmap
-	for(const auto& input: input_string) {
-	}
 	return "";
 }
 
 /*
 Input: babad
-Type:  Odd
 
 Input: cbbd
 
 Input: caeeeeaz
 
-Input:  aleveldefe
+Input: aleveldefe
 Index: 0123456789
-Mid:        |
 Mid string: aleve ldefe
 Type:  Even
 */
-std::string longest_palindromic_substring(const std::string& input_string) {
-	std::string longest_substring;
-	
-	// Input string is empty
-	if(input_string.length() <= 1) {
-		return input_string;
-	}
-	
-	// Even case
-	if(input_string.length() % 2 != 0) {
-	} else {
-		// odd case
-	}
-	
-	return longest_substring;
+std::string longest_palindromic_substring(std::string& input) {
+  std::string output = input.substr(0, 1);
+  
+  if(input.size() <= 1) {
+    return input;
+  }
+  
+  // Technique: Expand around the center
+  // RC: O(n^2), SC: O(1)
+  auto expand_around_the_center = [&](int low, int high) {
+    while(low >= 0 && high < input.size() && input[low] == input[high]) {
+      --low;
+      ++high;
+    }
+    return input.substr(low + 1, high - low - 1) ;
+  };
+  
+  for(int index = 0; index < input.size() - 1; ++index) {
+    std::string odd_string = expand_around_the_center(index, index);
+    std::string even_string = expand_around_the_center(index, index + 1);
+    
+    if(odd_string.size() > output.size()) {
+      output = odd_string;
+    }
+    if(even_string.size() > output.size()) {
+      output = even_string;
+    }
+  }
+  
+  // RC: O(n^3), SC: O(1)
+//  auto is_palindrome = [&](std::string& input, int low, int high) {
+//    while(low < high) {
+//      if(input[low] != input[high]) {
+//        return false;
+//      }
+//      ++low;
+//      --high;
+//    }
+//    return true;
+//  };
+//  int max_length = 1;
+//  for(int left = 0; left < input.size() - 1; ++left) {
+//    for(int right = left + 1; right < input.size(); ++right) {
+//      if((right - left) >= max_length && is_palindrome(input, left, right)) {
+//        max_length = std::max(max_length, right - left + 1);
+//        output = input.substr(left, right - left + 1);
+//      }
+//    }
+//  }
+  
+  return output;
 }
 void invoke_longest_palindromic_substring() {
 	std::string input_string = "babad";

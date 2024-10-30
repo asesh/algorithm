@@ -168,4 +168,9 @@ public:
 void invoke_binary_tree();
 void invoke_binary_search_tree();
 
+/*
+199. Binary Tree Right Side View: https://leetcode.com/problems/binary-tree-right-side-view
+*/
+void invoke_right_side_view();
+
 #endif /* BINARY_TREE_HPP */

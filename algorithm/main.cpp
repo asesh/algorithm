@@ -17,7 +17,9 @@
 #include "graph.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_longest_palindromic_substring();
+  invoke_right_side_view();
+  
+//  invoke_longest_palindromic_substring();
   
 //  invoke_minimum_size_subarray_sum();
   

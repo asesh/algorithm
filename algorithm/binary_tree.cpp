@@ -66,3 +66,29 @@ void invoke_binary_tree() {
 	
 	std::cout<<std::endl;
 }
+
+template<typename T>
+void right_side_view(CBinaryTree<T>* node, int level, std::vector<int>& output) {
+  if(!node) {
+    return;
+  }
+  
+  if(level > output.size()) {
+    output.push_back(node->m_data);
+  }
+  
+  right_side_view(node->m_right_node, level + 1, output);
+  right_side_view(node->m_left_node, level + 1, output);
+}
+void invoke_right_side_view() {
+  std::vector<int> output;
+  CBinaryTree<int32_t> binary_tree(1);
+  binary_tree.m_left_node = new CBinaryTree<int32_t>(2);
+  binary_tree.m_left_node->m_left_node = new CBinaryTree<int32_t>(4);
+  binary_tree.m_right_node = new CBinaryTree<int32_t>(3);
+  right_side_view(&binary_tree, 1, output);
+  std::cout<<"The right-side view: ";
+  std::for_each(output.begin(), output.end(), [](int node_value) {
+    std::cout<<node_value<<"->";
+  });
+}

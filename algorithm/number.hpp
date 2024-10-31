@@ -294,4 +294,9 @@ void invoke_two_sum_ii();
 */
 void invoke_two_sum();
 
+/*
+48. Rotate Image: https://leetcode.com/problems/rotate-image
+*/
+void invoke_rotate_image();
+
 #endif /* NUMBER_HPP */

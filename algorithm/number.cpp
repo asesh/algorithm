@@ -979,6 +979,11 @@ nums1: [1,3], nums2: [2] => Output: 2.0
 nums1: [1,2], nums2: [3,4] => Output: 2.50000
  
 nums1: [1,3,4,5], nums: [2,3,6,7] => Output: 3.50000
+Process:
+ Total elements: 8 -> even
+ mid_index = ((8/2)-1) => [3+1]/2 = 7/2 = 3.5
+ 
+nums1: [4,5,6,7], nums2: [0,1,2,3]
 */
 double median_of_two_sorted_arrays(std::vector<int>& nums1, std::vector<int>& nums2) {
   double output = 0.0;
@@ -1545,4 +1550,42 @@ void invoke_two_sum() {
   std::vector<int> input = {2,7,11,15};
   auto output = two_sum(input, 22);
   std::cout<<"The indices of two sums are: "<<output[0]<<", "<<output[1]<<std::endl;
+}
+
+/*
+Input:     Output:
+ [1,2,3]          [7,4,1]
+ [4,5,6]       => [8,5,2]
+ [7,8,9]          [9,6,3]
+Process:
+ 
+ Reverse the input => [7, 8, 9]
+                      [4, 5, 6]
+                      [1, 2, 3]
+        R0C1
+     [7, 8, 9]R0C2
+R1C0 [4, 5, 6]R1C2
+R2C0 [1, 2, 3]
+        R2C1
+ Swap the symmetrical parts
+*/
+void rotate_image(std::vector<std::vector<int>>& input) {
+  std::reverse(input.begin(), input.end());
+  for(int row = 0; row < input.size(); ++row) {
+    for(int column = row + 1; column < input[row].size(); ++column) {
+      std::swap(input[row][column], input[column][row]);
+    }
+  }
+}
+void invoke_rotate_image() {
+  std::vector<std::vector<int>> input = {
+    {1,2,3},
+    {4,5,6},
+    {7,8,9},
+  };
+  rotate_image(input);
+  std::cout<<"The rotated matrix is: "<<std::endl;
+  std::for_each(input.begin(), input.end(), [](std::vector<int> row) {
+    std::cout<<row[0]<<", "<<row[1]<<", "<<row[2]<<std::endl;
+  });
 }

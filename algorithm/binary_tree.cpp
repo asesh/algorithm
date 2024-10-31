@@ -68,6 +68,17 @@ void invoke_binary_tree() {
 }
 
 template<typename T>
+int get_binary_tree_height(CBinaryTree<T>* node) {
+  if(!node) {
+    return 0;
+  }
+  
+  int left_height = get_binary_tree_height(node->m_left_node) + 1;
+  int right_height = get_binary_tree_height(node->m_right_node) + 1;
+  return std::max(left_height, right_height);
+}
+
+template<typename T>
 void right_side_view(CBinaryTree<T>* node, int level, std::vector<int>& output) {
   if(!node) {
     return;
@@ -90,5 +101,53 @@ void invoke_right_side_view() {
   std::cout<<"The right-side view: ";
   std::for_each(output.begin(), output.end(), [](int node_value) {
     std::cout<<node_value<<"->";
+  });
+}
+
+/*
+    3
+   /  \
+  9   20
+     /  \
+    15   7
+ 
+RC: O(nh), SC: O(n+h)
+*/
+void level_order_traversal(CBinaryTree<int32_t>* node, int level, int actual_level, std::unordered_map<int, std::vector<int>>& value_map) {
+  if(!node) {
+    return;
+  }
+  
+  if(level == 1) {
+    value_map[actual_level].push_back(node->m_data);
+  } else if(level > 1) {
+    level_order_traversal(node->m_left_node, level - 1, actual_level, value_map);
+    level_order_traversal(node->m_right_node, level - 1, actual_level, value_map);
+  }
+}
+void invoke_level_order_traversal() {
+  std::vector<std::vector<int>> output;
+  std::unordered_map<int, std::vector<int>> value_map;
+  CBinaryTree<int32_t> binary_tree(3);
+  binary_tree.m_left_node = new CBinaryTree<int32_t>(9);
+  binary_tree.m_right_node = new CBinaryTree<int32_t>(20);
+  binary_tree.m_right_node->m_left_node = new CBinaryTree<int32_t>(15);
+  binary_tree.m_right_node->m_right_node = new CBinaryTree<int32_t>(7);
+  
+  int tree_height = get_binary_tree_height(&binary_tree);
+  for(int level = 1; level <= tree_height; ++level) {
+    level_order_traversal(&binary_tree, level, level, value_map);
+  }
+  
+  for(int level = 1; level <= tree_height; ++level) {
+    output.push_back(value_map[level]);
+  }
+  
+  std::cout<<"The level-order traversal: ";
+  std::for_each(output.begin(), output.end(), [&](std::vector<int>& nodes) {
+    for(auto& node: nodes) {
+      std::cout<<node<<", ";
+    }
+    std::cout<<"; ";
   });
 }

@@ -173,4 +173,9 @@ void invoke_binary_search_tree();
 */
 void invoke_right_side_view();
 
+/*
+102. Binary Tree Level Order Traversal: https://leetcode.com/problems/binary-tree-level-order-traversal
+*/
+void invoke_level_order_traversal();
+
 #endif /* BINARY_TREE_HPP */

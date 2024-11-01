@@ -10,36 +10,6 @@
 #include "string.hpp"
 
 /*
-ABC
-ABC				BAC					CBA
-ABC ACB			BAC BCA			CBA CAB
-
-012			102				210
-012 021	102 120		210 201
-
-AB -> 2! = 2 * 1 = 2
-AB BA
-
-Input: [1,2,3]
-Output: [[123],[132],[231][213],[312][321]]
-
-Input: [1,2,3,4]
-Output: [[123],[132],[231][213],[312][321]]
- */
-std::vector<std::vector<int>> permutations(std::vector<int>& input) {
-  std::vector<std::vector<int>> output;
-  return output;
-}
-void invoke_permutations() {
-  std::vector<int> input = {1,2,3};
-  auto permutation = permutations(input);
-  std::cout<<"Permutation of the input: ";
-  std::for_each(permutation.begin(), permutation.end(), [](std::vector<int>& array) {
-    std::cout<<array[0]<<array[1]<<array[2]<<" ";
-  });
-}
-
-/*
  1 2 3 4 5
  1 2 3 | 4 5
  1 | 2

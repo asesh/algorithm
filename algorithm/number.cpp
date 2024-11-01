@@ -1589,3 +1589,41 @@ void invoke_rotate_image() {
     std::cout<<row[0]<<", "<<row[1]<<", "<<row[2]<<std::endl;
   });
 }
+
+/*
+ Input: [1,2,3]
+ Output: [[123],[132],[231][213],[312][321]]
+ Process:
+           123
+  123      213       321
+123 132  213 231   321 312
+
+           012
+     /      |        \
+   012     102       210
+  /  \    /  \       / \
+012 021  102 120   210 201
+*/
+void permutations(std::vector<int>& input, int index, std::vector<std::vector<int>>& output) {
+  if(index == input.size() - 1) {
+//    std::cout<<"Answer: "<<input[0]<<" "<<input[1]<<" "<<input[2]<<std::endl;
+    output.push_back(input);
+  } else {
+    for(int count = index; count < input.size(); ++count) {
+      std::swap(input[count], input[index]);
+//      std::cout<<"Before recursion: "<<input[0]<<" "<<input[1]<<" "<<input[2]<<std::endl;
+      permutations(input, index + 1, output);
+      std::swap(input[count], input[index]);
+//      std::cout<<"After recursion: "<<input[0]<<" "<<input[1]<<" "<<input[2]<<std::endl;
+    }
+  }
+}
+void invoke_permutations() {
+  std::vector<std::vector<int>> output;
+  std::vector<int> input = {1,2,3};
+  permutations(input, 0, output);
+  std::cout<<"Permutation of the input: ";
+  std::for_each(output.begin(), output.end(), [](std::vector<int>& array) {
+    std::cout<<array[0]<<array[1]<<array[2]<<" ";
+  });
+}

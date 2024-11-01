@@ -9,11 +9,6 @@
 #ifndef string_hpp
 #define string_hpp
 
-/*
-46. Permutations: https://leetcode.com/problems/permutations
-*/
-void invoke_permutations();
-
 void split_and_print(int32_t input_array[], int32_t lower_index, int32_t higher_index);
 
 /*

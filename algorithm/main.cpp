@@ -17,7 +17,9 @@
 #include "graph.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_rotate_image();
+  invoke_permutations();
+  
+//  invoke_rotate_image();
   
 //  invoke_level_order_traversal();
   

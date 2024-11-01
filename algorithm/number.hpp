@@ -299,4 +299,9 @@ void invoke_two_sum();
 */
 void invoke_rotate_image();
 
+/*
+46. Permutations: https://leetcode.com/problems/permutations
+*/
+void invoke_permutations();
+
 #endif /* NUMBER_HPP */

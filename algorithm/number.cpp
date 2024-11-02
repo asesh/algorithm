@@ -1044,52 +1044,57 @@ void invoke_jump_game() {
 /*
  1 3     *
 [2,3,1,1,4] => 2
-/\
-1 2
-| |
-3 1
  
  0 1 2 3 4 5 6
-[2,3,1,2,1,1,4] => 3
-/\
-1 2
-| |
-3 1
-|
-1
-|\
-1 2
+[2,3,1,2,1,1,4] => 4
  
-[1,2,1] => 2
+[1,1,1] => 2
 
-[1,2,3] => 2
-|
-1
-|\
-1 2
-   \
-    1*
+[1,2,1,1] => 2
  
 [1,1,1,1,2,4] = 5
  
  * *   * *
-[1,2,4,1,5]
+[1,2,4,1,5] = 3
  
-[1,2,2,3,1,1,2]
+ 0 1 2 3 4 5 6 7
+[2,3,1,4,1,1,1,2]
+ 
+[2,3,0,1,4] = 2
+Process:
+ 0 1 2 3 4
+ 2,3,0,1,4
+ 
+ 0 1 2 3 4
+[1,2,4,1,5] = 3
+ 
 */
-int jump_game_ii(std::vector<int>& nums) {
-  int min_jumps = 0, destination = nums.size() - 1;
+int jump_game_ii(std::vector<int>& input) {
+  int steps = 0, end = 0;
+  int max_steps = 0;
   
   // O(n)
-  for(int index = 0; index < nums.size(); ) {
+  int current_index = 0;
+  while(current_index < input.size() - 1) {
+    max_steps = std::max(max_steps, current_index + input[current_index]); // 2, 3, 4
+    if(max_steps >= input.size() - 1) {
+      ++steps;
+      break;
+    }
     
+    if(current_index == end) { // 0 == 0, 1 == 2,
+      ++steps; // 1,
+      end = max_steps; // 2,
+    }
+    
+    ++current_index; // 0,1,2,3,4,5
   }
   
-  return min_jumps;
+  return steps;
 }
 void invoke_jump_game_ii() {
-  std::vector<int> nums = {2,3,1,2,1,1,4};
-  std::cout<<jump_game_ii(nums)<<std::endl;
+  std::vector<int> nums = {2,2,0,1,4};
+  std::cout<<"The minimum number of jumps to reach the end is: "<<jump_game_ii(nums)<<std::endl;
 }
 
 /*

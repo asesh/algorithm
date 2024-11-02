@@ -245,7 +245,7 @@ void invoke_best_time_to_buy_and_sell_stock_ii();
 void invoke_jump_game();
 
 /*
- 45. Jump Game II https://leetcode.com/problems/jump-game-ii
+45. Jump Game II https://leetcode.com/problems/jump-game-ii
 */
 void invoke_jump_game_ii();
 

@@ -17,6 +17,12 @@
 #include "graph.hpp"
 
 int main(int argc, const char* argv[]) {
+  invoke_group_anagrams();
+  
+//  invoke_spiral_matrix();
+  
+//  invoke_minimum_path_sum();
+  
 //  invoke_permutations();
   
 //  invoke_rotate_image();
@@ -59,7 +65,7 @@ int main(int argc, const char* argv[]) {
   
 //  invoke_four_number_sum();
   
-  invoke_jump_game_ii();
+//  invoke_jump_game_ii();
   
 //  invoke_kth_largest_element_in_an_array();
   

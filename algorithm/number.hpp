@@ -304,4 +304,14 @@ void invoke_rotate_image();
 */
 void invoke_permutations();
 
+/*
+64. Minimum Path Sum: https://leetcode.com/problems/minimum-path-sum
+*/
+void invoke_minimum_path_sum();
+
+/*
+54. Spiral Matrix: https://leetcode.com/problems/spiral-matrix
+*/
+void invoke_spiral_matrix();
+
 #endif /* NUMBER_HPP */

@@ -1632,3 +1632,98 @@ void invoke_permutations() {
     std::cout<<array[0]<<array[1]<<array[2]<<" ";
   });
 }
+
+/*
+Input:
+ [1,3,1]
+ [1,5,1] => Output: 7
+ [4,2,1]
+ Process:
+ [1,4,5]
+ [2,8,6] => Output: 7
+ [6,8,7]
+ 
+ [1,2,3] => Output: 12
+ [4,5,6]
+ Process:
+ [1,3,6]
+ [5,8,12]
+*/
+int minimum_path_sum(std::vector<std::vector<int>>& input) {
+  for(int row = 0; row < input.size(); ++row) {
+    for(int column = 0; column < input[0].size(); ++column) {
+      if(row > 0 && column > 0) {
+        input[row][column] += std::min(input[row - 1][column], input[row][column - 1]);
+      } else if(row > 0) {
+        input[row][column] += input[row - 1][column];
+      } else if(column > 0) {
+        input[row][column] += input[row][column - 1];
+      }
+    }
+  }
+  return input[input.size() - 1][input[0].size() - 1];
+}
+void invoke_minimum_path_sum() {
+  std::vector<std::vector<int>> input = {
+    {1,2,3},
+    {4,5,6},
+  };
+  std::cout<<"Minimum path sum is: "<<minimum_path_sum(input);
+}
+
+/*
+Input:
+ [1,2,3]
+ [4,5,6] => Output: [1,2,3,6,9,8,7,4,5]
+ [7,8,9]
+Process:
+ pattern: right, down, left, up
+ rows: number of rows -> 3
+ columns: number of columns -> 3
+ 
+ * C C    00 01 02
+ R C R => 10 11 12
+ C C R    20 21 22
+ 
+Input:
+ [1,2,3,4]
+ [5,6,7,8]    => Output: [1,2,3,4,8,12,11,10,9,5,6,7]
+ [9,10,11,12]
+ 
+ * C C C
+ R C C R
+ C C C R
+*/
+std::vector<int> spiral_matrix(std::vector<std::vector<int>>& input) {
+  std::vector<int> output;
+  
+  std::vector<std::vector<int>> direction = {
+    {0, 1}, {1, 0}, {0, -1}, {-1, 0}
+  };
+  int row = 0, column = -1;
+  int rows = input.size(), columns = input[0].size();
+  int direction_index = 0;
+  
+  std::vector<int> number_of_steps{columns, rows - 1};
+  
+  while(number_of_steps[direction_index % 2]) {
+    for(int index = 0; index < number_of_steps[direction_index % 2]; ++index) {
+    }
+    
+    //std::cout<<number_of_steps[direction_index % 2]<<std::endl;
+  }
+  
+  return output;
+}
+void invoke_spiral_matrix() {
+  std::vector<std::vector<int>> input {
+    {1,2,3},
+    {4,5,6},
+    {7,8,9}
+  };
+  auto output = spiral_matrix(input);
+  std::cout<<"Spiral matrix: ";
+  std::for_each(output.begin(), output.end(), [](int& number) {
+    std::cout<<number<<", ";
+  });
+}

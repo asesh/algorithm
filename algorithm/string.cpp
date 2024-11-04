@@ -689,3 +689,43 @@ void invoke_minimum_size_subarray_sum() {
   std::vector<int> input = {2,3,1,2,4,3};
   std::cout<<"Minimum size subarray sum: "<<minimum_size_subarray_sum(input, 7);
 }
+
+/*
+Input: ["eat","tea","tan","ate","nat","bat"] Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+Process: sort all the words: ["aet","aet","ant","aet","ant","abt"]
+ map[string]string
+ for word in input:
+  current_word = word
+  sort(word)
+  map[word] = current_word
+*/
+std::vector<std::vector<std::string>> group_anagrams(std::vector<std::string>& input) {
+  std::vector<std::vector<std::string>> output;
+  
+  std::unordered_map<std::string, std::vector<std::string>> key_value;
+  for(auto& word: input) {
+    auto current_word = word;
+    std::sort(word.begin(), word.end());
+    key_value[word].push_back(current_word);
+  }
+  
+  for(auto& key: key_value) {
+    output.push_back(key.second);
+  }
+  
+  return output;
+}
+void invoke_group_anagrams() {
+  std::vector<std::string> input = {
+    "eat","tea","tan","ate","nat","bat"
+  };
+  auto output = group_anagrams(input);
+  std::cout<<"The grouped anagrams are: ";
+  std::for_each(output.begin(), output.end(), [](std::vector<std::string>& words) {
+    std::cout<<"[";
+    for(auto& word: words) {
+      std::cout<<word<<", ";
+    }
+    std::cout<<"], ";
+  });
+}

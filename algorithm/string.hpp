@@ -65,4 +65,9 @@ void invoke_string_to_integer();
 */
 void invoke_minimum_size_subarray_sum();
 
+/*
+49. Group Anagrams: https://leetcode.com/problems/group-anagrams
+*/
+void invoke_group_anagrams();
+
 #endif /* string_hpp */

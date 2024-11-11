@@ -314,4 +314,9 @@ void invoke_minimum_path_sum();
 */
 void invoke_spiral_matrix();
 
+/*
+274. H-Index: https://leetcode.com/problems/h-index
+*/
+void invoke_h_index();
+
 #endif /* NUMBER_HPP */

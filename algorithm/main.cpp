@@ -17,9 +17,9 @@
 #include "graph.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_group_anagrams();
+//  invoke_group_anagrams();
   
-//  invoke_spiral_matrix();
+  invoke_spiral_matrix();
   
 //  invoke_minimum_path_sum();
   

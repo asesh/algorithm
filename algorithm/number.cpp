@@ -1680,19 +1680,13 @@ Process:
  pattern: right, down, left, up
  rows: number of rows -> 3
  columns: number of columns -> 3
+ shifts:
+  horizontal: 3,2,1
+  vertical: 2,1,0
  
  * C C    00 01 02
- R C R => 10 11 12
+ R C R => 10 11 12 => [00 01 02 12 22 21 20 10 11]
  C C R    20 21 22
- 
-Input:
- [1,2,3,4]
- [5,6,7,8]    => Output: [1,2,3,4,8,12,11,10,9,5,6,7]
- [9,10,11,12]
- 
- * C C C
- R C C R
- C C C R
 */
 std::vector<int> spiral_matrix(std::vector<std::vector<int>>& input) {
   std::vector<int> output;
@@ -1700,17 +1694,22 @@ std::vector<int> spiral_matrix(std::vector<std::vector<int>>& input) {
   std::vector<std::vector<int>> direction = {
     {0, 1}, {1, 0}, {0, -1}, {-1, 0}
   };
-  int row = 0, column = -1;
   int rows = input.size(), columns = input[0].size();
+  
+  int current_row = 0, current_column = -1;
   int direction_index = 0;
   
-  std::vector<int> number_of_steps{columns, rows - 1};
+  std::vector<int> number_of_steps{columns, rows - 1}; // 3,2
   
-  while(number_of_steps[direction_index % 2]) {
+  while(number_of_steps[direction_index % 2]) { //
     for(int index = 0; index < number_of_steps[direction_index % 2]; ++index) {
+      current_row += direction[direction_index][0];
+      current_column += direction[direction_index][1];
+      output.push_back(input[current_row][current_column]);
     }
     
-    //std::cout<<number_of_steps[direction_index % 2]<<std::endl;
+    number_of_steps[direction_index % 2]--;
+    direction_index = (direction_index + 1) % 4;
   }
   
   return output;
@@ -1719,11 +1718,34 @@ void invoke_spiral_matrix() {
   std::vector<std::vector<int>> input {
     {1,2,3},
     {4,5,6},
-    {7,8,9}
+    {7,8,9},
   };
   auto output = spiral_matrix(input);
   std::cout<<"Spiral matrix: ";
   std::for_each(output.begin(), output.end(), [](int& number) {
     std::cout<<number<<", ";
   });
+}
+
+/*
+Input: [3,0,6,1,5] Output: 3
+Process:
+ sort: 0,1,3,5,6
+ sum: 15
+ 
+Input: [1,3,1] Output: 1
+Process:
+ sort: 1,1,3
+ 
+Input: [2,2,4,4,5] Output: 
+
+*/
+int h_index(std::vector<int>& input) {
+  int output = 0;
+  
+  return output;
+}
+void invoke_h_index() {
+  std::vector<int> input = {3,0,6,1,5};
+  std::cout<<"The number of citations needed: "<<h_index(input);
 }

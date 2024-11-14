@@ -729,3 +729,45 @@ void invoke_group_anagrams() {
     std::cout<<"], ";
   });
 }
+
+/*
+Input: Given below Output: true
+Process:
+ 5 3 . . 7 . . . .
+ 6 . . 1 9 5 . . .
+ . 9 8 . . . . 6 .
+ 8 . . . 6 . . . 3
+*/
+bool valid_sudoku(std::vector<std::vector<char>>& input) {
+  int checkRow[9][9] = {}, checkColumn[9][9] = {}, checkSubBoxes[9][9] = {};
+  for(int row = 0; row < 9; ++row) {
+    for(int column = 0; column < 9; ++column) {
+      if(input[row][column] != '.') {
+        int targetColumn = input[row][column] - '0' - 1;
+        int subBox = (row / 3) * 3 + (column / 3); // Index of sub-boxes
+//        std::cout<<"Row: ("<<row<<", "<<number<<")\tColumn: ("<<column<<", "<<number<<")\tSubbox: ("<<subBox<<", "<<number<<")"<<std::endl;
+        if(checkRow[row][targetColumn] || checkColumn[column][targetColumn] || checkSubBoxes[subBox][targetColumn]) {
+          return false;
+        }
+        
+        checkRow[row][targetColumn] = checkColumn[column][targetColumn] = checkSubBoxes[subBox][targetColumn] = 1;
+//        std::cout<<"Row: "<<row<<", column: "<<column<<", number: "<<number<<", subBox: "<<subBox<<std::endl;
+      }
+    }
+  }
+  return true;
+}
+void invoke_valid_sudoku() {
+  std::vector<std::vector<char>> input = {
+    {'5','3','.','.','7','.','.','.','.'},
+    {'6','.','.','1','9','5','.','.','.'},
+    {'.','9','8','.','.','.','.','6','.'},
+    {'8','.','.','.','6','.','.','.','3'},
+    {'4','.','.','8','.','3','.','.','1'},
+    {'7','.','.','.','2','.','.','.','6'},
+    {'.','6','.','.','.','.','2','8','.'},
+    {'.','.','.','4','1','9','.','.','5'},
+    {'.','.','.','.','8','.','.','7','9'}
+  };
+  std::cout<<"The validity of Sudoku: "<< std::boolalpha << valid_sudoku(input);
+}

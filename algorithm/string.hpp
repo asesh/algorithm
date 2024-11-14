@@ -70,4 +70,9 @@ void invoke_minimum_size_subarray_sum();
 */
 void invoke_group_anagrams();
 
+/*
+36. Valid Sudoku: https://leetcode.com/problems/valid-sudoku
+*/
+void invoke_valid_sudoku();
+
 #endif /* string_hpp */

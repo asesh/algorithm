@@ -17,8 +17,11 @@
 #include "graph.hpp"
 
 int main(int argc, const char* argv[]) {
+  invoke_add_binary();
   
-  invoke_valid_sudoku();
+//  invoke_median_of_two_sorted_arrays();
+  
+//  invoke_valid_sudoku();
   
 //  invoke_group_anagrams();
   
@@ -63,8 +66,6 @@ int main(int argc, const char* argv[]) {
 //  invoke_product_of_array_except_itself();
   
 //  invoke_reverse_words_in_a_string();
-  
-//    invoke_median_of_two_sorted_arrays();
   
 //  invoke_four_number_sum();
   

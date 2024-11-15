@@ -319,4 +319,14 @@ void invoke_spiral_matrix();
 */
 void invoke_h_index();
 
+/*
+137. Single Number II: https://leetcode.com/problems/single-number-ii
+*/
+void invoke_single_number_ii();
+
+/*
+67. Add Binary: https://leetcode.com/problems/add-binary
+*/
+void invoke_add_binary();
+
 #endif /* NUMBER_HPP */

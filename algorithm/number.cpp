@@ -974,11 +974,11 @@ void invoke_reverse_integer() {
 }
 
 /*
-nums1: [1,3], nums2: [2] => Output: 2.0
+Input: nums1: [1,3], nums2: [2] => Output: 2.0
  
-nums1: [1,2], nums2: [3,4] => Output: 2.50000
+Input: nums1: [1,2], nums2: [3,4] => Output: 2.50000
  
-nums1: [1,3,4,5], nums: [2,3,6,7] => Output: 3.50000
+Input: nums1: [1,3,4,5], nums: [2,3,6,7] => Output: 3.50000
 Process:
  Total elements: 8 -> even
  mid_index = ((8/2)-1) => [3+1]/2 = 7/2 = 3.5
@@ -991,7 +991,7 @@ double median_of_two_sorted_arrays(std::vector<int>& nums1, std::vector<int>& nu
 }
 void invoke_median_of_two_sorted_arrays() {
   std::vector<int> nums1 = {1,2}, nums2 = {3,4};
-  std::cout<<median_of_two_sorted_arrays(nums1, nums2);
+  std::cout<<"The median of two sorted array is: "<<median_of_two_sorted_arrays(nums1, nums2);
 }
 
 /*
@@ -1748,4 +1748,63 @@ int h_index(std::vector<int>& input) {
 void invoke_h_index() {
   std::vector<int> input = {3,0,6,1,5};
   std::cout<<"The number of citations needed: "<<h_index(input);
+}
+
+/*
+Input: [2,2,3,2] => Output: 3
+ Total: 9 1001
+ 2 10 & 1001 => 1
+ 2
+ 3 11 & 1001 => 1
+ 2
+ 
+ 10 | 10 = 10
+ 10 | 11 = 11
+ 
+Input: [0,1,0,1,0,1,99] => Output: 99
+*/
+int single_number_ii(std::vector<int>& input) {
+  int output = 0;
+  
+  return output;
+}
+void invoke_single_number_ii() {
+  std::vector<int> input = {2,2,3,2};
+  std::cout<<"The single ii is: "<<single_number_ii(input);
+}
+
+/*
+Input: one: "11", two: "1" => Output: "100"
+ 11
+ 01
+ ---
+ 100
+*/
+std::string add_binary(std::string& one, std::string& two) {
+  std::string output;
+  int first_index = one.size() - 1, second_index = two.size() - 1;
+  int carry = 0, sum = 0;
+  
+  while(first_index >= 0 || second_index >= 0) {
+    sum = carry;
+    
+    if(first_index >= 0) {
+      sum += one[first_index--] - '0';
+    }
+    if(second_index >= 0) {
+      sum += one[second_index--] - '0';
+    }
+    carry = sum > 1 ? 1 : 0;
+    output += std::to_string(sum % 2);
+  }
+  if(carry) {
+    output += std::to_string(carry);
+  }
+  std::reverse(output.begin(), output.end());
+  
+  return output;
+}
+void invoke_add_binary() {
+  std::string one = "11", two = "1";
+  std::cout<<"The sum of binary is: "<<add_binary(one, two);
 }

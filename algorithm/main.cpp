@@ -17,7 +17,9 @@
 #include "graph.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_h_index();
+  invoke_gas_station();
+  
+//  invoke_h_index();
   
 //  invoke_add_binary();
   

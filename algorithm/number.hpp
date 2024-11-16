@@ -329,4 +329,9 @@ void invoke_single_number_ii();
 */
 void invoke_add_binary();
 
+/*
+134. Gas Station: https://leetcode.com/problems/gas-station
+*/
+void invoke_gas_station();
+
 #endif /* NUMBER_HPP */

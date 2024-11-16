@@ -1731,12 +1731,18 @@ void invoke_spiral_matrix() {
 Input: [3,0,6,1,5] Output: 3
 Process:
  sort: 6,5,3,1,0
+ h_index: 1
+  6 >= 1 true
+ h_index: 2
+  5 >= 2 true
+ h_index: 3
+  3 >= 3 true => Output
+ h_index: 1
+  1 >= 3 false
  
 Input: [1,3,1] Output: 1
 Process:
  sort: 1,1,3
- 
-Input: [2,2,4,4,5] Output:
 */
 int h_index(std::vector<int>& input) {
   int output = 0;
@@ -1814,4 +1820,55 @@ std::string add_binary(std::string& one, std::string& two) {
 void invoke_add_binary() {
   std::string one = "11", two = "1";
   std::cout<<"The sum of binary is: "<<add_binary(one, two);
+}
+
+/*
+Input: gas: [1,2,3,4,5], cost: [3,4,5,1,2] => Output: 3
+Process:
+       0 1 2 3 4          0 1 2 3 4
+ gas: [1,2,3,4,5], cost: [3,4,5,1,2]
+ Start at gas[3]: 0 + 4
+ gas[4]: 4 - 1 + 5 = 8
+ gas[0]: 8 - 2 + 1 = 7
+ gas[1]: 7 - 3 + 2 = 6
+ gas[2]: 6 - 4 + 3 = 5
+ gas[3]: 5
+ 
+Input: gas: [2,3,4], cost: [3,4,3] => Output: -1
+Process:
+ Start at gas[2]: 0 + 4
+ gas[0]: 4 - 3 + 2 = 3
+ gas[1]: 3 - 3 + 3 = 3
+ gas[2]: 3 < 4 => Output: -1
+ 
+Input: gas: [5,1,2,3,4], cost: [4,4,1,5,1] => Output: 4
+Process:
+ index
+ 0 = 5 - 4 1, current_gas = 1
+ 1 = 1 + 1 - 4, current_gas = -2, current_index = 1 + 1 = 2
+ 2 = 2 - 1, current_gas = 1
+ 3 = 1 + 3 - 5, current_gas = -1, current_index = 3 + 1 = 4
+ 4 = 4 - 1, current_gas = 3
+*/
+int gas_station(std::vector<int>& gas, std::vector<int>& cost) {
+  int output = 0, current_gas = 0;
+  int total_gas = 0, total_cost = 0;
+  
+  for(int index = 0; index < gas.size(); ++index) {
+    total_gas += gas[index];
+    total_cost += cost[index];
+    
+    current_gas += gas[index] - cost[index]; // 1
+    if(current_gas < 0) {
+      output = index + 1;
+      current_gas = 0;
+    }
+  }
+  
+  return total_gas < total_cost ? -1 : output;
+}
+void invoke_gas_station() {
+  std::vector<int> gas = {5,1,2,3,4};
+  std::vector<int> cost = {4,4,1,5,1};
+  std::cout<<"The starting gas station's index: "<<gas_station(gas, cost);
 }

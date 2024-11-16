@@ -1730,18 +1730,25 @@ void invoke_spiral_matrix() {
 /*
 Input: [3,0,6,1,5] Output: 3
 Process:
- sort: 0,1,3,5,6
- sum: 15
+ sort: 6,5,3,1,0
  
 Input: [1,3,1] Output: 1
 Process:
  sort: 1,1,3
  
-Input: [2,2,4,4,5] Output: 
-
+Input: [2,2,4,4,5] Output:
 */
 int h_index(std::vector<int>& input) {
   int output = 0;
+  std::sort(input.begin(), input.end(), std::greater<int>());
+  
+  int h_index = 1;
+  for(int index = 0; index < input.size(); ++index) {
+    if(input[index] >= h_index) {
+      output = h_index;
+      ++h_index;
+    }
+  }
   
   return output;
 }

@@ -17,7 +17,9 @@
 #include "graph.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_add_binary();
+  invoke_h_index();
+  
+//  invoke_add_binary();
   
 //  invoke_median_of_two_sorted_arrays();
   

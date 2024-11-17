@@ -14,10 +14,10 @@ Trie visualization:
          (*)
         /  \
       (a)   (h)
-      /       \
-    (s)        (i)
-                 \
-                 (m)
+      /    /  \
+    (s)  (e)  (i)
+         /       \
+       (r)        (m)
 */
 void CTrie::insert(std::string word) {
   CTrie* current_node = this;
@@ -36,7 +36,16 @@ void CTrie::insert(std::string word) {
 
 bool CTrie::search(std::string word) {
   CTrie* current_node = this;
-  for(auto& character: word) {
+  for(int index = 0; index < word.size(); ++index) {//for(auto& character: word) {
+    auto character = word[index];
+    if(character == '.') {
+      for(auto& child_node: current_node->m_child) {
+        if(child_node && child_node->search(word.substr(index + 1))) {
+          return true;
+        }
+      }
+      return false;
+    }
     if(!current_node->m_child[character - 'a']) {
       return false;
     }
@@ -63,10 +72,12 @@ void invoke_trie_methods() {
   trie.insert("hello");
   auto search_one = trie.search("hello");
   auto search_two = trie.search("foo");
+  auto search_three = trie.search("..llo");
   auto starts_with = trie.starts_with("hel");
   std::cout<<"Trie (prefix tree): "
     <<std::boolalpha
     <<"search result for 'hello': "<<search_one
     <<", search result for 'foo': "<<search_two
+    <<", search result for '..llo': "<<search_three
     <<", starts with 'hel': "<<starts_with<<std::endl;
 }

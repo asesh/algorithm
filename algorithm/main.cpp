@@ -18,7 +18,9 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_trie_methods();
+  invoke_longest_common_prefx();
+  
+//  invoke_trie_methods();
   
 //  invoke_gas_station();
   

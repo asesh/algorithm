@@ -771,3 +771,29 @@ void invoke_valid_sudoku() {
   };
   std::cout<<"The validity of Sudoku: "<< std::boolalpha << valid_sudoku(input);
 }
+
+/*
+Input: ["flower", "flow", "flight"], Output: "fl"
+Process:
+ sort: flight, flow, flower
+ compare flight[i...] with flower[i...] until and unless they are equal
+*/
+std::string longest_common_prefx(std::vector<std::string>& input) {
+  std::string output;
+  std::sort(input.begin(), input.end());
+  
+  std::string first = input[0], last = input[input.size() - 1];
+  for(int index = 0; index < std::min(first.size(), last.size()); ++index) {
+    if(first[index] != last[index]) {
+      return output;
+    }
+    
+    output += first[index];
+  }
+  
+  return output;
+}
+void invoke_longest_common_prefx() {
+  std::vector<std::string> input = {"flower", "flow", "flight"}; // {"dog","racecar","car"}
+  std::cout<<"The longest common prefix is: "<<longest_common_prefx(input);
+}

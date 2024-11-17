@@ -75,4 +75,9 @@ void invoke_group_anagrams();
 */
 void invoke_valid_sudoku();
 
+/*
+14. Longest Common Prefix: https://leetcode.com/problems/longest-common-prefix
+*/
+void invoke_longest_common_prefx();
+
 #endif /* string_hpp */

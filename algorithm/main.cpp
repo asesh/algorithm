@@ -15,9 +15,12 @@
 #include "number.hpp"
 #include "string.hpp"
 #include "graph.hpp"
+#include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_gas_station();
+  invoke_trie_methods();
+  
+//  invoke_gas_station();
   
 //  invoke_h_index();
   

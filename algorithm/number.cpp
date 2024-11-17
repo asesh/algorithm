@@ -1872,3 +1872,20 @@ void invoke_gas_station() {
   std::vector<int> cost = {4,4,1,5,1};
   std::cout<<"The starting gas station's index: "<<gas_station(gas, cost);
 }
+
+/*
+Input: [1,0,2], Output: 5 => [2,1,2]
+ 
+Input: [1,2,2], Output: 4 => [1,2,1]
+ 
+Input: [2,2,2], Output: => [1,2,1]
+ 
+Input: [0,0,0], Output: => [1,2,1]
+*/
+int candy(std::vector<int>& input) {
+  return 0;
+}
+void invoke_candy() {
+  std::vector<int> input = {1,0,2};
+  std::cout<<"The minimum number of candies required to distribute the candies to the children: "<< candy(input);
+}

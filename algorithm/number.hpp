@@ -334,4 +334,9 @@ void invoke_add_binary();
 */
 void invoke_gas_station();
 
+/*
+135. Candy: https://leetcode.com/problems/candy
+*/
+void invoke_candy();
+
 #endif /* NUMBER_HPP */

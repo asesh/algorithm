@@ -339,4 +339,9 @@ void invoke_gas_station();
 */
 void invoke_candy();
 
+/*
+128. Longest Consecutive Sequence: https://leetcode.com/problems/longest-consecutive-sequence
+*/
+void invoke_longest_consecutive_sequence();
+
 #endif /* NUMBER_HPP */

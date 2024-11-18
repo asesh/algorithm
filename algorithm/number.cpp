@@ -1889,3 +1889,47 @@ void invoke_candy() {
   std::vector<int> input = {1,0,2};
   std::cout<<"The minimum number of candies required to distribute the candies to the children: "<< candy(input);
 }
+
+/*
+Input: [100,4,200,1,3,2], Output: 4 => [1,2,3,4]
+Process:
+ Store all the elements in a hash table: [100,4,200,1,3,2]
+ Psuedocode:
+ longest = 0
+ for num in hash_table: // 100,4,200,1
+  if !hash_table contains(num - 1): // 100 - 1 is not there
+    current_number = num // 100,200,1
+    while(hash_table contains(curret_number)):
+      current_number ++ // 101,201,1,2,3,4,5
+ 
+    longest = max(longest, current_number - num) // 101-100: 1, 201-200: 1, 5-1: 4
+
+Input: [0,3,7,2,5,8,4,6,0,1], Output: 9 => [0,1,2,3,4,5,6,7,8]
+*/
+int longest_consecutive_sequence(std::vector<int>& input) {
+  int output = 0;
+  std::unordered_set<int> number_hash;
+  
+  // RC: O(n), SC: O(n)
+  for(auto& number: input) {
+    number_hash.insert(number);
+  }
+  
+  // RC: O(n)
+  for(auto& number: input) {
+    if(!number_hash.contains(number - 1)) {
+      int increasing_sequence = number;
+      while(number_hash.contains(increasing_sequence)) {
+        ++increasing_sequence;
+      }
+      
+      output = std::max(output, increasing_sequence - number);
+    }
+  }
+  
+  return output;
+}
+void invoke_longest_consecutive_sequence() {
+  std::vector<int> input = {100,4,200,1,3,2};
+  std::cout<<"The longest consecutive sequence is: "<<longest_consecutive_sequence(input);
+}

@@ -344,4 +344,14 @@ void invoke_candy();
 */
 void invoke_longest_consecutive_sequence();
 
+/*
+74. Search a 2D Matrix: https://leetcode.com/problems/search-a-2d-matrix
+*/
+void invoke_search_a_2d_matrix();
+
+/*
+162. Find Peak Element: https://leetcode.com/problems/find-peak-element
+*/
+void invoke_find_peak_element();
+
 #endif /* NUMBER_HPP */

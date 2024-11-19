@@ -1933,3 +1933,55 @@ void invoke_longest_consecutive_sequence() {
   std::vector<int> input = {100,4,200,1,3,2};
   std::cout<<"The longest consecutive sequence is: "<<longest_consecutive_sequence(input);
 }
+
+/*
+ 
+*/
+bool search_a_2d_matrix(std::vector<std::vector<int>>& input) {
+  return true;
+}
+void invoke_search_a_2d_matrix() {
+  std::vector<std::vector<int>> input = {
+    {1,3,5,7},
+    {10,11,16,20},
+    {23,30,34,60},
+  };
+  std::cout<<"Search a 2D matrix: "<<std::boolalpha<<search_a_2d_matrix(input);
+}
+
+/*
+Input: [1,2,3,1], Output: 2
+Process:
+ 0 1 2 3 (index)
+ 1,2,3,1
+ median = 0+3/2 = 1
+ 2<3? true low = median + 1 = 2
+ median = 2+3/2 = 2
+ 3<1? false high = median
+ 
+Input: [1,2,1,3,5,6,4], Output: 5
+Process:
+ 0 1 2 3 4 5 6 (index)
+ 1,2,1,3,5,6,4
+ median = 0+6/2 = 3
+ 3>5? false else low = 4
+ median = 4+6/2 = 5
+ 6>4? true high = median
+*/
+int find_peak_element(std::vector<int>& input) {
+  int low = 0, high = input.size() - 1;
+  while(low < high) {
+    int median = (low + high) / 2; // 3
+    if(input[median] > input[median + 1]) { // 3>5
+      high = median;
+    } else {
+      low = median + 1; // 4
+    }
+  }
+  
+  return low;
+}
+void invoke_find_peak_element() {
+  std::vector<int> input = {1,2,3,1};
+  std::cout<<"The peak element is: "<<find_peak_element(input);
+}

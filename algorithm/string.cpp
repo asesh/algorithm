@@ -797,3 +797,47 @@ void invoke_longest_common_prefx() {
   std::vector<std::string> input = {"flower", "flow", "flight"}; // {"dog","racecar","car"}
   std::cout<<"The longest common prefix is: "<<longest_common_prefx(input);
 }
+
+/*
+Input: 1, Output: ["()"]
+Process:
+       *
+     /   \
+    (     )
+ base case: 2 * n return
+ open < n:
+  append('(')
+  open++
+ close < open:
+  append(')')
+  close++
+ 
+Input: 2, Output: ["()()", "(())"]
+Process:
+       *
+      (
+   ((  ()
+  (()   ()(
+(())     ()()
+*/
+void generate_parentheses(std::vector<std::string>& output, std::string word, int number, int open, int close) {
+  if(word.size() >= 2 * number) {
+    output.push_back(word);
+    return;
+  }
+  
+  if(open < number) { // 0 < 2, 1 < 2,
+    generate_parentheses(output, word + "(", number, open + 1, close); // (, 1, 0 /
+  }
+  if(close < open) { //
+    generate_parentheses(output, word + ")", number, open, close + 1);
+  }
+}
+void invoke_generate_parentheses() {
+  std::vector<std::string> output;
+  std::cout<<"Well-formed parentheses: ";
+  generate_parentheses(output, "", 2, 0, 0);
+  std::for_each(output.begin(), output.end(), [](std::string& word) {
+    std::cout<<word<<", ";
+  });
+}

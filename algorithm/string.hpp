@@ -80,4 +80,9 @@ void invoke_valid_sudoku();
 */
 void invoke_longest_common_prefx();
 
+/*
+22. Generate Parentheses: https://leetcode.com/problems/generate-parentheses
+*/
+void invoke_generate_parentheses();
+
 #endif /* string_hpp */

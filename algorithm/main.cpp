@@ -18,7 +18,9 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_find_peak_element();
+  invoke_generate_parentheses();
+  
+//  invoke_find_peak_element();
   
 //  invoke_longest_consecutive_sequence();
   

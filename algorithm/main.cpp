@@ -18,7 +18,9 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_generate_parentheses();
+  invoke_combination_sum();
+  
+//  invoke_generate_parentheses();
   
 //  invoke_find_peak_element();
   

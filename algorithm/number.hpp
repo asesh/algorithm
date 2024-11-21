@@ -354,4 +354,9 @@ void invoke_search_a_2d_matrix();
 */
 void invoke_find_peak_element();
 
+/*
+39. Combination Sum: https://leetcode.com/problems/combination-sum
+*/
+void invoke_combination_sum();
+
 #endif /* NUMBER_HPP */

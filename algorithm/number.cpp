@@ -1985,3 +1985,61 @@ void invoke_find_peak_element() {
   std::vector<int> input = {1,2,3,1};
   std::cout<<"The peak element is: "<<find_peak_element(input);
 }
+
+/*
+Input: [2,3], Target: 6, Output: [[2,2,2],[3,3]]
+Process:
+ sort the input
+        2       3
+  2(+2)      4+3!
+ 6(+4)*      2+3
+            2+3+3!
+            3
+            3+3*
+ 
+Input: [2,3], Target: 7, Output: [[2,2,2],[3,3]]
+Process: sort the input
+       2    3
+    2+2   ->4+3*  3
+   2+4!   2+3     3+3
+          5+3!    6+3!
+  
+ 
+Input: [2,3,6,7], Target: 7, Output: [[2,2,3],[7]]
+     2       3        6       7
+   4    /6+3!  6      12!
+  6     /4+3   9!
+ 8!
+*/
+void combination_sum(std::vector<int>& input, int target, std::vector<int> candidate,
+                     int current_index, std::vector<std::vector<int>>& output) {
+  if(target == 0) {
+    output.push_back(candidate);
+    return;
+  }
+  
+  for(int index = current_index; index < input.size(); ++index) {
+    int current_number = input[index];
+    if(current_number > target) { // 2>7, 2>5, 2>3, 2>1?true
+      return;
+    }
+    
+    candidate.push_back(current_number); // 2, 2, 2
+    combination_sum(input, target - current_number, candidate, index, output); // target: 7-2=5, 5-2=3, 3-2=1
+    candidate.pop_back();
+  }
+}
+void invoke_combination_sum() {
+  std::vector<std::vector<int>> output;
+  std::vector<int> input = {2,3,6,7};
+  combination_sum(input, 7, {}, 0, output);
+  std::cout<<"Combination sum: "<<"[";
+  std::for_each(output.begin(), output.end(), [](std::vector<int> numbers) {
+    std::cout<<"[";
+    for(auto& number: numbers) {
+      std::cout<<number<<", ";
+    }
+    std::cout<<"]";
+  });
+  std::cout<<"]";
+}

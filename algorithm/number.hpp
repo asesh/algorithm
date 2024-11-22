@@ -16,6 +16,8 @@ int get_max_sum_of_consecutive_numbers(int array[], int number_of_elements, int 
 std::pair<int, int> two_sum_equals_specific_target(const int* input_numbers, int number_of_elements, int target);
 void high_to_low(int input_array[], int lower_index, int higher_index, int smaller_value = 0);
 void binary_tree();
+
+void invoke_binary_search();
 int binary_search(int input_array[], int number_to_search, int lower_index, int higher_index);
 
 template<typename DataType>

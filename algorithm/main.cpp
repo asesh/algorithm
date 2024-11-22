@@ -18,7 +18,9 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_combination_sum();
+  invoke_search_a_2d_matrix();
+  
+//  invoke_combination_sum();
   
 //  invoke_generate_parentheses();
   

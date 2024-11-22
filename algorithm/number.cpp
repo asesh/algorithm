@@ -139,30 +139,52 @@ void high_to_low(int input_array[], int lower_index, int higher_index, int small
 //void sort_array(std::array<int, 7>& integer_array, int number_of_items);
 void binary_tree();
 
-// Recursive implementation for binary search
-int binary_search(int input_array[], int number_to_search, int lower_index, int higher_index) {
-	// index: 0  1  2  3  4  5   6
-	// input: 1, 3, 4, 7, 9, 11, 13
-	// search: 13
-	if(higher_index >= 1) {
-		// Calculate median
-		int median = (lower_index + higher_index) / 2;
-		
-		if(input_array[median] == number_to_search) {
-			return median;
-		}
-		
-		// Search lower bound
-		if(input_array[median] > number_to_search) {
-			return binary_search(input_array, number_to_search, lower_index, median);
-		}
-		
-		// Search higher bound
-		return binary_search(input_array, number_to_search, median + 1, higher_index);
-	}
-	
-	return -1;
+// Iterative binary serach
+bool binary_search(std::vector<int>& input, int target, int low, int high) {
+  while(low <= high) {
+    int median = (low + high) >> 1;
+    if(input[median] == target) {
+      return true;
+    }
+    
+    if(input[median] < target) {
+      low = median + 1;
+    } else {
+      high = median - 1;
+    }
+  }
+  
+  return false;
 }
+void invoke_binary_search() {
+  std::vector<int> input = {1,3,5,7};
+  std::cout<<std::boolalpha<<binary_search(input, 8, 0, input.size() - 1);
+}
+
+// Recursive implementation for binary search
+//int binary_search(int input_array[], int number_to_search, int lower_index, int higher_index) {
+//	// index: 0  1  2  3  4  5   6
+//	// input: 1, 3, 4, 7, 9, 11, 13
+//	// search: 13
+//	if(higher_index >= 1) {
+//		// Calculate median
+//		int median = (lower_index + higher_index) / 2;
+//		
+//		if(input_array[median] == number_to_search) {
+//			return median;
+//		}
+//		
+//		// Search lower bound
+//		if(input_array[median] > number_to_search) {
+//			return binary_search(input_array, number_to_search, lower_index, median);
+//		}
+//		
+//		// Search higher bound
+//		return binary_search(input_array, number_to_search, median + 1, higher_index);
+//	}
+//	
+//	return -1;
+//}
 
 // Given an array: 1, 2, 3, 4, 5, 6
 template<typename DataType>
@@ -1935,10 +1957,28 @@ void invoke_longest_consecutive_sequence() {
 }
 
 /*
- 
+Input:            Target: 3, Output: true
+  {1,3,5,7},
+  {10,11,16,20},
+  {23,30,34,60},
 */
-bool search_a_2d_matrix(std::vector<std::vector<int>>& input) {
-  return true;
+bool search_a_2d_matrix(std::vector<std::vector<int>>& input, int target) {
+  int rows = input.size(), columns = input[0].size();
+  int row = 0, column = columns - 1;
+  while(row < rows && column >= 0) {
+    int current_value = input[row][column];
+    if(current_value == target) {
+      return true;
+    }
+    
+    if(target > current_value) {
+      ++row;
+    } else {
+      --column;
+    }
+  }
+
+  return false;
 }
 void invoke_search_a_2d_matrix() {
   std::vector<std::vector<int>> input = {
@@ -1946,7 +1986,7 @@ void invoke_search_a_2d_matrix() {
     {10,11,16,20},
     {23,30,34,60},
   };
-  std::cout<<"Search a 2D matrix: "<<std::boolalpha<<search_a_2d_matrix(input);
+  std::cout<<"Search a 2D matrix: "<<std::boolalpha<<search_a_2d_matrix(input, 24);
 }
 
 /*

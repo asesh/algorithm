@@ -18,9 +18,9 @@ public:
   bool search(std::string word);
   bool starts_with(std::string word);
   
-private:
   CTrie *m_child[26] = {};
   bool m_end = false;
+  std::string m_current_word;
 };
 
 /*

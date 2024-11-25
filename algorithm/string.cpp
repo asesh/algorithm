@@ -8,6 +8,7 @@
 
 #include "header.h"
 #include "string.hpp"
+#include "trie.hpp"
 
 /*
  1 2 3 4 5
@@ -840,4 +841,165 @@ void invoke_generate_parentheses() {
   std::for_each(output.begin(), output.end(), [](std::string& word) {
     std::cout<<word<<", ";
   });
+}
+
+/*
+Input: [              word: ["oath","pea","eat","rain"], Output: ["eat","oath"]
+   ["o","a","a","n"],
+   ["e","t","a","e"],
+   ["i","h","k","r"],
+   ["i","f","l","v"]
+ ]
+ 
+Input: [      words: ["abcb"], Output: []
+   ["a","b"],
+   ["c","d"]
+ ]
+*/
+// Times out on leetcode
+//bool word_search_ii(std::vector<std::vector<char>>&input, std::vector<std::vector<int>>& visited,
+//                    std::string current_word, int current_index,
+//                    int row, int column) {
+//  while(row >= 0 && row < input.size() && column >= 0 && column < input[0].size()
+//        && !visited[row][column]
+//        && current_index < current_word.size()
+//        && input[row][column] == current_word[current_index]) {
+//    if(current_index == current_word.size() -1) {
+//      return true;
+//    }
+//   
+//    bool found = false;
+//    visited[row][column] = true;
+//    
+//    if(word_search_ii(input, visited, current_word, current_index + 1, row, column - 1) // Left
+//       || word_search_ii(input, visited, current_word, current_index + 1, row - 1, column) // Top
+//       || word_search_ii(input, visited, current_word, current_index + 1, row, column + 1) // Right
+//       || word_search_ii(input, visited, current_word, current_index + 1, row + 1, column)) { // Bottom
+//      found = true;
+//    }
+//    
+//    visited[row][column] = false;
+//    return found;
+//  }
+//  
+//  return false;
+//}
+void invoke_word_search_ii_trie(std::vector<std::vector<char>>& input, std::vector<std::string>& output,
+                                CTrie* node, int row, int column) {
+  if(row < 0 || row >= input.size() || column < 0 || column >= input[0].size() ||
+     input[row][column] == '#' || !node->m_child[input[row][column] - 'a']) {
+    return;
+  }
+  
+  auto current_character = input[row][column];
+  
+  node = node->m_child[current_character - 'a']; // Next character node
+  
+  if(node->m_end) {
+    output.push_back(node->m_current_word);
+    node->m_end = false;
+  }
+  
+  input[row][column]  = '#';
+  
+  invoke_word_search_ii_trie(input, output, node, row, column - 1); // Left
+  invoke_word_search_ii_trie(input, output, node, row - 1, column); // Top
+  invoke_word_search_ii_trie(input, output, node, row, column + 1); // Right
+  invoke_word_search_ii_trie(input, output, node, row + 1, column); // Bottom
+  
+  input[row][column]  = current_character;
+}
+void invoke_word_search_ii() {
+  std::vector<std::string> output;
+  std::vector<std::string> words = {"a", "oath","pea","eat","rain","oeiifhtaaakl"};
+  std::vector<std::vector<char>> input = {
+//    {'a', 'a'}
+    {'o','a','a','n'},
+    {'e','t','a','e'},
+    {'i','h','k','r'},
+    {'i','f','l','v'}
+  };
+  
+  // Times out on leetcode
+//  std::vector<std::vector<int>> visited(input.size(), std::vector<int>(input[0].size(), false));
+//  
+//  for(auto& current_word: words) {
+//    bool found = false;
+//    for(int row = 0; row < input.size() && !found; ++row) {
+//      for(int column = 0; column < input[0].size() && !found; ++column) {
+//        if(input[row][column] == current_word[0]) {
+//          found = word_search_ii(input, visited, current_word, 0, row, column);
+//          if(found) {
+//            output.push_back(current_word);
+//          }
+//        }
+//      }
+//    }
+//  }
+  
+  CTrie* root = new CTrie();
+  
+  // Implementation using Trie
+  //
+  for(auto& word: words) {
+    auto* node = root;
+    node->insert(word);
+  }
+  auto* node = root;
+  for(int row = 0; row < input.size(); ++row) {
+    for(int column = 0; column < input[0].size(); ++column) {
+      invoke_word_search_ii_trie(input, output, node, row, column);
+    }
+  }
+  
+  std::cout<<"Word search ii: ";
+  std::for_each(output.begin(), output.end(), [](std::string word) {
+    std::cout<<word<<", ";
+  });
+}
+
+/*
+Input: "(()", Output: 2
+Process:
+ 0 1 2
+ ( ( )
+ 
+ 0 1
+ ( )
+ 
+ 0 1 2 3 4
+ ( ) ( ( )
+ stack: -1
+ for(index in input): // 0,1,2,3,4
+  top = stack.top() // -1,2,3
+  if top != -1 and input[index] = ')' and input[top] = '(':
+    stack.pop() // -1,2
+    output = std::max(output, index - stack.top()) // 1-(-1)=2, 4-
+  else:
+    stack.push(index) // 0,2,3
+ 
+Input: ")()())", Output: 4
+
+Input: "()(()", Output: 2
+*/
+int longest_valid_parentheses(std::string& input) {
+  int output = 0;
+  std::stack<int> stack;
+  stack.push(-1); // -1
+  
+  for(int index = 0; index < input.size(); ++index) { // 0,1,2
+    int stack_top = stack.top(); // -1,0,1
+    if(stack_top != -1 && input[index] == ')' && input[stack_top] == '(') { //
+      stack.pop(); // -1,0
+      output = std::max(output, index - stack.top()); // 2-0=2
+    } else {
+      stack.push(index); // 0,1,
+    }
+  }
+  
+  return output;
+}
+void invoke_longest_valid_parentheses() {
+  std::string input = "()(()";
+  std::cout<<"Longest valid parentheses: "<<longest_valid_parentheses(input);
 }

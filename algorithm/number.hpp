@@ -361,4 +361,9 @@ void invoke_find_peak_element();
 */
 void invoke_combination_sum();
 
+/*
+1975. Maximum Matrix Sum: https://leetcode.com/problems/maximum-matrix-sum
+*/
+void invoke_maximium_matrix_sum();
+
 #endif /* NUMBER_HPP */

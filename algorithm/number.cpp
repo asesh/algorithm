@@ -2083,3 +2083,33 @@ void invoke_combination_sum() {
   });
   std::cout<<"]";
 }
+
+/*
+Input: [  Output: 4
+ [1,-1],
+ [-1,1]
+ ]
+Process:
+ 
+Input: [     Output: 16
+ [1,2,3],
+ [-1,-2,-3],
+ [1,2,3]
+ ]
+*/
+int maximium_matrix_sum(std::vector<std::vector<int>>& input) {
+  int output = 0;
+  
+  return output;
+}
+void invoke_maximium_matrix_sum() {
+  std::vector<std::vector<int>> input = {
+    {1,-1},
+    {-1,1}
+    
+//    {1,2,3},
+//    {-1,-2,-3},
+//    {1,2,3}
+  };
+  std::cout<<"Maximium matrix sum: "<<maximium_matrix_sum(input);
+}

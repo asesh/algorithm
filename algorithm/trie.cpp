@@ -31,6 +31,7 @@ void CTrie::insert(std::string word) {
     current_node = current_node->m_child[character - 'a'];
   }
   
+  current_node->m_current_word = word;
   current_node->m_end = true;
 }
 

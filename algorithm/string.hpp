@@ -85,4 +85,14 @@ void invoke_longest_common_prefx();
 */
 void invoke_generate_parentheses();
 
+/*
+212. Word Search II: https://leetcode.com/problems/word-search-ii
+*/
+void invoke_word_search_ii();
+
+/*
+32. Longest Valid Parentheses: https://leetcode.com/problems/longest-valid-parentheses
+*/
+void invoke_longest_valid_parentheses();
+
 #endif /* string_hpp */

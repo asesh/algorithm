@@ -18,9 +18,11 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
+  invoke_min_stack();
+  
 //  invoke_longest_valid_parentheses();
   
-  invoke_word_search_ii();
+//  invoke_word_search_ii();
   
 //  invoke_search_a_2d_matrix();
   

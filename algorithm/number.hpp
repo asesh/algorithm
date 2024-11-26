@@ -366,4 +366,19 @@ void invoke_combination_sum();
 */
 void invoke_maximium_matrix_sum();
 
+/*
+155. Min Stack: https://leetcode.com/problems/min-stack
+ */
+class MinStack {
+private:
+  std::stack<int> m_stack;
+  int m_min_element = INT_MAX;
+public:
+  void push(int value);
+  void pop();
+  int top();
+  int get_min();
+};
+void invoke_min_stack();
+
 #endif /* NUMBER_HPP */

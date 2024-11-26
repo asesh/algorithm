@@ -2113,3 +2113,42 @@ void invoke_maximium_matrix_sum() {
   };
   std::cout<<"Maximium matrix sum: "<<maximium_matrix_sum(input);
 }
+
+/*
+push: -2,0,-3
+get_min: -3
+pop: -3
+top: 0
+get_min: -2
+*/
+void MinStack::push(int value) {
+  if(value <= m_min_element) { // -2 <= INT_MAX, 0 <= -2, -3 <= -2
+    m_stack.push(m_min_element); // INT_MAX,-3,0,-2,
+    m_min_element = value; // -2 => -3
+  }
+  m_stack.push(value); // INT_MAX,-3,0,-2,-3
+}
+void MinStack::pop() {
+  if(m_min_element == m_stack.top()) { //
+    m_stack.pop(); //
+    m_min_element = m_stack.top();
+  }
+  m_stack.pop();
+}
+int MinStack::top() {
+  return m_stack.top();
+}
+int MinStack::get_min() {
+  return m_min_element;
+}
+void invoke_min_stack() {
+  MinStack min_stack;
+  min_stack.push(-2);
+  min_stack.push(0);
+  min_stack.push(-3);
+  std::cout<<"get_min: "<<min_stack.get_min()<<std::endl;
+  std::cout<<"pop"<<std::endl;
+  min_stack.pop();
+  std::cout<<"top: "<<min_stack.top()<<std::endl;
+  std::cout<<"get_min: "<<min_stack.get_min()<<std::endl;
+}

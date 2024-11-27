@@ -381,4 +381,9 @@ public:
 };
 void invoke_min_stack();
 
+/*
+56. Merge Intervals: https://leetcode.com/problems/merge-intervals
+*/
+void invoke_merge_intervals();
+
 #endif /* NUMBER_HPP */

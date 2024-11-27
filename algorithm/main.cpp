@@ -18,7 +18,9 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_min_stack();
+  invoke_merge_intervals();
+  
+//  invoke_min_stack();
   
 //  invoke_longest_valid_parentheses();
   

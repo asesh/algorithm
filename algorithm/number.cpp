@@ -2152,3 +2152,49 @@ void invoke_min_stack() {
   std::cout<<"top: "<<min_stack.top()<<std::endl;
   std::cout<<"get_min: "<<min_stack.get_min()<<std::endl;
 }
+
+/*
+Input: [
+ [1,3],
+ [2,6],
+ [8,10],
+ [15,18]], Output: [[1,6],[8,10],[15,18]]
+Process:
+ sort: [1,3],[2,6][8,10][15,18]
+ [1,3] 3 < 6 [2,6] true => [1,6]
+ [1,6] 6 < 10 [8,10] true => [8, 10]
+ [8,10] 10 < 15 [15,18] true => [15, 18]
+*/
+std::vector<std::vector<int>> merge_intervals(std::vector<std::vector<int>>& input) {
+  std::vector<std::vector<int>> output;
+  std::sort(input.begin(), input.end(), [](std::vector<int>& interval_one, std::vector<int>& interval_two) {
+    return interval_one[0] < interval_two[0];
+  });
+  output.push_back(input[0]);
+  
+  for(int index = 1; index < input.size(); ++index) {
+    if(output.back()[1] < input[index][0]) {
+      output.push_back(input[index]);
+    } else {
+      output.back()[1] = std::max(output.back()[1], input[index][1]);
+    }
+  }
+  
+  return output;
+}
+void invoke_merge_intervals() {
+  std::vector<std::vector<int>> input = {
+//    {1,3},{2,6},{8,10},{15,18}
+//    {1,4},{5,6}
+//    {1,4},{2,3}
+    {1,4},{2,3},{5,8}
+  };
+  auto output = merge_intervals(input);
+  std::for_each(output.begin(), output.end(), [](std::vector<int>& interval) {
+    std::cout<<"[";
+    for(auto& number: interval) {
+      std::cout<<number<<", ";
+    }
+    std::cout<<"], ";
+  });
+}

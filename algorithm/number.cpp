@@ -2198,3 +2198,21 @@ void invoke_merge_intervals() {
     std::cout<<"], ";
   });
 }
+
+/*
+Input: [-2,1,-3,4,-1,2,1,-5,4], Output: 6 [4,-1,2,1]
+ 
+Input: [-1,1,2,-2], Output: 3 [1,2]
+*/
+int maximium_subarray(std::vector<int>& input) {
+  int output = INT_MIN, current_max = 0;
+  for(auto& number: input) {
+    current_max = std::max(number, current_max + number); // -1,1,3,1
+    output = std::max(output, current_max);
+  }
+  return output;
+}
+void invoke_maximium_subarray() {
+  std::vector<int> input = {-1,1,2,-2};//{-2,1,-3,4,-1,2,1,-5,4};
+  std::cout<<"Maximium subarray: "<<maximium_subarray(input);
+}

@@ -1003,3 +1003,40 @@ void invoke_longest_valid_parentheses() {
   std::string input = "()(()";
   std::cout<<"Longest valid parentheses: "<<longest_valid_parentheses(input);
 }
+
+/*
+Input: "23", Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+*/
+std::vector<std::string> letter_combination_of_a_phone_number(std::string& digits,
+                                                              std::vector<std::string>& map) {
+  if(digits.empty()) {
+    return {};
+  }
+  
+  std::vector<std::string> output = {""};
+  
+  for(auto& number: digits) { // 23
+    std::vector<std::string> temp;
+    for(auto& character: map[number - '0']) { // abc and def
+      for(auto& another_character: output) {
+        temp.push_back(another_character + character); // a b c => ad ae af...
+      }
+    }
+    output.swap(temp); // a b c => ad ae af...
+  }
+  
+  return output;
+}
+void invoke_letter_combination_of_a_phone_number() {
+  std::string input = "23";
+  std::vector<std::string> map = {
+    "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"
+  };
+  auto output = letter_combination_of_a_phone_number(input, map);
+  std::cout<<"Letter combinations of a phone number: ";
+  std::cout<<"[";
+  for(auto& word: output) {
+    std::cout<<word<<", ";
+  }
+  std::cout<<"]";
+}

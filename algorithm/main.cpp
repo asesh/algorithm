@@ -18,7 +18,9 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_merge_intervals();
+  invoke_letter_combination_of_a_phone_number();
+  
+//  invoke_merge_intervals();
   
 //  invoke_min_stack();
   

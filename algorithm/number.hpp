@@ -391,4 +391,9 @@ void invoke_merge_intervals();
 */
 void invoke_maximium_subarray();
 
+/*
+918. Maximum Sum Circular Subarray: https://leetcode.com/problems/maximum-sum-circular-subarray
+*/
+void invoke_maximum_sum_circular_subarray();
+
 #endif /* NUMBER_HPP */

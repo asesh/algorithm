@@ -2204,6 +2204,13 @@ Input: [-2,1,-3,4,-1,2,1,-5,4], Output: 6 [4,-1,2,1]
  
 Input: [-1,1,2,-2], Output: 3 [1,2]
 */
+int maximium_subarray(std::vector<int>& input, int left, int right) {
+  if(left > right) {
+    return INT_MIN;
+  }
+  
+  return INT_MIN;
+}
 int maximium_subarray(std::vector<int>& input) {
   int output = INT_MIN, current_max = 0;
   for(auto& number: input) {
@@ -2214,5 +2221,45 @@ int maximium_subarray(std::vector<int>& input) {
 }
 void invoke_maximium_subarray() {
   std::vector<int> input = {-1,1,2,-2};//{-2,1,-3,4,-1,2,1,-5,4};
-  std::cout<<"Maximium subarray: "<<maximium_subarray(input);
+  std::cout<<"Maximium subarray: "<<maximium_subarray(input, 0, input.size() - 1);
+}
+
+/*
+Input: [1,-2,3,-2], Output: 3
+Process:
+ 1 -2 3 -2
+ total_max: 3, current_max: 1
+ total_min: -2, current_min: -2
+ total_sum: 0
+ 
+Input: [5,-3,5], Output: 10
+Process:
+ 5 -3 5
+ total_max: 7
+ total_min: -3
+*/
+int maximum_sum_circular_subarray(std::vector<int>& input) {
+  int total_sum = 0;
+  int current_max = 0, total_max = INT_MIN;
+  int current_min = 0, total_min = INT_MAX;
+  
+  for(auto& number: input) {
+    current_max = std::max(number, current_max + number);
+    total_max = std::max(total_max, current_max); // Non-circular
+    
+    current_min = std::min(number, current_min + number);
+    total_min = std::min(total_min, current_min);
+    
+    total_sum += number; // 7
+  }
+  
+  if(total_sum == total_min) {
+    return total_max;
+  }
+  
+  return std::max(total_max, total_sum - total_min);
+}
+void invoke_maximum_sum_circular_subarray() {
+  std::vector<int> input = {1,-2,3,-2};//{5,-3,5};
+  std::cout<<"Maximum sum circular subarray: "<<maximum_sum_circular_subarray(input);
 }

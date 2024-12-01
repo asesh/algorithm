@@ -100,4 +100,9 @@ void invoke_longest_valid_parentheses();
 */
 void invoke_letter_combination_of_a_phone_number();
 
+/*
+71. Simplify Path: https://leetcode.com/problems/simplify-path
+*/
+void invoke_simplify_path();
+
 #endif /* string_hpp */

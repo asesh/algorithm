@@ -1040,3 +1040,58 @@ void invoke_letter_combination_of_a_phone_number() {
   }
   std::cout<<"]";
 }
+
+/*
+Input: "/home/user/Documents/../Pictures"
+Process:
+ /
+  home
+    user
+      Documents
+        ..
+          Pictures
+ 
+Input: "/.../a/../b/c/../d/./"
+Process:
+  /
+    ...
+        a
+          ..
+            b
+              c
+                ..
+                  d
+                    .
+*/
+std::string simplify_path(std::string& input) {
+  std::string output;
+  std::vector<std::string> path_candidate;
+  std::stringstream path_stream(input);
+  std::string current_word;
+  while(std::getline(path_stream, current_word, '/')) {
+//    std::cout<<current_word<<std::endl;
+
+    if(current_word.compare("..") == 0) {
+      if(!path_candidate.empty()) {
+        path_candidate.pop_back();
+      }
+    } else if(current_word.compare(".") != 0 && !current_word.empty()) {
+      path_candidate.push_back(current_word);
+    }
+  }
+  
+  for(auto& word: path_candidate) {
+//    std::cout<<word<<std::endl;
+    output += "/" + word;
+  }
+  
+  if(output.empty()) {
+    return "/";
+  }
+  
+  return output;
+}
+void invoke_simplify_path() {
+  std::string input = /*"/home//foo/";*/ "/home/user/Documents/../Pictures";
+  std::cout<<"Simplify path: "<<simplify_path(input);
+}

@@ -18,7 +18,9 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_maximum_sum_circular_subarray();
+  invoke_simplify_path();
+  
+//  invoke_maximum_sum_circular_subarray();
   
 //  invoke_maximium_subarray();
   

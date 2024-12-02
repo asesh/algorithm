@@ -396,4 +396,9 @@ void invoke_maximium_subarray();
 */
 void invoke_maximum_sum_circular_subarray();
 
+/*
+77. Combinations: https://leetcode.com/problems/combinations
+*/
+void invoke_combinations();
+
 #endif /* NUMBER_HPP */

@@ -2203,11 +2203,18 @@ void invoke_merge_intervals() {
 Input: [-2,1,-3,4,-1,2,1,-5,4], Output: 6 [4,-1,2,1]
  
 Input: [-1,1,2,-2], Output: 3 [1,2]
+Process:
+ Using DnQ
+   0 1 2  3
+ [-1,1,2,-2]
 */
-int maximium_subarray(std::vector<int>& input, int left, int right) {
-  if(left > right) {
+// Using divide-and-conquer approach
+int maximium_subarray(std::vector<int>& input, int low, int high) {
+  if(low > high) {
     return INT_MIN;
   }
+  
+  int mid = (low + high) / 2;
   
   return INT_MIN;
 }
@@ -2221,7 +2228,8 @@ int maximium_subarray(std::vector<int>& input) {
 }
 void invoke_maximium_subarray() {
   std::vector<int> input = {-1,1,2,-2};//{-2,1,-3,4,-1,2,1,-5,4};
-  std::cout<<"Maximium subarray: "<<maximium_subarray(input, 0, input.size() - 1);
+//  std::cout<<"Maximium subarray: "<<maximium_subarray(input, 0, input.size() - 1);
+  std::cout<<"Maximium subarray using divice and conquer: "<<maximium_subarray(input, 0, input.size() - 1);
 }
 
 /*
@@ -2262,4 +2270,39 @@ int maximum_sum_circular_subarray(std::vector<int>& input) {
 void invoke_maximum_sum_circular_subarray() {
   std::vector<int> input = {1,-2,3,-2};//{5,-3,5};
   std::cout<<"Maximum sum circular subarray: "<<maximum_sum_circular_subarray(input);
+}
+
+/*
+Input: number: 4, combination: 2, Output: [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
+ 
+Input: number: 4, combination: 3; Output: [[1,2,3],[1,2,4],[1,3,4],[2,3,4]]
+*/
+// Backtracking
+void combinations(int number, int combination, int first_number,
+                  std::vector<int>& current,
+                  std::vector<std::vector<int>>& output) {
+  if(current.size() == combination) {
+    output.push_back(current);
+    return;
+  }
+  
+  for(int current_number = first_number; current_number <= number; ++current_number) {
+    current.push_back(current_number);
+    combinations(number, combination, current_number + 1, current, output);
+    current.pop_back();
+  }
+}
+void invoke_combinations() {
+  std::vector<int> current;
+  std::vector<std::vector<int>> output;
+  combinations(4, 2, 1, current, output);
+  std::cout<<"Combinations: [";
+  std::for_each(output.begin(), output.end(), [](std::vector<int>& numbers) {
+    std::cout<<"[";
+    for(auto& number: numbers) {
+      std::cout<<number<<", ";
+    }
+    std::cout<<"],";
+  });
+  std::cout<<"],";
 }

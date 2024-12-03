@@ -18,7 +18,9 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_combinations();
+  invoke_word_search();
+  
+//  invoke_combinations();
   
 //  invoke_simplify_path();
   

@@ -105,4 +105,9 @@ void invoke_letter_combination_of_a_phone_number();
 */
 void invoke_simplify_path();
 
+/*
+79. Word Search: https://leetcode.com/problems/word-search
+*/
+void invoke_word_search();
+
 #endif /* string_hpp */

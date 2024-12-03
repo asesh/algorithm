@@ -1095,3 +1095,54 @@ void invoke_simplify_path() {
   std::string input = /*"/home//foo/";*/ "/home/user/Documents/../Pictures";
   std::cout<<"Simplify path: "<<simplify_path(input);
 }
+
+/*
+Input: [           , word: "ABCCED", Output: true
+ ["A","B","C","E"],
+ ["S","F","C","S"],
+ ["A","D","E","E"]
+ ]
+*/
+// Using DFS
+bool word_search(std::vector<std::vector<char>>& input, std::string& word_to_search,
+                 int row, int column, int search_offset) {
+  if(word_to_search.size() == search_offset) {
+    return true;
+  }
+  
+  if(row < 0 || row >= input.size() || column < 0 ||
+     column >= input[0].size() || input[row][column] == '#' ||
+     input[row][column] != word_to_search[search_offset]) {
+    return false;
+  }
+  
+  auto current_char = input[row][column];
+  
+  input[row][column] = '#';
+  bool found =
+    word_search(input, word_to_search, row, column - 1, search_offset + 1) ||
+    word_search(input, word_to_search, row - 1, column, search_offset + 1) ||
+    word_search(input, word_to_search, row, column + 1, search_offset + 1) ||
+    word_search(input, word_to_search, row + 1, column, search_offset + 1);
+  
+  input[row][column] = current_char;
+  
+  return found;
+}
+void invoke_word_search() {
+  std::vector<std::vector<char>> input = {
+    {'A','B','C','E'},
+    {'S','F','C','S'},
+    {'A','D','E','E'}
+//    {'A','B'},
+//    {'C','D'},
+  };
+  std::string word_to_search = "ABCCEDF"; // "ABCCED";
+  for(int row = 0; row < input.size(); ++row) {
+    for(int column = 0; column < input[0].size(); ++column) {
+      if(word_search(input, word_to_search, row, column, 0)) {
+        std::cout<<std::boolalpha<<"Word search: "<<true;
+      }
+    }
+  }
+}

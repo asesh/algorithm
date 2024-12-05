@@ -213,18 +213,18 @@ void add_reverse_linked_list(const CSingleLinkedList<Data>& first,
 }
 
 void invoke_add_reverse_linked_list() {
-	CSingleLinkedList<int> output;
-	CSingleLinkedList<int> first;
-	first.add_node(2);
-	first.add_node(4);
-	first.add_node(3);
-	CSingleLinkedList<int> second;
-	second.add_node(5);
-	second.add_node(6);
-	second.add_node(4);
-	add_reverse_linked_list(first, second, output);
-	first.clear_nodes();
-	second.clear_nodes();
+//	CSingleLinkedList<int> output;
+//	CSingleLinkedList<int> first;
+//	first.add_node(2);
+//	first.add_node(4);
+//	first.add_node(3);
+//	CSingleLinkedList<int> second;
+//	second.add_node(5);
+//	second.add_node(6);
+//	second.add_node(4);
+//	add_reverse_linked_list(first, second, output);
+//	first.clear_nodes();
+//	second.clear_nodes();
 }
 
 int search_in_rotated_sorted_array(int input_array[]) {
@@ -2305,4 +2305,69 @@ void invoke_combinations() {
     std::cout<<"],";
   });
   std::cout<<"],";
+}
+
+/*
+Input: 4, Output: 2
+*/
+int n_queens_ii(int number) {
+  return 0;
+}
+void invoke_n_queens_ii() {
+  std::cout<<"N-Queens II: "<<n_queens_ii(4);
+}
+
+/*
+Input: [4,5,6,7,0,1,2], target: 0, Output: 4
+Process:
+ Find pivot index which is the minimum value
+ 0 1 2 3 4 5 6
+ 4,5,6,7,0,1,2
+ Pivot index: 4
+ Search 0 - pivot index - 1
+ Search pivot index to last element
+ 
+Input: [4,5,6,7,0,1,2], target = 3, Output: -1
+*/
+int binary_search_index(std::vector<int>& input, int target, int left, int right) {
+  while(left <= right) {
+    int median = (left + right) / 2;
+    if(input[median] == target) {
+      return median;
+    }
+    if(input[median] > target) {
+      right = median - 1;
+    } else {
+      left = median + 1;
+    }
+  }
+  
+  return -1;
+}
+int search_in_rotated_sorted_array(std::vector<int>& input, int target) {
+  int last_index = input.size() - 1;
+  int left = 0, right = last_index;
+  while(left <= right) {
+    int median = (left + right) / 2;
+    
+    if(input[median] > input[last_index]) {
+      left = median + 1;
+    } else {
+      right = median - 1;
+    }
+  }
+
+  
+  // Search the right-half
+  int value = binary_search_index(input, target, left, last_index);
+  if(value == -1) {
+    // Search the left-half
+    return binary_search_index(input, target, 0, left - 1);
+  }
+
+  return value;
+}
+void invoke_search_in_rotated_sorted_array() {
+  std::vector<int> input = {4,5,6,7,0,1,2};
+  std::cout<<"Search in rotated sorted array: "<<search_in_rotated_sorted_array(input, 9);
 }

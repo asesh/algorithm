@@ -401,4 +401,14 @@ void invoke_maximum_sum_circular_subarray();
 */
 void invoke_combinations();
 
+/*
+52. N-Queens II: https://leetcode.com/problems/n-queens-ii
+*/
+void invoke_n_queens_ii();
+
+/*
+33. Search in Rotated Sorted Array: https://leetcode.com/problems/search-in-rotated-sorted-array
+*/
+void invoke_search_in_rotated_sorted_array();
+
 #endif /* NUMBER_HPP */

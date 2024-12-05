@@ -61,7 +61,7 @@ void rotate_linked_list() {
     if(current_node) {
       std::cout<< current_node->get_value() << std::endl;
     }
-    current_node = linked_list.next();
+    current_node = linked_list.m_next_node;
   } while(current_node);
 }
 
@@ -150,4 +150,34 @@ void invoke_add_two_linked_list_numbers() {
   // Call the above method which was done on LeetCode.
   // We will have to modify the used linked list to run locally
 //  add_two_linked_list_number(...);
+}
+
+CSingleLinkedList<int>* sort_linked_list(CSingleLinkedList<int>* linked_list) {
+  auto* head = linked_list;
+  // Brute force approach
+  //
+  std::vector<int> list;
+  while(head) {
+    list.push_back(head->m_data);
+    head = head->m_next_node;
+  }
+  
+  std::sort(list.begin(), list.end());
+  
+  head = linked_list;
+  for(auto& value: list) {
+    head->m_data = value;
+    head = head->m_next_node;
+  }
+  
+  return linked_list;
+}
+void invoke_sort_linked_list() {
+  CSingleLinkedList<int>* head = new CSingleLinkedList<int>({4,2,1,3});
+  auto* output = sort_linked_list(head);
+  std::cout<<"Sort list: ";
+  while(output) {
+    std::cout<<output->m_data<<"->";
+    output = output->m_next_node;
+  }
 }

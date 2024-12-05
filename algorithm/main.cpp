@@ -18,7 +18,11 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_word_search();
+  invoke_search_in_rotated_sorted_array();
+  
+//  invoke_sort_linked_list();
+  
+//  invoke_word_search();
   
 //  invoke_combinations();
   

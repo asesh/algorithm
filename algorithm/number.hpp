@@ -411,4 +411,9 @@ void invoke_n_queens_ii();
 */
 void invoke_search_in_rotated_sorted_array();
 
+/*
+34. Find First and Last Position of Element in Sorted Array: https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array
+*/
+void invoke_find_first_last_position_of_element();
+
 #endif /* NUMBER_HPP */

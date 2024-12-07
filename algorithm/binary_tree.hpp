@@ -178,4 +178,9 @@ void invoke_right_side_view();
 */
 void invoke_level_order_traversal();
 
+/*
+98. Validate Binary Search Tree: https://leetcode.com/problems/validate-binary-search-tree
+*/
+void invoke_validate_binary_search_tree();
+
 #endif /* BINARY_TREE_HPP */

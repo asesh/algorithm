@@ -18,7 +18,9 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_search_in_rotated_sorted_array();
+  invoke_validate_binary_search_tree();
+  
+//  invoke_search_in_rotated_sorted_array();
   
 //  invoke_sort_linked_list();
   

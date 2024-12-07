@@ -151,3 +151,25 @@ void invoke_level_order_traversal() {
     std::cout<<"; ";
   });
 }
+
+bool validate_binary_search_tree(CBinaryTree<int32_t>* root, CBinaryTree<int32_t>* left,
+                                 CBinaryTree<int32_t>* right) {
+  if(!root) {
+    return true;
+  }
+  
+  if(left && left->m_data >= root->m_data || right && right->m_data <= root->m_data) {
+    return false;
+  }
+  
+  return validate_binary_search_tree(root->m_left_node, left, root) &&
+  validate_binary_search_tree(root->m_right_node, root, right);
+}
+void invoke_validate_binary_search_tree() {
+  CBinaryTree<int32_t> binary_tree(5);
+  binary_tree.m_left_node = new CBinaryTree<int32_t>(1);
+  binary_tree.m_right_node = new CBinaryTree<int32_t>(4);
+  binary_tree.m_right_node->m_left_node = new CBinaryTree<int32_t>(3);
+  binary_tree.m_right_node->m_right_node = new CBinaryTree<int32_t>(6);
+  std::cout<<std::boolalpha<<validate_binary_search_tree(&binary_tree, nullptr, nullptr);
+}

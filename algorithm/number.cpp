@@ -2329,7 +2329,8 @@ Process:
  
 Input: [4,5,6,7,0,1,2], target = 3, Output: -1
 */
-int binary_search_index(std::vector<int>& input, int target, int left, int right) {
+// Returns the pivot index of the target using binary search
+int binary_search_pivot_index(std::vector<int>& input, int target, int left, int right) {
   while(left <= right) {
     int median = (left + right) / 2;
     if(input[median] == target) {
@@ -2357,12 +2358,11 @@ int search_in_rotated_sorted_array(std::vector<int>& input, int target) {
     }
   }
 
-  
   // Search the right-half
-  int value = binary_search_index(input, target, left, last_index);
+  int value = binary_search_pivot_index(input, target, left, last_index);
   if(value == -1) {
     // Search the left-half
-    return binary_search_index(input, target, 0, left - 1);
+    return binary_search_pivot_index(input, target, 0, left - 1);
   }
 
   return value;
@@ -2370,4 +2370,34 @@ int search_in_rotated_sorted_array(std::vector<int>& input, int target) {
 void invoke_search_in_rotated_sorted_array() {
   std::vector<int> input = {4,5,6,7,0,1,2};
   std::cout<<"Search in rotated sorted array: "<<search_in_rotated_sorted_array(input, 9);
+}
+
+/*
+Input: [5,7,7,8,8,10], target = 8, Output: [3,4]
+Process:
+  0 1 2 3 4 5
+ [5,7,7,8,8,10]
+ calculate mid: mid = (low + high) / 2 = 5/2 = 2
+ input[mid] 7 <= 8 false. So the target lies on the right-half.
+  l m r
+ [8,8,10]
+ mid = (0+2)/2 = 1 => 8
+ 
+Input: [7,7,7,7,8,10], target = 7, Output: [0,2]
+Process:
+  0 1 2 3 4 5
+ [7,7,7,7,8,10]
+ mid = 5/2 = 2 = 7
+ 7 <= 7. Search first-half
+ [7,7,7] [7,8,10]
+ 
+*/
+std::vector<int> find_first_last_position_of_element(std::vector<int>& input, int target) {
+  std::vector<int> output;
+  
+  return output;
+}
+void invoke_find_first_last_position_of_element() {
+  std::vector<int> input = {5,7,7,8,8,10};
+  auto output = find_first_last_position_of_element(input, 8);
 }

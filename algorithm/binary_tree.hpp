@@ -183,4 +183,9 @@ void invoke_level_order_traversal();
 */
 void invoke_validate_binary_search_tree();
 
+/*
+230. Kth Smallest Element in a BST: https://leetcode.com/problems/kth-smallest-element-in-a-bst
+*/
+void invoke_kth_smallest_element_in_a_bst();
+
 #endif /* BINARY_TREE_HPP */

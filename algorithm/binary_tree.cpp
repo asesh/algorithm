@@ -173,3 +173,58 @@ void invoke_validate_binary_search_tree() {
   binary_tree.m_right_node->m_right_node = new CBinaryTree<int32_t>(6);
   std::cout<<std::boolalpha<<validate_binary_search_tree(&binary_tree, nullptr, nullptr);
 }
+
+/*
+Input: [4,2,5,null,3], k: 2, Output: 2
+Process:
+     4
+  2     5
+    3
+*/
+// RC: O(H + k), SC: O(H) using stack
+int kth_smallest_element_in_a_bst(CBinaryTree<int32_t>* node, int kth_value) {
+  std::stack<CBinaryTree<int32_t>*> node_stack;
+  
+  while(1) {
+    while(node) {
+      node_stack.push(node);
+      node = node->m_left_node;
+    }
+    
+    node = node_stack.top();
+    node_stack.pop();
+    if(--kth_value == 0) {
+      return node->m_data;
+    }
+    
+    node = node->m_right_node;
+  }
+}
+// RC: O(n)
+void kth_smallest_element_in_a_bst(CBinaryTree<int32_t>* node, std::vector<int>& nodes) {
+  if(!node) {
+    return;
+  }
+  
+  kth_smallest_element_in_a_bst(node->m_left_node, nodes);
+  nodes.push_back(node->m_data);
+  kth_smallest_element_in_a_bst(node->m_right_node, nodes);
+}
+void invoke_kth_smallest_element_in_a_bst() {
+  int kth_value = 2;
+//  CBinaryTree<int32_t> binary_tree(5);
+//  binary_tree.m_left_node = new CBinaryTree<int32_t>(3);
+//  binary_tree.m_left_node->m_left_node = new CBinaryTree<int32_t>(2);
+//  binary_tree.m_left_node->m_right_node = new CBinaryTree<int32_t>(4);
+//  binary_tree.m_left_node->m_left_node->m_left_node = new CBinaryTree<int32_t>(1);
+//  binary_tree.m_right_node = new CBinaryTree<int32_t>(6);
+  CBinaryTree<int32_t> binary_tree(4);
+  binary_tree.m_left_node = new CBinaryTree<int32_t>(2);
+  binary_tree.m_left_node->m_right_node = new CBinaryTree<int32_t>(3);
+  binary_tree.m_right_node = new CBinaryTree<int32_t>(5);
+  
+//  std::vector<int> nodes;
+//  kth_smallest_element_in_a_bst(&binary_tree, nodes);
+//  std::cout<<"Kth smallest element in a BST: "<<nodes[kth_value - 1];
+  std::cout<<"Kth smallest element in a BST: "<<kth_smallest_element_in_a_bst(&binary_tree, 3);
+}

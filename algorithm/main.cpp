@@ -18,7 +18,9 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_validate_binary_search_tree();
+  invoke_kth_smallest_element_in_a_bst();
+  
+//  invoke_validate_binary_search_tree();
   
 //  invoke_search_in_rotated_sorted_array();
   

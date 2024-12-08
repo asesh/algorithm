@@ -14,32 +14,32 @@ class CSingleLinkedList {
 public:
 	CSingleLinkedList() = default;
 	CSingleLinkedList(Data data) {
-		m_data = data;
+		value = data;
 	}
 	CSingleLinkedList(const std::initializer_list<Data>& input_list) {
 		for(const auto& node_data: input_list) {
-      m_next_node = new CSingleLinkedList(node_data);
-      m_next_node = m_next_node->m_next_node;
+      next = new CSingleLinkedList(node_data);
+      next = next->next;
 		}
 	}
 
 	Data get_value() const {
-    return m_data;
+    return value;
 	}
 
 	// Clear all the nodes starting from the root node
-	void clear_nodes() {
+	void destroy() {
 		auto current_node = this;
 		while(current_node) {
-			auto next_node = current_node->m_next_node;
+			auto next_node = current_node->next;
 			delete current_node;
 			current_node = next_node;
 		}
 	}
 
 public:
-	CSingleLinkedList<Data>* m_next_node = nullptr;
-	Data m_data = 0;
+	CSingleLinkedList<Data>* next = nullptr;
+	Data value = 0;
 };
 
 // Double linked list
@@ -47,76 +47,76 @@ template<typename DataType>
 class CDoubleLinkedList {
 public:
 	CDoubleLinkedList(DataType new_data) {
-		m_previous_node = m_next_node = nullptr;
-		m_data = new_data;
+		previous = next = nullptr;
+		value = new_data;
 	}
 
 	void add_previous_node(DataType new_data) {
 		CDoubleLinkedList<DataType>* temp_node = nullptr;
-		if(m_previous_node) {
+		if(previous) {
 			// Previous node exists already
-			temp_node = m_previous_node;
-			m_previous_node = new CDoubleLinkedList<DataType>(new_data);
-			m_previous_node->m_next_node = temp_node;
+			temp_node = previous;
+			previous = new CDoubleLinkedList<DataType>(new_data);
+			previous->next = temp_node;
 		}
 		else {
 			// Previous node doesn't exist
-			m_previous_node = new CDoubleLinkedList(new_data);
-			m_previous_node->m_next_node = this;
+			previous = new CDoubleLinkedList(new_data);
+			previous->next = this;
 		}
 	}
 
 	void add_next_node(DataType new_data) {
-		if(m_next_node) {
+		if(next) {
 			// Next node exits already
-			auto temp_node = m_next_node;
-			m_next_node = new CDoubleLinkedList<DataType>(new_data);
-			m_next_node->m_previous_node = temp_node;
+			auto temp_node = next;
+			next = new CDoubleLinkedList<DataType>(new_data);
+			next->previous = temp_node;
 		}
 		else {
 			// Next node doesn't exists
-			m_next_node = new CDoubleLinkedList<DataType>(new_data);
-			m_next_node->m_previous_node = this;
+			next = new CDoubleLinkedList<DataType>(new_data);
+			next->previous = this;
 		}
 	}
 
 	void destroy() {
-		if(m_previous_node) {
+		if(previous) {
 			// Previous node exists so we iterate through all the nodes from it
-			while(m_previous_node) {
-				auto temp_previous_node = m_previous_node->m_next;
-				delete m_previous_node;
-				m_previous_node = temp_previous_node;
+			while(previous) {
+				auto temp_previous_node = previous->m_next;
+				delete previous;
+				previous = temp_previous_node;
 			}
-			m_previous_node = nullptr;
+			previous = nullptr;
 		}
 		else {
-			while(m_next_node) {
-				auto temp_previous_node = m_next_node->m_previous_node;
-				delete m_next_node;
-				m_next_node = temp_previous_node;
+			while(next) {
+				auto temp_previous_node = next->previous;
+				delete next;
+				next = temp_previous_node;
 			}
-			m_next_node = nullptr;
+			next = nullptr;
 		}
 	}
 
 	void print_all() const {
 		CDoubleLinkedList<DataType>* next_node = nullptr;
-		if(m_previous_node) {
-			next_node = m_previous_node;
+		if(previous) {
+			next_node = previous;
 			while(next_node) {
-				std::cout<< next_node->m_data << std::endl;
-				next_node = next_node->m_next_node;
+				std::cout<< next_node->value << std::endl;
+				next_node = next_node->next;
 			}
 		}
 		else {
-			std::cout<< m_data << std::endl;
-			if(m_next_node) {
+			std::cout<< value << std::endl;
+			if(next) {
 				std::list<DataType> node_data;
-				auto previous_node = m_next_node; // Next is pointing to the last element
+				auto previous_node = next; // Next is pointing to the last element
 				while(previous_node) {
-					node_data.push_front(previous_node->m_data);
-					previous_node = previous_node->m_previous_node;
+					node_data.push_front(previous_node->value);
+					previous_node = previous_node->previous;
 				}
 				for(const auto& data: node_data) {
 					std::cout << data << std::endl;
@@ -126,9 +126,9 @@ public:
 	}
 
 protected:
-	CDoubleLinkedList* m_previous_node, *m_next_node;
+	CDoubleLinkedList* previous, *next;
 
-	DataType m_data;
+	DataType value;
 };
 
 void invoke_reverse_linked_list();
@@ -148,5 +148,10 @@ void invoke_reverse_linked_list();
 148. Sort List: https://leetcode.com/problems/sort-list
 */
 void invoke_sort_linked_list();
+
+/*
+19. Remove Nth Node From End of List: https://leetcode.com/problems/remove-nth-node-from-end-of-list
+*/
+void invoke_remove_nth_node_from_end_of_list();
 
 #endif /* linked_list_h */

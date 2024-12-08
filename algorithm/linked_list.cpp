@@ -61,7 +61,7 @@ void rotate_linked_list() {
     if(current_node) {
       std::cout<< current_node->get_value() << std::endl;
     }
-    current_node = linked_list.m_next_node;
+    current_node = linked_list.next;
   } while(current_node);
 }
 
@@ -158,16 +158,16 @@ CSingleLinkedList<int>* sort_linked_list(CSingleLinkedList<int>* linked_list) {
   //
   std::vector<int> list;
   while(head) {
-    list.push_back(head->m_data);
-    head = head->m_next_node;
+    list.push_back(head->value);
+    head = head->next;
   }
   
   std::sort(list.begin(), list.end());
   
   head = linked_list;
   for(auto& value: list) {
-    head->m_data = value;
-    head = head->m_next_node;
+    head->value = value;
+    head = head->next;
   }
   
   return linked_list;
@@ -177,7 +177,40 @@ void invoke_sort_linked_list() {
   auto* output = sort_linked_list(head);
   std::cout<<"Sort list: ";
   while(output) {
-    std::cout<<output->m_data<<"->";
-    output = output->m_next_node;
+    std::cout<<output->value<<"->";
+    output = output->next;
   }
+}
+
+/*
+Refer to Freeform: Remove Nth Node From End of List
+*/
+CSingleLinkedList<int>* remove_nth_node_from_end_of_list(CSingleLinkedList<int>* head, int nth_node) {
+  CSingleLinkedList<int>* dummy = new CSingleLinkedList<int>(0);
+  CSingleLinkedList<int>* first = dummy;
+  CSingleLinkedList<int>* second = dummy;
+  
+  int counter = 0;
+  while(counter++ < nth_node + 1) {
+    first = first->next;
+  }
+  
+  while(first) {
+    first = first->next;
+    second = second->next;
+  }
+  
+  second->next = second->next->next;
+  
+  return dummy->next;
+}
+void invoke_remove_nth_node_from_end_of_list() {
+  CSingleLinkedList<int>* head = new CSingleLinkedList<int>({1,2,3,4,5});
+  auto* output_head = remove_nth_node_from_end_of_list(head, 2);
+  std::cout<<"Remove Nth node from end of list: ";
+  while(head) {
+    std::cout<<head->value<<" -> ";
+    head = head->next;
+  }
+  head->destroy();
 }

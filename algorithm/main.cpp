@@ -18,7 +18,9 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_kth_smallest_element_in_a_bst();
+  invoke_remove_nth_node_from_end_of_list();
+  
+//  invoke_kth_smallest_element_in_a_bst();
   
 //  invoke_validate_binary_search_tree();
   

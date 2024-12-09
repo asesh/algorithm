@@ -214,3 +214,42 @@ void invoke_remove_nth_node_from_end_of_list() {
   }
   head->destroy();
 }
+
+/*
+Refer to Freeform: 82. Remove Duplicates from Sorted List II
+*/
+CSingleLinkedList<int>* invoke_remove_duplicates_from_sorted_list_ii(CSingleLinkedList<int>* head) {
+  CSingleLinkedList<int>* dummy = new CSingleLinkedList<int>(0);
+  dummy->next = head;
+  CSingleLinkedList<int>* first = dummy;
+  first = first->next;
+  CSingleLinkedList<int>* second = dummy;
+
+  int current_node_value = INT_MIN;
+  while(first && first->next) {
+    while((first && first->value == current_node_value) ||
+          (first && first->next && first->value == first->next->value)) {
+      current_node_value = first->value; // 1
+      first = first->next;
+    }
+
+    second->next = first;
+    second = second->next;
+
+    if(first) {
+      current_node_value = first->value;
+      first = first->next;
+    }
+  }
+
+  return dummy->next;
+}
+void invoke_remove_duplicates_from_sorted_list_ii() {
+  CSingleLinkedList<int>* head = new CSingleLinkedList<int>({1,2,2,3});
+  auto* output = invoke_remove_duplicates_from_sorted_list_ii(head);
+  std::cout<<"Remove duplicates from sorted list ii: ";
+  while(output) {
+    std::cout<<output->value<<"->";
+    output = output->next;
+  }
+}

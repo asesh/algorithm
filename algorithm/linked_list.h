@@ -154,4 +154,9 @@ void invoke_sort_linked_list();
 */
 void invoke_remove_nth_node_from_end_of_list();
 
+/*
+82. Remove Duplicates from Sorted List II: https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii
+*/
+void invoke_remove_duplicates_from_sorted_list_ii();
+
 #endif /* linked_list_h */

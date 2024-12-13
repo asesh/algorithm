@@ -35,8 +35,8 @@ public:
 	
 private:
 	GenericData m_generic_data;
-	std::unique_ptr<CBinarySearchTree> m_left_node;
-	std::unique_ptr<CBinarySearchTree> m_right_node;
+	std::unique_ptr<CBinarySearchTree> left;
+	std::unique_ptr<CBinarySearchTree> right;
 };
 
 // Insertion methods:
@@ -46,7 +46,7 @@ template<typename GenericData>
 class CBinaryTree {
 public:
 	CBinaryTree(GenericData input_data) {
-		m_data = input_data;
+		value = input_data;
 	}
 	/*
 	 Visualization of binary tree
@@ -66,9 +66,9 @@ public:
 		if(!node) {
 			return;
 		}
-		std::cout<<node->m_data<<" ";
+		std::cout<<node->value<<" ";
 		
-		print_outer_layer(node->m_right_node);
+		print_outer_layer(node->right);
 	}
 	
 	void traverse_inorder(CBinaryTree<GenericData>* node) {
@@ -76,9 +76,9 @@ public:
 			return;
 		}
 		
-		traverse_inorder(node->m_left_node);
-		std::cout<<node->m_data<<" ";
-		traverse_inorder(node->m_right_node);
+		traverse_inorder(node->left);
+		std::cout<<node->value<<" ";
+		traverse_inorder(node->right);
 	}
 	
 	void traverse_postorder(CBinaryTree<GenericData>* node) {
@@ -86,27 +86,27 @@ public:
 			return;
 		}
 		
-		traverse_postorder(node->m_left_node);
-		traverse_postorder(node->m_right_node);
-		std::cout<<node->m_data<<" ";
+		traverse_postorder(node->left);
+		traverse_postorder(node->right);
+		std::cout<<node->value<<" ";
 	}
 	
 	void traverse_preorder(CBinaryTree<GenericData>* node) {
 		if(!node) {
 			return;
 		} else {
-			std::cout<<node->m_data << " ";
+			std::cout<<node->value << " ";
 			
-			traverse_preorder(node->m_left_node);
-			traverse_preorder(node->m_right_node);
+			traverse_preorder(node->left);
+			traverse_preorder(node->right);
 		}
 	}
 	
 	void remove_subtree(CBinaryTree<GenericData>* parent_node) {
 		while(parent_node) {
-			auto left_child_node = parent_node->m_left_node;
-			auto right_child_node = parent_node->m_right_node;
-			std::cout<<"Deleting: " << parent_node->m_data << " ";
+			auto left_child_node = parent_node->left;
+			auto right_child_node = parent_node->right;
+			std::cout<<"Deleting: " << parent_node->value << " ";
 			delete parent_node;
 			parent_node = nullptr;
 			
@@ -123,8 +123,8 @@ public:
 		if(node == nullptr) {
 			return 0;
 		} else {
-			auto left_subtree_height = get_height(node->m_left_node) + 1;
-			auto right_subtree_height = get_height(node->m_right_node) + 1;
+			auto left_subtree_height = get_height(node->left) + 1;
+			auto right_subtree_height = get_height(node->right) + 1;
 			return std::max(left_subtree_height, right_subtree_height);
 		}
 	}
@@ -133,10 +133,10 @@ public:
 		if(!node) {
 			return;
 		} else if(level == 0) {
-			std::cout<<node->m_data<< " ";
+			std::cout<<node->value<< " ";
 		} else {
-			print_level(node->m_left_node, level - 1);
-			print_level(node->m_right_node, level - 1);
+			print_level(node->left, level - 1);
+			print_level(node->right, level - 1);
 		}
 	}
 	
@@ -157,10 +157,10 @@ public:
 	}
   
 public:
-  CBinaryTree<GenericData>* m_left_node = nullptr;
-  CBinaryTree<GenericData>* m_right_node = nullptr;
+  CBinaryTree<GenericData>* left = nullptr;
+  CBinaryTree<GenericData>* right = nullptr;
   
-  GenericData m_data;
+  GenericData value;
   
   std::size_t m_number_of_items;
 };
@@ -187,5 +187,15 @@ void invoke_validate_binary_search_tree();
 230. Kth Smallest Element in a BST: https://leetcode.com/problems/kth-smallest-element-in-a-bst
 */
 void invoke_kth_smallest_element_in_a_bst();
+
+/*
+105. Construct Binary Tree from Preorder and Inorder Traversal: https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+*/
+void invoke_construct_binary_tree_from_pre_and_inorder_traversal();
+
+/*
+129. Sum Root to Leaf Numbers: https://leetcode.com/problems/sum-root-to-leaf-numbers
+*/
+void invoke_sum_root_to_leaf_number();
 
 #endif /* BINARY_TREE_HPP */

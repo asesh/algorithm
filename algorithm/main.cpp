@@ -20,7 +20,11 @@
 int main(int argc, const char* argv[]) {
 //  invoke_construct_binary_tree_from_pre_and_inorder_traversal();
   
-  invoke_sum_root_to_leaf_number();
+//  invoke_flatten_binary_tree_to_linked_list();
+  
+  invoke_rotate_list();
+  
+//  invoke_sum_root_to_leaf_number();
   
 //  invoke_remove_duplicates_from_sorted_list_ii();
   

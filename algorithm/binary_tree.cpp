@@ -263,3 +263,22 @@ void invoke_sum_root_to_leaf_number() {
   sum_root_to_leaf_number(&binary_tree, 0, sum);
   std::cout<<"Sum of root to leaf numbers: "<<sum;
 }
+
+void flatten_binary_tree_to_linked_list(CBinaryTree<int32_t>* node) {
+  if(!node) {
+    return;
+  }
+  
+  flatten_binary_tree_to_linked_list(node->left);
+  flatten_binary_tree_to_linked_list(node->right);
+}
+void invoke_flatten_binary_tree_to_linked_list() {
+  CBinaryTree<int32_t> binary_tree(1);
+  binary_tree.left = new CBinaryTree<int32_t>(2);
+  binary_tree.left->left = new CBinaryTree<int32_t>(3);
+  binary_tree.left->right = new CBinaryTree<int32_t>(4);
+  binary_tree.right = new CBinaryTree<int32_t>(5);
+  binary_tree.right->right = new CBinaryTree<int32_t>(6);
+  flatten_binary_tree_to_linked_list(&binary_tree);
+//  destroy(&binary_tree);
+}

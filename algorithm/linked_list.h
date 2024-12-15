@@ -159,4 +159,9 @@ void invoke_remove_nth_node_from_end_of_list();
 */
 void invoke_remove_duplicates_from_sorted_list_ii();
 
+/*
+61. Rotate List: https://leetcode.com/problems/rotate-list
+*/
+void invoke_rotate_list();
+
 #endif /* linked_list_h */

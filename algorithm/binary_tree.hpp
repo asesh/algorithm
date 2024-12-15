@@ -165,6 +165,19 @@ public:
   std::size_t m_number_of_items;
 };
 
+template<typename T>
+void destroy(CBinaryTree<T>* node) {
+  if(!node) {
+    return;
+  }
+  
+  destroy(node->left);
+  destroy(node->right);
+  
+  delete node;
+  node = nullptr;
+}
+
 void invoke_binary_tree();
 void invoke_binary_search_tree();
 
@@ -197,5 +210,10 @@ void invoke_construct_binary_tree_from_pre_and_inorder_traversal();
 129. Sum Root to Leaf Numbers: https://leetcode.com/problems/sum-root-to-leaf-numbers
 */
 void invoke_sum_root_to_leaf_number();
+
+/*
+114. Flatten Binary Tree to Linked List: https://leetcode.com/problems/flatten-binary-tree-to-linked-list
+*/
+void invoke_flatten_binary_tree_to_linked_list();
 
 #endif /* BINARY_TREE_HPP */

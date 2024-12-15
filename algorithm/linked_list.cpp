@@ -253,3 +253,43 @@ void invoke_remove_duplicates_from_sorted_list_ii() {
     output = output->next;
   }
 }
+
+/*
+Refer to Freeform: 61. Rotate List
+*/
+CSingleLinkedList<int>* rotate_list(CSingleLinkedList<int>* head, int rotate) {
+  CSingleLinkedList<int>* dummy = new CSingleLinkedList<int>(-1);
+  dummy->next = head;
+  
+  int nodes_count = 1;
+  CSingleLinkedList<int>* right = head;
+  while(right && right->next) {
+    ++nodes_count;
+    right = right->next;
+  }
+
+  int rotation = rotate % nodes_count;
+  if(rotation == 0) {
+    return head;
+  }
+  CSingleLinkedList<int>* middle = dummy;
+  for(int count = 0; count < nodes_count - rotation; ++count) { // 1 <= 3
+    middle = middle->next;
+  }
+
+  auto* left = dummy->next;
+  dummy->next = middle->next;
+  middle->next = nullptr;
+  right->next = left;
+  
+  return dummy->next;
+}
+void invoke_rotate_list() {
+  CSingleLinkedList<int>* head = new CSingleLinkedList<int>({1,2,3,4,5});
+  auto* output = rotate_list(head, 2);
+  std::cout<<"61. Rotate List: ";
+  while(output) {
+    std::cout<<output->value<<"->";
+    output = output->next;
+  }
+}

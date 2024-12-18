@@ -264,6 +264,9 @@ void invoke_sum_root_to_leaf_number() {
   std::cout<<"Sum of root to leaf numbers: "<<sum;
 }
 
+/*
+Refer to Freeform diagram: 114. Flatten Binary Tree to Linked List
+*/
 void flatten_binary_tree_to_linked_list(CBinaryTree<int32_t>* node) {
   if(!node) {
     return;

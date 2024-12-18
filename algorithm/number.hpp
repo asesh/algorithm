@@ -82,8 +82,6 @@ void invoke_number_of_ways_to_traverse_graph();
 
 void invoke_river_size();
 
-void invoke_valid_starting_city();
-
 void invoke_valid_palindrome_2();
 
 class MinHeap {
@@ -106,7 +104,7 @@ class MinHeap {
 
   std::vector<int> buildHeap(std::vector<int>& vector) {
     for(int index = 0; index < vector.size(); ++index) {
-      heap.push_back(vector[index]);
+      heap.push_back(vector[index]);	
       siftUp(index, vector);
     }
     return vector;
@@ -267,7 +265,7 @@ void invoke_product_of_array_except_itself();
 void invoke_kth_largest_element_in_an_array();
 
 /*
-6. Zigzag Conversion: https://leetcode.com/problems/zigzag-
+6. Zigzag Conversion: https://leetcode.com/problems/zigzag-conversion/
 */
 void invoke_zig_zag_conversion();
 
@@ -414,6 +412,6 @@ void invoke_search_in_rotated_sorted_array();
 /*
 34. Find First and Last Position of Element in Sorted Array: https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array
 */
-void invoke_find_first_last_position_of_element();
+void invoke_find_first_and_last_position_of_element_in_sorted_array();
 
 #endif /* NUMBER_HPP */

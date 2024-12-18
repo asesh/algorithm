@@ -570,7 +570,6 @@ int calculate_minimum_coins(int target, const std::vector<int>& denoms, int coin
   
   return minimum_coins;
 }
-
 void invoke_calculate_minimum_coins() {
   std::unordered_map<int, int> computed_targets;
   int minimum_coins = calculate_minimum_coins(11, {1, 2, 5}, 0, computed_targets);
@@ -589,7 +588,6 @@ int calculate_four_number_sum(int target, const std::vector<int>& array, int sum
   
   return INT_MAX;
 }
-
 void invoke_calculate_four_number_sum() {
   std::vector<int> array = {7, 6, 4, -1, 1, 2};
   calculate_four_number_sum(16, array, 0);
@@ -621,7 +619,6 @@ void calculate_total_number_of_steps(int number_of_steps, int& total_number_of_s
 //  std::cout<<"Storing Key: "<<number_of_steps<<", value: "<<total_number_of_steps<<std::endl;
   computed_values[number_of_steps] = total_number_of_steps;
 }
-
 void invoke_calculate_total_number_of_steps() {
   int total_number_of_steps = 0;
   std::unordered_map<int, int> computed_values;
@@ -666,7 +663,6 @@ int calculate_minimum_number_of_steps(int destination_steps, int total_steps = 0
   
   return min_steps;
 }
-
 void invoke_calculate_minimum_number_of_steps() {
   std::cout<<"Minimum number of steps: "<<calculate_minimum_number_of_steps(25)<<std::endl;
 }
@@ -687,11 +683,11 @@ int number_of_ways_to_traverse_graph(int total_width, int total_height) {
   
   return computed_cells[0];
 }
-
 void invoke_number_of_ways_to_traverse_graph() {
   std::cout<<"Number of ways to traverse graph: "<<number_of_ways_to_traverse_graph(4, 3);
 }
 
+// Time: O(wh), Space: O(wh)
 void river_size_dfs(const std::vector<std::vector<int>>& matrix, std::vector<std::vector<int>>& visited, int& river_size, int row, int column) {
   auto column_size = matrix[0].size();
   auto row_size = matrix.size();
@@ -705,8 +701,6 @@ void river_size_dfs(const std::vector<std::vector<int>>& matrix, std::vector<std
     river_size_dfs(matrix, visited, river_size,  row + 1, column); // Move to bottom
   }
 }
-
-// Time: O(wh), Space: O(wh)
 void invoke_river_size() {
   std::vector<int> output;
   
@@ -733,10 +727,6 @@ void invoke_river_size() {
   for(const auto& size: output) {
     std::cout<<size<<", ";
   }
-}
-
-void invoke_valid_starting_city() {
-  
 }
 
 // https://www.algoexpert.io/questions/valid-starting-city
@@ -1312,35 +1302,6 @@ std::string zig_zag_conversion_lc(std::string input, int rows) {
     for(auto& character: row_data) {
       output += character;
     }
-  }
-  
-  return output;
-}
-
-/*
-AlgoExpert:
-Input:
-[1,3,4,10]
-[2,5,9,11]   => [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
-[6,8,12,15]
-[7,13,14,16]
- 
-    A   A   A   A
-    0   1   2   3
-B0  00  10  20  30
-B1  01  11  21  31
-B2  02  12  22  32
-B3  03  13  23  33
-
-Output: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
-Index:  [00 01 10 20 11 02 03 12 21 30 31 22 13 23 32 33]
-*/
-std::string zig_zag_conversion_ae(std::vector<std::vector<int>>& matrix) {
-  std::string output;
-  auto rows = matrix[0].size();
-  auto columns = matrix.size();
-  
-  for(int row = 0; row < rows; ++row) {
   }
   
   return output;
@@ -2390,14 +2351,34 @@ Process:
  mid = 5/2 = 2 = 7
  7 <= 7. Search first-half
  [7,7,7] [7,8,10]
- 
 */
-std::vector<int> find_first_last_position_of_element(std::vector<int>& input, int target) {
-  std::vector<int> output;
-  
-  return output;
+int find_first_and_last_position_of_element_in_sorted_array(std::vector<int>& input, int target, int left_index, int right_index, bool first) {
+  while(left_index <= right_index) {
+    int median_index = (left_index + right_index) / 2;
+    if(input[median_index] == target) {
+      if(first) {
+        if(left_index == median_index || input[median_index - 1] != target) {
+          return median_index;
+        }
+        right_index = median_index - 1;
+      } else {
+        if(right_index == median_index || input[median_index + 1] != target) {
+          return median_index;
+        }
+        left_index = median_index + 1;
+      }
+    } else if(input[median_index] > target) {
+      right_index = median_index - 1;
+    } else {
+      left_index = median_index + 1;
+    }
+  }
+  return -1;
 }
-void invoke_find_first_last_position_of_element() {
-  std::vector<int> input = {5,7,7,8,8,10};
-  auto output = find_first_last_position_of_element(input, 8);
+void invoke_find_first_and_last_position_of_element_in_sorted_array() {
+  int target = 8;
+  std::vector<int> input = {5,8,8,8,8,10};
+  int left = find_first_and_last_position_of_element_in_sorted_array(input, target, 0, input.size() - 1, true);
+  int right = find_first_and_last_position_of_element_in_sorted_array(input, target, 0, input.size() - 1, false);
+  std::cout<<"34. Find First and Last Position of Element in Sorted Array: ["<<left<<", "<<right<<"]";
 }

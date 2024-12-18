@@ -18,11 +18,13 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
+  invoke_find_first_and_last_position_of_element_in_sorted_array();
+  
 //  invoke_construct_binary_tree_from_pre_and_inorder_traversal();
   
 //  invoke_flatten_binary_tree_to_linked_list();
   
-  invoke_rotate_list();
+//  invoke_rotate_list();
   
 //  invoke_sum_root_to_leaf_number();
   

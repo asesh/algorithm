@@ -19,52 +19,53 @@ void invoke_binary_search_tree() {
 }
 
 void invoke_binary_tree() {
-	CBinaryTree<int32_t> binary_tree(1);
+  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(1);
 	// Fill left-subtree
-	binary_tree.left = new CBinaryTree<int32_t>(2);
-	binary_tree.left->left = new CBinaryTree<int32_t>(4);
-	binary_tree.left->right = new CBinaryTree<int32_t>(5);
-	binary_tree.left->left->left = new CBinaryTree<int32_t>(8);
-	binary_tree.left->left->right = new CBinaryTree<int32_t>(9);
-	binary_tree.left->right->left = new CBinaryTree<int32_t>(10);
-	binary_tree.left->right->right = new CBinaryTree<int32_t>(11);
+	binary_tree->left = new CBinaryTree<int32_t>(2);
+	binary_tree->left->left = new CBinaryTree<int32_t>(4);
+	binary_tree->left->right = new CBinaryTree<int32_t>(5);
+	binary_tree->left->left->left = new CBinaryTree<int32_t>(8);
+	binary_tree->left->left->right = new CBinaryTree<int32_t>(9);
+	binary_tree->left->right->left = new CBinaryTree<int32_t>(10);
+	binary_tree->left->right->right = new CBinaryTree<int32_t>(11);
 	
 	// Fill right-subtree
-	binary_tree.right = new CBinaryTree<int32_t>(3);
-	binary_tree.right->left = new CBinaryTree<int32_t>(6);
-	binary_tree.right->right = new CBinaryTree<int32_t>(7);
-	binary_tree.right->left->left = new CBinaryTree<int32_t>(12);
-	binary_tree.right->left->right = new CBinaryTree<int32_t>(13);
-	binary_tree.right->right->left = new CBinaryTree<int32_t>(14);
-	binary_tree.right->right->right = new CBinaryTree<int32_t>(15);
-	binary_tree.right->right->right->right = new CBinaryTree<int32_t>(16);
-	binary_tree.right->right->right->right->left = new CBinaryTree<int32_t>(17);
+	binary_tree->right = new CBinaryTree<int32_t>(3);
+	binary_tree->right->left = new CBinaryTree<int32_t>(6);
+	binary_tree->right->right = new CBinaryTree<int32_t>(7);
+	binary_tree->right->left->left = new CBinaryTree<int32_t>(12);
+	binary_tree->right->left->right = new CBinaryTree<int32_t>(13);
+	binary_tree->right->right->left = new CBinaryTree<int32_t>(14);
+	binary_tree->right->right->right = new CBinaryTree<int32_t>(15);
+	binary_tree->right->right->right->right = new CBinaryTree<int32_t>(16);
+	binary_tree->right->right->right->right->left = new CBinaryTree<int32_t>(17);
 	
 	//	binary_tree.traverse_bfs(&binary_tree);
 	
-	std::cout<<std::endl<<"Height of the tree: "<<binary_tree.get_height(&binary_tree)<<std::endl;
+	std::cout<<std::endl<<"Height of the tree: "<<binary_tree->get_height(binary_tree)<<std::endl;
 	
 	std::cout<<"Traversing in BFS:"<<std::endl;
-	binary_tree.traverse_bfs();
+	binary_tree->traverse_bfs();
 	
 	std::cout<<std::endl<<"Traversing in pre-order: "<<std::endl;
-	binary_tree.traverse_preorder(&binary_tree);
+	binary_tree->traverse_preorder(binary_tree);
 	
 	std::cout<<std::endl<<std::endl<<"Traversing in in-order: "<<std::endl;
-	binary_tree.traverse_inorder(&binary_tree);
+	binary_tree->traverse_inorder(binary_tree);
 	
 	std::cout<<std::endl<<std::endl<<"Traversing in post-order: "<<std::endl;
-	binary_tree.traverse_postorder(&binary_tree);
+	binary_tree->traverse_postorder(binary_tree);
 	
 	std::cout<<std::endl<<std::endl<<"Traversing outer layer: "<<std::endl;
-	binary_tree.print_outer_layer(&binary_tree);
+	binary_tree->print_outer_layer(binary_tree);
 	
 	std::cout<<std::endl<<std::endl<<"Removing all the nodes"<<std::endl;
 	// Remove the left and right subtrees
-	binary_tree.remove_subtree(binary_tree.left);
-	binary_tree.remove_subtree(binary_tree.right);
+	binary_tree->remove_subtree(binary_tree->left);
+	binary_tree->remove_subtree(binary_tree->right);
 	
 	std::cout<<std::endl;
+  destroy(binary_tree);
 }
 
 template<typename T>
@@ -93,15 +94,16 @@ void right_side_view(CBinaryTree<T>* node, int level, std::vector<int>& output) 
 }
 void invoke_right_side_view() {
   std::vector<int> output;
-  CBinaryTree<int32_t> binary_tree(1);
-  binary_tree.left = new CBinaryTree<int32_t>(2);
-  binary_tree.left->left = new CBinaryTree<int32_t>(4);
-  binary_tree.right = new CBinaryTree<int32_t>(3);
-  right_side_view(&binary_tree, 1, output);
+  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(1);
+  binary_tree->left = new CBinaryTree<int32_t>(2);
+  binary_tree->left->left = new CBinaryTree<int32_t>(4);
+  binary_tree->right = new CBinaryTree<int32_t>(3);
+  right_side_view(binary_tree, 1, output);
   std::cout<<"The right-side view: ";
   std::for_each(output.begin(), output.end(), [](int node_value) {
     std::cout<<node_value<<"->";
   });
+  destroy(binary_tree);
 }
 
 /*
@@ -128,15 +130,15 @@ void level_order_traversal(CBinaryTree<int32_t>* node, int level, int actual_lev
 void invoke_level_order_traversal() {
   std::vector<std::vector<int>> output;
   std::unordered_map<int, std::vector<int>> value_map;
-  CBinaryTree<int32_t> binary_tree(3);
-  binary_tree.left = new CBinaryTree<int32_t>(9);
-  binary_tree.right = new CBinaryTree<int32_t>(20);
-  binary_tree.right->left = new CBinaryTree<int32_t>(15);
-  binary_tree.right->right = new CBinaryTree<int32_t>(7);
+  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(3);
+  binary_tree->left = new CBinaryTree<int32_t>(9);
+  binary_tree->right = new CBinaryTree<int32_t>(20);
+  binary_tree->right->left = new CBinaryTree<int32_t>(15);
+  binary_tree->right->right = new CBinaryTree<int32_t>(7);
   
-  int tree_height = get_binary_tree_height(&binary_tree);
+  int tree_height = get_binary_tree_height(binary_tree);
   for(int level = 1; level <= tree_height; ++level) {
-    level_order_traversal(&binary_tree, level, level, value_map);
+    level_order_traversal(binary_tree, level, level, value_map);
   }
   
   for(int level = 1; level <= tree_height; ++level) {
@@ -150,6 +152,7 @@ void invoke_level_order_traversal() {
     }
     std::cout<<"; ";
   });
+  destroy(binary_tree);
 }
 
 bool validate_binary_search_tree(CBinaryTree<int32_t>* root, CBinaryTree<int32_t>* left,
@@ -166,12 +169,13 @@ bool validate_binary_search_tree(CBinaryTree<int32_t>* root, CBinaryTree<int32_t
   validate_binary_search_tree(root->right, root, right);
 }
 void invoke_validate_binary_search_tree() {
-  CBinaryTree<int32_t> binary_tree(5);
-  binary_tree.left = new CBinaryTree<int32_t>(1);
-  binary_tree.right = new CBinaryTree<int32_t>(4);
-  binary_tree.right->left = new CBinaryTree<int32_t>(3);
-  binary_tree.right->right = new CBinaryTree<int32_t>(6);
-  std::cout<<std::boolalpha<<validate_binary_search_tree(&binary_tree, nullptr, nullptr);
+  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(5);
+  binary_tree->left = new CBinaryTree<int32_t>(1);
+  binary_tree->right = new CBinaryTree<int32_t>(4);
+  binary_tree->right->left = new CBinaryTree<int32_t>(3);
+  binary_tree->right->right = new CBinaryTree<int32_t>(6);
+  std::cout<<std::boolalpha<<validate_binary_search_tree(binary_tree, nullptr, nullptr);
+  destroy(binary_tree);
 }
 
 /*
@@ -218,15 +222,16 @@ void invoke_kth_smallest_element_in_a_bst() {
 //  binary_tree.left->right = new CBinaryTree<int32_t>(4);
 //  binary_tree.left->left->left = new CBinaryTree<int32_t>(1);
 //  binary_tree.right = new CBinaryTree<int32_t>(6);
-  CBinaryTree<int32_t> binary_tree(4);
-  binary_tree.left = new CBinaryTree<int32_t>(2);
-  binary_tree.left->right = new CBinaryTree<int32_t>(3);
-  binary_tree.right = new CBinaryTree<int32_t>(5);
+  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(4);
+  binary_tree->left = new CBinaryTree<int32_t>(2);
+  binary_tree->left->right = new CBinaryTree<int32_t>(3);
+  binary_tree->right = new CBinaryTree<int32_t>(5);
   
 //  std::vector<int> nodes;
 //  kth_smallest_element_in_a_bst(&binary_tree, nodes);
 //  std::cout<<"Kth smallest element in a BST: "<<nodes[kth_value - 1];
-  std::cout<<"Kth smallest element in a BST: "<<kth_smallest_element_in_a_bst(&binary_tree, 3);
+  std::cout<<"Kth smallest element in a BST: "<<kth_smallest_element_in_a_bst(binary_tree, 3);
+  destroy(binary_tree);
 }
 
 /*
@@ -255,13 +260,14 @@ void sum_root_to_leaf_number(CBinaryTree<int32_t>* node, int current_sum, int& s
 }
 void invoke_sum_root_to_leaf_number() {
   int sum = 0;
-  CBinaryTree<int32_t> binary_tree(4);
-  binary_tree.left = new CBinaryTree<int32_t>(9);
-  binary_tree.left->left = new CBinaryTree<int32_t>(5);
-  binary_tree.left->right = new CBinaryTree<int32_t>(3);
-  binary_tree.right = new CBinaryTree<int32_t>(0);
-  sum_root_to_leaf_number(&binary_tree, 0, sum);
+  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(4);
+  binary_tree->left = new CBinaryTree<int32_t>(9);
+  binary_tree->left->left = new CBinaryTree<int32_t>(5);
+  binary_tree->left->right = new CBinaryTree<int32_t>(3);
+  binary_tree->right = new CBinaryTree<int32_t>(0);
+  sum_root_to_leaf_number(binary_tree, 0, sum);
   std::cout<<"Sum of root to leaf numbers: "<<sum;
+  destroy(binary_tree);
 }
 
 /*
@@ -276,12 +282,12 @@ void flatten_binary_tree_to_linked_list(CBinaryTree<int32_t>* node) {
   flatten_binary_tree_to_linked_list(node->right);
 }
 void invoke_flatten_binary_tree_to_linked_list() {
-  CBinaryTree<int32_t> binary_tree(1);
-  binary_tree.left = new CBinaryTree<int32_t>(2);
-  binary_tree.left->left = new CBinaryTree<int32_t>(3);
-  binary_tree.left->right = new CBinaryTree<int32_t>(4);
-  binary_tree.right = new CBinaryTree<int32_t>(5);
-  binary_tree.right->right = new CBinaryTree<int32_t>(6);
-  flatten_binary_tree_to_linked_list(&binary_tree);
-//  destroy(&binary_tree);
+  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(1);
+  binary_tree->left = new CBinaryTree<int32_t>(2);
+  binary_tree->left->left = new CBinaryTree<int32_t>(3);
+  binary_tree->left->right = new CBinaryTree<int32_t>(4);
+  binary_tree->right = new CBinaryTree<int32_t>(5);
+  binary_tree->right->right = new CBinaryTree<int32_t>(6);
+  flatten_binary_tree_to_linked_list(binary_tree);
+  destroy(binary_tree);
 }

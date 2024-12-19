@@ -273,13 +273,31 @@ void invoke_sum_root_to_leaf_number() {
 /*
 Refer to Freeform diagram: 114. Flatten Binary Tree to Linked List
 */
-void flatten_binary_tree_to_linked_list(CBinaryTree<int32_t>* node) {
+// RC: O(n), SC: O(n)
+void flatten_binary_tree_to_linked_list_preorder_traversal(CBinaryTree<int32_t>* node,
+                                                           std::vector<int>& node_values) {
   if(!node) {
     return;
   }
   
-  flatten_binary_tree_to_linked_list(node->left);
-  flatten_binary_tree_to_linked_list(node->right);
+  node_values.push_back(node->value);
+  
+  flatten_binary_tree_to_linked_list_preorder_traversal(node->left, node_values);
+  flatten_binary_tree_to_linked_list_preorder_traversal(node->right, node_values);
+}
+void flatten_binary_tree_to_linked_list(CBinaryTree<int32_t>* node) {
+  std::vector<int> node_values;
+  flatten_binary_tree_to_linked_list_preorder_traversal(node, node_values);
+  
+  for(int index = 0; index < node_values.size(); ++index) {
+    (*node).value = node_values[index];
+    node->left = nullptr;
+    while(!node->right && index < node_values.size() - 1) {
+      node->right = new CBinaryTree<int32_t>(node_values[++index]);
+      node = node->right;
+    }
+    node = node->right;
+  }
 }
 void invoke_flatten_binary_tree_to_linked_list() {
   CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(1);

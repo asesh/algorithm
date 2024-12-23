@@ -20,35 +20,6 @@ void print_reverse(int input_array[], int index, int max_items) {
 	std::cout<<input_array[--index] << " ";
 }
 
-
-/*
- Ref 2: Merge sort implementation
- 5 | 4 | 2 | 7 | 6 | 1 => (0, 2) => (0, 1) => (0, 0) 1st half
- 5 | 4   2 | 7   6 | 1 => (3, 5) => (3, 4) => (3, 3) 2nd half
- 4 | 5   2 | 7   1 | 6
- 2 | 4 | 5 | 7   1 | 6
-=> 1 | 2 | 4 | 5 | 6 | 7
- 
-1 2 3 4
-(0, 3)
-  -> (0, *1)
-    -> (0, *0)
-    -> (1, 3)
-  ->
-*/
-void merge_sort(std::array<int, 6> input_array, int lower_index, int higher_index) {
-	// Base case
-	if(higher_index > input_array.size() - 1 || lower_index == higher_index || lower_index > higher_index) {
-		return;
-	}
-	
-	int median = (lower_index + higher_index) / 2;
-	merge_sort(input_array, lower_index, median);
-  merge_sort(input_array, median + 1, higher_index);
-  std::cout<<"Lower index: "<<lower_index<<", median: "<<median<<", higher_index: "<<higher_index<<std::endl;
-//	std::cout<< "Median: "<<median<<", value: "<<input_array[median] << std::endl;
-}
-
 /*
  Check if the input number is palindrome or not
  input: 121
@@ -2381,4 +2352,55 @@ void invoke_find_first_and_last_position_of_element_in_sorted_array() {
   int left = find_first_and_last_position_of_element_in_sorted_array(input, target, 0, input.size() - 1, true);
   int right = find_first_and_last_position_of_element_in_sorted_array(input, target, 0, input.size() - 1, false);
   std::cout<<"34. Find First and Last Position of Element in Sorted Array: ["<<left<<", "<<right<<"]";
+}
+
+/*
+Refer to Freeform diagram: 912. Sort an Array
+*/
+void merge(std::vector<int>& input, std::vector<int>& sorted_elements, int left_index, int median_index, int right_index) {
+  if(left_index >= right_index) {
+    return;
+  }
+//  std::cout
+//    <<"left: "<<left_index<<"->"<<input[left_index]<<std::endl
+//    <<"median: "<<median_index<<"->"<<input[median_index]<<std::endl
+//    <<"right: "<<right_index<<"->"<<input[right_index]<<std::endl<<std::endl;
+  
+  int number_of_elements = right_index - left_index + 1;
+  
+  int left = left_index, right = median_index + 1;
+  int current_index = 0;
+  
+  while(left <= median_index && right <= right_index) {
+    sorted_elements[current_index++] = input[left] < input[right] ? input[left++] : input[right++];
+  }
+  while(left <= median_index) {
+    sorted_elements[current_index++] = input[left++];
+  }
+  while(right <= right_index) {
+    sorted_elements[current_index++] = input[right++];
+  }
+  for(current_index = 0; current_index < number_of_elements; ++current_index) {
+    input[current_index + left_index] = sorted_elements[current_index];
+  }
+}
+void merge_sort(std::vector<int>& input, std::vector<int>& sorted_elements, int left_index, int right_index) {
+  if(left_index >= right_index) {
+    return;
+  }
+  
+  int median_index = (left_index + right_index) / 2;
+  merge_sort(input, sorted_elements, left_index, median_index);
+  merge_sort(input, sorted_elements, median_index + 1, right_index);
+  
+  merge(input, sorted_elements, left_index, median_index, right_index);
+}
+void invoke_merge_sort() {
+  std::vector<int> input = {5,4,3,2,1,0};
+  std::vector<int> sorted_elements(input.size());
+  merge_sort(input, sorted_elements, 0, input.size() - 1);
+  std::cout<<"912. Sort an Array -> Merge sort: ";
+  for(auto& num: input) {
+    std::cout<<num<<", ";
+  }
 }

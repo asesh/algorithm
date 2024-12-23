@@ -10,7 +10,6 @@
 #define NUMBER_HPP
 
 void print_reverse(int input_array[], int index, int max_items);
-void merge_sort(std::array<int, 6>, int lower_index, int higher_index);
 bool is_number_palindrome(int number);
 int get_max_sum_of_consecutive_numbers(int array[], int number_of_elements, int number_of_consecutive_elements);
 std::pair<int, int> two_sum_equals_specific_target(const int* input_numbers, int number_of_elements, int target);
@@ -413,5 +412,10 @@ void invoke_search_in_rotated_sorted_array();
 34. Find First and Last Position of Element in Sorted Array: https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array
 */
 void invoke_find_first_and_last_position_of_element_in_sorted_array();
+
+/*
+912. Sort an Array: https://leetcode.com/problems/sort-an-array
+*/
+void invoke_merge_sort();
 
 #endif /* NUMBER_HPP */

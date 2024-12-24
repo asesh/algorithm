@@ -2404,3 +2404,58 @@ void invoke_merge_sort() {
     std::cout<<num<<", ";
   }
 }
+
+/*
+Input: [4,2,1,5,3], Output = [1,2,3,4,5]
+Process:
+ Pick the last element as pivot
+ 0 1 2 3 4
+         pv
+         hi
+         ci
+     cli
+ 4 2 1 5 3
+ 2 4 1 5 3
+ 2 1 4 5 3
+ 2 1 3 5 4
+ 
+  pv
+  hi
+  ci
+ cli
+ 2 1
+ 1 2
+ 
+WARNING: TLE on LeetCode
+*/
+int quick_sort_partition(std::vector<int>& input, int low_index, int high_index) {
+  int pivot_value = input[high_index];
+  int current_low_index = low_index;
+  for(int current_index = low_index; current_index < high_index; ++current_index) {
+    if(input[current_index] < pivot_value) {
+      std::swap(input[current_low_index], input[current_index]);
+      ++current_low_index;
+    }
+  }
+  
+  std::swap(input[current_low_index], input[high_index]);
+  
+  return current_low_index;
+}
+void quick_sort(std::vector<int>& input, int low_index, int high_index) {
+  if(low_index >= high_index) {
+    return;
+  }
+  
+  int parition_index = quick_sort_partition(input, low_index, high_index);
+  quick_sort(input, low_index, parition_index - 1);
+  quick_sort(input, parition_index + 1, high_index);
+}
+void invoke_quick_sort() {
+  std::vector<int> input = {4,2,1,5,3};
+  quick_sort(input, 0, input.size() - 1);
+  std::cout<<"912. Sort an Array -> Quick sort: ";
+  for(auto& num: input) {
+    std::cout<<num<<", ";
+  }
+}

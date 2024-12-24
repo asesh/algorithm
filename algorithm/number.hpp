@@ -418,4 +418,9 @@ void invoke_find_first_and_last_position_of_element_in_sorted_array();
 */
 void invoke_merge_sort();
 
+/*
+912. Sort an Array: https://leetcode.com/problems/sort-an-array
+*/
+void invoke_quick_sort();
+
 #endif /* NUMBER_HPP */

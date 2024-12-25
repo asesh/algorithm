@@ -216,4 +216,9 @@ void invoke_sum_root_to_leaf_number();
 */
 void invoke_flatten_binary_tree_to_linked_list();
 
+/*
+ 
+*/
+void invoke_construct_binary_tree_from_inorder_and_postorder_traversal();
+
 #endif /* BINARY_TREE_HPP */

@@ -2431,15 +2431,13 @@ WARNING: TLE on LeetCode
 int quick_sort_partition(std::vector<int>& input, int low_index, int high_index) {
   int pivot_value = input[high_index];
   int current_low_index = low_index;
-  for(int current_index = low_index; current_index < high_index; ++current_index) {
+  for(int current_index = current_low_index; current_index < high_index; ++current_index) {
     if(input[current_index] < pivot_value) {
-      std::swap(input[current_low_index], input[current_index]);
+      std::swap(input[current_index], input[current_low_index]);
       ++current_low_index;
     }
   }
-  
   std::swap(input[current_low_index], input[high_index]);
-  
   return current_low_index;
 }
 void quick_sort(std::vector<int>& input, int low_index, int high_index) {
@@ -2458,4 +2456,29 @@ void invoke_quick_sort() {
   for(auto& num: input) {
     std::cout<<num<<", ";
   }
+}
+
+// RC: O(nm), SC: O(1)
+bool search_2d_matrix_ii(std::vector<std::vector<int>>& matrix, int target) {
+  int column = 0, row = matrix.size() - 1;
+  while(row >= 0 && row < matrix.size() && column >= 0 && column < matrix[0].size()) {
+    if(matrix[row][column] > target) {
+      --row;
+    } else if(matrix[row][column] < target) {
+      ++column;
+    } else {
+      return true;
+    }
+  }
+  return false;
+}
+void invoke_search_2d_matrix_ii() {
+  std::vector<std::vector<int>> matrix = {
+    {1,4,7,11,15},
+    {2,5,8,12,19},
+    {3,6,9,16,22},
+    {10,13,14,17,24},
+    {18,21,23,26,30}
+  };
+  std::cout<<std::boolalpha<<"240. Search a 2D Matrix II: "<<search_a_2d_matrix(matrix, 3);
 }

@@ -236,13 +236,58 @@ void invoke_kth_smallest_element_in_a_bst() {
 
 /*
 Refer to the Freeform diagram
+
+Input: preorder: [3,9,12,20,25,28,30], inorder: [9,12,3,28,25,20,30]
+Process:
+    Pi
+ [3,9,12,20,25,28,30]
+  L H
+ [9,12,3,28,25,20,30]
+ 
+ preorder index map: {
+    9: 0
+    12: 1
+    3: 2
+    28: 3
+    25: 4
+    20: 5
+    30: 6
+ }
 */
 CBinaryTree<int>* construct_binary_tree_from_pre_and_inorder_traversal(std::vector<int>& preorder,
-                                                                       std::vector<int>& inorder) {
-  return nullptr;
+                                                                       int& preorder_index,
+                                                                       std::unordered_map<int, int>& inorder_index_map,
+                                                                       int left_index, int right_index) {
+  if(left_index > right_index) {
+    return nullptr;
+  }
+  
+  int root_value = preorder[preorder_index++];
+  CBinaryTree<int>* root = new CBinaryTree<int>(root_value);
+  
+  root->left = construct_binary_tree_from_pre_and_inorder_traversal(preorder, preorder_index, inorder_index_map,
+                                                                    left_index, inorder_index_map[root_value] - 1);
+  root->right = construct_binary_tree_from_pre_and_inorder_traversal(preorder, preorder_index, inorder_index_map,
+                                                                     inorder_index_map[root_value] + 1, right_index);
+  
+  return root;
 }
 void invoke_construct_binary_tree_from_pre_and_inorder_traversal() {
+  std::vector<int> preorder = {3,9,12,20,25,28,30};
+  std::vector<int> inorder = {9,12,3,28,25,20,30};
   
+  // 9: 0, 12: 1, 3: 2, 28: 3, 25: 4, 20: 5, 30: 6
+  std::unordered_map<int, int> inorder_index_map;
+  for(int index = 0; index < inorder.size(); ++index) {
+    inorder_index_map[inorder[index]] = index;
+  }
+  
+  int preorder_index = 0;
+  auto* binary_tree = construct_binary_tree_from_pre_and_inorder_traversal(preorder, preorder_index, inorder_index_map,
+                                                                           0, preorder.size() - 1);
+  std::cout<<"105. Construct Binary Tree from Preorder and Inorder Traversal: ";
+  binary_tree->traverse_preorder(binary_tree);
+  destroy(binary_tree);
 }
 
 void sum_root_to_leaf_number(CBinaryTree<int32_t>* node, int current_sum, int& sum) {
@@ -308,4 +353,19 @@ void invoke_flatten_binary_tree_to_linked_list() {
   binary_tree->right->right = new CBinaryTree<int32_t>(6);
   flatten_binary_tree_to_linked_list(binary_tree);
   destroy(binary_tree);
+}
+
+/*
+Input: inorder = [9,3,15,20,7], postorder = [9,15,7,20,3]
+ [9,3,15,20,7]
+ [9,15,7,20,3]
+*/
+CBinaryTree<int32_t>* construct_binary_tree_from_inorder_and_postorder_traversal(std::vector<int>& inorder,
+                                                                                 std::vector<int>& postorder,
+                                                                                 int left_index, int right_index) {
+  return nullptr;
+}
+void invoke_construct_binary_tree_from_inorder_and_postorder_traversal() {
+  std::vector<int> inorder = {9,3,15,20,7};
+  std::vector<int> postorder = {9,15,7,20,3};
 }

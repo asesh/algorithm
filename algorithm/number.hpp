@@ -423,4 +423,9 @@ void invoke_merge_sort();
 */
 void invoke_quick_sort();
 
+/*
+240. Search a 2D Matrix II: https://leetcode.com/problems/search-a-2d-matrix-ii
+*/
+void invoke_search_2d_matrix_ii();
+
 #endif /* NUMBER_HPP */

@@ -356,16 +356,56 @@ void invoke_flatten_binary_tree_to_linked_list() {
 }
 
 /*
-Input: inorder = [9,3,15,20,7], postorder = [9,15,7,20,3]
- [9,3,15,20,7]
- [9,15,7,20,3]
+Refer to Freeform diagram: 106. Construct Binary Tree from Inorder and Postorder Traversal
+Input: inorder = [4,5,3,7,6,8,9], postorder = [5,4,7,9,8,6,3]
+Process
+ Hash map from inorder: {
+   4: 0
+   5: 1
+   3: 2
+   7: 3
+   6: 4
+   8: 5
+   9: 6
+ }
+              R
+              L
+  0 1 2 3 4 5 6
+ [4,5,3,7,6,8,9]
+ 
+        Pi
+  0 1 2 3 4 5 6
+ [5,4,7,9,8,6,3]
 */
-CBinaryTree<int32_t>* construct_binary_tree_from_inorder_and_postorder_traversal(std::vector<int>& inorder,
-                                                                                 std::vector<int>& postorder,
+CBinaryTree<int32_t>* construct_binary_tree_from_inorder_and_postorder_traversal(std::vector<int>& postorder,
+                                                                                 int& postorder_index,
+                                                                                 std::unordered_map<int, int>& inorder_map,
                                                                                  int left_index, int right_index) {
-  return nullptr;
+  if(left_index > right_index) {
+    return nullptr;
+  }
+  
+  int node_value = postorder[postorder_index--];
+  CBinaryTree<int>* node = new CBinaryTree<int>(node_value);
+  
+  node->right = construct_binary_tree_from_inorder_and_postorder_traversal(postorder, postorder_index, inorder_map,
+                                                                           inorder_map[node_value] + 1, right_index);
+  node->left = construct_binary_tree_from_inorder_and_postorder_traversal(postorder, postorder_index, inorder_map,
+                                                                          left_index, inorder_map[node_value] - 1);
+  
+  return node;
 }
 void invoke_construct_binary_tree_from_inorder_and_postorder_traversal() {
-  std::vector<int> inorder = {9,3,15,20,7};
-  std::vector<int> postorder = {9,15,7,20,3};
+  std::vector<int> inorder = {4,5,3,7,6,8,9};
+  std::vector<int> postorder = {5,4,7,9,8,6,3};
+  
+  std::unordered_map<int, int> inorder_map;
+  for(int index = 0; index < inorder.size(); ++index) {
+    inorder_map[inorder[index]] = index;
+  }
+  int postorder_index = postorder.size() - 1;
+  auto* tree = construct_binary_tree_from_inorder_and_postorder_traversal(postorder, postorder_index, inorder_map, 0, postorder.size() - 1);
+  std::cout<<"106. Construct Binary Tree from Inorder and Postorder Traversal: ";
+  tree->traverse_preorder(tree);
+  destroy(tree);
 }

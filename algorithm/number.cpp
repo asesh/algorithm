@@ -2460,6 +2460,8 @@ void invoke_quick_sort() {
 
 // RC: O(nm), SC: O(1)
 bool search_2d_matrix_ii(std::vector<std::vector<int>>& matrix, int target) {
+  
+  // Search space reduction
   int column = 0, row = matrix.size() - 1;
   while(row >= 0 && row < matrix.size() && column >= 0 && column < matrix[0].size()) {
     if(matrix[row][column] > target) {

@@ -18,9 +18,9 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-//  invoke_construct_binary_tree_from_inorder_and_postorder_traversal();
+  invoke_construct_binary_tree_from_inorder_and_postorder_traversal();
   
-  invoke_search_2d_matrix_ii();
+//  invoke_search_2d_matrix_ii();
   
 //  invoke_quick_sort();
   

@@ -409,3 +409,35 @@ void invoke_construct_binary_tree_from_inorder_and_postorder_traversal() {
   tree->traverse_preorder(tree);
   destroy(tree);
 }
+
+/*
+Refer to Freeform: 236. Lowest Common Ancestor of a Binary Tree
+*/
+CBinaryTree<int32_t>* lowest_common_ancestor_binary_tree(CBinaryTree<int32_t>* root, CBinaryTree<int32_t>* p, CBinaryTree<int32_t>* q) {
+  if(!root || root == p || root == q) {
+    return root;
+  }
+  
+  auto* left = lowest_common_ancestor_binary_tree(root->left, p, q);
+  auto* right = lowest_common_ancestor_binary_tree(root->right, p, q);
+  
+  if(left && right) {
+    return root;
+  }
+  
+  return left ? left : right;
+}
+void invoke_lowest_common_ancestor_binary_tree() {
+  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(3);
+  binary_tree->left = new CBinaryTree<int32_t>(5);
+  binary_tree->left->left = new CBinaryTree<int32_t>(6);
+  binary_tree->left->right = new CBinaryTree<int32_t>(2);
+  binary_tree->left->right->left = new CBinaryTree<int32_t>(7);
+  binary_tree->left->right->right = new CBinaryTree<int32_t>(4);
+  binary_tree->right = new CBinaryTree<int32_t>(1);
+  binary_tree->right->left = new CBinaryTree<int32_t>(0);
+  binary_tree->right->right = new CBinaryTree<int32_t>(8);
+  auto* output = lowest_common_ancestor_binary_tree(binary_tree, binary_tree->left->right->left, binary_tree->right->right);
+  std::cout<<"236. Lowest Common Ancestor of a Binary Tree: "<<output->value;
+  destroy(binary_tree);
+}

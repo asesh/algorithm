@@ -1146,3 +1146,72 @@ void invoke_word_search() {
     }
   }
 }
+
+/*
+  0 1 2 3 4
+  a a b c a -> aba, aca, aaa
+
+  0 1 2 3 4 5 6
+  b b c b a b a -> aba, bcb, bbb, bab
+Character indices
+F 4 0 2
+L 6 5 2
+  a b c d e f g h i j k l m n o p q r s t u v w x y z
+*/
+int unique_length_three_palindromic_subsequences(std::string& input) {
+  int output = 0;
+  
+  std::vector<int> first(26, -1), last(26, -1);
+  for(int index = 0; index < input.size(); ++index) {
+    auto char_value = input[index] - 'a';
+    if(first[char_value] == -1) {
+      first[char_value] = index;
+    }
+    last[char_value] = index;
+  }
+  
+  for(int char_index = 0; char_index < 26; ++char_index) {
+    if(first[char_index] == -1) {
+      continue;
+    }
+    
+    std::unordered_set<char> set;
+    for(int index = first[char_index] + 1; index < last[char_index]; ++index) {
+      set.insert(input[index]);
+    }
+    
+    output += set.size();
+  }
+  
+  // TLE
+  // int size = input.size() - 1;
+  // int left = 0, middle = 1, right = 2;
+  // std::set<std::string> set;
+  // while(middle <= size) {
+  //   if(input[left] == input[right]) {
+  //     std::string str({input[left], input[middle], input[right]});
+  //     if(set.find(str) == set.end()) {
+  //       std::cout<<str<<", ";
+  //       set.insert(str);
+  //       ++output;
+  //     }
+  //   }
+
+  //   ++right;
+  //   if(right > size) {
+  //     ++middle;
+  //     right = middle + 1;
+  //   }
+  //   if(middle == size) {
+  //     ++left;
+  //     middle = left + 1;
+  //     right = middle + 1;
+  //   }
+  // }
+  
+  return output;
+}
+void invoke_unique_length_three_palindromic_subsequences() {
+  std::string input = "bbcbaba";
+  std::cout<<"1930. Unique Length-3 Palindromic Subsequences: "<<unique_length_three_palindromic_subsequences(input);
+}

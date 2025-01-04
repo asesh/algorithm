@@ -221,4 +221,9 @@ void invoke_flatten_binary_tree_to_linked_list();
 */
 void invoke_construct_binary_tree_from_inorder_and_postorder_traversal();
 
+/*
+236. Lowest Common Ancestor of a Binary Tree: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree
+*/
+void invoke_lowest_common_ancestor_binary_tree();
+
 #endif /* BINARY_TREE_HPP */

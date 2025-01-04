@@ -2484,3 +2484,41 @@ void invoke_search_2d_matrix_ii() {
   };
   std::cout<<std::boolalpha<<"240. Search a 2D Matrix II: "<<search_a_2d_matrix(matrix, 3);
 }
+
+/*
+Refer to Freeform: 373. Find K Pairs with Smallest Sums
+
+Input: nums1 = [1,2,11], nums2 = [2,4,6], k = 3
+ [1,2], [1,4], [1,6], [2,2], [2,4], [2,6]...
+   *      *             *
+
+Input: nums1 = [1,2,4,5,6], nums2 = [3,5,7,9], k = 3 Output => [[1,3],[2,3],[1,5]]
+ [1,3], [1,5], [1,7], [1,9], [2,3], [2,5], [2,7]...
+   *      *                    *
+   4      6      8      10     5
+
+Input: nums1 = [1,1,2], nums2 = [1,2,3], k = 2
+ [1,1], [1,2], [1,3], [1,1], [1,2],  [1,3], [2,1], [2,2], [2,3]
+   2      3      4      2      3       4      3      4      5
+   *                    *
+*/
+std::vector<std::vector<int>> find_k_pairs_with_smallest_sums(std::vector<int>& input_one, std::vector<int>& input_two, int k) {
+  std::vector<std::vector<int>> output;
+  
+  std::priority_queue<std::pair<int, std::pair<int, int>>, std::vector<std::pair<int, std::pair<int, int>>>, std::greater<>> min_heap;
+  
+  return output;
+}
+void invoke_find_k_pairs_with_smallest_sums() {
+  std::vector<int> input_one = {1,2,4,5,6}, input_two = {3,5,7,9};
+  auto k_smallest_sums = find_k_pairs_with_smallest_sums(input_one, input_two, 3);
+  std::cout<<"373. Find K Pairs with Smallest Sums: [";
+  for(auto& k_pair: k_smallest_sums) {
+    std::cout<<"[";
+    for(auto& num: k_pair) {
+      std::cout<<num<<", ";
+    }
+    std::cout<<"], ";
+  }
+  std::cout<<"]";
+}

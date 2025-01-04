@@ -428,4 +428,9 @@ void invoke_quick_sort();
 */
 void invoke_search_2d_matrix_ii();
 
+/*
+373. Find K Pairs with Smallest Sums: https://leetcode.com/problems/find-k-pairs-with-smallest-sums
+*/
+void invoke_find_k_pairs_with_smallest_sums();
+
 #endif /* NUMBER_HPP */

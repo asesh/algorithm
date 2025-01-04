@@ -110,4 +110,9 @@ void invoke_simplify_path();
 */
 void invoke_word_search();
 
+/*
+1930. Unique Length-3 Palindromic Subsequences: https://leetcode.com/problems/unique-length-3-palindromic-subsequences
+*/
+void invoke_unique_length_three_palindromic_subsequences();
+
 #endif /* string_hpp */

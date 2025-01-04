@@ -2501,11 +2501,39 @@ Input: nums1 = [1,1,2], nums2 = [1,2,3], k = 2
  [1,1], [1,2], [1,3], [1,1], [1,2],  [1,3], [2,1], [2,2], [2,3]
    2      3      4      2      3       4      3      4      5
    *                    *
+ 
+RC: O(min(k*logk, m*n*log(m*n)), SC: O(min(k, m*n))
 */
 std::vector<std::vector<int>> find_k_pairs_with_smallest_sums(std::vector<int>& input_one, std::vector<int>& input_two, int k) {
   std::vector<std::vector<int>> output;
   
+  int input_one_size = input_one.size(), input_two_size = input_two.size();
+  
+  std::set<std::pair<int, int>> visited; // Indices of input_one and input_two
+  // {sum of index1 and index2, {index1, index2}}
   std::priority_queue<std::pair<int, std::pair<int, int>>, std::vector<std::pair<int, std::pair<int, int>>>, std::greater<>> min_heap;
+  
+  // First the first element from both inputs
+  min_heap.push({input_one[0] + input_two[0], {0, 0}});
+  visited.insert({0, 0});
+  
+  while(k-- && !min_heap.empty()) {
+    auto top = min_heap.top();
+    min_heap.pop();
+    
+    auto first_index = top.second.first;
+    auto second_index = top.second.second;
+    output.push_back({input_one[first_index], input_two[second_index]});
+    
+    if(first_index + 1 < input_one_size &&
+       visited.find({first_index + 1, second_index}) == visited.end()) {
+      min_heap.push({input_one[first_index + 1] + input_two[second_index], {first_index + 1, second_index}});
+    }
+    if(second_index + 1 < input_two_size &&
+       visited.find({first_index, second_index + 1}) == visited.end()) {
+      min_heap.push({input_two[first_index] + input_one[second_index + 1], {first_index, second_index + 1}});
+    }
+  }
   
   return output;
 }

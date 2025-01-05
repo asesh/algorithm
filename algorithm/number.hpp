@@ -433,4 +433,9 @@ void invoke_search_2d_matrix_ii();
 */
 void invoke_find_k_pairs_with_smallest_sums();
 
+/*
+295. Find Median from Data Stream: https://leetcode.com/problems/find-median-from-data-stream
+*/
+void invoke_find_median_from_data_stream();
+
 #endif /* NUMBER_HPP */

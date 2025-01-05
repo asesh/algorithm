@@ -18,9 +18,11 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
+  invoke_find_median_from_data_stream();
+  
 //  invoke_unique_length_three_palindromic_subsequences();
   
-  invoke_find_k_pairs_with_smallest_sums();
+//  invoke_find_k_pairs_with_smallest_sums();
   
 //  invoke_lowest_common_ancestor_binary_tree();
   

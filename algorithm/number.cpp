@@ -2550,3 +2550,47 @@ void invoke_find_k_pairs_with_smallest_sums() {
   }
   std::cout<<"]";
 }
+
+/*
+Input: [41, 35, 62, 97, 108] (odd)
+ Process: store smaller half in max heap and bigger half in min heap
+ Sorted: [35, 41, 62, 97, 108]
+ min_heap: 62, 97, 108
+ max_heap: 41, 35
+ 
+Input: [41, 35, 62, 5, 97, 108] (even)
+ Sorted: [5, 35, 41, 62, 97, 108]
+ min_heap: 62, 97, 108
+ max_heap: 41, 25, 5
+*/
+class CMedianFinder {
+private:
+  std::priority_queue<int> max_heap;
+  std::priority_queue<int, std::vector<int>, std::greater<int>> min_heap;
+public:
+  CMedianFinder() {
+  }
+  void add_number(int number) {
+    min_heap.push(number);
+    max_heap.push(min_heap.top());
+    min_heap.pop();
+    
+    if(min_heap.size() < max_heap.size()) {
+      min_heap.push(max_heap.top());
+      max_heap.pop();
+    }
+  }
+  double find_median() {
+    return min_heap.size() > max_heap.size() ? min_heap.top() : (min_heap.top() + max_heap.top()) * 0.5;
+  }
+};
+void invoke_find_median_from_data_stream() {
+  CMedianFinder median_finder;
+//  median_finder.add_number(5);
+  median_finder.add_number(35);
+  median_finder.add_number(41);
+  median_finder.add_number(62);
+  median_finder.add_number(97);
+  median_finder.add_number(108);
+  std::cout<<"295. Find Median from Data Stream: "<<median_finder.find_median();
+}

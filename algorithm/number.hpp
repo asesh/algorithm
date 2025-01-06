@@ -438,4 +438,9 @@ void invoke_find_k_pairs_with_smallest_sums();
 */
 void invoke_find_median_from_data_stream();
 
+/*
+560. Subarray Sum Equals K: https://leetcode.com/problems/subarray-sum-equals-k
+*/
+void invoke_subarray_sum_equals_k();
+
 #endif /* NUMBER_HPP */

@@ -2594,3 +2594,41 @@ void invoke_find_median_from_data_stream() {
   median_finder.add_number(108);
   std::cout<<"295. Find Median from Data Stream: "<<median_finder.find_median();
 }
+
+/*
+         0 1 2
+Input:  [1,2,3], k = 3
+         0 1 2 3
+Preifx: [0,1,3,6]
+
+         0 1 2 3 4 5 6
+Input:  [1,3,4,6,2,5,8]
+             -----
+              12
+         0 1 2 3  4  5  6  7
+Prefix: [0,1,4,8,14,16,21,29]
+             ---------
+              16 - 4
+
+         0  1  2  3   4  5  6  7
+Input:  [3, 4, 7, 2, -3, 1, 4, 2], k: 7, Output: 3
+         0  1  2   3   4   5   6   7   8
+Prefix: [0, 3, 7, 14, 16, 13, 14, 18, 20]
+*/
+int subarray_sum_equals_k(std::vector<int>& input, int k) {
+  int output = 0, sum = 0;
+  std::unordered_map<int, int> prefix_map = {{0, 1}}; // 0:1, 1:1, 3:1,
+  for(auto& num: input) { // 1, 2, 3
+    sum += num; // 1, 3, 6
+    if(prefix_map.contains(sum - k)) { // 1-3, 3-3, 6-3
+      output += prefix_map[sum - k]; // 1, 2
+    }
+    prefix_map[sum] = prefix_map[sum] + 1;
+  }
+  
+  return output;
+}
+void invoke_subarray_sum_equals_k() {
+  std::vector<int> input = {3,4,7,2,-3,1,4,2}; // {1,2,3};
+  std::cout<<"560. Subarray Sum Equals K: "<<subarray_sum_equals_k(input, 7);
+}

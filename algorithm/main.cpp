@@ -18,7 +18,9 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_find_median_from_data_stream();
+  invoke_subarray_sum_equals_k();
+  
+//  invoke_find_median_from_data_stream();
   
 //  invoke_unique_length_three_palindromic_subsequences();
   

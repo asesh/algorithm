@@ -17,9 +17,10 @@ public:
 		value = data;
 	}
 	CSingleLinkedList(const std::initializer_list<Data>& input_list) {
+    auto* copy = this;
 		for(const auto& node_data: input_list) {
-      next = new CSingleLinkedList(node_data);
-      next = next->next;
+      copy->next = new CSingleLinkedList(node_data);
+      copy->next = copy->next->next;
 		}
 	}
 
@@ -163,5 +164,10 @@ void invoke_remove_duplicates_from_sorted_list_ii();
 61. Rotate List: https://leetcode.com/problems/rotate-list
 */
 void invoke_rotate_list();
+
+/*
+86. Partition List: https://leetcode.com/problems/partition-list/
+*/
+void invoke_partition_list();
 
 #endif /* linked_list_h */

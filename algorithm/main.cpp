@@ -18,7 +18,11 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_subarray_sum_equals_k();
+  invoke_word_subsets();
+  
+//  invoke_partition_list();
+  
+//  invoke_subarray_sum_equals_k();
   
 //  invoke_find_median_from_data_stream();
   

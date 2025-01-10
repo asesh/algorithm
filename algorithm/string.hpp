@@ -115,4 +115,9 @@ void invoke_word_search();
 */
 void invoke_unique_length_three_palindromic_subsequences();
 
+/*
+916. Word Subsets: https://leetcode.com/problems/word-subsets
+*/
+void invoke_word_subsets();
+
 #endif /* string_hpp */

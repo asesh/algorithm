@@ -293,3 +293,39 @@ void invoke_rotate_list() {
     output = output->next;
   }
 }
+
+/*
+Input: [1,4,4,2,3,5], x: 3, Output: [1,2,4,4,3,5]
+                           H
+         *   *       *   R
+     *           L
+ * - 1 - 4 - 4 - 2 - 3 - 5
+ x: 3
+ Output: 1 - 2 - 4 - 4 - 3 - 5
+*/
+CSingleLinkedList<int>* partition_list(CSingleLinkedList<int>* head, int x) {
+  CSingleLinkedList<int>* dummy_left = new CSingleLinkedList<int>(-1), *dummy_right = new CSingleLinkedList<int>(-1);
+  CSingleLinkedList<int>* left = dummy_left, *right = dummy_right;
+  
+  while(head) {
+    if(head->value < x) {
+      left = left->next = head;
+    } else {
+      right = right->next = head;
+    }
+    
+    head = head->next;
+  }
+  
+  left->next = dummy_right->next;
+  return dummy_left->next;
+}
+void invoke_partition_list() {
+  CSingleLinkedList<int>* head = new CSingleLinkedList<int>({1,4,4,2,3,5});
+  auto* output = partition_list(head, 3);
+  std::cout<<"86. Partition List: ";
+  while(output) {
+    std::cout<<output->value<<" -> ";
+    output = output->next;
+  }
+}

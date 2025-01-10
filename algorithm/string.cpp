@@ -1215,3 +1215,67 @@ void invoke_unique_length_three_palindromic_subsequences() {
   std::string input = "bbcbaba";
   std::cout<<"1930. Unique Length-3 Palindromic Subsequences: "<<unique_length_three_palindromic_subsequences(input);
 }
+
+/*
+Input: first_word: ["amazon","apple","facebook","google","leetcode"], second_word: ["lo", "eo"]
+Process:
+          1             1     1
+  a b c d e f g h i j k l m n o p q r s t u v w x y z
+  apple:
+  1       e             1       2
+  a b c d e f g h i j k l m n o p q r s t u v w x y z
+  leetcode:
+      1 1 3             1.    1.        1
+  a b c d e f g h i j k l m n o p q r s t u v w x y z
+
+Input: first_word: ["amazon","apple","facebook","google","leetcode","warriol","raven"], second_word; ["l", "rr"]
+Process:
+                      1           2
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+warriol:
+1               1     1     1     2         1
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+*/
+std::vector<std::string> word_subsets(std::vector<std::string>& first_words, std::vector<std::string>& second_words) {
+  auto counter = [](std::string& word) {
+    std::vector<int> character_count(26);
+    for(auto& character: word) {
+      character_count[character - 'a']++;
+    }
+    return character_count;
+  };
+  
+  std::vector<std::string> output;
+
+  std::vector<int> unique_character_count(26), current_character_count(26);
+  for(auto& word: second_words) {
+    current_character_count = counter(word);
+    for(int index = 0; index < 26; ++index) {
+      unique_character_count[index] = std::max(unique_character_count[index], current_character_count[index]);
+    }
+  }
+
+  for(auto& word: first_words) {
+    current_character_count = counter(word);
+    for(int index = 0; index < 26; ++index) {
+      if(current_character_count[index] < unique_character_count[index]) {
+        break;
+      }
+      if(index == 25) {
+        output.push_back(word);
+      }
+    }
+  }
+  
+  return output;
+}
+void invoke_word_subsets() {
+  std::vector<std::string> word_one = {"amazon","apple","facebook","google","leetcode","warriol"};
+  std::vector<std::string> word_two = {"lo","eo"};
+  auto output = word_subsets(word_one, word_two);
+  std::cout<<"916. Word Subsets: [";
+  for(auto& word: output) {
+    std::cout<<word<<", ";
+  }
+  std::cout<<"]";
+}

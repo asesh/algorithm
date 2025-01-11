@@ -1279,3 +1279,47 @@ void invoke_word_subsets() {
   }
   std::cout<<"]";
 }
+
+/*
+Input: "leetcode", k: 3
+     1 1 3             1     1         1
+ a b c d e f g h i j k l m n o p q r s t u v w x y z
+ odd characters: 6 > k so false
+ 
+Input: "annabelle", k: 2
+ 1 1     2             2   2
+ a b c d e f g h i j k l m n o p q r s t u v w x y z
+ odd characters: 2 < k so true
+ 
+Input: "true", k: 4
+                 1         1   1       1 1
+ a b c d e f g h i j k l m n o p q r s t u v w x y z
+ odd characters: 4 < k so true
+*/
+bool construct_k_palindrome_strings(std::string& input, int k) {
+  if(input.size() < k) {
+    return false;
+  }
+  
+  std::vector<int> character_array(26);
+  for(auto& character: input) {
+    character_array[character - 'a'] += 1;
+  }
+
+  int odd_counter = 0;
+  for(int index = 0; index < 26; ++index) {
+    if(character_array[index] != 0 && character_array[index] % 2 != 0) {
+      ++odd_counter;
+    }
+
+    if(odd_counter > k) {
+      return false;
+    }
+  }
+
+  return true;
+}
+void invoke_construct_k_palindrome_strings() {
+  std::string input = "leetcode";
+  std::cout<<"1400. Construct K Palindrome Strings: "<<std::boolalpha<<construct_k_palindrome_strings(input, 3);
+}

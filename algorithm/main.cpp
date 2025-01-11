@@ -18,7 +18,9 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_word_subsets();
+  invoke_construct_k_palindrome_strings();
+  
+//  invoke_word_subsets();
   
 //  invoke_partition_list();
   

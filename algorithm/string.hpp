@@ -120,4 +120,9 @@ void invoke_unique_length_three_palindromic_subsequences();
 */
 void invoke_word_subsets();
 
+/*
+1400. Construct K Palindrome Strings: https://leetcode.com/problems/construct-k-palindrome-strings
+*/
+void invoke_construct_k_palindrome_strings();
+
 #endif /* string_hpp */

@@ -1323,3 +1323,27 @@ void invoke_construct_k_palindrome_strings() {
   std::string input = "leetcode";
   std::cout<<"1400. Construct K Palindrome Strings: "<<std::boolalpha<<construct_k_palindrome_strings(input, 3);
 }
+
+int minimum_length_of_string_after_operations(std::string& input) {
+  int char_removal_count = 0;
+
+  std::unordered_map<char, int> char_count_map;
+  for(auto& character: input) {
+    char_count_map[character]++;
+  }
+
+  for(auto& key_value: char_count_map) {
+    int char_count = key_value.second;
+    if(char_count % 2 == 0) {
+      char_removal_count += char_count - 2;
+    } else {
+      char_removal_count += char_count - 1;
+    }
+  }
+
+  return input.size() - char_removal_count;
+}
+void invoke_minimum_length_of_string_after_operations() {
+  std::string input = "abaacbcbb";
+  std::cout<<"3223. Minimum Length of String After Operations: "<<minimum_length_of_string_after_operations(input);
+}

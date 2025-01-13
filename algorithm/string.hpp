@@ -125,4 +125,9 @@ void invoke_word_subsets();
 */
 void invoke_construct_k_palindrome_strings();
 
+/*
+3223. Minimum Length of String After Operations: https://leetcode.com/problems/minimum-length-of-string-after-operations
+*/
+void invoke_minimum_length_of_string_after_operations();
+
 #endif /* string_hpp */

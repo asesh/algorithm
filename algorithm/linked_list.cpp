@@ -329,3 +329,43 @@ void invoke_partition_list() {
     output = output->next;
   }
 }
+
+void test_linked_list() {
+  SLinkedList* dummy = new SLinkedList(-1);
+  
+  SLinkedList* next = new SLinkedList(0);
+  dummy->next = next;
+  
+  next->next = new SLinkedList(1);
+  next->next->next = new SLinkedList(2);
+  next->next->next->next = new SLinkedList(3);
+  
+  auto* node = dummy;
+  while(node) {
+    std::cout<<node->value;
+    auto* temp = node;
+    node = node->next;
+    
+    delete temp;
+  }
+}
+
+/*
+* <-> 1 <-> 2 <-> 3 <-> *
+*/
+void test_doubly_linked_list() {
+  SDoublyLinkedList* dummy_head = new SDoublyLinkedList(-1);
+  SDoublyLinkedList* dummy_tail = new SDoublyLinkedList(-1);
+  dummy_head->next = dummy_tail;
+  dummy_tail->previous = dummy_head;
+  
+//  SDoublyLinkedList* new_node = new SDoublyLinkedList(1);
+//  new_node->previous = dummy_head;
+//  dummy_head->next = new_node;
+  
+  while(dummy_head) {
+    auto* head = dummy_head;
+    dummy_head = dummy_head->next;
+    delete head;
+  }
+}

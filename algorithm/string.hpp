@@ -130,4 +130,9 @@ void invoke_construct_k_palindrome_strings();
 */
 void invoke_minimum_length_of_string_after_operations();
 
+/*
+2657. Find the Prefix Common Array of Two Arrays: https://leetcode.com/problems/find-the-prefix-common-array-of-two-arrays
+*/
+void invoke_find_the_prefix_common_array_of_two_arrays();
+
 #endif /* string_hpp */

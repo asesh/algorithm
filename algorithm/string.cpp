@@ -1347,3 +1347,35 @@ void invoke_minimum_length_of_string_after_operations() {
   std::string input = "abaacbcbb";
   std::cout<<"3223. Minimum Length of String After Operations: "<<minimum_length_of_string_after_operations(input);
 }
+
+std::vector<int> find_the_prefix_common_array_of_two_arrays(std::vector<int>& array_one, std::vector<int>& array_two) {
+  std::vector<int> output(array_one.size());
+  std::unordered_set<int> char_set;
+  int sum = 0;
+  
+  for(int index = 0; index < array_one.size(); ++index) {
+    if(array_one[index] == array_two[index]) {
+      ++sum;
+    } else {
+      if(char_set.contains(array_one[index])) {
+        ++sum;
+      }
+      if(char_set.contains(array_two[index])) {
+        ++sum;
+      }
+    }
+    char_set.insert(array_one[index]);
+    char_set.insert(array_two[index]);
+    output[index] = sum;
+  }
+  return output;
+}
+void invoke_find_the_prefix_common_array_of_two_arrays() {
+  std::vector<int> input_one = {1,3,2,4}, input_two = {3,1,2,4};
+  auto output = find_the_prefix_common_array_of_two_arrays(input_one, input_two);
+  std::cout<<"2657. Find the Prefix Common Array of Two Arrays: [";
+  for(auto& number: output) {
+    std::cout<<number<<", ";
+  }
+  std::cout<<"]";
+}

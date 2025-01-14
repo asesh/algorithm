@@ -9,6 +9,15 @@
 #ifndef linked_list_h
 #define linked_list_h
 
+struct SLinkedList {
+  int value = 0;
+  SLinkedList* next = nullptr;
+  
+  SLinkedList(int new_value) {
+    value = new_value;
+  }
+};
+
 template<typename Data>
 class CSingleLinkedList {
 public:
@@ -43,40 +52,46 @@ public:
 	Data value = 0;
 };
 
+struct SDoublyLinkedList {
+  int value = 0;
+  SDoublyLinkedList* next = nullptr;
+  SDoublyLinkedList* previous = nullptr;
+  
+  SDoublyLinkedList(int new_value) {
+    value = new_value;
+  }
+};
+
 // Double linked list
 template<typename DataType>
-class CDoubleLinkedList {
+class CDoublyLinkedList {
 public:
-	CDoubleLinkedList(DataType new_data) {
+	CDoublyLinkedList(DataType new_data) {
 		previous = next = nullptr;
 		value = new_data;
 	}
 
 	void add_previous_node(DataType new_data) {
-		CDoubleLinkedList<DataType>* temp_node = nullptr;
+		CDoublyLinkedList<DataType>* temp_node = nullptr;
 		if(previous) {
-			// Previous node exists already
 			temp_node = previous;
-			previous = new CDoubleLinkedList<DataType>(new_data);
+			previous = new CDoublyLinkedList<DataType>(new_data);
 			previous->next = temp_node;
 		}
 		else {
-			// Previous node doesn't exist
-			previous = new CDoubleLinkedList(new_data);
+			previous = new CDoublyLinkedList(new_data);
 			previous->next = this;
 		}
 	}
 
 	void add_next_node(DataType new_data) {
 		if(next) {
-			// Next node exits already
 			auto temp_node = next;
-			next = new CDoubleLinkedList<DataType>(new_data);
+			next = new CDoublyLinkedList<DataType>(new_data);
 			next->previous = temp_node;
 		}
 		else {
-			// Next node doesn't exists
-			next = new CDoubleLinkedList<DataType>(new_data);
+			next = new CDoublyLinkedList<DataType>(new_data);
 			next->previous = this;
 		}
 	}
@@ -102,7 +117,7 @@ public:
 	}
 
 	void print_all() const {
-		CDoubleLinkedList<DataType>* next_node = nullptr;
+		CDoublyLinkedList<DataType>* next_node = nullptr;
 		if(previous) {
 			next_node = previous;
 			while(next_node) {
@@ -127,7 +142,7 @@ public:
 	}
 
 protected:
-	CDoubleLinkedList* previous, *next;
+	CDoublyLinkedList* previous, *next;
 
 	DataType value;
 };
@@ -169,5 +184,9 @@ void invoke_rotate_list();
 86. Partition List: https://leetcode.com/problems/partition-list/
 */
 void invoke_partition_list();
+
+void test_linked_list();
+
+void test_doubly_linked_list();
 
 #endif /* linked_list_h */

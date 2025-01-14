@@ -18,7 +18,13 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_minimum_length_of_string_after_operations();
+  invoke_find_the_prefix_common_array_of_two_arrays();
+  
+//  test_doubly_linked_list();
+  
+//  test_linked_list();
+  
+//  invoke_minimum_length_of_string_after_operations();
   
 //  invoke_construct_k_palindrome_strings();
   

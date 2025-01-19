@@ -18,7 +18,9 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_bitwise_and_of_numbers_range();
+  invoke_number_of_1_bits();
+  
+//  invoke_bitwise_and_of_numbers_range();
   
 //  invoke_lru_cache();
   

@@ -2763,3 +2763,21 @@ int bitwise_and_of_numbers_range(int left, int right) {
 void invoke_bitwise_and_of_numbers_range() {
   std::cout<<"201. Bitwise AND of Numbers Range: "<<bitwise_and_of_numbers_range(5, 7);
 }
+
+/*
+Input: 12
+ 12: 1100
+ 1100 >> 1100 >> 0 & 1 => 110 >> 1 & 1 => (11 >> 1) & 1 => (1 >> 1) & 1 & 1
+ Output: 2
+*/
+int number_of_1_bits(int input) {
+  int output = 0;
+  for(int shift = 0; shift < 32; ++shift) {
+    output += (input >> shift) & 1;
+  }
+  
+  return output;
+}
+void invoke_number_of_1_bits() {
+  std::cout<<"191. Number of 1 Bits: "<<number_of_1_bits(21);
+}

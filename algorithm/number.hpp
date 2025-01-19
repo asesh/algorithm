@@ -453,4 +453,9 @@ void invoke_lru_cache();
 */
 void invoke_bitwise_and_of_numbers_range();
 
+/*
+191. Number of 1 Bits: https://leetcode.com/problems/number-of-1-bits
+*/
+void invoke_number_of_1_bits();
+
 #endif /* NUMBER_HPP */

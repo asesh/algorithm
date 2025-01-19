@@ -448,4 +448,9 @@ void invoke_subarray_sum_equals_k();
 */
 void invoke_lru_cache();
 
+/*
+201. Bitwise AND of Numbers Range: https://leetcode.com/problems/bitwise-and-of-numbers-range
+*/
+void invoke_bitwise_and_of_numbers_range();
+
 #endif /* NUMBER_HPP */

@@ -2735,3 +2735,31 @@ void invoke_lru_cache() {
   
   lru_cache.destroy();
 }
+
+/*
+Input: left: 5, right: 7, Ouptut: 4
+ 5: 101 >> 1 => 10 >> 1 => 1 (m)
+ 7: 111 >> 1 => 11 >> 1 => 1 (n)
+ shift count: 2
+ output: m << shift count
+ 
+Input: left: 1, right: 10
+ 1:  0001 >> 1 => 0000 >> 1 => 0000 >> 1 => 0000 >> 1 => 0000 >> 1
+ 10: 1010 >> 1 => 0101 >> 1 => 0010 >> 1 => 0001 >> 1 => 0000 >> 1
+ shft count: 5
+ output: m << shift count
+*/
+int bitwise_and_of_numbers_range(int left, int right) {
+  int shift_count = 0;
+  
+  while(left < right) {
+    left >>= 1;
+    right >>= 1;
+    ++shift_count;
+  }
+  
+  return left << shift_count;
+}
+void invoke_bitwise_and_of_numbers_range() {
+  std::cout<<"201. Bitwise AND of Numbers Range: "<<bitwise_and_of_numbers_range(5, 7);
+}

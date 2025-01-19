@@ -1719,25 +1719,33 @@ void invoke_h_index() {
 
 /*
 Input: [2,2,3,2] => Output: 3
- Total: 9 1001
- 2 10 & 1001 => 1
- 2
- 3 11 & 1001 => 1
- 2
+ 2: 10
+  0: (10 >> 0) & 1 = 0
+  1: (10 >> 1) & 1 = 1
+ 3: 11
+  0: (11 >> 0) & 1 = 1
+  1: (11 >> 1) & 1 = 1
  
- 10 | 10 = 10
- 10 | 11 = 11
- 
-Input: [0,1,0,1,0,1,99] => Output: 99
+ sum_bit:
+ 0: 0 + 0 + 1 + 0 = 0 -> (1 % 3) = (1 << 0) = 01
+ 1: 1 + 1 + 1 + 1 = 4 -> (4 % 3) = (1 << 1) = 11 <- Output
 */
 int single_number_ii(std::vector<int>& input) {
   int output = 0;
+  
+  for(int shift = 0; shift < 32; ++shift) {
+    int bit_sum = 0;
+    for(auto& num: input) {
+      bit_sum += ((num >> shift) & 1);
+    }
+    output = output | ((bit_sum % 3) << shift);
+  }
   
   return output;
 }
 void invoke_single_number_ii() {
   std::vector<int> input = {2,2,3,2};
-  std::cout<<"The single ii is: "<<single_number_ii(input);
+  std::cout<<"137. Single Number II: "<<single_number_ii(input);
 }
 
 /*
@@ -2631,4 +2639,31 @@ int subarray_sum_equals_k(std::vector<int>& input, int k) {
 void invoke_subarray_sum_equals_k() {
   std::vector<int> input = {3,4,7,2,-3,1,4,2}; // {1,2,3};
   std::cout<<"560. Subarray Sum Equals K: "<<subarray_sum_equals_k(input, 7);
+}
+
+/*
+Implementation using doubly linkedlist and hashmap
+first <-> last
+first <-> (1,1) <-> (2,2) <-> last
+*/
+class CLRUCache {
+public:
+  CLRUCache(int capacity) {
+  }
+  int get(int key) {
+    return -1;
+  }
+  void put(int key, int value) {
+  }
+};
+void invoke_lru_cache() {
+  CLRUCache lru_cache(5);
+  lru_cache.get(1);
+  lru_cache.put(1, 1);
+  lru_cache.put(2, 2);
+  lru_cache.put(3, 3);
+  lru_cache.put(4, 4);
+  lru_cache.put(5, 5);
+  lru_cache.get(2);
+  lru_cache.get(3);
 }

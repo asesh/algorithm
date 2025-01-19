@@ -443,4 +443,9 @@ void invoke_find_median_from_data_stream();
 */
 void invoke_subarray_sum_equals_k();
 
+/*
+146. LRU Cache: https://leetcode.com/problems/lru-cache
+*/
+void invoke_lru_cache();
+
 #endif /* NUMBER_HPP */

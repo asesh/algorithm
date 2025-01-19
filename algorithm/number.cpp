@@ -2643,27 +2643,95 @@ void invoke_subarray_sum_equals_k() {
 
 /*
 Implementation using doubly linkedlist and hashmap
-first <-> last
-first <-> (1,1) <-> (2,2) <-> last
+Input: [(1,1), (2,2)]
+ first <-> last
+ first <-> (1,1) <-> last
+ first <-> (1,1) <-> (2,2) <-> last
+ get(1):
+  remove(1)
+  add(1)
+  first <-> (2,2) <-> (1,1) <-> last
 */
 class CLRUCache {
+private:
+  SDoublyLinkedList* first = new SDoublyLinkedList(-1);
+  SDoublyLinkedList* last = new SDoublyLinkedList(-1);
+  
+  std::unordered_map<int, SDoublyLinkedList*> node_map;
+  
+  int capacity = 0;
 public:
   CLRUCache(int capacity) {
+    first->next = last;
+    last->previous = first;
+    
+    this->capacity = capacity;
   }
   int get(int key) {
-    return -1;
+    if(!node_map.contains(key)) {
+      return -1;
+    }
+    
+    auto* node = node_map[key];
+    remove(node);
+    add(node);
+    return node->value;
   }
   void put(int key, int value) {
+    SDoublyLinkedList* new_node = new SDoublyLinkedList(value);
+    if(node_map.contains(key)) {
+      auto* node = node_map[key];
+      remove(node);
+      delete node;
+    }
+    else if(capacity == node_map.size()) {
+      auto* next = first->next;
+      remove(next);
+      delete next;
+    }
+    add(new_node);
+    node_map[key] = new_node;
+  }
+  
+  void remove(SDoublyLinkedList* node) {
+    node->previous->next = node->next;
+    node->next->previous = node->previous;
+  }
+  void add(SDoublyLinkedList* node) {
+    auto* previous = last->previous;
+    previous->next = node;
+    node->previous = previous;
+    node->next = last;
+    last->previous = node;
+  }
+  
+  void destroy() {
+    while(first) {
+      auto* next = first->next;
+      delete first;
+      first = next;
+    }
   }
 };
 void invoke_lru_cache() {
   CLRUCache lru_cache(5);
-  lru_cache.get(1);
+  std::cout<<"146. LRU Cache: "<<std::endl<<"get(1): "<<lru_cache.get(1)<<std::endl;
+  std::cout<<"put(1,1)"<<std::endl;
   lru_cache.put(1, 1);
+  std::cout<<"get(1): "<<lru_cache.get(1)<<std::endl;
+  std::cout<<"put(2,2)"<<std::endl;
   lru_cache.put(2, 2);
+  std::cout<<"get(2): "<<lru_cache.get(2)<<std::endl;
+  std::cout<<"put(3,3)"<<std::endl;
   lru_cache.put(3, 3);
+  std::cout<<"get(3): "<<lru_cache.get(3)<<std::endl;
+  std::cout<<"put(4,4)"<<std::endl;
   lru_cache.put(4, 4);
+  std::cout<<"get(4): "<<lru_cache.get(4)<<std::endl;
+  std::cout<<"put(5,5)"<<std::endl;
   lru_cache.put(5, 5);
-  lru_cache.get(2);
-  lru_cache.get(3);
+  std::cout<<"get(2): "<<lru_cache.get(2)<<std::endl
+    <<"get(3): "<<lru_cache.get(3)<<std::endl;
+  
+  lru_cache.destroy();
 }

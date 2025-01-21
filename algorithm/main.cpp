@@ -18,7 +18,9 @@
 #include "trie.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_number_of_1_bits();
+  invoke_copy_list_with_random_pointer();
+  
+//  invoke_number_of_1_bits();
   
 //  invoke_bitwise_and_of_numbers_range();
   

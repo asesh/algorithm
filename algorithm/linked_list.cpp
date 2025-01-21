@@ -330,6 +330,59 @@ void invoke_partition_list() {
   }
 }
 
+/*
+Input: [1,null, 2,4, 3,2, 4,1]
+ Process:
+ key     value
+ 1,null  1
+ 2,4     2
+ 3,2     3
+ 4,1     4
+*/
+SLinkedList* copy_list_with_random_pointer(SLinkedList* head) {
+  std::unordered_map<SLinkedList*, SLinkedList*> node_map;
+  SLinkedList* node = head;
+  while(node) {
+    node_map[node] = new SLinkedList(node->value);
+    node = node->next;
+  }
+  node = head;
+  while(node) {
+    node_map[node]->next = node_map[node->next];
+    node_map[node]->random = node_map[node->random];
+    node = node->next;
+  }
+  
+  return node_map[head];
+}
+void invoke_copy_list_with_random_pointer() {
+  SLinkedList* head = new SLinkedList(1);
+  head->next = new SLinkedList(2);
+  head->next->next = new SLinkedList(3);
+  head->next->next->next = new SLinkedList(4);
+  head->next->random = head->next->next->next;
+  head->next->next->random = head->next->next;
+  head->next->next->next->random = head->next;
+  auto* output_node = copy_list_with_random_pointer(head);
+  auto* copy_output_node = output_node;
+  std::cout<<"138. Copy List with Random Pointer: ";
+  while(output_node) {
+    std::cout<<"("<<output_node->value<<",";
+    if(output_node->random) {
+      std::cout<<output_node->random->value;
+    } else {
+      std::cout<<"null";
+    }
+    std::cout<<") -> ";
+    output_node = output_node->next;
+  }
+  while(copy_output_node) {
+    auto* temp = copy_output_node;
+    copy_output_node = copy_output_node->next;
+    delete temp;
+  }
+}
+
 void test_linked_list() {
   SLinkedList* dummy = new SLinkedList(-1);
   

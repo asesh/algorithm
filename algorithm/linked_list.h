@@ -12,6 +12,7 @@
 struct SLinkedList {
   int value = 0;
   SLinkedList* next = nullptr;
+  SLinkedList* random = nullptr;
   
   SLinkedList(int new_value) {
     value = new_value;
@@ -62,7 +63,7 @@ struct SDoublyLinkedList {
   }
 };
 
-// Double linked list
+// Doubly linked list
 template<typename DataType>
 class CDoublyLinkedList {
 public:
@@ -184,6 +185,11 @@ void invoke_rotate_list();
 86. Partition List: https://leetcode.com/problems/partition-list/
 */
 void invoke_partition_list();
+
+/*
+138. Copy List with Random Pointer: https://leetcode.com/problems/copy-list-with-random-pointer
+*/
+void invoke_copy_list_with_random_pointer();
 
 void test_linked_list();
 

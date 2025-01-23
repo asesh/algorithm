@@ -458,4 +458,9 @@ void invoke_bitwise_and_of_numbers_range();
 */
 void invoke_number_of_1_bits();
 
+/*
+150. Evaluate Reverse Polish Notation: https://leetcode.com/problems/evaluate-reverse-polish-notation
+*/
+void invoke_evaluate_reverse_polish_notation();
+
 #endif /* NUMBER_HPP */

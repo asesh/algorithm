@@ -2781,3 +2781,45 @@ int number_of_1_bits(int input) {
 void invoke_number_of_1_bits() {
   std::cout<<"191. Number of 1 Bits: "<<number_of_1_bits(21);
 }
+
+/*
+Input: ["4","13","5","/","+"] => (4 + (13 / 5)) = 6
+ stack:
+ 5  X
+ 13 X
+ 2  X
+ 4  X
+ 6  X pop => answer
+*/
+int evaluate_reverse_polish_notation(std::vector<std::string>& tokens) {
+  std::stack<int> number_stack;
+  std::unordered_set<std::string> operators_list = {"+", "-", "*", "/"};
+
+  for(auto& token: tokens) {
+    if(operators_list.contains(token)) {
+      auto number_two = number_stack.top();
+      number_stack.pop();
+      auto number_one = number_stack.top();
+      number_stack.pop();
+      int sum = 0;
+      if(token.compare("+") == 0) {
+        sum = number_one + number_two;
+      } else if(token.compare("-") == 0) {
+        sum = number_one - number_two;
+      } else if(token.compare("*") == 0) {
+        sum = number_one * number_two;
+      } else {
+        sum = number_one / number_two;
+      }
+      number_stack.push(sum);
+    } else {
+      number_stack.push(std::stoi(token));
+    }
+  }
+
+  return number_stack.top();
+}
+void invoke_evaluate_reverse_polish_notation() {
+  std::vector<std::string> input = {"4","13","5","/","+"};
+  std::cout<<"150. Evaluate Reverse Polish Notation: "<<evaluate_reverse_polish_notation(input);
+}

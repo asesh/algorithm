@@ -159,6 +159,7 @@ public:
 public:
   CBinaryTree<GenericData>* left = nullptr;
   CBinaryTree<GenericData>* right = nullptr;
+  CBinaryTree<GenericData>* next = nullptr;
   
   GenericData value;
   
@@ -225,5 +226,10 @@ void invoke_construct_binary_tree_from_inorder_and_postorder_traversal();
 236. Lowest Common Ancestor of a Binary Tree: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree
 */
 void invoke_lowest_common_ancestor_binary_tree();
+
+/*
+117. Populating Next Right Pointers in Each Node II: https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii
+*/
+void invoke_populating_next_right_pointers_in_each_node_ii();
 
 #endif /* BINARY_TREE_HPP */

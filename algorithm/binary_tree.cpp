@@ -441,3 +441,41 @@ void invoke_lowest_common_ancestor_binary_tree() {
   std::cout<<"236. Lowest Common Ancestor of a Binary Tree: "<<output->value;
   destroy(binary_tree);
 }
+
+CBinaryTree<int>* populating_next_right_pointers_in_each_node_ii(CBinaryTree<int>* root) {
+  std::queue<CBinaryTree<int>*> node_queue;
+  node_queue.push(root);
+  
+  while(!node_queue.empty()) {
+    int nodes_count = node_queue.size();
+    for(int count = 0; count < nodes_count; ++count) {
+      auto* node = node_queue.front();
+      node_queue.pop();
+      
+      // Link node->left to node->right
+      if(count < nodes_count - 1) {
+        node->next = node_queue.front();
+      }
+      
+      if(node->left) {
+        node_queue.push(node->left);
+      }
+      if(node->right) {
+        node_queue.push(node->right);
+      }
+    }
+  }
+  return root;
+}
+void invoke_populating_next_right_pointers_in_each_node_ii() {
+  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(1);
+  binary_tree->left = new CBinaryTree<int32_t>(2);
+  binary_tree->left->left = new CBinaryTree<int32_t>(4);
+  binary_tree->left->right = new CBinaryTree<int32_t>(5);
+  binary_tree->right = new CBinaryTree<int32_t>(3);
+  binary_tree->right->left = new CBinaryTree<int32_t>(6);
+  binary_tree->right->right = new CBinaryTree<int32_t>(7);
+  auto* output = populating_next_right_pointers_in_each_node_ii(binary_tree);
+  std::cout<<"117. Populating Next Right Pointers in Each Node II: "<<output->value;
+  destroy(output);
+}

@@ -16,9 +16,16 @@
 #include "string.hpp"
 #include "graph.hpp"
 #include "trie.hpp"
+#include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_populating_next_right_pointers_in_each_node_ii();
+  invoke_construct_quad_tree();
+  
+//  invoke_maximum_number_of_fish_in_a_grid();
+  
+//  invoke_binary_tree_zigzag_level_order_traversal();
+  
+//  invoke_populating_next_right_pointers_in_each_node_ii();
   
 //  invoke_evaluate_reverse_polish_notation();
   

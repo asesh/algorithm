@@ -479,3 +479,21 @@ void invoke_populating_next_right_pointers_in_each_node_ii() {
   std::cout<<"117. Populating Next Right Pointers in Each Node II: "<<output->value;
   destroy(output);
 }
+
+std::vector<std::vector<int>> binary_tree_zigzag_level_order_traversal(CBinaryTree<int>* root) {
+  std::vector<std::vector<int>> output;
+  
+  return output;
+}
+void invoke_binary_tree_zigzag_level_order_traversal() {
+  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(1);
+  binary_tree->left = new CBinaryTree<int32_t>(2);
+  binary_tree->left->left = new CBinaryTree<int32_t>(4);
+  binary_tree->left->right = new CBinaryTree<int32_t>(5);
+  binary_tree->right = new CBinaryTree<int32_t>(3);
+  binary_tree->right->left = new CBinaryTree<int32_t>(6);
+  binary_tree->right->right = new CBinaryTree<int32_t>(7);
+  auto output = binary_tree_zigzag_level_order_traversal(binary_tree);
+  std::cout<<"103. Binary Tree Zigzag Level Order Traversal: ";
+  destroy(binary_tree);
+}

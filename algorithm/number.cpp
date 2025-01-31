@@ -2823,3 +2823,39 @@ void invoke_evaluate_reverse_polish_notation() {
   std::vector<std::string> input = {"4","13","5","/","+"};
   std::cout<<"150. Evaluate Reverse Polish Notation: "<<evaluate_reverse_polish_notation(input);
 }
+
+// DFS
+void maximum_number_of_fish_in_a_grid(std::vector<std::vector<int>>& grid,
+                                     int row, int column, int& output) {
+  if(row < 0 || row >= grid.size() || column < 0 || column >= grid[0].size() ||
+    grid[row][column] == 0) {
+    return;
+  }
+
+  output += grid[row][column];
+  grid[row][column] = 0;
+
+  maximum_number_of_fish_in_a_grid(grid, row, column + 1, output);
+  maximum_number_of_fish_in_a_grid(grid, row + 1, column, output);
+  maximum_number_of_fish_in_a_grid(grid, row, column - 1, output);
+  maximum_number_of_fish_in_a_grid(grid, row - 1, column, output);
+}
+void invoke_maximum_number_of_fish_in_a_grid() {
+  std::vector<std::vector<int>> grid = {
+    {0,2,1,0},
+    {4,0,0,3},
+    {1,0,0,4},
+    {0,3,2,0}
+  };
+  int output = 0;
+  std::vector<std::vector<bool>> visited(grid.size(), std::vector<bool>(grid[0].size(), false));
+  for(int row = 0; row < grid.size(); ++row) {
+    for(int column = 0; column < grid[0].size(); ++column) {
+      int num_fishes = 0;
+      maximum_number_of_fish_in_a_grid(grid, row, column, num_fishes);
+      output = std::max(output, num_fishes);
+    }
+  }
+  
+  std::cout<<"2658. Maximum Number of Fish in a Grid: "<<output;
+}

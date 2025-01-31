@@ -232,4 +232,9 @@ void invoke_lowest_common_ancestor_binary_tree();
 */
 void invoke_populating_next_right_pointers_in_each_node_ii();
 
+/*
+103. Binary Tree Zigzag Level Order Traversal: https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal
+*/
+void invoke_binary_tree_zigzag_level_order_traversal();
+
 #endif /* BINARY_TREE_HPP */

@@ -463,4 +463,9 @@ void invoke_number_of_1_bits();
 */
 void invoke_evaluate_reverse_polish_notation();
 
+/*
+2658. Maximum Number of Fish in a Grid: https://leetcode.com/problems/maximum-number-of-fish-in-a-grid
+*/
+void invoke_maximum_number_of_fish_in_a_grid();
+
 #endif /* NUMBER_HPP */

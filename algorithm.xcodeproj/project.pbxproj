@@ -14,6 +14,7 @@
 		CF9ECF012BE3430100676DFE /* graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF9ECEFB2BE3430100676DFE /* graph.cpp */; };
 		CF9ECF022BE3430100676DFE /* string.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF9ECEFD2BE3430100676DFE /* string.cpp */; };
 		CFB71B07272EE45D00724C26 /* linked_list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFB71B06272EE45D00724C26 /* linked_list.cpp */; };
+		CFCD88162D4CF0D600310ED9 /* tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFCD88152D4CF0D200310ED9 /* tree.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +46,8 @@
 		CF9ECEFF2BE3430100676DFE /* string.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = string.hpp; sourceTree = "<group>"; };
 		CFB71B06272EE45D00724C26 /* linked_list.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = linked_list.cpp; sourceTree = "<group>"; };
 		CFC588D226EA6A0F00ECB76A /* header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = header.h; sourceTree = "<group>"; };
+		CFCD88142D4CF0C300310ED9 /* tree.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tree.hpp; sourceTree = "<group>"; };
+		CFCD88152D4CF0D200310ED9 /* tree.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tree.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +80,8 @@
 		CF657F81244B2C6200A61FBD /* algorithm */ = {
 			isa = PBXGroup;
 			children = (
+				CFCD88152D4CF0D200310ED9 /* tree.cpp */,
+				CFCD88142D4CF0C300310ED9 /* tree.hpp */,
 				CF921DC42CE9C926006A52DD /* trie.cpp */,
 				CF921DC32CE9C91E006A52DD /* trie.hpp */,
 				CF9ECEFB2BE3430100676DFE /* graph.cpp */,
@@ -154,6 +159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF9ECF022BE3430100676DFE /* string.cpp in Sources */,
+				CFCD88162D4CF0D600310ED9 /* tree.cpp in Sources */,
 				CF9ECF002BE3430100676DFE /* number.cpp in Sources */,
 				CF921DC52CE9C927006A52DD /* trie.cpp in Sources */,
 				CFB71B07272EE45D00724C26 /* linked_list.cpp in Sources */,

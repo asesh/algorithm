@@ -482,18 +482,55 @@ void invoke_populating_next_right_pointers_in_each_node_ii() {
 
 std::vector<std::vector<int>> binary_tree_zigzag_level_order_traversal(CBinaryTree<int>* root) {
   std::vector<std::vector<int>> output;
+  std::queue<CBinaryTree<int>*> node_queue;
+  node_queue.push(root);
+  
+  bool left_to_right = true;
+  
+  while(!node_queue.empty()) {
+    int node_size = node_queue.size();
+    std::vector<int> level_order_values(node_size);
+    
+    for(int index = 0; index < node_size; ++index) {
+      auto* node = node_queue.front();
+      node_queue.pop();
+      
+      int dynamic_index = left_to_right ? index : node_size - index - 1;
+      level_order_values[dynamic_index] = node->value;
+      
+      if(node->left) {
+        node_queue.push(node->left);
+      }
+      if(node->right) {
+        node_queue.push(node->right);
+      }
+    }
+    output.push_back(level_order_values);
+    
+    left_to_right = !left_to_right;
+  }
   
   return output;
 }
 void invoke_binary_tree_zigzag_level_order_traversal() {
-  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(1);
-  binary_tree->left = new CBinaryTree<int32_t>(2);
-  binary_tree->left->left = new CBinaryTree<int32_t>(4);
-  binary_tree->left->right = new CBinaryTree<int32_t>(5);
-  binary_tree->right = new CBinaryTree<int32_t>(3);
-  binary_tree->right->left = new CBinaryTree<int32_t>(6);
-  binary_tree->right->right = new CBinaryTree<int32_t>(7);
+  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(8);
+  binary_tree->left = new CBinaryTree<int32_t>(4);
+  binary_tree->left->left = new CBinaryTree<int32_t>(2);
+  binary_tree->left->right = new CBinaryTree<int32_t>(6);
+  binary_tree->left->right->left = new CBinaryTree<int32_t>(5);
+  binary_tree->left->right->right = new CBinaryTree<int32_t>(7);
+  binary_tree->right = new CBinaryTree<int32_t>(10);
+  binary_tree->right->left = new CBinaryTree<int32_t>(9);
+  binary_tree->right->right = new CBinaryTree<int32_t>(11);
   auto output = binary_tree_zigzag_level_order_traversal(binary_tree);
-  std::cout<<"103. Binary Tree Zigzag Level Order Traversal: ";
+  std::cout<<"103. Binary Tree Zigzag Level Order Traversal: [";
+  for(auto& level_order_nodes: output) {
+    std::cout<<"[";
+    for(auto& node_value: level_order_nodes) {
+      std::cout<<node_value<<", ";
+    }
+    std::cout<<"],";
+  }
+  std::cout<<"]";
   destroy(binary_tree);
 }

@@ -2859,3 +2859,104 @@ void invoke_maximum_number_of_fish_in_a_grid() {
   
   std::cout<<"2658. Maximum Number of Fish in a Grid: "<<output;
 }
+
+/*
+ L     M     H
+[0,1,2,3,4,5,6]
+L     H
+0 1 2 3
+L H
+0 1 2 3
+
+ L     M     H
+[4,5,6,0,1,2,3]
+L     H
+4,5,6,0,1,2,3
+  M
+4,5,6,0
+L H
+6,0
+0
+
+ L     M     H
+[5,6,0,1,2,3,4]
+L     H
+5,6,0,1
+L H
+0,1
+
+ L   M   H
+[3,4,5,1,2]
+L H
+1,2
+ */
+int find_minimum_in_rotated_sorted_array(std::vector<int>& input) {
+  int low = 0, high = input.size() - 1;
+  while(low < high) {
+    int median = (low + high) / 2;
+    if(input[median] > input[high]) {
+      low = median + 1;
+    } else {
+      high = median;
+    }
+  }
+  
+  return input[low];
+}
+void invoke_find_minimum_in_rotated_sorted_array() {
+  std::vector<int> input = {3,4,5,1,2}; // {5,6,0,1,2,3,4};
+  std::cout<<"153. Find Minimum in Rotated Sorted Array: "<<find_minimum_in_rotated_sorted_array(input);
+}
+
+// DFS
+void sorround_regions(std::vector<std::vector<char>>& grid, int row, int column) {
+  if(row < 0 || row >= grid.size() || column < 0 || column >= grid[0].size() || grid[row][column] == 'X' || grid[row][column] == 'N') {
+    return;
+  }
+  
+  grid[row][column] = 'N';
+  
+  sorround_regions(grid, row, column - 1); // Left
+  sorround_regions(grid, row - 1, column); // Top
+  sorround_regions(grid, row, column + 1); // Right
+  sorround_regions(grid, row + 1, column); // Bottom
+}
+void invoke_sorround_regions() {
+  std::vector<std::vector<char>> grid = {
+    {'X','X','X','X'},
+    {'X','O','O','X'},
+    {'X','X','O','X'},
+    {'X','O','X','X'}
+    
+//    {'X','X','X','X'},
+//    {'X','X','O','X'},
+//    {'X','O','O','X'},
+//    {'X','O','X','X'}
+  };
+  int rows = grid.size(), columns = grid[0].size();
+  for(int row = 0; row < rows; ++row) {
+    for(int column = 0; column < columns; ++column) {
+      if(row == 0 || row == rows - 1 || column == 0 || column == columns - 1) {
+        sorround_regions(grid, row, column);
+      }
+    }
+  }
+  for(int row = 0; row < rows; ++row) {
+    for(int column = 0; column < columns; ++column) {
+      if(grid[row][column] == 'N') {
+        grid[row][column] = 'O';
+      } else if(grid[row][column] == 'O') {
+        grid[row][column] = 'X';
+      }
+    }
+  }
+  std::cout<<"130. Surrounded Regions: ["<<std::endl;
+  for(auto& row: grid) {
+    std::cout<<"{";
+    for(auto& cell_value: row) {
+      std::cout<<cell_value<<", ";
+    }
+    std::cout<<"}"<<std::endl;
+  }
+  std::cout<<"]";
+}

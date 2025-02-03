@@ -468,4 +468,14 @@ void invoke_evaluate_reverse_polish_notation();
 */
 void invoke_maximum_number_of_fish_in_a_grid();
 
+/*
+153. Find Minimum in Rotated Sorted Array: https://leetcode.com/problems/find-minimum-in-rotated-sorted-array
+*/
+void invoke_find_minimum_in_rotated_sorted_array();
+
+/*
+130. Surrounded Regions: https://leetcode.com/problems/surrounded-regions
+*/
+void invoke_sorround_regions();
+
 #endif /* NUMBER_HPP */

@@ -19,7 +19,11 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_sorround_regions();
+  invoke_house_robber();
+  
+//  invoke_insert_interval();
+  
+//  invoke_sorround_regions();
   
 //  invoke_find_minimum_in_rotated_sorted_array();
   

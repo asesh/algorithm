@@ -2960,3 +2960,112 @@ void invoke_sorround_regions() {
   }
   std::cout<<"]";
 }
+
+/*
+Input: [{1,2},{3,5},{6,7},{8,10},{12,16}], new_interval: [4,8]
+Output: [{1,2},{3,10},{12,16}]
+*/
+std::vector<std::vector<int>> insert_interval(std::vector<std::vector<int>>& intervals,
+                                              std::vector<int>& new_interval) {
+  std::vector<std::vector<int>> output;
+  int current_index = 0, max_index = intervals.size();
+  
+  // For non-overlapping intervals
+  while(current_index < max_index && intervals[current_index][1] < new_interval[0]) {
+    output.push_back(intervals[current_index++]);
+  }
+  
+  // For overlapping intervals
+  while(current_index < max_index && intervals[current_index][0] <= new_interval[1]) {
+    new_interval[0] = std::min(intervals[1][0], new_interval[0]);
+    new_interval[1] = std::max(intervals[1][1], new_interval[1]);
+    ++current_index;
+  }
+  output.push_back(new_interval);
+  
+  // For the remaining non-overlapping intervals
+  while(current_index < max_index) {
+    output.push_back(intervals[current_index++]);
+  }
+  
+  return output;
+}
+void invoke_insert_interval() {
+  std::vector<std::vector<int>> intervals = {
+    {1,2},{3,5},{6,7},{8,10},{12,16}
+  };
+  std::vector<int> new_interval = {4,8};
+  auto output = insert_interval(intervals, new_interval);
+  std::cout<<"57. Insert Interval: [";
+  for(auto& interval_range: output) {
+    std::cout<<"{";
+    for(auto& value: interval_range) {
+      std::cout<<value<<", ";
+    }
+    std::cout<<"}, ";
+  }
+  std::cout<<"]";
+}
+
+/*
+Input: [100, 10, 1, 10, 10, 100] => 210
+Process:
+  *        *      *
+ [100, 10, 1, 10, 100]
+ 
+Input: [1, 10, 1, 5, 2, 100, 400] => 415
+Process:
+  C
+     *      *          *
+  0  1   2  3  4  5    6
+ [1, 10, 1, 5, 2, 100, 400]
+Using iterative approach
+ value = max(input[index] + cache[index + 2], cache[index + 1])
+ cache (DP table):
+  0  1  2  3  4  5  6    7
+ [0, 0, 0, 0, 0, 0, 400, 0]
+ [0, 0, 0, 0, 0, 400, 400, 0]
+ [0, 0, 0, 0, 402, 400, 400, 0]
+ [0, 0, 0, 405, 402, 400, 400, 0]
+ [0, 0, 405, 405, 402, 400, 400, 0]
+ [0, 415, 405, 405, 402, 400, 400, 0]
+ [415, 415, 405, 405, 402, 400, 400, 0]
+   ^answer
+*/
+// Usin recursion
+int house_robber(int index, std::vector<int>& houses, std::vector<int>& cache) {
+  if(index >= houses.size()) {
+    return 0;
+  }
+  
+  if(cache[index] != -1) {
+    return cache[index];
+  }
+  
+  int output = std::max(houses[index] + house_robber(index + 2, houses, cache),
+                        house_robber(index + 1, houses, cache));
+  cache[index] = output;
+  
+  return output;
+}
+int house_robber(std::vector<int>& houses) {
+  int total_houses = houses.size();
+  std::vector<int> cache(total_houses + 1);
+  cache[total_houses] = 0;
+  cache[total_houses - 1] = houses[total_houses - 1];
+  
+  for(int index = total_houses - 2; index >= 0; --index) {
+    cache[index] = std::max(houses[index] + cache[index + 2], cache[index + 1]);
+  }
+  
+  return cache[0];
+}
+void invoke_house_robber() {
+  std::vector<int> houses = {1, 10, 1, 5, 2, 100, 400};
+  
+//  std::vector<int> cache(houses.size(), -1);
+//  std::cout<<"198. House Robber: "<<house_robber(0, houses, cache);
+  
+  // Using iterative approach and DP
+  std::cout<<"198. House Robber: "<<house_robber(houses);
+}

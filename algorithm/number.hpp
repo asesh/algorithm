@@ -478,4 +478,14 @@ void invoke_find_minimum_in_rotated_sorted_array();
 */
 void invoke_sorround_regions();
 
+/*
+57. Insert Interval: https://leetcode.com/problems/insert-interval
+*/
+void invoke_insert_interval();
+
+/*
+198. House Robber: https://leetcode.com/problems/house-robber
+*/
+void invoke_house_robber();
+
 #endif /* NUMBER_HPP */

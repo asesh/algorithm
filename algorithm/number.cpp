@@ -3031,8 +3031,18 @@ Using iterative approach
  [0, 415, 405, 405, 402, 400, 400, 0]
  [415, 415, 405, 405, 402, 400, 400, 0]
    ^answer
+ 
+Using iterative approach and O(1) space:
+ rob_next: 400
+ rob_alternate_next: 100,
+ max: max(C + P, N)
+                  C    N     P
+               C  N    P
+     *      *          *
+  0  1   2  3  4  5    6     0
+ [1, 10, 1, 5, 2, 100, 400]
 */
-// Usin recursion
+// Using recursion
 int house_robber(int index, std::vector<int>& houses, std::vector<int>& cache) {
   if(index >= houses.size()) {
     return 0;
@@ -3050,15 +3060,28 @@ int house_robber(int index, std::vector<int>& houses, std::vector<int>& cache) {
 }
 int house_robber(std::vector<int>& houses) {
   int total_houses = houses.size();
-  std::vector<int> cache(total_houses + 1);
-  cache[total_houses] = 0;
-  cache[total_houses - 1] = houses[total_houses - 1];
+  
+  // Using DP
+//  std::vector<int> cache(total_houses + 1);
+//  cache[total_houses] = 0;
+//  cache[total_houses - 1] = houses[total_houses - 1];
+//  
+//  for(int index = total_houses - 2; index >= 0; --index) {
+//    cache[index] = std::max(houses[index] + cache[index + 2], cache[index + 1]);
+//  }
+//  
+//  return cache[0];
+  
+  // Using constant space
+  int rob_next = houses[total_houses - 1], rob_alternate_next = 0;
   
   for(int index = total_houses - 2; index >= 0; --index) {
-    cache[index] = std::max(houses[index] + cache[index + 2], cache[index + 1]);
+    auto max_loot = std::max(houses[index] + rob_alternate_next, rob_next); // 402, 405
+    rob_alternate_next = rob_next; // 400,
+    rob_next = max_loot; // 400 + 2, 405
   }
   
-  return cache[0];
+  return rob_next;
 }
 void invoke_house_robber() {
   std::vector<int> houses = {1, 10, 1, 5, 2, 100, 400};

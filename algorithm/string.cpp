@@ -1379,3 +1379,35 @@ void invoke_find_the_prefix_common_array_of_two_arrays() {
   }
   std::cout<<"]";
 }
+
+/*
+Input: "applepenapple", dict: ["apple","pen"]
+Process: BU approach (tabulation)
+ 0 1 2 3 4 5 6 7 8 9 0 1 12
+ a p p l e p e n a p p l e
+ f f f f t f f t f f f f t
+*/
+bool word_break(std::string& word, std::vector<std::string>& dictionary) {
+  std::vector<bool> table(word.size());
+  
+  for(int index = 0; index < word.size(); ++index) {
+    for(auto& dict_word: dictionary) {
+      if(index < dict_word.size() - 1) {
+        continue;
+      }
+      
+      if(index == dict_word.size() - 1 || table[index - dict_word.size()]) {
+        if(word.substr(index - dict_word.size() + 1, dict_word.size()) == dict_word) {
+          table[index] = true;
+          break;
+        }
+      }
+    }
+  }
+  return table[word.size() - 1];
+}
+void invoke_word_break() {
+  std::string word = "applepenapple";
+  std::vector<std::string> word_dictionary  = {"apple","pen"};
+  std::cout<<std::boolalpha<<"139. Word Break: "<<word_break(word, word_dictionary);
+}

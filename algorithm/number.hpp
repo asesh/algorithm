@@ -488,4 +488,9 @@ void invoke_insert_interval();
 */
 void invoke_house_robber();
 
+/*
+322. Coin Change: https://leetcode.com/problems/coin-change
+*/
+void invoke_coin_change();
+
 #endif /* NUMBER_HPP */

@@ -19,7 +19,11 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_house_robber();
+//  invoke_coin_change();
+  
+  invoke_word_break();
+  
+//  invoke_house_robber();
   
 //  invoke_insert_interval();
   

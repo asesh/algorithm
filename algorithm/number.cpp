@@ -3092,3 +3092,62 @@ void invoke_house_robber() {
   // Using iterative approach and DP
   std::cout<<"198. House Robber: "<<house_robber(houses);
 }
+
+/*
+ coins: [1,2,5], amount: 11
+ Output: 3 => 5 + 5 + 1
+
+ 1 1 1 1 1 1 1 1 1 1  <- 11
+ 2 2 2 2 2 1 <- 6
+ 5 5 1 <- 3
+*/
+// TLE
+int coin_change(std::vector<int>& coins, int index,
+  int number_of_coins, int64_t sum, int target) {
+
+  if(index >= coins.size() || sum > target) {
+    return 0;
+  }
+
+  if(sum == target) {
+    return number_of_coins;
+  }
+
+  int min_coins = INT_MAX;
+  for(int current_index = index; current_index < coins.size(); ++current_index) {
+    int total_coins = coin_change(coins, current_index, number_of_coins + 1, sum + coins[current_index], target);
+    if(total_coins > 0) {
+      min_coins = std::min(min_coins, total_coins);
+    }
+  }
+
+  return min_coins == INT_MAX ? -1 : min_coins;
+}
+void invoke_coin_change() {
+  int amount = 11;
+  std::vector<int> coins = {1,2,5};
+  
+//  std::cout<<"322. Coin Change: "<<coin_change(coins, 0, 0, 0, 11);
+  
+  /*
+  DP BU approach
+                 *
+  index: 0 1  2  3  4  5  6  7  8  9  10 11
+  dp:    0 12 12 12 12 12 12 12 12 12 12 12
+  dp:    0 1  12 12 12 12 12 12 12 12 12 12
+  dp:    0 1  1  12 12 12 12 12 12 12 12 12
+  dp:    0 1  1  2  12 12 12 12 12 12 12 12
+   ...
+  */
+  std::vector<int> table(amount + 1, amount + 1);
+  table[0] = 0;
+  for(int current_amount = 1; current_amount <= amount; ++current_amount) {
+    for(auto& coin: coins) {
+      if(coin <= current_amount) {
+        table[current_amount] = std::min(table[current_amount], 1 + table[current_amount - coin]);
+      }
+    }
+  }
+  
+  std::cout<<"322. Coin Change: "<<(table[amount] > amount ? -1 : table[amount]);
+}

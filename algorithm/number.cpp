@@ -3151,3 +3151,89 @@ void invoke_coin_change() {
   
   std::cout<<"322. Coin Change: "<<(table[amount] > amount ? -1 : table[amount]);
 }
+
+/*
+Input: [10,9,2,5,3,7], Output: 3
+            R
+          L
+ 10 9 2 5 3 7
+ 1  1 1 2 2 3 (DP table)
+ L < R: dp[i] = std::max(R, L + 1)
+ 
+ Binary search to reduce RC
+  C
+ 10 9 2 5 3 7 101 18
+ 0
+ [10]
+ [9]
+ [2]
+ [2,5]
+ [2,3]
+ [2,3,7]
+ [2,3,7,101]
+
+ 0 1 2 3
+ [2,3,7,101]
+
+ [4,10,4,3,8,9]
+ 0 1  2 3 4 5
+ 4 10 4 3 8 9
+ [4,10]
+
+ [3,5,6,2,5,4,19,5,6,7,12]
+ C
+ 3 5 6 2 5 4 19 5 6 7 12
+ L   H
+ 0 1 2
+ [2,5,6]
+*/
+int binary_search_longest_increasing_subsequence(std::vector<int>& nums, int number) {
+    int low = 0, high = nums.size() - 1;
+    while(low < high) {
+      int median = (low + high) / 2; // 1
+      if(nums[median] == number) {
+        return median;
+      }
+      if(number < nums[median]) {
+        high = median;
+      } else {
+        low = median + 1;
+      }
+    }
+
+    return low;
+  }
+int longest_increasing_subsequence(std::vector<int>& input) {
+  // RC: O(n^2)
+//  int max_subsequence = 1;
+//  std::vector<int> table(input.size(), 1);
+//  
+//  for(int right = 1; right < input.size(); ++right) {
+//    for(int left = 0; left < right; ++left) {
+//      if(input[left] < input[right]) {
+//        table[right] = std::max(table[left] + 1, table[right]);
+//        max_subsequence = table[right];
+//      }
+//    }
+//  }
+//  return max_subsequence;
+  
+  std::vector<int> max_subsequence;
+  max_subsequence.push_back(input[0]);
+
+  for(int current = 1; current < input.size(); ++current) {
+    int number = input[current];
+    if(number > max_subsequence.back()) {
+      max_subsequence.push_back(number);
+    } else {
+      int replace_index = binary_search_longest_increasing_subsequence(max_subsequence, number);
+      max_subsequence[replace_index] = number;
+    }
+  }
+
+  return max_subsequence.size();
+}
+void invoke_longest_increasing_subsequence() {
+  std::vector<int> input = {3,5,6,2,5,4,19,5,6,7,12}; //{10,9,2,5,3,7};
+  std::cout<<"300. Longest Increasing Subsequence: "<<longest_increasing_subsequence(input);
+}

@@ -19,9 +19,11 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
+  invoke_longest_increasing_subsequence();
+  
 //  invoke_coin_change();
   
-  invoke_word_break();
+//  invoke_word_break();
   
 //  invoke_house_robber();
   

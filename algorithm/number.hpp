@@ -493,4 +493,9 @@ void invoke_house_robber();
 */
 void invoke_coin_change();
 
+/*
+300. Longest Increasing Subsequence: https://leetcode.com/problems/longest-increasing-subsequence/
+*/
+void invoke_longest_increasing_subsequence();
+
 #endif /* NUMBER_HPP */

@@ -3188,21 +3188,21 @@ Input: [10,9,2,5,3,7], Output: 3
  [2,5,6]
 */
 int binary_search_longest_increasing_subsequence(std::vector<int>& nums, int number) {
-    int low = 0, high = nums.size() - 1;
-    while(low < high) {
-      int median = (low + high) / 2; // 1
-      if(nums[median] == number) {
-        return median;
-      }
-      if(number < nums[median]) {
-        high = median;
-      } else {
-        low = median + 1;
-      }
+  int low = 0, high = nums.size() - 1;
+  while(low < high) {
+    int median = (low + high) / 2; // 1
+    if(nums[median] == number) {
+      return median;
     }
-
-    return low;
+    if(number < nums[median]) {
+      high = median;
+    } else {
+      low = median + 1;
+    }
   }
+
+  return low;
+}
 int longest_increasing_subsequence(std::vector<int>& input) {
   // RC: O(n^2)
 //  int max_subsequence = 1;
@@ -3236,4 +3236,60 @@ int longest_increasing_subsequence(std::vector<int>& input) {
 void invoke_longest_increasing_subsequence() {
   std::vector<int> input = {3,5,6,2,5,4,19,5,6,7,12}; //{10,9,2,5,3,7};
   std::cout<<"300. Longest Increasing Subsequence: "<<longest_increasing_subsequence(input);
+}
+
+/*
+Input: [[2],[3,4],[6,5,7],[4,1,8,3]]
+ BU approach in-place
+    2 => 2
+   3 4 => 5 6
+  6 5 7 => 9 8 12
+ 4 1 8 3 => 10 6 13 10
+
+ BU approach by flipping triangle
+ 4 1 8 3 => 4 1 8 3
+  6 5 7 => 7 6 10
+   3 4 => 9 10
+    2 => 11
+*/
+int triangle(std::vector<std::vector<int>>& triangle) {
+  // BU approach by flipping triangle
+  for(int row_index = triangle.size() - 2; row_index >= 0; --row_index) {
+    for(int column_index = 0; column_index < triangle[row_index].size(); ++column_index) {
+      triangle[row_index][column_index] += std::min(triangle[row_index + 1][column_index + 1],
+        triangle[row_index + 1][column_index]);
+    }
+  }
+  return triangle[0][0];
+  
+  // BU approach in-place
+//  int output = triangle[0][0];
+//  for(int row_index = 1; row_index < triangle.size(); ++row_index) {
+//    int row_min_value = INT_MAX;
+//    for(int column_index = 0; column_index < triangle[row_index].size(); ++column_index) {
+//      // column == 0 first column and row == column last column else middle cells
+//      if(column_index == 0) {
+//        triangle[row_index][column_index] += triangle[row_index - 1][column_index];
+//      } else if(row_index == column_index) {
+//        triangle[row_index][column_index] += triangle[row_index - 1][column_index - 1];
+//      } else {
+//        triangle[row_index][column_index] += std::min(triangle[row_index - 1][column_index],
+//          triangle[row_index - 1][column_index - 1]);
+//      }
+//
+//      row_min_value = std::min(row_min_value, triangle[row_index][column_index]);
+//    }
+//    output = row_min_value;
+//  }
+//
+//  return output;
+}
+void invoke_triangle() {
+  std::vector<std::vector<int>> input = {
+    {2},
+    {3,4},
+    {6,5,7},
+    {4,1,8,3}
+  };
+  std::cout<<"120. Triangle: "<<triangle(input);
 }

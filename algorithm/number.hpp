@@ -498,4 +498,9 @@ void invoke_coin_change();
 */
 void invoke_longest_increasing_subsequence();
 
+/*
+120. Triangle: https://leetcode.com/problems/triangle
+*/
+void invoke_triangle();
+
 #endif /* NUMBER_HPP */

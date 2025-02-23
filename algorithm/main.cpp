@@ -19,7 +19,9 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_longest_increasing_subsequence();
+  invoke_triangle();
+  
+//  invoke_longest_increasing_subsequence();
   
 //  invoke_coin_change();
   

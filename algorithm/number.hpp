@@ -503,4 +503,9 @@ void invoke_longest_increasing_subsequence();
 */
 void invoke_triangle();
 
+/*
+1749. Maximum Absolute Sum of Any Subarray: https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray
+*/
+void invoke_maximum_absolute_sum_of_any_subarray();
+
 #endif /* NUMBER_HPP */

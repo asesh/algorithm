@@ -19,7 +19,9 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_triangle();
+  invoke_maximum_absolute_sum_of_any_subarray();
+  
+//  invoke_triangle();
   
 //  invoke_longest_increasing_subsequence();
   

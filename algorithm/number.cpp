@@ -3293,3 +3293,30 @@ void invoke_triangle() {
   };
   std::cout<<"120. Triangle: "<<triangle(input);
 }
+
+/*
+Input: [2,-5,1,-4,3,-2], Output: abs(-5+1-4) = 8
+ compute prefix sum, max prefix sum, min prefix sum
+ answer: max prefix sum - min prefix sum
+Process:
+ 
+    *
+ 2 -5 1 -4 3 -2 => prefix: 2, max: , min:
+ 2 -5 1 -4 3 -2 => prefix: 2, max: , min:
+*/
+int maximum_absolute_sum_of_any_subarray(std::vector<int>& input) {
+  int prefix_sum = 0, max_prefix_sum = 0, min_prefix_sum = 0;
+  
+  for(auto& number: input) {
+    prefix_sum += number;
+    
+    max_prefix_sum = std::max(max_prefix_sum, prefix_sum);
+    min_prefix_sum = std::min(min_prefix_sum, prefix_sum);
+  }
+  
+  return max_prefix_sum - min_prefix_sum;
+}
+void invoke_maximum_absolute_sum_of_any_subarray() {
+  std::vector<int> input = {2,-5,1,-4,3,-2};
+  std::cout<<"1749. Maximum Absolute Sum of Any Subarray: "<<maximum_absolute_sum_of_any_subarray(input);
+}

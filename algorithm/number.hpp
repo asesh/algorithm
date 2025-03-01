@@ -508,4 +508,9 @@ void invoke_triangle();
 */
 void invoke_maximum_absolute_sum_of_any_subarray();
 
+/*
+63. Unique Paths II: https://leetcode.com/problems/unique-paths-ii
+*/
+void invoke_unique_paths_ii();
+
 #endif /* NUMBER_HPP */

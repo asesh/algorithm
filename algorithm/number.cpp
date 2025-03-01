@@ -3320,3 +3320,42 @@ void invoke_maximum_absolute_sum_of_any_subarray() {
   std::vector<int> input = {2,-5,1,-4,3,-2};
   std::cout<<"1749. Maximum Absolute Sum of Any Subarray: "<<maximum_absolute_sum_of_any_subarray(input);
 }
+
+/*
+Input:
+ [0,0,0]
+ [0,0,0] => 4
+ [0,1,0]
+ [0,0,0]*
+Process:
+            DP table     Final DP table
+ [0,0,0]    [0,1,0,0]    [0,1,0,0]
+ [0,0,0] => [0,0,0,0] => [0,1,1,1]
+ [0,1,0]    [0,0,0,0]    [0,1,2,3]
+ [0,0,0]*   [0,0,0,0]    [0,1,0,3]
+            [0,0,0,0]    [0,1,1,4]
+*/
+int unique_paths_ii(std::vector<std::vector<int>>& input) {
+  int rows = input.size(), columns = input[0].size();
+  std::vector<std::vector<int>> dp(rows + 1, std::vector<int>(columns + 1, 0));
+  dp[0][1] = 1;
+  
+  for(int row = 1; row <= rows; ++row) {
+    for(int column = 1; column <= columns; ++column) {
+      if(!input[row - 1][column - 1]) {
+        dp[row][column] = dp[row - 1][column] + dp[row][column - 1];
+      }
+    }
+  }
+  
+  return dp[rows][columns];
+}
+void invoke_unique_paths_ii() {
+  std::vector<std::vector<int>> input = {
+    {0,0,0},
+    {0,0,0},
+    {0,1,0},
+    {0,0,0}
+  };
+  std::cout<<"63. Unique Paths II: "<<unique_paths_ii(input);
+}

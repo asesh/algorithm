@@ -1411,3 +1411,22 @@ void invoke_word_break() {
   std::vector<std::string> word_dictionary  = {"apple","pen"};
   std::cout<<std::boolalpha<<"139. Word Break: "<<word_break(word, word_dictionary);
 }
+
+/*
+Input: horse, ros => 3
+ horse -> rorse (replace 'h' with 'r')
+ rorse -> rose (remove 'r')
+ rose -> ros (remove 'e')
+ 
+   h o r s e
+ r 1 1 1 1 1
+ o 1 1 1 1 1
+ s 
+*/
+int edit_distance(std::string& first, std::string& second) {
+  return 0;
+}
+void invoke_edit_distance() {
+  std::string first = "horse", second = "ros";
+  std::cout<<"72. Edit Distance: "<<edit_distance(first, second);
+}

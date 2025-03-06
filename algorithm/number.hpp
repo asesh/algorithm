@@ -1,5 +1,5 @@
 //
-//  number_algorithm.hpp
+//  number_algorithm. 
 //  algorithm
 //
 //  Created by Asesh Shrestha on 09/09/2021.
@@ -512,5 +512,25 @@ void invoke_maximum_absolute_sum_of_any_subarray();
 63. Unique Paths II: https://leetcode.com/problems/unique-paths-ii
 */
 void invoke_unique_paths_ii();
+
+/*
+50. Pow(x, n): https://leetcode.com/problems/powx-n
+*/
+void invoke_pow_x_n();
+
+/*
+149. Max Points on a Line: https://leetcode.com/problems/max-points-on-a-line
+*/
+void invoke_max_points_on_a_line();
+
+/*
+2161. Partition Array According to Given Pivot: https://leetcode.com/problems/partition-array-according-to-given-pivot
+*/
+void invoke_parition_array_according_to_given_pivot();
+
+/*
+221. Maximal Square: https://leetcode.com/problems/maximal-square
+*/
+void invoke_maximal_square();
 
 #endif /* NUMBER_HPP */

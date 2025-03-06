@@ -3359,3 +3359,122 @@ void invoke_unique_paths_ii() {
   };
   std::cout<<"63. Unique Paths II: "<<unique_paths_ii(input);
 }
+
+/*
+Input: (2,3)
+2^3 = 2*2*2 => 8
+1   1
+2^1 2^0
+2   1
+2^2 * 2^1 => 8
+
+Input: (2,-3)
+2^-2 = 1/2^2 => 1/4 => 0.25
+
+Input: (7,11)
+7^11
+11: 1011
+3 2 1 0
+1 0 1 1   1   0   1   1
+          2^3 2^2 2^1 2^0
+          8   4   2   1
+          7^8     7^2 7^1 => 7^8 * 7^2 * 7
+*/
+double pow_x_n(double base, int power) {
+  int output = 1.0;
+  
+  return output;
+}
+void invoke_pow_x_n() {
+  std::cout<<"50. Pow(x, n): "<<pow_x_n(2, 3);
+}
+
+/*
+Input: [[1,1],[2,2],[3,3]], Output: 3
+ 
+Input: [[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]], Output: 4
+
+Input: [[0,0],[1,-1],[1,1]], Output: 2
+*/
+int max_points_on_a_line(std::vector<std::vector<int>>& points) {
+  int max_points = 0, total_points = points.size();
+  if(total_points == 1) {
+    return 1;
+  }
+
+  for(int first = 0; first < total_points - 1; ++first) {
+    std::unordered_map<double, int> slope_count;
+    for(int second = 0; second < total_points; ++second) {
+      if(first == second) {
+        continue;
+      }
+      auto y = points[second][1] - points[first][1];
+      auto x = points[second][0] - points[first][0];
+      auto angle = std::atan2(y, x);
+      slope_count[angle]++;
+      max_points = std::max(max_points, slope_count[angle] + 1);
+    }
+  }
+  
+  return max_points;
+}
+void invoke_max_points_on_a_line() {
+  std::vector<std::vector<int>> points = {
+//    {1,1},{2,2},{3,3}
+    {1,1},{3,2},{5,3},{4,1},{2,3},{1,4}
+  };
+  std::cout<<"149. Max Points on a Line: "<<max_points_on_a_line(points);
+}
+
+/*
+Input: [2,3,4,1,2,4,6,1,4,3], pivot: 4 => [2,3,1,2,1,3,4,4,4,6]
+                  ri
+li
+2 3 1 2 0 0 0 0 0 6
+0 0 0 0 0 0 0 0 0 0
+L
+                  R
+*/
+std::vector<int> parition_array_according_to_given_pivot(std::vector<int>& input) {
+  std::vector<int> output(input.size(), 0);
+  
+  return output;
+}
+void invoke_parition_array_according_to_given_pivot() {
+  std::vector<int> array = {2,3,4,1,2,4,6,1,4,3};
+  auto output = parition_array_according_to_given_pivot(array);
+}
+
+/*
+Input:        Output => 9
+*               *
+0 0 0 0 0     0 0 0 0 0 0
+1 1 1 1 1 =>  0 0 0 0 0 0
+1 1 1 1 1     0 1 1 1 1 1
+0 1 1 1 1     0 1 2 2 2 2
+              0 0 1 2 3 3
+*/
+int maximal_square(std::vector<std::vector<std::string>>& matrix) {
+  int max_square = 0, total_rows = matrix.size(), total_columns = matrix[0].size();
+  std::vector<std::vector<int>> dp(matrix.size() + 1, std::vector<int>(matrix[0].size() + 1, 0));
+  for(int row = 1; row <= total_rows; ++row) {
+    for(int column = 1; column <= total_columns; ++column) {
+      if(matrix[row - 1][column - 1] == "1") {
+        dp[row][column] = std::min(dp[row - 1][column],
+          std::min(dp[row][column - 1], dp[row - 1][column - 1])) + 1;
+        max_square = std::max(max_square, dp[row][column]);
+      }
+    }
+  }
+  
+  return max_square * max_square;
+}
+void invoke_maximal_square() {
+  std::vector<std::vector<std::string>> square = {
+    {"0","0","0","0","0"},
+    {"1","1","1","1","1"},
+    {"1","1","1","1","1"},
+    {"0","1","1","1","1"}
+  };
+  std::cout<<"221. Maximal Square: "<<maximal_square(square);
+}

@@ -140,4 +140,9 @@ void invoke_find_the_prefix_common_array_of_two_arrays();
 */
 void invoke_word_break();
 
+/*
+72. Edit Distance: https://leetcode.com/problems/edit-distance
+*/
+void invoke_edit_distance();
+
 #endif /* string_hpp */

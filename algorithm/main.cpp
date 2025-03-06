@@ -19,7 +19,13 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_unique_paths_ii();
+  invoke_maximal_square();
+  
+//  invoke_pow_x_n();
+  
+//  invoke_max_points_on_a_line();
+  
+//  invoke_unique_paths_ii();
   
 //  invoke_maximum_absolute_sum_of_any_subarray();
   

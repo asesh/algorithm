@@ -533,4 +533,9 @@ void invoke_parition_array_according_to_given_pivot();
 */
 void invoke_maximal_square();
 
+/*
+70. Climbing Stairs: https://leetcode.com/problems/climbing-stairs
+*/
+void invoke_climbing_stairs();
+
 #endif /* NUMBER_HPP */

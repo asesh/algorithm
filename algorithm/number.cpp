@@ -597,23 +597,6 @@ void invoke_calculate_total_number_of_steps() {
   std::cout<<std::endl<<"Number of steps that can be taken: "<<total_number_of_steps<<std::endl;
 }
 
-// https://leetcode.com/problems/climbing-stairs/description/
-// Using bottom-up DP
-int get_total_number_of_steps(int total_steps) {
-  int previous = 1, next = 1;
-  int sum = 0;
-  total_steps -= 2;
-  while(total_steps >= 0) {
-    --total_steps;
-    
-    sum = previous + next;
-    previous = next;
-    next = sum;
-  }
-  
-  return sum;
-}
-
 int calculate_minimum_number_of_steps(int destination_steps, int total_steps = 0) {
   static std::vector<int> steps = {1, 2};
   if(destination_steps < 0) {
@@ -3427,6 +3410,8 @@ void invoke_max_points_on_a_line() {
 }
 
 /*
+Input: [9,12,5,10,14,3,10], pivot = 10 => [9,5,3,10,10,12,14]
+
 Input: [2,3,4,1,2,4,6,1,4,3], pivot: 4 => [2,3,1,2,1,3,4,4,4,6]
                   ri
 li
@@ -3477,4 +3462,21 @@ void invoke_maximal_square() {
     {"0","1","1","1","1"}
   };
   std::cout<<"221. Maximal Square: "<<maximal_square(square);
+}
+
+int climbing_stairs(int total_steps) {
+  if(total_steps == 1) {
+    return total_steps;
+  }
+  std::vector<int> dp(total_steps + 1, 0);
+  dp[0] = 1, dp[1] = 1;
+  for(int index = 2; index <= total_steps; ++index) {
+    dp[index] = dp[index - 1] + dp[index - 2];
+  }
+
+  return dp[total_steps];
+}
+
+void invoke_climbing_stairs() {
+  std::cout<<"70. Climbing Stairs: "<<climbing_stairs(5);
 }

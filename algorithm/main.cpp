@@ -19,7 +19,9 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_maximal_square();
+  invoke_climbing_stairs();
+  
+//  invoke_maximal_square();
   
 //  invoke_pow_x_n();
   

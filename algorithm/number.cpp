@@ -3464,6 +3464,26 @@ void invoke_maximal_square() {
   std::cout<<"221. Maximal Square: "<<maximal_square(square);
 }
 
+/*
+Input: 5
+                5
+        1                  2
+    1      2            1      2
+  1   2    1   2       1  2      1
+1  2   1   1          1
+1
+1+1+1+1+1
+1+1+1+2
+1+1+2+1
+1+2+1+1
+1+2+2
+2+1+1+1
+2+1+2
+2+2+1
+
+0 1 2 3 4 5
+1 1 2 3 5 8*
+*/
 int climbing_stairs(int total_steps) {
   if(total_steps == 1) {
     return total_steps;

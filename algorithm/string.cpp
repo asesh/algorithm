@@ -1430,3 +1430,69 @@ void invoke_edit_distance() {
   std::string first = "horse", second = "ros";
   std::cout<<"72. Edit Distance: "<<edit_distance(first, second);
 }
+
+/*
+Input: first: "aabcc", second: "dbbca", target: "aadbbcbcac"
+                    T
+ 0 1 2 3 4 5 6 7 8 9
+ a a d b b c b c a c
+          F
+ 0 1 2 3 4
+ a a b c c
+          S
+ 0 1 2 3 4
+ d b b c a
+ 
+                   *
+ a a d b b c b c a c
+   * d b b c a (second)
+ * t f f f f f
+ a t f f f f f
+ a t t t t t f
+ b f t t f t f
+ c f f t t t t
+ c f f f t f t*
+ (first)
+*/
+// TD approach TLEs on LeetCode
+bool is_interleave(std::string first, int first_index,
+                   std::string second, int second_index,
+                   std::string result,
+                   std::string target) {
+  if(result == target && first_index == first.size() && second_index == second.size()) {
+    return true;
+  }
+  bool answer = false;
+  
+  if(first_index < first.size()) {
+    answer |= is_interleave(first, first_index + 1, second, second_index, result + first[first_index], target);
+  }
+  if(second_index < second.size()) {
+    answer |= is_interleave(first, first_index, second, second_index + 1, result + second[second_index], target);
+  }
+
+  return answer;
+}
+bool interleaving_string(std::string first, std::string second, std::string target) {
+//  return is_interleave(first, 0, second, 0, "", target);
+  
+  // BU approach RC: O(mn) SC: O(mn)
+  bool dp[first.size() + 1][second.size() + 1];
+  dp[0][0] = true;
+  
+  for(int row = 0; row <= first.size(); ++row) {
+    for(int column = 0; column <= second.size(); ++column) {
+      if(row > 0) {
+        dp[row][column] |= dp[row - 1][column] && first[row - 1] == target[row + column - 1];
+      }
+      if(column > 0) {
+        dp[row][column] |= dp[row][column - 1] && second[column - 1] == target[row + column - 1];
+      }
+    }
+  }
+  
+  return dp[first.size()][second.size()];
+}
+void invoke_interleaving_string() {
+  std::cout<<std::boolalpha<<"97. Interleaving String: "<<interleaving_string("aabcc", "dbbca", "aadbbcbcac");
+}

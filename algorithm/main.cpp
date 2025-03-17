@@ -19,7 +19,9 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_climbing_stairs();
+  invoke_interleaving_string();
+  
+//  invoke_climbing_stairs();
   
 //  invoke_maximal_square();
   

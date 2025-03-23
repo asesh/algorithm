@@ -290,55 +290,6 @@ void invoke_is_anagram() {
   std::cout<<std::boolalpha<<is_anagram(first_word, second_word)<<std::endl;
 }
 
-// R: O(nm) S: O(min(n,m))
-int levenshtein_distance(const std::string &first_word, const std::string& second_word) {
-  // Space: O(mn)
-  std::vector<std::vector<int>> edit_distance_table(first_word.size() + 1);
-
-  // Runtime: O(mn)
-  // Pre-populate the first-row and first-column of our table
-  std::for_each(edit_distance_table.begin(), edit_distance_table.end(), 
-                [number = 1, current_row = 0, second_word](std::vector<int> &row) mutable {
-   if(current_row == 0) {
-     // Construct first row
-     for(int row_value = 0; row_value <= second_word.size(); ++row_value) {
-       row.push_back(row_value);
-     }
-   } else {
-     // Construct the first column
-     row.reserve(second_word.size());
-     for(int row_value = 0; row_value <= second_word.size(); ++row_value) {
-       row.push_back(0);
-     }
-     row[0] = number++;
-   }
-   ++current_row;
-  });
-
-  // Runtime: O(mn)
-  int row = 1, column = 1;
-  for(const auto& from_char: first_word) {
-   for(const auto& to_char: second_word) {
-     if(from_char == to_char) {
-       // Take the value of upper-left cell
-       edit_distance_table[row][column] = edit_distance_table[row - 1][column - 1];
-     } else {
-       // Take the min. of three neighbors and add 1 to it
-       edit_distance_table[row][column] = 1 + std::min(std::min(edit_distance_table[row - 1][column - 1],
-         edit_distance_table[row - 1][column]), edit_distance_table[row][column - 1]);
-     }
-     ++column;
-   }
-   ++row;
-   column = 1;
-  }
-
-  return edit_distance_table[first_word.size()][second_word.size()];
-}
-void invoke_levenshtein_distance() {
-  std::cout<<"The number of edit operations required: "<<levenshtein_distance("abcdefghij", "1234567890")<<std::endl;
-}
-
 // T: O(wh), S(wh)
 int river_sizes(std::vector<std::vector<int>>& input_matrix) {
   return 0;
@@ -1413,22 +1364,94 @@ void invoke_word_break() {
 }
 
 /*
-Input: horse, ros => 3
+Input: horse, target: ros => 3
  horse -> rorse (replace 'h' with 'r')
  rorse -> rose (remove 'r')
  rose -> ros (remove 'e')
  
-   h o r s e
- r 1 1 1 1 1
- o 1 1 1 1 1
- s 
+Input: wenesfays, target: wednesday => 3
+ w e   n e s f a y s
+     *       *     *
+ w e d n e s d a y
+ 
+Input: abc, target: abe => 1
+Replace: 1
+ a b c
+ a b e
+ 
+Insertion: 2
+ a b c
+ a b c e insertion
+ a b e deletion
+ 
+Deletion: 2
+ a b c
+ a b deletion
+ a b e insertion
 */
-int edit_distance(std::string& first, std::string& second) {
-  return 0;
+int edit_distance_td(std::string& source, int source_index, std::string& target, int target_index) {
+  if(source_index == 0) {
+    return target_index;
+  }
+  if(target_index == 0) {
+    return source_index;
+  }
+  
+  if(source[source_index - 1] == target[target_index - 1]) {
+    return edit_distance_td(source, source_index - 1, target, target_index - 1);
+  }
+  
+  int insert_distance = edit_distance_td(source, source_index, target, target_index - 1);
+  int replace_distance = edit_distance_td(source, source_index - 1, target, target_index - 1);
+  int delete_distance = edit_distance_td(source, source_index - 1, target, target_index);
+  auto min_edit_distance = std::min(insert_distance, std::min(replace_distance, delete_distance)) + 1;
+  return min_edit_distance;
+}
+/*
+BU approach:
+Input: abc Target: ade => 2
+  "" a d e
+"" 0 1 2 3
+ a 1 0 1 2
+ b 2 1 1 2
+ c 3 2 2 2*
+ if source[index] == destination[index] = dp[source_index - 1][destination_index - 1];
+ else: min(dp[source_index - 1][destination_index - 1], dp[source_index - 1][destination_index], dp[source_index][destination_index - 1]) + 1
+*/
+int edit_distance_bu(std::string source, std::string target) {
+  int source_length = source.length();
+  int target_length = target.length();
+  if(source_length == 0) {
+    return target_length;
+  }
+  if(target_length == 0) {
+    return source_length;
+  }
+  std::vector<std::vector<int>> dp(source_length + 1, std::vector<int>(target_length + 1, 0));
+  for(int index = 1; index <= source_length; ++index) {
+    dp[index][0] = index;
+  }
+  for(int index = 1; index <= target_length; ++index) {
+    dp[0][index] = index;
+  }
+  
+  for(int source_index = 1; source_index <= source_length; ++source_index) {
+    for(int target_index = 1; target_index <= target_length; ++target_index) {
+      if(source[source_index - 1] == target[target_index - 1]) {
+        dp[source_index][target_index] = dp[source_index - 1][target_index - 1];
+      } else {
+        dp[source_index][target_index] = std::min(dp[source_index - 1][target_index],
+          std::min(dp[source_index][target_index - 1], dp[source_index - 1][target_index - 1])) + 1;
+      }
+    }
+  }
+  
+  return dp[source_length][target_length];
 }
 void invoke_edit_distance() {
-  std::string first = "horse", second = "ros";
-  std::cout<<"72. Edit Distance: "<<edit_distance(first, second);
+  std::string source = "horse", target = "ros";
+//  std::cout<<"72. Edit Distance: "<<edit_distance_td(source, source.length(), target, target.length());
+  std::cout<<"72. Edit Distance: "<<edit_distance_bu(source, target);
 }
 
 /*

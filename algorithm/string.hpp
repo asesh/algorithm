@@ -29,8 +29,6 @@ void invoke_longest_palindromic_substring();
 bool is_anagram(const std::string& first_word, const std::string& second_word);
 void invoke_is_anagram();
 
-void invoke_levenshtein_distance();
-
 /*
 Valid IP Addresses: https://www.algoexpert.io/questions/valid-ip-addresses
 */

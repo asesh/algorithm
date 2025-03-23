@@ -19,7 +19,9 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_interleaving_string();
+  invoke_edit_distance();
+  
+//  invoke_interleaving_string();
   
 //  invoke_climbing_stairs();
   

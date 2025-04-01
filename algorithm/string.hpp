@@ -148,4 +148,9 @@ void invoke_edit_distance();
 */
 void invoke_interleaving_string();
 
+/*
+763. Partition Labels: https://leetcode.com/problems/partition-labels
+*/
+void invoke_partition_labels();
+
 #endif /* string_hpp */

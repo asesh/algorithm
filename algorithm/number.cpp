@@ -3517,31 +3517,80 @@ Input: [7,1,5,3,6,4] => 7
      *
 Left profits ->
  4+3 = 7
+ 
+Using one-pass simulation:
+   *
+ 3 5
+ first_price:   MAX 3 3
+ first_profit:  0   0 2
+ second_price:  MAX 3 3
+ second_profit: 0   0 2*
+ 
+ first_price = MAX, second_price = MAX
+ first_profit = 0, second_profit = 0
+ 
+ first_price   = min(first_price, price)
+ first_profit  = max(first_profit, price - first_price)
+ second_price  = min(second_price, price - first_profit)
+ second_profit = max(second_profit, price - second_price)
 */
-// Using BU approach
 int best_time_to_buy_and_sell_stock_iii(std::vector<int>& prices) {
-  int max_profit = 0;
+  // Using one-pass simulation
+  int first_price = INT_MAX, second_price = INT_MAX;
+  int first_profit = 0, second_profit = 0;
   
-  int total_prices = prices.size();
-  std::vector<int> left_profit(total_prices), right_profit(total_prices + 1);
-  int left_min = prices[0], right_max = prices[total_prices - 1];
-  
-  for(int index = 1; index < prices.size(); ++index) {
-    left_profit[index] = std::max(left_profit[index - 1], prices[index] - left_min);
-    left_min = std::min(left_min, prices[index]);
+  for(auto& price: prices) {
+    first_price = std::min(first_price, price);
+    first_profit = std::max(first_profit, price - first_price);
     
-    auto right_index = total_prices - index - 1;
-    right_profit[right_index] = std::max(right_profit[right_index + 1], right_max - prices[right_index]);
-    right_max = std::max(right_max, prices[right_index]);
+    second_price = std::min(second_price, price - first_profit);
+    second_profit = std::max(second_profit, price - second_price);
   }
+  return second_profit;
   
-  for(int index = 1; index < total_prices; ++index) {
-    max_profit = std::max(max_profit, left_profit[index] + right_profit[index + 1]);
-  }
-  
-  return max_profit;
+  // Using BU approach
+//  int max_profit = 0;
+//  
+//  int total_prices = prices.size();
+//  std::vector<int> left_profit(total_prices), right_profit(total_prices + 1);
+//  int left_min = prices[0], right_max = prices[total_prices - 1];
+//  
+//  for(int index = 1; index < prices.size(); ++index) {
+//    left_profit[index] = std::max(left_profit[index - 1], prices[index] - left_min);
+//    left_min = std::min(left_min, prices[index]);
+//    
+//    auto right_index = total_prices - index - 1;
+//    right_profit[right_index] = std::max(right_profit[right_index + 1], right_max - prices[right_index]);
+//    right_max = std::max(right_max, prices[right_index]);
+//  }
+//  
+//  for(int index = 1; index < total_prices; ++index) {
+//    max_profit = std::max(max_profit, left_profit[index] + right_profit[index + 1]);
+//  }
+//  
+//  return max_profit;
 }
 void invoke_best_time_to_buy_and_sell_stock_iii() {
   std::vector<int> prices = {7,1,5,3,6,4};// {3,3,5,0,0,3,1,4};
   std::cout<<"123. Best Time to Buy and Sell Stock III: "<<best_time_to_buy_and_sell_stock_iii(prices);
+}
+
+/*
+Input: [3,2,6,5,0,3], k: 2 => 2
+     4     3   => 7
+   B S   B S
+ 3 2 6 5 0 3
+            <-- right profit
+ 3 3 3 3 3 0
+ 0 0 4 4 4 4
+--> left profit
+*/
+int best_time_to_buy_and_sell_stock_iv(std::vector<int> prices, int k) {
+  int max_profit = 0;
+  
+  return max_profit;
+}
+void invoke_best_time_to_buy_and_sell_stock_iv() {
+  std::vector<int> prices = {3,2,6,5,0,3};
+  std::cout<<"123. Best Time to Buy and Sell Stock IV: "<<best_time_to_buy_and_sell_stock_iv(prices, 2);
 }

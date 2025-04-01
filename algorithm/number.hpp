@@ -543,4 +543,9 @@ void invoke_climbing_stairs();
 */
 void invoke_best_time_to_buy_and_sell_stock_iii();
 
+/*
+188. Best Time to Buy and Sell Stock IV: https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv
+*/
+void invoke_best_time_to_buy_and_sell_stock_iv();
+
 #endif /* NUMBER_HPP */

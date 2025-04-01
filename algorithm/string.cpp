@@ -1519,3 +1519,71 @@ bool interleaving_string(std::string first, std::string second, std::string targ
 void invoke_interleaving_string() {
   std::cout<<std::boolalpha<<"97. Interleaving String: "<<interleaving_string("aabcc", "dbbca", "aadbbcbcac");
 }
+
+/*
+ *
+ a b a b c b a c a d e f e g d e h i j h k l i j
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3
+ output: [9, 7, 8]
+ occurrence:
+ a: 8
+ b: 5
+ c: 7
+ d: 14
+ e: 15
+ f: 11
+ g: 13
+ h: 19
+ i: 22
+ j: 23
+ k: 20
+ l: 21
+
+                 1 3 2
+ q i e j x q f n q c e o c m y
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4
+ q: 8
+ i: 1
+ e: 10
+ j: 3
+ x: 4
+ f: 6
+ n: 7
+ q: 8
+ c: 12
+ o: 11
+ m: 13
+ y: 14
+*/
+std::vector<int> partition_labels(std::string input) {
+  std::vector<int> output;
+  std::unordered_map<char, int> char_map;
+
+  for(int index = 0; index < input.length(); ++index) {
+    if(char_map.contains(input[index])) {
+      char_map[input[index]] = std::max(index, char_map[input[index]]);
+    } else {
+      char_map[input[index]] = index;
+    }
+  }
+
+  int index = 0;
+  while(index < input.length()) {
+    int max_offset = index, offset = char_map[input[index]];
+    for(int current_offset = index; current_offset < offset; ++current_offset) {
+      max_offset = std::max(max_offset, char_map[input[current_offset]]);
+      offset = max_offset;
+    }
+    output.push_back(max_offset - index + 1);
+    index = max_offset + 1;
+  }
+
+  return output;
+}
+void invoke_partition_labels() {
+  auto output = partition_labels("ababcbacadefegdehijhklij");
+  std::cout<<"763. Partition Labels: ";
+  for(auto& number: output) {
+    std::cout<<number<<", ";
+  }
+}

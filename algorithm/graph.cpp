@@ -91,3 +91,76 @@ void create_directed_graph() {
   CDirectedGraph<int, int> di_graph(std::move(directed_graph));
   di_graph.traverse_bfs();
 }
+
+/*
+Input: [[2,4],[1,3],[2,4],[1,3]]
+Process:
+ 1----------2
+ |          |
+ |          |
+ |          |
+ 3----------4
+*/
+Node* clone_graph_dfs(Node* node, std::unordered_map<Node*, Node*>& visited_nodes) {
+  if(!node) {
+    return node;
+  }
+  
+  if(visited_nodes.contains(node)) {
+    return visited_nodes[node];
+  }
+  
+  Node* new_node = new Node(node->val);
+  visited_nodes[node] = new_node;
+  
+  for(auto& neighbor_node: node->neighbors) {
+    visited_nodes[node]->neighbors.push_back(clone_graph_dfs(neighbor_node, visited_nodes));
+  }
+  
+  return visited_nodes[node];
+}
+Node* clone_graph_bfs(Node* node, std::unordered_map<Node*, Node*>& visited_nodes) {
+  if(!node) {
+    return node;
+  }
+  
+  std::queue<Node*> nodes_to_visit;
+  
+  visited_nodes[node] = new Node(node->val);
+  nodes_to_visit.push(node);
+  
+  while(!nodes_to_visit.empty()) {
+    auto* current_node = nodes_to_visit.front();
+    nodes_to_visit.pop();
+    
+    for(auto& neighbor: current_node->neighbors) {
+      if(!visited_nodes.contains(neighbor)) {
+        visited_nodes[neighbor] = new Node(neighbor->val);
+        nodes_to_visit.push(neighbor);
+      }
+      visited_nodes[current_node]->neighbors.push_back(visited_nodes[neighbor]);
+    }
+  }
+  
+  return visited_nodes[node];
+}
+void invoke_clone_graph() {
+  Node* first = new Node(1);
+  Node* second = new Node(2);
+  Node* third = new Node(3);
+  Node* fourth = new Node(4);
+  first->neighbors = std::vector<Node*>({second, third});
+  second->neighbors = std::vector<Node*>({first, fourth});
+  third->neighbors = std::vector<Node*>({first, fourth});
+  fourth->neighbors = std::vector<Node*>({second, third});
+  std::unordered_map<Node*, Node*> visited_nodes;
+//  auto* cloned_graph = clone_graph_bfs(first, visited_nodes);
+  auto* cloned_graph = clone_graph_dfs(first, visited_nodes);
+  std::cout<<"133. Clone Graph: "<<cloned_graph;
+  
+  // Memory deallocation
+  for(auto& node: visited_nodes) {
+    delete node.first;
+    delete node.second;
+  }
+}

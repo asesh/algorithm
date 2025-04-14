@@ -3576,14 +3576,13 @@ void invoke_best_time_to_buy_and_sell_stock_iii() {
 }
 
 /*
-Input: [3,2,6,5,0,3], k: 2 => 2
-     4     3   => 7
-   B S   B S
- 3 2 6 5 0 3
-            <-- right profit
- 3 3 3 3 3 0
- 0 0 4 4 4 4
---> left profit
+Input: [2,3,6,5,0,3], k: 2 => 7
+ B   S   B S => 7
+ 2 3 6 5 0 3
+ *
+ 2 3 6 5 0 3
+ cost:   M M M M
+ profit: 0 0 0 0
 */
 int best_time_to_buy_and_sell_stock_iv(std::vector<int> prices, int k) {
   int max_profit = 0;
@@ -3593,4 +3592,64 @@ int best_time_to_buy_and_sell_stock_iv(std::vector<int> prices, int k) {
 void invoke_best_time_to_buy_and_sell_stock_iv() {
   std::vector<int> prices = {3,2,6,5,0,3};
   std::cout<<"123. Best Time to Buy and Sell Stock IV: "<<best_time_to_buy_and_sell_stock_iv(prices, 2);
+}
+
+/*
+Input: [10,16],[2,8],[1,6],[7,12] => 2
+ sort: {1, 6}, {2, 8}, {7, 12}, {10, 16}
+ 1   6
+   2    8
+       7   12
+         10     16
+ 
+Input: [1,2],[3,4],[5,6],[7,8] => 4
+ 1  2
+      3  4
+            5   6
+                  7   8
+
+Input: [1,2],[2,3],[3,4],[4,5] => 2
+ 1   2
+     2    3
+          3    4
+               4    5
+               *
+
+Input: [1,6][2,3][4,6] => 2
+ --------------------
+ 1                 6
+      2    3
+               4   6
+ 
+Input: [1,6][2,3][4,6] => 2
+ sort: x2 < y2 => {2, 3}, {1, 6}, {4, 6}
+   2   3
+ 1            6
+          4   6
+*/
+int min_number_of_arrows_to_burst_balloons(std::vector<int>& points) {
+  int total_arrows = 1;
+  
+  return total_arrows;
+}
+void invoke_min_number_of_arrows_to_burst_balloons() {
+}
+
+/*
+ live with < 2 live -> dies
+ live 2 or 3 live -> lives
+ live > 3 live -> dies
+ dead with 3 live -> lives
+
+Input: [0,1,0],[0,0,1],[1,1,1],[0,0,0]]
+ 0 1 0      0 1 0     0 0 0
+ 0 0 1      2 0 3     1 0 1
+ 1 1 1  =>  1 3 3 =>  0 1 1
+ 0 0 0      0 2 0     0 1 0
+*/
+void game_of_life(std::vector<std::vector<int>>& board) {
+  
+}
+void invoke_game_of_life() {
+  
 }

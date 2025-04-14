@@ -548,4 +548,14 @@ void invoke_best_time_to_buy_and_sell_stock_iii();
 */
 void invoke_best_time_to_buy_and_sell_stock_iv();
 
+/*
+452. Minimum Number of Arrows to Burst Balloons: https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons
+*/
+void invoke_min_number_of_arrows_to_burst_balloons();
+
+/*
+289. Game of Life: https://leetcode.com/problems/game-of-life
+*/
+void invoke_game_of_life();
+
 #endif /* NUMBER_HPP */

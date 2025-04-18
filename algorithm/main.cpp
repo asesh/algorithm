@@ -19,7 +19,9 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_clone_graph();
+  invoke_min_cost_climbing_stairs();
+  
+//  invoke_clone_graph();
   
 //  invoke_partition_labels();
   

@@ -558,4 +558,9 @@ void invoke_min_number_of_arrows_to_burst_balloons();
 */
 void invoke_game_of_life();
 
+/*
+746. Min Cost Climbing Stairs: https://leetcode.com/problems/min-cost-climbing-stairs
+*/
+void invoke_min_cost_climbing_stairs();
+
 #endif /* NUMBER_HPP */

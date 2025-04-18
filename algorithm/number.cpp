@@ -3653,3 +3653,58 @@ void game_of_life(std::vector<std::vector<int>>& board) {
 void invoke_game_of_life() {
   
 }
+
+/*
+Input: [2,3,3,1]
+Process: TD
+ 0 1 2 3
+ 2 3 3 1
+       2     3     0 -> 5
+     3         1   1 -> 4
+   3               2 -> 3
+  1                3 -> 1
+ 
+Process: BU
+     *
+ 0 1 2 3
+ 2 3 3 1
+ single_step_cost: 2, 3
+ double_step_cost: 3, 5
+ step_cost:
+     index
+  2: 3 + min(2, 3) = 5
+  single_step_cost = double_step_cost
+  double_step_cost = step_cost
+  3: 1 + min(3, 5) = 4*
+*/
+int min_cost_climbing_stairs_bu(std::vector<int>& cost) {
+  int single_step_cost = cost[0], double_step_cost = cost[1];
+  for(int index = 2; index < cost.size(); ++index) {
+    int step_cost = cost[index] + std::min(single_step_cost, double_step_cost);
+    single_step_cost = double_step_cost;
+    double_step_cost = step_cost;
+  }
+  
+  return std::min(single_step_cost, double_step_cost);
+}
+int min_cost_climbing_stairs_td(std::vector<int>& cost, int index, std::unordered_map<int, int>& cache) {
+  if(index >= cost.size()) {
+    return 0;
+  }
+  if(cache.contains(index)) {
+    return cache[index];
+  }
+  
+  int step_cost = cost[index] + std::min(min_cost_climbing_stairs_td(cost, index + 1, cache),
+                                         min_cost_climbing_stairs_td(cost, index + 2, cache));
+  cache[index] = step_cost;
+  return step_cost;
+}
+void invoke_min_cost_climbing_stairs() {
+  std::vector<int> prices = {2,3,3,1};
+  std::unordered_map<int, int> cache;
+//  auto min_cost = std::min(min_cost_climbing_stairs_td(prices, 0, cache),
+//                           min_cost_climbing_stairs_td(prices, 1, cache));
+  auto min_cost = min_cost_climbing_stairs_bu(prices);
+  std::cout<<"746. Min Cost Climbing Stairs: "<<min_cost;
+}

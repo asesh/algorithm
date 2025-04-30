@@ -164,3 +164,18 @@ void invoke_clone_graph() {
     delete node.second;
   }
 }
+
+void invoke_union_find() {
+  UnionFind union_find(10);
+  union_find.union_set(1, 2);
+  union_find.union_set(2, 5);
+  union_find.union_set(5, 6);
+  union_find.union_set(6, 7);
+  
+  union_find.union_set(3, 8);
+  union_find.union_set(8, 9);
+  std::cout<<std::boolalpha
+    <<"1 -> 2?: "<<union_find.equal(1, 2)<<", "<<std::endl
+    <<"5 -> 7?: "<<union_find.equal(5, 7)<<", "<<std::endl
+    <<"4 -> 9?: "<<union_find.equal(4, 9)<<std::endl;
+}

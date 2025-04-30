@@ -19,7 +19,11 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_min_cost_climbing_stairs();
+  invoke_nth_tribonacci_number();
+  
+//  invoke_union_find();
+  
+//  invoke_min_cost_climbing_stairs();
   
 //  invoke_clone_graph();
   

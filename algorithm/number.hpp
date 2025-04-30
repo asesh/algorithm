@@ -563,4 +563,14 @@ void invoke_game_of_life();
 */
 void invoke_min_cost_climbing_stairs();
 
+/*
+2962. Count Subarrays Where Max Element Appears at Least K Times: https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times
+*/
+void invoke_count_subarrays_where_max_element_appears_at_least_k_times();
+
+/*
+1137. N-th Tribonacci Number: https://leetcode.com/problems/n-th-tribonacci-number
+*/
+void invoke_nth_tribonacci_number();
+
 #endif /* NUMBER_HPP */

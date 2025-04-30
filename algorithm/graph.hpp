@@ -121,4 +121,48 @@ public:
 */
 void invoke_clone_graph();
 
+/*
+         0
+    1          2
+ 3     4    5    6
+ 
+ Index: 0 1 2 3 4 5 6 <- Nodes' value
+ Value: 0 0 0 0 0 0 0 <- Root nodes
+ */
+class UnionFind {
+public:
+  UnionFind(int total_nodes) : root_nodes(total_nodes) {
+    for(int index = 0; index < total_nodes; ++index) {
+      root_nodes[index] = index;
+    }
+  }
+  
+  // RC: O(1)
+  int find(int node_value) {
+    return root_nodes[node_value];
+  }
+  
+  bool equal(int node_value_x, int node_value_y) {
+    return find(node_value_x) == find(node_value_y);
+  }
+  
+  // RC: O(n)
+  void union_set(int node_value_x, int node_value_y) {
+    int root_x = find(node_value_x);
+    int root_y = find(node_value_y);
+    if(root_x != root_y) {
+      for(int index = 0; index < root_nodes.size(); ++index) {
+        if(root_nodes[index] == root_y) {
+          root_nodes[index] = root_x;
+        }
+      }
+    }
+  }
+  
+private:
+  std::vector<int> root_nodes;
+};
+
+void invoke_union_find();
+
 #endif /* GRAPH_H */

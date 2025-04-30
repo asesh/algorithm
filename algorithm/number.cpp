@@ -3708,3 +3708,58 @@ void invoke_min_cost_climbing_stairs() {
   auto min_cost = min_cost_climbing_stairs_bu(prices);
   std::cout<<"746. Min Cost Climbing Stairs: "<<min_cost;
 }
+
+/*
+Input: 1,3,2,3, k:1 => 8
+ *
+ 0 1 2 3
+ 1 3 2 3
+*/
+long long count_subarrays_where_max_element_appears_at_least_k_times(std::vector<int>& input, int k) {
+  long long output = 0;
+  
+  // O(n^2) TLE
+  // int max_number;
+  // for(auto& number: nums) {
+  //   max_number = std::max(max_number, number);
+  // }
+
+  // for(int left = 0; left < nums.size(); ++left) {
+  //   int count = 0;
+  //   if(nums[left] == max_number) {
+  //     ++count;
+  //   }
+  //   for(int right = left; right < nums.size(); ++right) {
+  //     if(left != right && nums[right] == max_number) {
+  //       ++count;
+  //     }
+
+  //     if(count >= k) {
+  //       ++output;
+  //     }
+  //   }
+  // }
+  
+  return output;
+}
+void invoke_count_subarrays_where_max_element_appears_at_least_k_times() {
+  std::vector<int> input = {1,3,2,3};
+  int k = 1;
+  std::cout<<"2962. Count Subarrays Where Max Element Appears at Least K Times: "
+    <<count_subarrays_where_max_element_appears_at_least_k_times(input, k);
+}
+
+int nth_tribonacci_number(int number) {
+  std::vector<int> dp(37 + 1);
+  dp[0] = 0; dp[1] = 1; dp[2] = 1;
+  int current = 3;
+  while(current <= number) {
+    dp[current] = dp[current - 1] + dp[current - 2] + dp[current - 3];
+    ++current;
+  }
+
+  return dp[number];
+}
+void invoke_nth_tribonacci_number() {
+  std::cout<<"1137. N-th Tribonacci Number: "<<nth_tribonacci_number(5);
+}

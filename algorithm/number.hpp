@@ -573,4 +573,9 @@ void invoke_count_subarrays_where_max_element_appears_at_least_k_times();
 */
 void invoke_nth_tribonacci_number();
 
+/*
+740. Delete and Earn: https://leetcode.com/problems/delete-and-earn
+*/
+void invoke_delete_and_earn();
+
 #endif /* NUMBER_HPP */

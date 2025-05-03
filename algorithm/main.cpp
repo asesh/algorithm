@@ -19,7 +19,11 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_nth_tribonacci_number();
+  invoke_delete_and_earn();
+  
+//  invoke_count_subarrays_where_max_element_appears_at_least_k_times();
+  
+//  invoke_nth_tribonacci_number();
   
 //  invoke_union_find();
   

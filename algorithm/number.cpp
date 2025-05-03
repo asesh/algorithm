@@ -3718,27 +3718,23 @@ Input: 1,3,2,3, k:1 => 8
 long long count_subarrays_where_max_element_appears_at_least_k_times(std::vector<int>& input, int k) {
   long long output = 0;
   
-  // O(n^2) TLE
-  // int max_number;
-  // for(auto& number: nums) {
-  //   max_number = std::max(max_number, number);
-  // }
+  // RC: O(n^2) TLE
+  int max_number = *std::max_element(input.begin(), input.end());
 
-  // for(int left = 0; left < nums.size(); ++left) {
-  //   int count = 0;
-  //   if(nums[left] == max_number) {
-  //     ++count;
-  //   }
-  //   for(int right = left; right < nums.size(); ++right) {
-  //     if(left != right && nums[right] == max_number) {
-  //       ++count;
-  //     }
-
-  //     if(count >= k) {
-  //       ++output;
-  //     }
-  //   }
-  // }
+  for(int left = 0; left < input.size(); ++left) {
+    int count = 0;
+    if(input[left] == max_number) {
+      ++count;
+    }
+    for(int right = left; right < input.size(); ++right) {
+      if(left != right && input[right] == max_number) {
+        ++count;
+      }
+      if(count >= k) {
+        ++output;
+      }
+    }
+  }
   
   return output;
 }
@@ -3762,4 +3758,71 @@ int nth_tribonacci_number(int number) {
 }
 void invoke_nth_tribonacci_number() {
   std::cout<<"1137. N-th Tribonacci Number: "<<nth_tribonacci_number(5);
+}
+
+/*
+Input: [2,2,3,3,3,4] => 9
+ 2: 4
+ 3: 9
+ 4: 4
+
+Input: [13,13,13,10,10,11,11,11,11,12,12,12,12,15] => 98
+ 10,10,11,11,11,11,12,12,12,12,13,13,13,15
+    L  C  R
+ 10 11 12 13 15
+ 20 44 48 39 15
+
+Input: [1,1,1,2,4,5,5,5,6]
+ 1: 3
+ 2: 2
+ 4: 4
+ 5: 15
+ 6: 6
+
+Input: [3,4,2] => 6
+  3: 3
+  4: 4
+  2: 2
+ BU approach:
+         *
+ 0 1 2 3 4 5
+ 0 0 2 3 6 0
+         ^
+*/
+int delete_and_earn_bu(int max_number, std::unordered_map<int, int>& points) {
+  std::vector<int> max_points(max_number + 1);
+  max_points[1] = points.contains(1) ? points[1] : 0;
+  for(int number = 2; number < max_points.size(); ++number) {
+    int sum = points.contains(number) ? points[number] : 0;
+    max_points[number] = std::max(max_points[number - 1], max_points[number - 2] + sum);
+  }
+  
+  return max_points[max_number];
+}
+int delete_and_earn_td(int number, std::unordered_map<int, int>& points, std::unordered_map<int, int>& cache) {
+  if(number == 0) {
+    return 0;
+  }
+  if(number == 1) {
+    return points.contains(1) ? points[1] : 0;
+  }
+  if(cache.contains(number)) {
+    return cache[number];
+  }
+  
+  int total_points = points.contains(number) ? points[number] : 0;
+  cache[number] = std::max(delete_and_earn_td(number - 1, points, cache), delete_and_earn_td(number - 2, points, cache) + total_points);
+  
+  return cache[number];
+}
+void invoke_delete_and_earn() {
+  std::vector<int> input = {1,1,1,2,4,5,5,5,6};
+  std::unordered_map<int, int> points, cache;
+  int max_number = 0;
+  for(auto& number: input) {
+    points[number] += number;
+    max_number = std::max(max_number, number);
+  }
+//  std::cout<<"740. Delete and Earn: "<<delete_and_earn_td(max_number, points, cache);
+  std::cout<<"740. Delete and Earn: "<<delete_and_earn_bu(max_number, points);
 }

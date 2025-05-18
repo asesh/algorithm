@@ -6,6 +6,16 @@
 //  Copyright © 2025 Asesh Shrestha. All rights reserved.
 //
 
+struct TreeNode {
+  int val = 0;
+  TreeNode* left = nullptr;
+  TreeNode* right = nullptr;
+  
+  TreeNode() {}
+  TreeNode(int x) : val(x) {}
+  TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+
 struct QuadTree {
   bool val = false;
   bool is_leaf = false;
@@ -36,3 +46,8 @@ void destroy_quad_tree(QuadTree* root_node);
  427. Construct Quad Tree: https://leetcode.com/problems/construct-quad-tree
 */
 void invoke_construct_quad_tree();
+
+/*
+100. Same Tree: https://leetcode.com/problems/same-tree
+*/
+void invoke_same_tree();

@@ -578,4 +578,14 @@ void invoke_nth_tribonacci_number();
 */
 void invoke_delete_and_earn();
 
+/*
+207. Course Schedule: https://leetcode.com/problems/course-schedule
+*/
+void invoke_course_schedule();
+
+/*
+210. Course Schedule II: https://leetcode.com/problems/course-schedule-ii
+*/
+void invoke_course_schedule_ii();
+
 #endif /* NUMBER_HPP */

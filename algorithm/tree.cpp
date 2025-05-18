@@ -56,3 +56,26 @@ void invoke_construct_quad_tree() {
   std::cout<<"427. Construct Quad Tree: "<<root_node->val<<", "<<std::boolalpha<<root_node->is_leaf;
   destroy_quad_tree(root_node);
 }
+
+bool same_tree(TreeNode* p, TreeNode* q) {
+  if(!p && !q) {
+    return true;
+  }
+
+  if((!p && q) || (p && !q)) {
+    return false;
+  }
+
+  if(p->val != q->val) {
+    return false;
+  }
+
+  return same_tree(p->left, q->left) && same_tree(p->right, q->right);
+}
+void invoke_same_tree() {
+  TreeNode* tree_node_one = new TreeNode(1);
+  tree_node_one->left = new TreeNode(2);
+  TreeNode* tree_node_two = new TreeNode(1);
+  tree_node_one->right = new TreeNode(2);
+  std::cout<<std::boolalpha<<"100. Same Tree: "<<same_tree(tree_node_one, tree_node_two);
+}

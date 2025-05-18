@@ -3826,3 +3826,65 @@ void invoke_delete_and_earn() {
 //  std::cout<<"740. Delete and Earn: "<<delete_and_earn_td(max_number, points, cache);
   std::cout<<"740. Delete and Earn: "<<delete_and_earn_bu(max_number, points);
 }
+
+/*
+Kahn's algorithm for topological sort:
+ Source: https://leetcode.com/explore/learn/card/graph/623/kahns-algorithm-for-topological-sorting/3886/
+A----->B
+|   /^ |
+|  /   |
+\/--->\/
+C      D
+ => [A,C,B,D]
+ 
+ [1,0],[0,2],[2,1] -> 3 => false
+ 2 -> 0 -> 1 <- cycle
+ adj   indegree
+ 0: 1  1
+ 2: 0  2
+ 1: 2  3
+
+ [1,0],[2,1] -> 3 => true
+ 0 -> 1 -> 2
+ adj   indegree
+ 0: 1  0
+ 1: 2  2 -> 1
+       3
+*/
+bool course_schedule(std::vector<std::vector<int>> &prerequisites, int num_courses) {
+  std::vector<int> indegree(num_courses);
+  std::vector<std::vector<int>> adjacency_list(num_courses);
+  
+  int visited_nodes = 0;
+  
+  return num_courses == visited_nodes;
+}
+void invoke_course_schedule() {
+  std::vector<std::vector<int>> prerequisites = {{1,0},{2,1}}; // {1,0},{0,2},{2,1}
+  std::cout<<std::boolalpha<<"207. Course Schedule: "<<course_schedule(prerequisites, 3);
+}
+
+/*
+ 2, [1,0] => [0,1]
+
+ 4, [1,0],[2,0],[3,1],[3,2] => [0,2,1,3]
+ adj         indegree
+ 0: 1,2      0
+ 1: 3        1 -> 0
+ 2: 3        1
+             2
+
+ 4, [1,0],[2,1],[3,1],[3,2] => [0,1,2,3]
+*/
+std::vector<int> course_schedule_ii(int num_courses, std::vector<std::vector<int>>& prerequisites) {
+  std::vector<int> output;
+  
+  return output;
+}
+void invoke_course_schedule_ii() {
+  std::vector<std::vector<int>> prerequisites = {{1,0},{2,0},{3,1},{3,2}};
+  std::cout<<"210. Course Schedule II: ";
+  for(auto& value: course_schedule_ii(4, prerequisites)) {
+    std::cout<<value<<", ";
+  }
+}

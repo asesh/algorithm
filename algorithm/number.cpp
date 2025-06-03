@@ -3888,3 +3888,52 @@ void invoke_course_schedule_ii() {
     std::cout<<value<<", ";
   }
 }
+
+/*
+ 0  1  2  3  4  5
+0 [-1,-1,-1,-1,-1,-1] <- [36 35 34 33 32 31]
+1 [-1,-1,-1,-1,-1,-1] -> [25 26 27 28 29 30]
+2 [-1,-1,-1,-1,-1,-1] <- [24 23 22 21 20 19]
+3 [-1,35,-1,-1,13,-1] -> [13 14 15 16 17 18]
+4 [-1,-1,-1,-1,-1,-1] <- [12 11 10  9  8  7]
+5 [-1,15,-1,-1,-1,-1] -> [1  2   3  4  5  6]
+*/
+int snakes_and_ladders(std::vector<std::vector<int>>& board) {
+  int num_rows = board.size();
+  int label = 1;
+  std::vector<std::pair<int, int>> cells(num_rows * num_rows + 1); // 37 cells
+  
+  std::vector<int> columns(board.size());
+  std::iota(columns.begin(), columns.end(), 0); // 0,1,2,3,4,5
+  
+  for(int row_index = num_rows - 1; row_index >= 0; --row_index) {
+    for(auto& column_index: columns) {
+      cells[label++] = {row_index, column_index};
+    }
+    
+    std::reverse(columns.begin(), columns.end());
+  }
+  
+  std::vector<int> distance(num_rows * num_rows + 1, -1);
+  distance[1] = 0;
+  std::queue<int> queue;
+  queue.push(1);
+  
+  while(!queue.empty()) {
+    int current = queue.front();
+    queue.pop();
+  }
+  
+  return distance[num_rows * num_rows];
+}
+void invoke_snakes_and_ladders() {
+  std::vector<std::vector<int>> board = {
+    {-1,-1,-1,-1,-1,-1},
+    {-1,-1,-1,-1,-1,-1},
+    {-1,-1,-1,-1,-1,-1},
+    {-1,35,-1,-1,13,-1},
+    {-1,-1,-1,-1,-1,-1},
+    {-1,15,-1,-1,-1,-1}
+  };
+  std::cout<<"909. Snakes and Ladders: "<<snakes_and_ladders(board);
+}

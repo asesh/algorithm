@@ -153,4 +153,19 @@ void invoke_interleaving_string();
 */
 void invoke_partition_labels();
 
+/*
+20. Valid Parentheses: https://leetcode.com/problems/valid-parentheses
+*/
+void invoke_valid_parentheses();
+
+/*
+2131. Longest Palindrome by Concatenating Two Letter Words: https://leetcode.com/problems/longest-palindrome-by-concatenating-two-letter-words
+*/
+void invoke_longest_palindrome_by_concatenating_two_letter_words();
+
+/*
+1143. Longest Common Subsequence: https://leetcode.com/problems/longest-common-subsequence
+*/
+void invoke_longest_common_subsequence();
+
 #endif /* string_hpp */

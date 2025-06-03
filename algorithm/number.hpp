@@ -588,4 +588,14 @@ void invoke_course_schedule();
 */
 void invoke_course_schedule_ii();
 
+/*
+909. Snakes and Ladders: https://leetcode.com/problems/snakes-and-ladders
+*/
+void invoke_snakes_and_ladders();
+
+/*
+2929. Distribute Candies Among Children II: https://leetcode.com/problems/distribute-candies-among-children-ii
+*/
+void invoke_distribute_candies_among_children_ii();
+
 #endif /* NUMBER_HPP */

@@ -1587,3 +1587,172 @@ void invoke_partition_labels() {
     std::cout<<number<<", ";
   }
 }
+
+/*
+()[]{}: true
+ stack:
+ }
+ {
+ ]
+ [
+ )
+ (
+
+(]: false
+ ]
+ (
+
+([]): true
+ )
+ ]
+ [
+ (
+
+([]{}): true
+ )
+ }
+ {
+ ]
+ [
+ (
+*/
+bool valid_parentheses(std::string word) {
+  std::stack<char> bracket_stack;
+  bracket_stack.push(word[0]);
+  for(int index = 1; index < word.length(); ++index) {
+    auto current_bracket = word[index];
+    if(!bracket_stack.empty()) {
+      switch(current_bracket) {
+        case ']':
+        if(bracket_stack.top() == '[') {
+          bracket_stack.pop();
+          continue;
+        }
+        break;
+
+        case ')':
+        if(bracket_stack.top() == '(') {
+          bracket_stack.pop();
+          continue;
+        }
+        break;
+
+        case '}':
+        if(bracket_stack.top() == '{') {
+          bracket_stack.pop();
+          continue;
+        }
+        break;
+      }
+    }
+    bracket_stack.push(current_bracket);
+  }
+  return bracket_stack.empty();
+}
+void invoke_valid_parentheses() {
+  std::string parentheses = "([]{})";
+  std::cout<<std::boolalpha<<"20. Valid Parentheses: "<<valid_parentheses(parentheses);
+}
+
+/*
+ ["lc","cl","gg"] => lcggcl => 6
+ hash map:
+ lc: 1
+ cl: 1
+ gg: 1
+
+ ["ab","ty","yt","lc","cl","ab"] => tylcclyt => 8
+ ab: 2
+ ty: 1
+ yt: 1
+ lc: 1
+ cl: 1
+
+ ["cc","cc","cc"] => cccccc => 6
+ cc: 3
+
+ ["cc","ll","xx"] => cc or ll or xx => 2
+ cc: 1
+ ll: 1
+ xx: 1
+ 
+ ["cc","ll","cc"] => ccllcc => 6
+ cc: 2
+ ll: 1
+*/
+int longest_palindrome_by_concatenating_two_letter_words(std::vector<std::string>& words) {
+  int output = 0;
+  
+  return output;
+}
+void invoke_longest_palindrome_by_concatenating_two_letter_words() {
+  std::vector<std::string> words = {"ab","ty","yt","lc","cl","ab"};
+  std::cout<<"2131. Longest Palindrome by Concatenating Two Letter Words: "<<longest_palindrome_by_concatenating_two_letter_words(words);
+}
+/*
+first: abcde, second: ace => 3
+ *
+ F
+ a b c d e
+ *
+ S
+ a c e
+ => [2]
+ 
+ DP:
+     a b c d e
+   0 0 0 0 0 0
+ a 0 1 1 1 1 1
+ c 0 1 1 2 2 2
+ e 0 1 1 2 2 3*
+ 
+first: abcdef, second: acfbdg => 3
+     *
+     F
+ a b c d e f
+   *
+   S
+ a c f b d g
+ => [ab] => [3,3...]
+*/
+int longest_common_subsequence_td(std::string& first, int first_index,
+                               std::string& second, int second_index,
+                               std::vector<std::vector<int>>& memo) {
+  if(first_index == first.length() || second_index == second.length()) {
+    return 0;
+  }
+  
+  if(memo[first_index][second_index] > 0) {
+    return memo[first_index][second_index];
+  }
+  
+  if(first[first_index] == second[second_index]) {
+    memo[first_index][second_index] = 1 + longest_common_subsequence_td(first, first_index + 1, second, second_index + 1, memo);
+    return memo[first_index][second_index];
+  }
+  
+  return std::max(longest_common_subsequence_td(first, first_index + 1, second, second_index, memo),
+                  longest_common_subsequence_td(first, first_index, second, second_index + 1, memo));
+}
+int longest_common_subsequence_bu(std::string& first, std::string& second) {
+  std::vector<std::vector<int>> dp(first.length() + 1, std::vector<int>(second.length() + 1));
+  
+  for(int first_index = 0; first_index < first.length(); ++first_index) {
+    for(int second_index = 0; second_index < second.length(); ++second_index) {
+      dp[first_index + 1][second_index + 1] = first[first_index] == second[second_index] ?
+            dp[first_index][second_index] + 1 :
+            std::max(dp[first_index + 1][second_index], dp[first_index][second_index + 1]);
+    }
+  }
+  
+  return dp[first.length()][second.length()];
+}
+void invoke_longest_common_subsequence() {
+  std::string first = "actgattag", second = "gtggatcg";
+//  std::string first = "pmjghexybyrgzczy", second = "hafcdqbgncrcbihkd";
+  std::vector<std::vector<int>> memo(first.length(), std::vector<int>(second.length(), -1));
+//  std::cout<<"1143. Longest Common Subsequence: "<<longest_common_subsequence_td(first, 0,
+//                                                                                 second, 0,
+//                                                                                 memo);
+  std::cout<<"1143. Longest Common Subsequence: "<<longest_common_subsequence_bu(first, second);
+}

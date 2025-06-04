@@ -165,4 +165,9 @@ private:
 
 void invoke_union_find();
 
+/*
+433. Minimum Genetic Mutation: https://leetcode.com/problems/minimum-genetic-mutation
+*/
+void invoke_minimum_genetic_mutation();
+
 #endif /* GRAPH_H */

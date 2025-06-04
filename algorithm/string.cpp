@@ -1681,9 +1681,32 @@ void invoke_valid_parentheses() {
  ll: 1
 */
 int longest_palindrome_by_concatenating_two_letter_words(std::vector<std::string>& words) {
+  bool central = false;
   int output = 0;
+  std::unordered_map<std::string, int> word_count;
+  for(auto& word: words) {
+    word_count[word]++;
+  }
   
-  return output;
+  for(auto& [word, count]: word_count) {
+    // Same characters
+    if(word[0] == word[1]) {
+      if(count % 2 == 0) {
+        output += 2;
+      } else {
+        central = true;
+        output += count - 1;
+      }
+    } else if(word[0] < word[1] && word_count.contains({word[1], word[0]})) {
+      output += 2 * std::min(count, word_count[{word[1], word[0]}]);
+    }
+  }
+  
+  if(central) {
+    ++output;
+  }
+  
+  return output * 2;
 }
 void invoke_longest_palindrome_by_concatenating_two_letter_words() {
   std::vector<std::string> words = {"ab","ty","yt","lc","cl","ab"};

@@ -179,3 +179,63 @@ void invoke_union_find() {
     <<"5 -> 7?: "<<union_find.equal(5, 7)<<", "<<std::endl
     <<"4 -> 9?: "<<union_find.equal(4, 9)<<std::endl;
 }
+
+/*
+AACCGGTT, AACCGGTA; [AACCGGTA] => 1
+               *
+ A A C C G G T T <-
+ A A C C G G T A ->
+
+AACCGGTT, AAACGGTA; [AACCGGTA,AACCGCTA,AAACGGTA] => 2
+     *         *
+ A A C C G G T T <-
+ A A C C G G T A
+ A A A C G G T A
+ A A A C G G T A ->
+
+AACCGGTT, ACACGTGT; [AACCGGGT,AACCGTGT,ACCCGTGT,ACACGTGT,CCACGTGT] => 4
+   * *     * *
+ A A C C G G T T <-
+ A A C C G G G T
+ A A C C G T G T
+ A C C C G T G T
+ A C A C G T G T ->
+*/
+int minimum_genetic_mutation(std::string& start, std::string& end, std::vector<std::string>& bank) {
+  int total_steps = 0;
+  
+  std::unordered_set<std::string> seen;
+  std::queue<std::string> queue;
+  queue.push(start);
+  seen.insert(start);
+  
+  while(!queue.empty()) {
+    auto current_word = queue.front();
+    queue.pop();
+    
+    for(auto& character: "ACGT") {
+      for(int index = 0; index < current_word.length(); ++index) {
+        auto word = current_word;
+        word[index] = character;
+        
+        if(word == end) {
+          return ++total_steps;
+        } else if(!seen.contains(word) &&
+                  std::find(bank.begin(), bank.end(), word) != bank.end()) {
+          seen.insert(word);
+          queue.push(word);
+        }
+      }
+    }
+    ++total_steps;
+  }
+  
+  return -1;
+}
+void invoke_minimum_genetic_mutation() {
+  std::string start = "AACCGGTT", end = "AAACGGTA";
+  std::vector<std::string> bank = {"AACCGGTA","AACCGCTA","AAACGGTA"};
+//  std::string start = "AACCGGTT", end = "ACACGTGT";
+//  std::vector<std::string> bank = {"AACCGGGT","AACCGTGT","ACCCGTGT","ACACGTGT","CCACGTGT"};
+  std::cout<<"433. Minimum Genetic Mutation: "<<minimum_genetic_mutation(start, end, bank);
+}

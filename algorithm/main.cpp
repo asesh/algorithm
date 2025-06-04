@@ -19,7 +19,11 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_longest_common_subsequence();
+  invoke_minimum_genetic_mutation();
+  
+//  invoke_longest_palindrome_by_concatenating_two_letter_words();
+  
+//  invoke_longest_common_subsequence();
   
 //  invoke_snakes_and_ladders();
   

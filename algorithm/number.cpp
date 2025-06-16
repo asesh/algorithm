@@ -3957,3 +3957,22 @@ void invoke_snakes_and_ladders() {
   };
   std::cout<<"909. Snakes and Ladders: "<<snakes_and_ladders(board);
 }
+
+int maximium_difference_between_increasing_elements(std::vector<int>& input) {
+  int max_diff = -1;
+
+  int minimum = INT_MAX;
+  for(int index = 1; index < input.size(); ++index) {
+    minimum = std::min(minimum, std::min(input[index], input[index - 1]));
+    auto diff = input[index] - minimum;
+    if(diff >= 0) {
+      max_diff = std::max(max_diff, diff);
+    }
+  }
+
+  return max_diff == 0 ? -1 : max_diff;
+}
+void invoke_maximium_difference_between_increasing_elements() {
+  std::vector<int> input = {1,5,2,10};
+  std::cout<<"2016. Maximum Difference Between Increasing Elements: "<<maximium_difference_between_increasing_elements(input);
+}

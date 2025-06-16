@@ -1779,3 +1779,134 @@ void invoke_longest_common_subsequence() {
 //                                                                                 memo);
   std::cout<<"1143. Longest Common Subsequence: "<<longest_common_subsequence_bu(first, second);
 }
+
+/*
+ {{"a","b"},{"b","c"}} -> {2.0,3.0}
+   2       3
+   a/b     b/c ->
+ a------b------c
+   b/a     c/b <-
+  1/2     1/3
+ a/b = 2.0 => a = b*2.0
+ b/c = 3.0 => c = b/3.0
+ (a/b)*(b/c) = 2*3 = 6
+ a/c = 6
+ b/a = 0.5
+ a/e = -1
+ a/a = 1
+ x/x = -1
+
+    1.5      2.5          ->
+ a-------b--------c--------d
+    0.66     0.4          <-
+ a/b = 1.5
+ b/c = 2.5
+ bc/cd = 5.0
+ a/c = 3.75
+ c/b = 1/2.5 = 0.4
+ bc/cd = 5.0
+ cd/bc = 0.2
+ cd=2.5/5.0 = 0.5
+ 
+Solution:
+ hash map: <a, <b, 2>>, <b, <a, 1/2>>, <b, <c, 3>>, <c, <b, 1/3>>
+*/
+double evaluate_divison_dfs(std::unordered_map<std::string, std::unordered_map<std::string, double>>& graph, std::string dividend, std::string divisor, std::unordered_set<std::string>& seen, double product) {
+  int output = -1;
+  
+  if(seen.contains(dividend)) {
+    return 0;
+  }
+  
+  seen.insert(dividend);
+  
+  for(auto& neighbor: graph[dividend]) {
+    if(!seen.contains(neighbor.first)) {
+      output = evaluate_divison_dfs(graph, neighbor.first, divisor, seen, product * neighbor.second);
+    }
+  }
+  
+  seen.clear();
+  
+  return output;
+}
+std::vector<double> evaluate_divison(std::vector<std::vector<std::string>>& equations, std::vector<double>& values, std::vector<std::vector<std::string>>& queries) {
+  std::vector<double> output(queries.size());
+  std::unordered_map<std::string, std::unordered_map<std::string, double>> graph;
+  for(int index = 0; index < equations.size(); ++index) {
+    auto& equation = equations[index];
+    graph[equation[0]][equation[1]] = values[index];
+    graph[equation[1]][equation[0]] = 1.0/values[index];
+  }
+  
+  for(int index = 0; index < queries.size(); ++index) {
+    auto equation = queries[index];
+    auto dividend = equation[0];
+    auto divisor = equation[1];
+    if(!graph.contains(dividend) || !graph.contains(divisor)) {
+      output[index] = -1;
+    } else if(dividend == divisor) {
+      output[index] = 1;
+    } else {
+      std::unordered_set<std::string> seen;
+      output[index] = evaluate_divison_dfs(graph, dividend, divisor, seen, 1.0);
+    }
+  }
+  
+  return output;
+}
+void invoke_evaluate_division() {
+  std::vector<std::vector<std::string>> equations = {{"a","b"},{"b","c"}};
+  std::vector<double> values = {2.0,3.0};
+  std::vector<std::vector<std::string>> queries = {{"a","c"},{"c","a"},{"b","a"},{"a","e"},{"a","a"},{"x","x"}};
+//  std::vector<std::vector<std::string>> equations = {{"a","b"},{"b","c"},{"bc","cd"}};
+//  std::vector<double> values = {1.5,2.5,5.0};
+//  std::vector<std::vector<std::string>> queries = {{"a","c"},{"c","b"},{"bc","cd"},{"cd","bc"}};
+  std::cout<<"399. Evaluate Division: ";
+  auto results = evaluate_divison(equations, values, queries);
+  for(int index = 0; index < results.size(); ++index) {
+    auto& query = queries[index];
+    std::cout<<query[0]<<"/"<<query[1]<<" = "<<results[index]<<std::endl;
+  }
+}
+
+/*
+ b: hit, e: cog -> {"dot","dog","lot","log","hot","cog"}
+                   hit
+                 /     \
+              hot
+             /   \
+          lot     dot
+         /        /
+      log      dog
+      /
+   cog
+
+ b: hit, e: cid -> {"dot","lot","hot","hht","log","cig","loc","dog","dig","cid"}
+                   hit
+                 /     \
+              hot       hht
+             /   \
+           lot    dot
+         /   \      \
+       log   loc     dog
+                       \
+                        dig
+                         \
+                          cig
+                           \
+                            cid
+ 
+Process:
+ hash map: *it -> hit, h*t -> hit, hi* -> hit
+*/
+int word_ladder(std::string& begin_word, std::string& end_word, std::vector<std::string>& word_list) {
+  int steps = 0;
+  
+  return steps;
+}
+void invoke_word_ladder() {
+  std::string begin_word = "hit", end_word = "cid";
+  std::vector<std::string> word_list = {"dot","lot","hot","hht","log","cig","loc","dog","dig","cid"};
+  std::cout<<""<<word_ladder(begin_word, end_word, word_list);
+}

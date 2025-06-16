@@ -168,4 +168,14 @@ void invoke_longest_palindrome_by_concatenating_two_letter_words();
 */
 void invoke_longest_common_subsequence();
 
+/*
+399. Evaluate Division: https://leetcode.com/problems/evaluate-division
+*/
+void invoke_evaluate_division();
+
+/*
+127. Word Ladder: https://leetcode.com/problems/word-ladder
+*/
+void invoke_word_ladder();
+
 #endif /* string_hpp */

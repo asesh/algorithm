@@ -598,4 +598,9 @@ void invoke_snakes_and_ladders();
 */
 void invoke_distribute_candies_among_children_ii();
 
+/*
+2016. Maximum Difference Between Increasing Elements: https://leetcode.com/problems/maximum-difference-between-increasing-elements
+*/
+void invoke_maximium_difference_between_increasing_elements();
+
 #endif /* NUMBER_HPP */

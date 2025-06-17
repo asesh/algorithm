@@ -534,3 +534,28 @@ void invoke_binary_tree_zigzag_level_order_traversal() {
   std::cout<<"]";
   destroy(binary_tree);
 }
+
+bool path_sum(CBinaryTree<int32_t>* node, int target, int sum) {
+  if(!node) {
+    return false;
+  }
+
+  sum += node->value;
+  if(sum == target && !node->left && !node->right) {
+    return true;
+  }
+  return path_sum(node->left, target, sum) || path_sum(node->right, target, sum);
+}
+void invoke_path_sum() {
+  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(5);
+  binary_tree->left = new CBinaryTree<int32_t>(4);
+  binary_tree->left->left = new CBinaryTree<int32_t>(11);
+  binary_tree->left->left->left = new CBinaryTree<int32_t>(7);
+  binary_tree->left->left->right = new CBinaryTree<int32_t>(2);
+  binary_tree->right = new CBinaryTree<int32_t>(8);
+  binary_tree->right->left = new CBinaryTree<int32_t>(13);
+  binary_tree->right->right = new CBinaryTree<int32_t>(4);
+  binary_tree->right->right->right = new CBinaryTree<int32_t>(1);
+  std::cout<<std::boolalpha<<path_sum(binary_tree, 22, 0);
+  destroy(binary_tree);
+}

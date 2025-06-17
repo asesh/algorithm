@@ -237,4 +237,9 @@ void invoke_populating_next_right_pointers_in_each_node_ii();
 */
 void invoke_binary_tree_zigzag_level_order_traversal();
 
+/*
+112. Path Sum: https://leetcode.com/problems/path-sum
+*/
+void invoke_path_sum();
+
 #endif /* BINARY_TREE_HPP */

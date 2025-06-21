@@ -191,6 +191,11 @@ void invoke_partition_list();
 */
 void invoke_copy_list_with_random_pointer();
 
+/*
+21. Merge Two Sorted Lists: https://leetcode.com/problems/merge-two-sorted-lists
+*/
+void invoke_merge_two_sorted_lists();
+
 void test_linked_list();
 
 void test_doubly_linked_list();

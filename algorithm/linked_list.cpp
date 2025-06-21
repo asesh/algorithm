@@ -422,3 +422,36 @@ void test_doubly_linked_list() {
     delete head;
   }
 }
+
+SLinkedList* merge_two_sorted_lists(SLinkedList* first, SLinkedList* second) {
+  SLinkedList* dummy = new SLinkedList(-1);
+  SLinkedList* new_head = dummy;
+  while(first || second) {
+    if(first && second) {
+      if(first->value <= second->value) {
+        dummy->next = new SLinkedList(first->value);
+        first = first->next;
+      } else {
+        dummy->next = new SLinkedList(second->value);
+        second = second->next;
+      }
+    } else if(first && !second) {
+      dummy->next = first;
+      first = nullptr;
+    } else {
+      dummy->next = second;
+      second = nullptr;
+    }
+    dummy = dummy->next;
+  }
+  return new_head->next;
+}
+void invoke_merge_two_sorted_lists() {
+  SLinkedList* first = new SLinkedList(1);
+  first->next = new SLinkedList(2);
+  first->next->next = new SLinkedList(4);
+  SLinkedList* second = new SLinkedList(1);
+  second->next = new SLinkedList(3);
+  second->next->next = new SLinkedList(4);
+  std::cout<<"21. Merge Two Sorted Lists: "<<merge_two_sorted_lists(first, second);
+}

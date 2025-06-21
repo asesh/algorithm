@@ -10,7 +10,6 @@
 #define NUMBER_HPP
 
 void print_reverse(int input_array[], int index, int max_items);
-bool is_number_palindrome(int number);
 int get_max_sum_of_consecutive_numbers(int array[], int number_of_elements, int number_of_consecutive_elements);
 std::pair<int, int> two_sum_equals_specific_target(const int* input_numbers, int number_of_elements, int target);
 void high_to_low(int input_array[], int lower_index, int higher_index, int smaller_value = 0);
@@ -602,5 +601,10 @@ void invoke_distribute_candies_among_children_ii();
 2016. Maximum Difference Between Increasing Elements: https://leetcode.com/problems/maximum-difference-between-increasing-elements
 */
 void invoke_maximium_difference_between_increasing_elements();
+
+/*
+9. Palindrome Number: https://leetcode.com/problems/palindrome-number
+*/
+void invoke_palindrome_number();
 
 #endif /* NUMBER_HPP */

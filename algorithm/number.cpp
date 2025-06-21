@@ -20,34 +20,6 @@ void print_reverse(int input_array[], int index, int max_items) {
 	std::cout<<input_array[--index] << " ";
 }
 
-/*
- Check if the input number is palindrome or not
- input: 121
- */
-bool is_number_palindrome(int number) {
-	if(number < 0) {
-		return false;
-	}
-	
-	int reverse_number = 0;
-	
-	int assigned_number = number;
-	
-	while(assigned_number != 0) {
-		auto last_number = assigned_number % 10; // 1 -> 2 -> 1
-		assigned_number /= 10; // 12 -> 1 -> 0
-		
-		if(reverse_number > assigned_number) {
-			assigned_number = (assigned_number * 10) + last_number;
-			break;
-		}
-		
-		reverse_number = (reverse_number * 10) + last_number; // 1 -> 12
-	}
-	
-	return reverse_number == assigned_number;
-}
-
 // Incomplete implementation of sliding window
 int get_max_sum_of_consecutive_numbers(int array[], int number_of_elements, int number_of_consecutive_elements) {
 	// array: 1, 2, 3, 4, 5, 6
@@ -3975,4 +3947,21 @@ int maximium_difference_between_increasing_elements(std::vector<int>& input) {
 void invoke_maximium_difference_between_increasing_elements() {
   std::vector<int> input = {1,5,2,10};
   std::cout<<"2016. Maximum Difference Between Increasing Elements: "<<maximium_difference_between_increasing_elements(input);
+}
+
+bool palindrome_number(int input) {
+  if(input < 0) {
+    return false;
+  }
+
+  int64_t new_number = 0, number = input;
+  while(number) { // 121
+    auto remainder = number % 10; // 1, 2, 1
+    new_number = (new_number * 10) + remainder; // 1 => 12 => 121
+    number /= 10; // 12, 1, 0
+  }
+  return new_number == input;
+}
+void invoke_palindrome_number() {
+  std::cout<<std::boolalpha<<"9. Palindrome Number: "<<palindrome_number(121);
 }

@@ -383,6 +383,14 @@ void invoke_copy_list_with_random_pointer() {
   }
 }
 
+/*
+ first: 1-> 2-> 4, second: 1 -> 3 -> 4 => 1 -> 1 -> 2 -> 3 -> 4 -> 4
+   F
+ 1 2 4
+ S
+ 1 3 4
+ => -1 -> 1
+*/
 SLinkedList* merge_two_sorted_lists(SLinkedList* first, SLinkedList* second) {
   SLinkedList* dummy = new SLinkedList(-1);
   SLinkedList* new_head = dummy;
@@ -416,6 +424,12 @@ void invoke_merge_two_sorted_lists() {
   std::cout<<"21. Merge Two Sorted Lists: "<<merge_two_sorted_lists(first, second);
 }
 
+/*
+ 3,2,0,-4 -> true
+      S          F
+ 3 -> 2 -> 0 -> -4
+      ^---------<|
+*/
 bool linked_list_cycle(SLinkedList* head) {
   if(!head) {
     return false;

@@ -383,6 +383,64 @@ void invoke_copy_list_with_random_pointer() {
   }
 }
 
+SLinkedList* merge_two_sorted_lists(SLinkedList* first, SLinkedList* second) {
+  SLinkedList* dummy = new SLinkedList(-1);
+  SLinkedList* new_head = dummy;
+  while(first || second) {
+    if(first && second) {
+      if(first->value <= second->value) {
+        dummy->next = new SLinkedList(first->value);
+        first = first->next;
+      } else {
+        dummy->next = new SLinkedList(second->value);
+        second = second->next;
+      }
+    } else if(first && !second) {
+      dummy->next = first;
+      first = nullptr;
+    } else {
+      dummy->next = second;
+      second = nullptr;
+    }
+    dummy = dummy->next;
+  }
+  return new_head->next;
+}
+void invoke_merge_two_sorted_lists() {
+  SLinkedList* first = new SLinkedList(1);
+  first->next = new SLinkedList(2);
+  first->next->next = new SLinkedList(4);
+  SLinkedList* second = new SLinkedList(1);
+  second->next = new SLinkedList(3);
+  second->next->next = new SLinkedList(4);
+  std::cout<<"21. Merge Two Sorted Lists: "<<merge_two_sorted_lists(first, second);
+}
+
+bool linked_list_cycle(SLinkedList* head) {
+  if(!head) {
+    return false;
+  }
+
+  SLinkedList* slow = head, *fast = head->next;
+  while(slow && fast) {
+    if(fast == slow) {
+      return true;
+    }
+
+    slow = slow->next;
+    fast = fast->next ? fast->next->next : fast->next;
+  }
+  return false;
+}
+void invoke_linked_list_cycle() {
+  SLinkedList* head = new SLinkedList(3);
+  head->next = new SLinkedList(2);
+  head->next->next = new SLinkedList(0);
+  head->next->next->next = new SLinkedList(4);
+  head->next->next->next->next = head->next;
+  std::cout<<std::boolalpha<<"141. Linked List Cycle: "<<linked_list_cycle(head);
+}
+
 void test_linked_list() {
   SLinkedList* dummy = new SLinkedList(-1);
   
@@ -421,37 +479,4 @@ void test_doubly_linked_list() {
     dummy_head = dummy_head->next;
     delete head;
   }
-}
-
-SLinkedList* merge_two_sorted_lists(SLinkedList* first, SLinkedList* second) {
-  SLinkedList* dummy = new SLinkedList(-1);
-  SLinkedList* new_head = dummy;
-  while(first || second) {
-    if(first && second) {
-      if(first->value <= second->value) {
-        dummy->next = new SLinkedList(first->value);
-        first = first->next;
-      } else {
-        dummy->next = new SLinkedList(second->value);
-        second = second->next;
-      }
-    } else if(first && !second) {
-      dummy->next = first;
-      first = nullptr;
-    } else {
-      dummy->next = second;
-      second = nullptr;
-    }
-    dummy = dummy->next;
-  }
-  return new_head->next;
-}
-void invoke_merge_two_sorted_lists() {
-  SLinkedList* first = new SLinkedList(1);
-  first->next = new SLinkedList(2);
-  first->next->next = new SLinkedList(4);
-  SLinkedList* second = new SLinkedList(1);
-  second->next = new SLinkedList(3);
-  second->next->next = new SLinkedList(4);
-  std::cout<<"21. Merge Two Sorted Lists: "<<merge_two_sorted_lists(first, second);
 }

@@ -196,6 +196,11 @@ void invoke_copy_list_with_random_pointer();
 */
 void invoke_merge_two_sorted_lists();
 
+/*
+141. Linked List Cycle: https://leetcode.com/problems/linked-list-cycle
+*/
+void invoke_linked_list_cycle();
+
 void test_linked_list();
 
 void test_doubly_linked_list();

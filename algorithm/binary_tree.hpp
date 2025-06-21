@@ -242,4 +242,9 @@ void invoke_binary_tree_zigzag_level_order_traversal();
 */
 void invoke_path_sum();
 
+/*
+226. Invert Binary Tree: https://leetcode.com/problems/invert-binary-tree
+*/
+void invoke_invert_binary_tree();
+
 #endif /* BINARY_TREE_HPP */

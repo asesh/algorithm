@@ -559,3 +559,27 @@ void invoke_path_sum() {
   std::cout<<std::boolalpha<<path_sum(binary_tree, 22, 0);
   destroy(binary_tree);
 }
+
+CBinaryTree<int32_t>* invert_binary_tree(CBinaryTree<int32_t>* root) {
+  if(!root) {
+    return nullptr;
+  }
+
+  auto* left = invert_binary_tree(root->left);
+  auto* right = invert_binary_tree(root->right);
+  std::swap(root->left, right);
+  std::swap(root->right, left);
+  return root;
+}
+void invoke_invert_binary_tree() {
+  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(4);
+  binary_tree->left = new CBinaryTree<int32_t>(2);
+  binary_tree->left->left = new CBinaryTree<int32_t>(1);
+  binary_tree->left->left->right = new CBinaryTree<int32_t>(3);
+  binary_tree->right = new CBinaryTree<int32_t>(7);
+  binary_tree->right->left = new CBinaryTree<int32_t>(6);
+  binary_tree->right->right = new CBinaryTree<int32_t>(49);
+  auto* inverted_tree = invert_binary_tree(binary_tree);
+  std::cout<<"226. Invert Binary Tree: "<<inverted_tree->value;
+  destroy(binary_tree);
+}

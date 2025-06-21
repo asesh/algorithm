@@ -247,4 +247,9 @@ void invoke_path_sum();
 */
 void invoke_invert_binary_tree();
 
+/*
+101. Symmetric Tree: https://leetcode.com/problems/symmetric-tree
+*/
+void invoke_symmetric_tree();
+
 #endif /* BINARY_TREE_HPP */

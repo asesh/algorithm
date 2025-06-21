@@ -19,7 +19,9 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_evaluate_division();
+//  invoke_evaluate_division();
+  
+  invoke_symmetric_tree();
   
 //  invoke_invert_binary_tree();
   

@@ -583,3 +583,43 @@ void invoke_invert_binary_tree() {
   std::cout<<"226. Invert Binary Tree: "<<inverted_tree->value;
   destroy(binary_tree);
 }
+
+bool symmetric_tree(CBinaryTree<int32_t>* left_subtree, CBinaryTree<int32_t>* right_subtree) {
+  if(!left_subtree && !right_subtree) {
+    return true;
+  }
+  if(!left_subtree || !right_subtree) {
+    return false;
+  }
+
+  auto first = symmetric_tree(left_subtree->left, right_subtree->right);
+  auto second = symmetric_tree(left_subtree->right, right_subtree->left);
+
+  if(!first || !second) {
+    return false;
+  } else if(left_subtree->left && right_subtree->right &&
+   left_subtree->left->value != right_subtree->right->value) {
+    return false;
+  }
+
+  return true;
+}
+void invoke_symmetric_tree() {
+  // Symmetric
+//  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(1);
+//  binary_tree->left = new CBinaryTree<int32_t>(2);
+//  binary_tree->left->left = new CBinaryTree<int32_t>(3);
+//  binary_tree->left->right = new CBinaryTree<int32_t>(4);
+//  binary_tree->right = new CBinaryTree<int32_t>(2);
+//  binary_tree->right->left = new CBinaryTree<int32_t>(4);
+//  binary_tree->right->right = new CBinaryTree<int32_t>(3);
+  
+  // Asymmetric
+  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(1);
+  binary_tree->left = new CBinaryTree<int32_t>(2);
+  binary_tree->left->right = new CBinaryTree<int32_t>(3);
+  binary_tree->right = new CBinaryTree<int32_t>(2);
+  binary_tree->right->right = new CBinaryTree<int32_t>(3);
+  std::cout<<std::boolalpha<<"101. Symmetric Tree: "<<symmetric_tree(binary_tree, binary_tree);
+  destroy(binary_tree);
+}

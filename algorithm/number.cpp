@@ -3965,3 +3965,58 @@ bool palindrome_number(int input) {
 void invoke_palindrome_number() {
   std::cout<<std::boolalpha<<"9. Palindrome Number: "<<palindrome_number(121);
 }
+
+std::vector<int> plus_one(std::vector<int>& digits) {
+  // Won't work on all the test cases when the input is too long
+  // std::vector<int> output;
+  // unsigned long long number = 0;
+  // for(auto& num: digits) {
+  //   number = number * 10 + num;
+  // }
+
+  // number++;
+
+  // while(number) {
+  //   auto remainder = number % 10; // 4
+  //   output.push_back(remainder);
+  //   number /= 10;
+  // }
+
+  // std::reverse(output.begin(), output.end());
+
+  // return output;
+
+  /*
+  1 2 9
+    1
+  1 2 0
+
+  9 9 9
+    1
+  9 9 0
+  1
+  9 0 0
+  1 0 0 0
+  */
+  int num_digits = digits.size();
+  for(int index = num_digits - 1; index >= 0; index--) {
+    if(digits[index] == 9) {
+      digits[index] = 0;
+    } else {
+      digits[index]++;
+      return digits;
+    }
+  }
+
+  digits.insert(digits.begin(), 1);
+
+  return digits;
+}
+void invoke_plus_one() {
+  std::vector<int> digits = {4,3,2,1};
+  std::cout<<"66. Plus One: {";
+  for(auto& num: plus_one(digits)) {
+    std::cout<<num<<", ";
+  }
+  std::cout<<"}";
+}

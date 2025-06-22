@@ -607,4 +607,9 @@ void invoke_maximium_difference_between_increasing_elements();
 */
 void invoke_palindrome_number();
 
+/*
+66. Plus One: https://leetcode.com/problems/plus-one
+*/
+void invoke_plus_one();
+
 #endif /* NUMBER_HPP */

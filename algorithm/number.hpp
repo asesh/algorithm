@@ -612,4 +612,9 @@ void invoke_palindrome_number();
 */
 void invoke_plus_one();
 
+/*
+35. Search Insert Position: https://leetcode.com/problems/search-insert-position
+*/
+void invoke_search_insert_position();
+
 #endif /* NUMBER_HPP */

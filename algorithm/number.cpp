@@ -3967,7 +3967,7 @@ void invoke_palindrome_number() {
 }
 
 std::vector<int> plus_one(std::vector<int>& digits) {
-  // Won't work on all the test cases when the input is too long
+  // Won't work on all the test cases when the input is too long because of integer overflow
   // std::vector<int> output;
   // unsigned long long number = 0;
   // for(auto& num: digits) {
@@ -3983,7 +3983,6 @@ std::vector<int> plus_one(std::vector<int>& digits) {
   // }
 
   // std::reverse(output.begin(), output.end());
-
   // return output;
 
   /*
@@ -4019,4 +4018,45 @@ void invoke_plus_one() {
     std::cout<<num<<", ";
   }
   std::cout<<"}";
+}
+
+/*
+ 1 3 4 5 6
+ 0 + 4 / 2 = 2
+
+ 1 3 5 6, target: 2
+   *
+ 0 1 2 3
+ 1 3 5 6
+ 3 / 2 = 1
+ 1 / 2 = 0
+
+ 1 3 5 6, taraget: 7
+ 0 1 2 3
+ 1 3 5 6
+ 3 / 2 = 1
+ (2 + 3) / 2 = 2
+ 3
+*/
+int search_insert_position_binary_search(std::vector<int>& nums, int low, int high, int target) {
+  int median = (low + high) / 2;
+  if(nums[median] == target) {
+    return median;
+  } else if(low == high) {
+    if(nums[low] < target) {
+      return low + 1;
+    }
+
+    return low;
+  }
+
+  if(nums[median] > target) {
+    return binary_search(nums, low, median, target);
+  }
+
+  return binary_search(nums, median + 1, high, target);
+}
+void invoke_search_insert_position() {
+  std::vector<int> input = {1,3,5,6};
+  std::cout<<"35. Search Insert Position: "<<search_insert_position_binary_search(input, 0, input.size() - 1, 2);
 }

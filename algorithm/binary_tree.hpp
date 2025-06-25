@@ -252,4 +252,9 @@ void invoke_invert_binary_tree();
 */
 void invoke_symmetric_tree();
 
+/*
+222. Count Complete Tree Nodes: https://leetcode.com/problems/count-complete-tree-nodes
+*/
+void invoke_count_complete_tree_nodes();
+
 #endif /* BINARY_TREE_HPP */

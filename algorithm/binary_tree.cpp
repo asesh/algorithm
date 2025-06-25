@@ -623,3 +623,17 @@ void invoke_symmetric_tree() {
   std::cout<<std::boolalpha<<"101. Symmetric Tree: "<<symmetric_tree(binary_tree, binary_tree);
   destroy(binary_tree);
 }
+
+int count_complete_tree_nodes(CBinaryTree<int32_t>* binary_tree) {
+  return binary_tree ? 1 + count_complete_tree_nodes(binary_tree->right) + count_complete_tree_nodes(binary_tree->left) : 0;
+}
+void invoke_count_complete_tree_nodes() {
+  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(1);
+  binary_tree->left = new CBinaryTree<int32_t>(2);
+  binary_tree->left->left = new CBinaryTree<int32_t>(4);
+  binary_tree->left->right = new CBinaryTree<int32_t>(5);
+  binary_tree->right = new CBinaryTree<int32_t>(3);
+  binary_tree->right->left = new CBinaryTree<int32_t>(6);
+  std::cout<<"222. Count Complete Tree Nodes: "<<count_complete_tree_nodes(binary_tree);
+  destroy(binary_tree);
+}

@@ -19,7 +19,9 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_evaluate_division();
+//  invoke_evaluate_division();
+  
+  invoke_count_complete_tree_nodes();
   
 //  invoke_symmetric_tree();
   

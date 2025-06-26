@@ -637,3 +637,47 @@ void invoke_count_complete_tree_nodes() {
   std::cout<<"222. Count Complete Tree Nodes: "<<count_complete_tree_nodes(binary_tree);
   destroy(binary_tree);
 }
+
+std::vector<double> average_of_levels_in_binary_tree(CBinaryTree<int32_t>* binary_tree) {
+  std::vector<double> output;
+
+  std::queue<CBinaryTree<int32_t>*> node_queue;
+  node_queue.push(binary_tree);
+
+  while(!node_queue.empty()) {
+    int number_of_nodes = node_queue.size();
+
+    double level_sum = 0;
+    for(int index = 0; index < number_of_nodes; ++index) {
+      auto* current_node = node_queue.front();
+      node_queue.pop();
+
+      level_sum += current_node->value;
+
+      if(current_node->left) {
+        node_queue.push(current_node->left);
+      }
+      if(current_node->right) {
+        node_queue.push(current_node->right);
+      }
+    }
+
+    output.push_back(level_sum / number_of_nodes);
+  }
+
+  return output;
+}
+void invoke_average_of_levels_in_binary_tree() {
+  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(3);
+  binary_tree->left = new CBinaryTree<int32_t>(9);
+  binary_tree->right = new CBinaryTree<int32_t>(20);
+  binary_tree->right->left = new CBinaryTree<int32_t>(15);
+  binary_tree->right->right = new CBinaryTree<int32_t>(7);
+  auto output = average_of_levels_in_binary_tree(binary_tree);
+  std::cout<<"637. Average of Levels in Binary Tree: [";
+  std::for_each(output.begin(), output.end(), [](double value) {
+    std::cout<<value<<", ";
+  });
+  std::cout<<"]";
+  destroy(binary_tree);
+}

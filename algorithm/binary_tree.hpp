@@ -257,4 +257,9 @@ void invoke_symmetric_tree();
 */
 void invoke_count_complete_tree_nodes();
 
+/*
+637. Average of Levels in Binary Tree: https://leetcode.com/problems/average-of-levels-in-binary-tree
+*/
+void invoke_average_of_levels_in_binary_tree();
+
 #endif /* BINARY_TREE_HPP */

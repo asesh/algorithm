@@ -21,7 +21,9 @@
 int main(int argc, const char* argv[]) {
 //  invoke_evaluate_division();
   
-  invoke_average_of_levels_in_binary_tree();
+  invoke_minimum_absolute_difference_in_bst();
+  
+//  invoke_average_of_levels_in_binary_tree();
   
 //  invoke_count_complete_tree_nodes();
   

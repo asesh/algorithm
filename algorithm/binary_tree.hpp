@@ -262,4 +262,9 @@ void invoke_count_complete_tree_nodes();
 */
 void invoke_average_of_levels_in_binary_tree();
 
+/*
+530. Minimum Absolute Difference in BST: https://leetcode.com/problems/minimum-absolute-difference-in-bst
+*/
+void invoke_minimum_absolute_difference_in_bst();
+
 #endif /* BINARY_TREE_HPP */

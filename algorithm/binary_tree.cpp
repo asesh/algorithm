@@ -681,3 +681,33 @@ void invoke_average_of_levels_in_binary_tree() {
   std::cout<<"]";
   destroy(binary_tree);
 }
+
+void minimum_absolute_difference_in_bst_inorder(CBinaryTree<int32_t>* node, std::vector<int>& sorted_array) {
+  if(!node) {
+    return;
+  }
+
+  minimum_absolute_difference_in_bst_inorder(node->left, sorted_array);
+  sorted_array.push_back(node->value);
+  minimum_absolute_difference_in_bst_inorder(node->right, sorted_array);
+}
+int minimum_absolute_difference_in_bst(CBinaryTree<int32_t>* binary_tree) {
+  int absolute_difference = INT_MAX;
+  std::vector<int> sorted_array;
+  minimum_absolute_difference_in_bst_inorder(binary_tree, sorted_array);
+
+  for(int index = 1; index < sorted_array.size(); ++index) {
+    absolute_difference = std::min(absolute_difference, sorted_array[index] - sorted_array[index - 1]);
+  }
+
+  return absolute_difference;
+}
+void invoke_minimum_absolute_difference_in_bst() {
+  CBinaryTree<int32_t>* binary_tree = new CBinaryTree<int32_t>(236);
+  binary_tree->left = new CBinaryTree<int32_t>(104);
+  binary_tree->left->right = new CBinaryTree<int32_t>(227);
+  binary_tree->right = new CBinaryTree<int32_t>(701);
+  binary_tree->right->right = new CBinaryTree<int32_t>(911);
+  std::cout<<"530. Minimum Absolute Difference in BST: "<<minimum_absolute_difference_in_bst(binary_tree);
+  destroy(binary_tree);
+}

@@ -9,6 +9,14 @@
 #include "header.h"
 #include "linked_list.h"
 
+void destroy_linkedlist(SLinkedList* head) {
+  while(head) {
+    auto* next = head->next;
+    delete head;
+    head = next;
+  }
+}
+
 /*
  1 -> 2 -> 3 -> 4 -> 5
  
@@ -453,6 +461,75 @@ void invoke_linked_list_cycle() {
   head->next->next->next = new SLinkedList(4);
   head->next->next->next->next = head->next;
   std::cout<<std::boolalpha<<"141. Linked List Cycle: "<<linked_list_cycle(head);
+  destroy_linkedlist(head);
+}
+
+/*
+ [1,2,3,4,5], k = 2 => 2 -> 1 -> 4 -> 3 -> 5
+ H    N
+ 1 -> 2 -> 3 -> 4 -> 5
+ H    N
+ 2 -> 1 -> ...
+ H                   N
+ 2 -> 1 -> 4 -> 3 -> 5
+
+ [1,2,3,4,5,6,7,8], k = 4 => 4 -> 3 -> 2 -> 1 -> 8 -> 7 -> 6 -> 5
+ H    N
+ 1 -> 2 -> 3 -> 4
+ H    N
+ 2 -> 1 -> 3 -> 4
+ H         N
+ 3 -> 2 -> 1 -> 4
+ H              N
+ 4 -> 3 -> 2 -> 1...
+*/
+SLinkedList* reverse_nodes_in_k_group_linkedlist(SLinkedList* head, int target_node_count) {
+  auto* dummy = head; // 1
+  SLinkedList* new_head = nullptr;
+  
+  while(target_node_count > 0) {
+    auto* next = dummy->next; // 2 -> 3 -> 4 -> 5
+//    dummy->next = new_head; // nullptr
+//    new_head = dummy; // 1
+//    dummy = next; // 2 -> 3 -> 4 -> 5
+    
+    --target_node_count;
+  }
+  
+  return new_head;
+}
+SLinkedList* reverse_nodes_in_k_group(SLinkedList* head, int target_node_count) {
+  SLinkedList* dummy = head;
+  int node_count = 0;
+  
+  while(node_count < target_node_count && dummy) {
+    dummy = dummy->next;
+    ++node_count;
+  }
+  
+  if(node_count == target_node_count) {
+    SLinkedList* reversed_head = reverse_nodes_in_k_group_linkedlist(head, target_node_count);
+    head->next = reverse_nodes_in_k_group(dummy, target_node_count);
+    
+    return reversed_head;
+  }
+  
+  return head;
+}
+void invoke_reverse_nodes_in_k_group() {
+  SLinkedList* head = new SLinkedList(1);
+  head->next = new SLinkedList(2);
+  head->next->next = new SLinkedList(3);
+  head->next->next->next = new SLinkedList(4);
+  head->next->next->next->next = new SLinkedList(5);
+  SLinkedList* output = reverse_nodes_in_k_group(head, 2);
+  auto* dummy = output;
+  std::cout<<"25. Reverse Nodes in k-Group: ";
+  while(dummy) {
+    std::cout<<dummy->value<<" -> ";
+    dummy = dummy->next;
+  }
+  destroy_linkedlist(output);
 }
 
 void test_linked_list() {

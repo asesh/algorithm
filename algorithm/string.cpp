@@ -1910,3 +1910,25 @@ void invoke_word_ladder() {
   std::vector<std::string> word_list = {"dot","lot","hot","hht","log","cig","loc","dog","dig","cid"};
   std::cout<<""<<word_ladder(begin_word, end_word, word_list);
 }
+
+bool word_pattern(std::string& pattern, std::string& words) {
+  std::unordered_map<std::string, int> word_index;
+  std::unordered_map<char, int> char_index;
+  std::stringstream words_stream(words);
+  std::string word;
+  int index = 0, length = pattern.length();
+  for(; words_stream >> word; ++index) {
+    if(word_index[word] != char_index[pattern[index]]) {
+      return false;
+    }
+
+    char_index[pattern[index]] = word_index[word] = index + 1;
+  }
+
+  return index == length;
+}
+void invoke_word_pattern() {
+  std::string pattern = "abba", words = "dog cat cat dog";
+//  std::string pattern = "abba", words = "dog cat cat fish";
+  std::cout<<std::boolalpha<<"290. Word Pattern: "<<word_pattern(pattern, words);
+}

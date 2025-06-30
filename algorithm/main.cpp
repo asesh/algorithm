@@ -1,6 +1,6 @@
 //
 //  main.cpp
-//  consoleApp_1
+//  algorithm
 //
 //  Created by Asesh Shrestha on 1/4/20.
 //  Copyright © 2020 Asesh Shrestha. All rights reserved.
@@ -21,7 +21,13 @@
 int main(int argc, const char* argv[]) {
 //  invoke_evaluate_division();
   
-  invoke_minimum_absolute_difference_in_bst();
+//  invoke_reverse_nodes_in_k_group();
+  
+  invoke_summary_ranges();
+  
+//  invoke_word_pattern();
+  
+//  invoke_minimum_absolute_difference_in_bst();
   
 //  invoke_average_of_levels_in_binary_tree();
   

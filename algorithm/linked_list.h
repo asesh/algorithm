@@ -18,6 +18,7 @@ struct SLinkedList {
     value = new_value;
   }
 };
+void destroy_linkedlist(SLinkedList* head);
 
 template<typename Data>
 class CSingleLinkedList {
@@ -200,6 +201,11 @@ void invoke_merge_two_sorted_lists();
 141. Linked List Cycle: https://leetcode.com/problems/linked-list-cycle
 */
 void invoke_linked_list_cycle();
+
+/*
+25. Reverse Nodes in k-Group: https://leetcode.com/problems/reverse-nodes-in-k-group
+*/
+void invoke_reverse_nodes_in_k_group();
 
 void test_linked_list();
 

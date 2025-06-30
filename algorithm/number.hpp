@@ -617,4 +617,9 @@ void invoke_plus_one();
 */
 void invoke_search_insert_position();
 
+/*
+228. Summary Ranges: https://leetcode.com/problems/summary-ranges
+*/
+void invoke_summary_ranges();
+
 #endif /* NUMBER_HPP */

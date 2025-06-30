@@ -4060,3 +4060,27 @@ void invoke_search_insert_position() {
   std::vector<int> input = {1,3,5,6};
   std::cout<<"35. Search Insert Position: "<<search_insert_position_binary_search(input, 0, input.size() - 1, 2);
 }
+
+void invoke_summary_ranges() {
+  std::vector<int> input = {0,1,2,4,5,7};
+  std::vector<std::string> output;
+
+  for(int current_index = 0; current_index < input.size(); ++current_index) {
+    int start = input[current_index];
+    while(current_index + 1 < input.size() && input[current_index] + 1 == input[current_index + 1]) {
+      ++current_index;
+    }
+
+    if(start != input[current_index]) {
+      output.push_back(std::to_string(start) + "->" + std::to_string(input[current_index]));
+    } else {
+      output.push_back(std::to_string(start));
+    }
+  }
+
+  std::cout<<"228. Summary Ranges: [";
+  for(auto& number: output) {
+    std::cout<<number<<",";
+  }
+  std::cout<<"]";
+}

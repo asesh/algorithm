@@ -178,4 +178,9 @@ void invoke_evaluate_division();
 */
 void invoke_word_ladder();
 
+/*
+290. Word Pattern: https://leetcode.com/problems/word-pattern
+*/
+void invoke_word_pattern();
+
 #endif /* string_hpp */

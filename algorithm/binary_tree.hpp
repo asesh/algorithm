@@ -267,4 +267,9 @@ void invoke_average_of_levels_in_binary_tree();
 */
 void invoke_minimum_absolute_difference_in_bst();
 
+/*
+108. Convert Sorted Array to Binary Search Tree: https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree
+*/
+void invoke_convert_sorted_array_to_binary_search_tree();
+
 #endif /* BINARY_TREE_HPP */

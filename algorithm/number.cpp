@@ -4084,3 +4084,19 @@ void invoke_summary_ranges() {
   }
   std::cout<<"]";
 }
+
+bool contains_duplicate_ii(std::vector<int>& input, int k) {
+  std::unordered_map<int, int> map;
+  for(int index = 0; index < input.size(); ++index) {
+    if(map.contains(input[index]) && std::abs(index - map[input[index]]) <= k) {
+      return true;
+    }
+    map[input[index]] = index;
+  }
+  
+  return false;
+}
+void invoke_contains_duplicate_ii() {
+  std::vector<int> input = {1,2,3,1};
+  std::cout<<std::boolalpha<<"219. Contains Duplicate II: "<<contains_duplicate_ii(input, 3);
+}

@@ -622,4 +622,9 @@ void invoke_search_insert_position();
 */
 void invoke_summary_ranges();
 
+/*
+219. Contains Duplicate II: https://leetcode.com/problems/contains-duplicate-ii
+*/
+void invoke_contains_duplicate_ii();
+
 #endif /* NUMBER_HPP */

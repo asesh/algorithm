@@ -711,3 +711,22 @@ void invoke_minimum_absolute_difference_in_bst() {
   std::cout<<"530. Minimum Absolute Difference in BST: "<<minimum_absolute_difference_in_bst(binary_tree);
   destroy(binary_tree);
 }
+
+CBinaryTree<int32_t>* convert_sorted_array_to_binary_search_tree(std::vector<int>& nums, int low, int high) {
+  if(low > high) {
+    return nullptr;
+  }
+
+  int medium = (low + high) / 2;
+  CBinaryTree<int32_t>* node = new CBinaryTree<int32_t>(nums[medium]);
+  node->left = convert_sorted_array_to_binary_search_tree(nums, low, medium - 1);
+  node->right = convert_sorted_array_to_binary_search_tree(nums, medium + 1, high);
+
+  return node;
+}
+void invoke_convert_sorted_array_to_binary_search_tree() {
+  std::vector<int> input = {-10,-3,0,5,9};
+  auto* root_node = convert_sorted_array_to_binary_search_tree(input, 0, input.size() - 1);
+  std::cout<<"108. Convert Sorted Array to Binary Search Tree: "<<root_node->value;
+  destroy(root_node);
+}

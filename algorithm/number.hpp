@@ -627,4 +627,9 @@ void invoke_summary_ranges();
 */
 void invoke_contains_duplicate_ii();
 
+/*
+69. Sqrt(x): https://leetcode.com/problems/sqrtx
+*/
+void invoke_sqrt_x();
+
 #endif /* NUMBER_HPP */

@@ -4100,3 +4100,32 @@ void invoke_contains_duplicate_ii() {
   std::vector<int> input = {1,2,3,1};
   std::cout<<std::boolalpha<<"219. Contains Duplicate II: "<<contains_duplicate_ii(input, 3);
 }
+
+int sqrt_x(int x) {
+  if(x < 2) {
+    return x;
+  }
+
+  // Pocket calculator algorithm
+  // long left = static_cast<long>(std::exp(0.5 * std::log(x))); // 1.162
+  // long right = left + 1; // 2.162
+
+  // return right * right > x ? left : right; // 4.32 > 2 ? 1 : 2
+
+  int left = 2, right = x/2;
+  while(left <= right) {
+    int pivot = left + (right - left) / 2;
+    long number = pivot * pivot;
+    if(number > x) {
+      right = pivot - 1;
+    } else if(number < x) {
+      left = pivot + 1;
+    } else {
+      return pivot;
+    }
+  }
+  return right;
+}
+void invoke_sqrt_x() {
+  std::cout<<"69. Sqrt(x): "<<sqrt_x(2);
+}

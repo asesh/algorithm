@@ -488,10 +488,20 @@ SLinkedList* reverse_nodes_in_k_group_linkedlist(SLinkedList* head, int target_n
   SLinkedList* new_head = nullptr;
   
   while(target_node_count > 0) {
-    auto* next = dummy->next; // 2 -> 3 -> 4 -> 5
-//    dummy->next = new_head; // nullptr
-//    new_head = dummy; // 1
-//    dummy = next; // 2 -> 3 -> 4 -> 5
+    /*
+     h    n
+     1 -> 2
+     next = head->next; // 2
+     new_head = next
+     
+     h    n
+     1 -> 2 -> 3
+     next = head->next;
+    */
+    auto* next = dummy->next; // 2
+    new_head = next; // 2
+    next = head; // 1
+    new_head->next = next;
     
     --target_node_count;
   }

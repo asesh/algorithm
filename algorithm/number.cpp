@@ -321,28 +321,32 @@ Process:
 */
 std::vector<std::vector<int>> find_three_number_sum(std::vector<int>& input_array) {
   std::vector<std::vector<int>> output;
-  std::set<std::vector<int>> unique_output;
-	// O(nlogn)
-	std::sort(input_array.begin(), input_array.end());
-  
-  // O(n^2)
-  for(int current_index = 0; current_index < input_array.size() - 2; ++current_index) {
-    int right_index = input_array.size() - 1;
-    for(int left_index = current_index + 1; left_index < input_array.size() && left_index != right_index;) {
-      auto sum = input_array[current_index] + input_array[left_index] + input_array[right_index];
+
+  // O(nlogn)
+  std::sort(input_array.begin(), input_array.end());
+
+  for(int index = 0; index < input_array.size() && input_array[index] <= 0; ++index) {
+    if(index > 0 && input_array[index - 1] == input_array[index]) {
+      continue;
+    }
+
+    int left = index + 1;
+    int right = input_array.size() - 1;
+    while(left < right) {
+      auto sum = input_array[index] + input_array[left] + input_array[right];
       if(sum == 0) {
-        unique_output.insert({input_array[current_index], input_array[left_index], input_array[right_index]});
-        ++left_index;
+        output.push_back({input_array[index],input_array[left],input_array[right]});
+        --right;
+        ++left;
+        while(left < right && input_array[left] == input_array[left - 1]) {
+          ++left;
+        }
       } else if(sum > 0) {
-        --right_index;
+        --right;
       } else {
-        ++left_index;
+        ++left;
       }
     }
-  }
-  
-  for(auto& item: unique_output) {
-    output.push_back(item);
   }
 	
 	return output;
@@ -4128,4 +4132,54 @@ int sqrt_x(int x) {
 }
 void invoke_sqrt_x() {
   std::cout<<"69. Sqrt(x): "<<sqrt_x(2);
+}
+
+/*
+ [[1,2],[1,3],[3,4]]
+ 1 -> 2
+ 1 ->   -> 3
+           3 -> 4
+
+ [[1,2],[2,3],[3,4],[1,2]]
+ 1 -> 2
+ 1 -> 2
+      2 -> 3
+           3 -> 4
+
+ [[1,2],[1,2]]
+ 1 -> 2
+ 1 -> 2
+
+ [[1,2],[2,2],[3,3],[3,4],[3,4]]
+ 1 -> 2
+      2 <=>
+        -> 3 -> 3
+           3 -> 4
+           3 -> 4
+
+ [[1,1],[2,3],[1,2]] => 3
+ sort: [1,1],[1,2],[2,3]
+
+ [[1,1],[2,3],[8,8],[8,9]] => 4
+ 1 -> 1 => +1
+      2 -> 3 => +1
+           8 -> 8 => +1
+                8 -> 9 => +1
+*/
+int maximium_number_of_events_that_can_be_attended(std::vector<std::vector<int>>& events) {
+  int max_events = 0, index = 0;
+  std::priority_queue<int, std::vector<int>, std::greater<int>> min_heap;
+  
+  while(index < events.size()) {
+    ++index;
+  }
+  
+  return max_events;
+}
+void invoke_maximium_number_of_events_that_can_be_attended() {
+  std::vector<std::vector<int>> events = {
+    {1,1}, {2,3}, {8,8}, {8,8} // 3
+//    {1,2},{2,2},{3,3},{3,4},{3,4} // 4
+  };
+  std::cout<<"1353. Maximum Number of Events That Can Be Attended: "<<maximium_number_of_events_that_can_be_attended(events);
 }

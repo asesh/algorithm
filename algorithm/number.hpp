@@ -632,4 +632,9 @@ void invoke_contains_duplicate_ii();
 */
 void invoke_sqrt_x();
 
+/*
+1353. Maximum Number of Events That Can Be Attended: https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended
+*/
+void invoke_maximium_number_of_events_that_can_be_attended();
+
 #endif /* NUMBER_HPP */

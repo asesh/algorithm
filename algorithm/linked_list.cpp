@@ -542,6 +542,30 @@ void invoke_reverse_nodes_in_k_group() {
   destroy_linkedlist(output);
 }
 
+int convert_binary_number_in_a_linkedlist_to_integer(SLinkedList* head) {
+  int output = 0, num_nodes = 0;
+  SLinkedList* dummy = head;
+  while(dummy) {
+    ++num_nodes;
+    dummy = dummy->next;
+  }
+
+  dummy = head;
+  while(dummy) {
+    output += dummy->value * std::pow(2, --num_nodes);
+    dummy = dummy->next;
+  }
+
+  return output;
+}
+void invoke_convert_binary_number_in_a_linkedlist_to_integer() {
+  SLinkedList* head = new SLinkedList(1);
+  head->next = new SLinkedList(0);
+  head->next->next = new SLinkedList(1);
+  std::cout<<"1290. Convert Binary Number in a Linked List to Integer: "<<convert_binary_number_in_a_linkedlist_to_integer(head);
+  destroy_linkedlist(head);
+}
+
 void test_linked_list() {
   SLinkedList* dummy = new SLinkedList(-1);
   

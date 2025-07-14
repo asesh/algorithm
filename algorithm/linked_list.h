@@ -207,6 +207,11 @@ void invoke_linked_list_cycle();
 */
 void invoke_reverse_nodes_in_k_group();
 
+/*
+1290. Convert Binary Number in a Linked List to Integer: https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer
+*/
+void invoke_convert_binary_number_in_a_linkedlist_to_integer();
+
 void test_linked_list();
 
 void test_doubly_linked_list();

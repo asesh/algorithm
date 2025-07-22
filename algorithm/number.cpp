@@ -4135,50 +4135,73 @@ void invoke_sqrt_x() {
 }
 
 /*
- [[1,2],[1,3],[3,4]]
+ [[1,2],[1,3],[3,4]] => 3
  1 -> 2
  1 ->   -> 3
            3 -> 4
 
- [[1,2],[2,3],[3,4],[1,2]]
+ [[1,2],[2,3],[3,4],[1,2]] => 4
  1 -> 2
  1 -> 2
       2 -> 3
            3 -> 4
 
- [[1,2],[1,2]]
- 1 -> 2
- 1 -> 2
+ [[1,2],[1,2],[1,2]] => 2
+ 1 -> 2 => +1
+ 1 -> 2 => +1
+ 1 -> 2 X
 
- [[1,2],[2,2],[3,3],[3,4],[3,4]]
+ [[1,2],[2,2],[3,3],[3,4],[3,4]] => 4
  1 -> 2
       2 <=>
         -> 3 -> 3
            3 -> 4
            3 -> 4
 
- [[1,1],[2,3],[1,2]] => 3
- sort: [1,1],[1,2],[2,3]
+ [[1,1],[1,2],[2,3]] => 3
+ 1 <->
+ 1 -> 2
+      2 -> 3
 
  [[1,1],[2,3],[8,8],[8,9]] => 4
- 1 -> 1 => +1
-      2 -> 3 => +1
-           8 -> 8 => +1
-                8 -> 9 => +1
+ 1 -> 1
+      2 -> 3
+           8 <->
+           8 -> 9
+
+ [[1,4],[2,4],[3,4],[4,4]] => 4
 */
 int maximium_number_of_events_that_can_be_attended(std::vector<std::vector<int>>& events) {
-  int max_events = 0, index = 0;
+  int max_events = 0, total_events = events.size();
   std::priority_queue<int, std::vector<int>, std::greater<int>> min_heap;
   
-  while(index < events.size()) {
-    ++index;
+  std::sort(events.begin(), events.end());
+  
+  int max_day = 0;
+  for(auto& event: events) {
+    max_day = std::max(max_day, event[1]);
+  }
+  
+  for(int start = 0, end = 0; start <= max_day; ++start) { // start: 2, end: 2
+    while(end < total_events && events[end][0] <= start) { //
+      min_heap.push(events[end][1]); // 2 => 0 => 2 => 0
+      ++end; // 2
+    }
+    while(!min_heap.empty() && min_heap.top() < start) {
+      min_heap.pop();
+    }
+    if(!min_heap.empty()) {
+      ++max_events;
+      min_heap.pop();
+    }
   }
   
   return max_events;
 }
 void invoke_maximium_number_of_events_that_can_be_attended() {
   std::vector<std::vector<int>> events = {
-    {1,1}, {2,3}, {8,8}, {8,8} // 3
+    {1,2}, {1,2}, {1,2} // 2
+//    {1,1}, {2,3}, {8,8}, {8,8} // 3
 //    {1,2},{2,2},{3,3},{3,4},{3,4} // 4
   };
   std::cout<<"1353. Maximum Number of Events That Can Be Attended: "<<maximium_number_of_events_that_can_be_attended(events);

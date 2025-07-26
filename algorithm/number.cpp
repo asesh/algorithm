@@ -4206,3 +4206,37 @@ void invoke_maximium_number_of_events_that_can_be_attended() {
   };
   std::cout<<"1353. Maximum Number of Events That Can Be Attended: "<<maximium_number_of_events_that_can_be_attended(events);
 }
+
+/*
+4,2,4,5,6 => 17 [2,4,5,6]
+ prefix sum: 0 4 6 10 15 21
+
+5,2,1,2,5,2,1,2,5 => 8 [5,2,1 or 1,2,5]
+ prefix sum:
+ 5 2 1 2 5  2  1  2  5
+ 0 5 7 8 10 15 17 18 20 25
+*/
+int maximium_erasure_value(std::vector<int>& nums) {
+  int max_subarray = 0, start_index = 0;
+  std::unordered_map<int, int> seen;
+  std::vector<int> prefix_sum(nums.size() + 1);
+  
+  for(int index = 0; index < nums.size(); ++index) {
+    int current_number = nums[index];
+    
+    prefix_sum[index + 1] = prefix_sum[index] + current_number;
+    
+    if(seen.contains(current_number)) {
+      start_index = std::max(start_index, seen[current_number] + 1);
+    }
+    
+    max_subarray = std::max(max_subarray, prefix_sum[index + 1] - prefix_sum[start_index]);
+    seen[current_number] = index;
+  }
+  
+  return max_subarray;
+}
+void invoke_maximium_erasure_value() {
+  std::vector<int> nums = {5,2,1,2,5,2,1,2,5};
+  std::cout<<"1695. Maximum Erasure Value:: "<<maximium_erasure_value(nums);
+}

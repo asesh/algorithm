@@ -637,4 +637,9 @@ void invoke_sqrt_x();
 */
 void invoke_maximium_number_of_events_that_can_be_attended();
 
+/*
+1695. Maximum Erasure Value: https://leetcode.com/problems/maximum-erasure-value
+*/
+void invoke_maximium_erasure_value();
+
 #endif /* NUMBER_HPP */

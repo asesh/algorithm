@@ -4240,3 +4240,36 @@ void invoke_maximium_erasure_value() {
   std::vector<int> nums = {5,2,1,2,5,2,1,2,5};
   std::cout<<"1695. Maximum Erasure Value:: "<<maximium_erasure_value(nums);
 }
+
+std::vector<std::vector<int>> pascals_triangle(int total_rows) {
+  std::vector<std::vector<int>> output;
+
+  for(int row = 0; row < total_rows; ++row) {
+    int column = 0;
+    std::vector<int> columns;
+    while(column <= row) {
+      // Edges
+      if(column == 0 || column == row) {
+        columns.push_back(1);
+      } else {
+        columns.push_back(output[row - 1][column - 1] + output[row - 1][column]);
+      }
+      ++column;
+    }
+    output.push_back(columns);
+  }
+
+  return output;
+}
+void invoke_pascals_triangle() {
+  auto rows = pascals_triangle(5);
+  std::cout<<"118. Pascal's Triangle: [";
+  for(auto& row: rows) {
+    std::cout<<"[";
+    for(auto& column: row) {
+      std::cout<<column<<", ";
+    }
+    std::cout<<"], ";
+  }
+  std::cout<<"]";
+}

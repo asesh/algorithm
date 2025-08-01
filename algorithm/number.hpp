@@ -642,4 +642,9 @@ void invoke_maximium_number_of_events_that_can_be_attended();
 */
 void invoke_maximium_erasure_value();
 
+/*
+118. Pascal's Triangle: https://leetcode.com/problems/pascals-triangle
+*/
+void invoke_pascals_triangle();
+
 #endif /* NUMBER_HPP */

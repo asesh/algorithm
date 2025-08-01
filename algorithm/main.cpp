@@ -24,7 +24,9 @@ int main(int argc, const char* argv[]) {
   
 //  invoke_reverse_nodes_in_k_group();
   
-  invoke_maximium_erasure_value();
+//  invoke_maximium_erasure_value();
+  
+  invoke_pascals_triangle();
   
 //  invoke_maximium_number_of_events_that_can_be_attended();
   

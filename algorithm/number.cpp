@@ -4273,3 +4273,31 @@ void invoke_pascals_triangle() {
   }
   std::cout<<"]";
 }
+
+/*
+1: 1
+2: 10
+3: 11
+4: 100
+5: 1000
+16: 10000
+ MSB should be 1, the remaining bits should be 0
+*/
+bool power_of_two(int number) {
+  bool bit_set = false;
+  while(number) {
+    if((number & 1) && !bit_set) {
+      bit_set = true;
+    }
+
+    number >>= 1;
+    if(number & 1 && bit_set) {
+      return false;
+    }
+  }
+
+  return bit_set;
+}
+void invoke_power_of_two() {
+  std::cout<<std::boolalpha<<power_of_two(16);
+}

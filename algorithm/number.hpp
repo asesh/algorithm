@@ -647,4 +647,9 @@ void invoke_maximium_erasure_value();
 */
 void invoke_pascals_triangle();
 
+/*
+231. Power of Two: https://leetcode.com/problems/power-of-two
+*/
+void invoke_power_of_two();
+
 #endif /* NUMBER_HPP */

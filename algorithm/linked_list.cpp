@@ -566,6 +566,92 @@ void invoke_convert_binary_number_in_a_linkedlist_to_integer() {
   destroy_linkedlist(head);
 }
 
+/*
+DAC:
+Input: [1,4,5],[1,3,4],[2,6]
+ [1,4,5],[1,3,4],[2,6]
+  0        1       2
+   \       /      /
+    \     /      /
+  [1,1,3,4,5]   /
+      \        /
+       \      /
+        0     2
+     [1,1,2,3,4,5,6]
+ 
+Input: [1,4,5],[1,3,4],[2,6],[3,5] => [1,1,2,3,3,4,4,5,5,6]
+  
+ 0        1       2     3
+  \      /        \     /
+    \   /          \   /
+  [1,1,3,4,4,5]   [2,3,5,6]
+        \          /
+         \        /
+          0      2
+    [1,1,2,3,3,4,4,5,5,6]
+*/
+SLinkedList* dac_merge_k_sorted_lists(SLinkedList* first, SLinkedList* second) {
+  SLinkedList* dummy = new SLinkedList(-1);
+  
+  while(first && second) {
+    if(first->value <= second->value) {
+      dummy->next = first;
+      first = first->next;
+    } else {
+      dummy->next = second;
+      second = second->next;
+    }
+    
+    dummy = dummy->next;
+  }
+  
+  if(!first) {
+    dummy->next = second;
+  } else {
+    dummy->next = first;
+  }
+  
+  return dummy->next;
+}
+SLinkedList* merge_k_sorted_lists(std::vector<SLinkedList*>& linkedlists) {
+  auto total_lists = linkedlists.size();
+  int interval = 1;
+  while(1) {
+    for(int index = 0; index < total_lists; ) {
+      linkedlists[index] = dac_merge_k_sorted_lists(linkedlists[index], linkedlists[index + interval]);
+    }
+    
+    interval *= 2;
+  }
+  
+  return total_lists == 0 ? nullptr : linkedlists[0];
+}
+void invoke_merge_k_sorted_lists() {
+  SLinkedList* first = new SLinkedList(1);
+  first->next = new SLinkedList(4);
+  first->next->next = new SLinkedList(5);
+  SLinkedList* second = new SLinkedList(1);
+  second->next = new SLinkedList(3);
+  second->next->next = new SLinkedList(4);
+  SLinkedList* third = new SLinkedList(2);
+  third->next = new SLinkedList(6);
+  SLinkedList* fourth = new SLinkedList(3);
+  fourth->next = new SLinkedList(5);
+
+  std::vector<SLinkedList*> linkedlists = {first, second, third, fourth};
+  auto* output = merge_k_sorted_lists(linkedlists);
+  std::cout<<"23. Merge k Sorted Lists: ";
+  auto* dummy = output;
+  while(dummy) {
+    std::cout<<dummy->value;
+    dummy = dummy->next;
+  }
+  
+  for(auto& linkedlist: linkedlists) {
+    destroy_linkedlist(linkedlist);
+  }
+}
+
 void test_linked_list() {
   SLinkedList* dummy = new SLinkedList(-1);
   

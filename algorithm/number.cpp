@@ -1795,23 +1795,6 @@ void invoke_gas_station() {
 }
 
 /*
-Input: [1,0,2], Output: 5 => [2,1,2]
- 
-Input: [1,2,2], Output: 4 => [1,2,1]
- 
-Input: [2,2,2], Output: => [1,2,1]
- 
-Input: [0,0,0], Output: => [1,2,1]
-*/
-int candy(std::vector<int>& input) {
-  return 0;
-}
-void invoke_candy() {
-  std::vector<int> input = {1,0,2};
-  std::cout<<"The minimum number of candies required to distribute the candies to the children: "<< candy(input);
-}
-
-/*
 Input: [100,4,200,1,3,2], Output: 4 => [1,2,3,4]
 Process:
  Store all the elements in a hash table: [100,4,200,1,3,2]
@@ -2207,9 +2190,16 @@ void invoke_combinations() {
 }
 
 /*
-Input: 4, Output: 2
+ Refer to Freeform diagram: N-Queens II diagram
 */
-int n_queens_ii(int number) {
+int n_queens_ii_backtrack(int n, int row) {
+  if(row == n) {
+    return 1;
+  }
+  
+  return 0;
+}
+int n_queens_ii(int n) {
   return 0;
 }
 void invoke_n_queens_ii() {
@@ -4300,4 +4290,83 @@ bool power_of_two(int number) {
 }
 void invoke_power_of_two() {
   std::cout<<std::boolalpha<<power_of_two(16);
+}
+
+/*
+Input: [[1,2,3],[4,5,6],[7,8,9]]
+ 1 2 3
+ 4 5 6
+ 7 8 9
+*/
+std::vector<int> diagonal_traverse(std::vector<std::vector<int>>& matrix) {
+  int row = 0, column = 0;
+  int total_rows = matrix.size(), total_columns = matrix[0].size();
+  int total_cells = total_rows * total_columns;
+  std::vector<int> result(total_cells);
+  
+  for(int cell = 0; cell < total_cells; ++cell) {
+    int value = row + column + 1;
+    if(value % 2 == 0) {
+      // Even cell
+    } else {
+      // Odd cell
+    }
+  }
+  
+  return result;
+}
+void invoke_diagonal_traverse() {
+  std::vector<std::vector<int>> matrix = {
+    {1,2,3},
+    {4,5,6},
+    {7,8,9}
+  };
+  auto result = diagonal_traverse(matrix);
+  std::cout<<"498. Diagonal Traverse: ";
+  std::for_each(result.begin(), result.end(), [](int cell) {
+    std::cout<<cell<<" -> ";
+  });
+}
+
+/*
+Input: 12 4 3 11 34 34 1 67
+ Solution: summation(i = 0, n - 1) max(l2r[i], r2l[i])
+ l2r: 1  1 1 2  3  1  1 2
+ r2l: 3  2 1 1  1  2  1 1
+ sol: 3  2 1 2  3  2  1 2 (max)
+ */
+int candy(std::vector<int> childrens) {
+  int min_candies = 0;
+  
+  return min_candies;
+}
+void invoke_candy() {
+  std::vector<int> childrens = {12, 4, 3, 11, 34, 34, 1, 67};
+  std::cout<<"135. Candy: "<<candy(childrens);
+}
+
+/*
+Input: [0,0,0,0] => 10
+       *
+ 0 0 0 0
+ sub: 4
+ ans: 10
+*/
+int number_of_zero_filled_subarrays(std::vector<int>& array) {
+  int result = 0, sub = 0;
+  
+  for(int index = 0; index < array.size(); ++index) {
+    if(array[index] == 0) {
+      ++sub;
+      result += sub;
+    } else {
+      sub = 0;
+    }
+  }
+  
+  return result;
+}
+void invoke_number_of_zero_filled_subarrays() {
+  std::vector<int> array = {1,3,0,0,2,0,0,4};
+  std::cout<<"2348. Number of Zero-Filled Subarrays: "<<number_of_zero_filled_subarrays(array);
 }

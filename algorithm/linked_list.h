@@ -212,6 +212,11 @@ void invoke_reverse_nodes_in_k_group();
 */
 void invoke_convert_binary_number_in_a_linkedlist_to_integer();
 
+/*
+23. Merge k Sorted Lists: https://leetcode.com/problems/merge-k-sorted-lists
+*/
+void invoke_merge_k_sorted_lists();
+
 void test_linked_list();
 
 void test_doubly_linked_list();

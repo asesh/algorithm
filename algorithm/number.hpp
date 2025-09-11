@@ -333,11 +333,6 @@ void invoke_add_binary();
 void invoke_gas_station();
 
 /*
-135. Candy: https://leetcode.com/problems/candy
-*/
-void invoke_candy();
-
-/*
 128. Longest Consecutive Sequence: https://leetcode.com/problems/longest-consecutive-sequence
 */
 void invoke_longest_consecutive_sequence();
@@ -651,5 +646,20 @@ void invoke_pascals_triangle();
 231. Power of Two: https://leetcode.com/problems/power-of-two
 */
 void invoke_power_of_two();
+
+/*
+498. Diagonal Traverse: https://leetcode.com/problems/diagonal-traverse
+*/
+void invoke_diagonal_traverse();
+
+/*
+135. Candy: https://leetcode.com/problems/candy
+*/
+void invoke_candy();
+
+/*
+2348. Number of Zero-Filled Subarrays: https://leetcode.com/problems/number-of-zero-filled-subarrays
+*/
+void invoke_number_of_zero_filled_subarrays();
 
 #endif /* NUMBER_HPP */

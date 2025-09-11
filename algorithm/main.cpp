@@ -19,8 +19,15 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
+  invoke_number_of_zero_filled_subarrays();
   
-  invoke_evaluate_division();
+//  invoke_diagonal_traverse();
+  
+//  invoke_n_queens_ii();
+  
+//  invoke_merge_k_sorted_lists();
+  
+//  invoke_evaluate_division();
   
 //  invoke_reverse_nodes_in_k_group();
   

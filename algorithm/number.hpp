@@ -662,4 +662,19 @@ void invoke_candy();
 */
 void invoke_number_of_zero_filled_subarrays();
 
+/*
+540. Single Element in a Sorted Array: https://leetcode.com/problems/single-element-in-a-sorted-array
+*/
+void invoke_single_element_in_a_sorted_array();
+
+/*
+347. Top K Frequent Elements: https://leetcode.com/problems/top-k-frequent-elements
+*/
+void invoke_top_k_frequent_elements();
+
+/*
+16. 3Sum Closest: https://leetcode.com/problems/3sum-closest
+*/
+void invoke_3_sum_closest();
+
 #endif /* NUMBER_HPP */

@@ -102,7 +102,7 @@ public:
 		if(previous) {
 			// Previous node exists so we iterate through all the nodes from it
 			while(previous) {
-				auto temp_previous_node = previous->m_next;
+				auto temp_previous_node = previous->next;
 				delete previous;
 				previous = temp_previous_node;
 			}

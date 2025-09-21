@@ -4370,3 +4370,99 @@ void invoke_number_of_zero_filled_subarrays() {
   std::vector<int> array = {1,3,0,0,2,0,0,4};
   std::cout<<"2348. Number of Zero-Filled Subarrays: "<<number_of_zero_filled_subarrays(array);
 }
+
+/*
+Input: [1,2,2,3,3,4,4,8,8] => 1
+ l
+ h
+ m
+ 0 1 2 3 4 5 6 7 8
+ 1 2 2 3 3 4 4 8 8
+
+Input: [3,3,7,7,10,10,11] => 11
+         l
+               h
+     m
+ 0 1 2 3 4  5  6
+ 3 3 7 7 10 10 11
+*/
+int single_element_in_a_sorted_array(std::vector<int>& input) {
+  int low = 0, high = input.size() - 1;
+  
+  return low;
+}
+void invoke_single_element_in_a_sorted_array() {
+  std::vector<int> input = {1,2,2,3,3,4,4,8,8};
+  std::cout<<"540. Single Element in a Sorted Array: "<<single_element_in_a_sorted_array(input);
+}
+
+/*
+Input: [1,2,1,2,1,2,3,1,3,2]; k: 2 => [1,2]
+ Hash map:
+ key: input, value: occurrence
+ 1 -> 4
+ 2 -> 4
+ 3 -> 2
+ Build max heap:
+    1
+     \
+      2
+ */
+std::vector<int> top_k_frequent_elements(std::vector<int>& input, int k) {
+  std::vector<int> result(k);
+  
+  return result;
+}
+void invoke_top_k_frequent_elements() {
+  std::vector<int> input = {1,2,1,2,1,2,3,1,3,2};
+  std::cout<<"347. Top K Frequent Elements: {";
+  auto result = top_k_frequent_elements(input, 2);
+  for(auto& num: result) {
+    std::cout<<num<<", ";
+  }
+  std::cout<<"}";
+}
+
+/*
+Input: [-1,5,2,3,1]; target: 1 => 2
+        C L R
+ sort: -1 1 2 3 5
+ 
+Input: [-1,2,1,-4,3,8,6]; target: 7 => 7
+        C
+                 L
+                     R
+ sort: -4 -1 1 2 3 6 8
+ sum:   3  5 6 7
+ diff:  4  2 1 0
+ sum < target: increment L
+ sum > target: decrement R
+*/
+int three_sum_closest(std::vector<int>& input, int target) {
+  int diff = INT_MAX, max_index = input.size() - 1;
+  
+  std::sort(input.begin(), input.end());
+  
+  for(int current = 0; current <= max_index; ++current) {
+    int low = current + 1, high = max_index;
+    while(low < high) {
+      int sum = input[current] + input[low] + input[high];
+      if(std::abs(target - sum) < std::abs(diff)) {
+        diff = target - sum;
+      }
+      
+      if(sum < target) {
+        ++low;
+      } else {
+        --high;
+      }
+    }
+  }
+  
+  return target - diff;
+}
+
+void invoke_3_sum_closest() {
+  std::vector<int> input = {-1,2,1,-4,3,8,6};
+  std::cout<<"16. 3Sum Closest: "<<three_sum_closest(input, 7);
+}

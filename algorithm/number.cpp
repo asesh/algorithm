@@ -4466,3 +4466,50 @@ void invoke_3_sum_closest() {
   std::vector<int> input = {-1,2,1,-4,3,8,6};
   std::cout<<"16. 3Sum Closest: "<<three_sum_closest(input, 7);
 }
+
+/*
+Input: [1,2,3,4,5] => 8
+ 
+ 0 1 2 3 4
+ 1 2 3 4 5
+ 3 5 7 9
+ 8 2 6
+ 0 8
+ 8
+*/
+int find_triangular_sum_of_an_array(std::vector<int>& input) {
+  int total = input.size();
+  for(int row = 1; row < total; ++row) {
+    for(int column = 0; column < total - row; ++column) {
+      input[column] = (input[column] + input[column + 1]) % 10;
+    }
+  }
+  return input[0];
+
+  // Beats 27.24%
+  // int total = input.size();
+  // if(total == 1) {
+  //   return input[0];
+  // }
+
+  // int row = 1;
+  // while(row < total) {
+  //   std::vector<int> sum(total - row); // 4,
+
+  //   for(int index = 0; index < total - row; ++index) {
+  //     sum[index] = (input[row + index] + input[row + index - 1]) % 10;
+  //   }
+
+  //   for(int index = 0; index < total - row; ++index) {
+  //     input[row + index] = sum[index];
+  //   }
+
+  //   ++row;
+  // }
+
+  // return input[total - 1];
+}
+void invoke_find_triangular_sum_of_an_array() {
+  std::vector<int> input = {1,2,3,4,5};
+  std::cout<<"2221. Find Triangular Sum of an Array: "<<find_triangular_sum_of_an_array(input);
+}

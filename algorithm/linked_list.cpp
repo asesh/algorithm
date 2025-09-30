@@ -73,87 +73,6 @@ void rotate_linked_list() {
   } while(current_node);
 }
 
-/*
- L    C    R
- 1 -> 2 -> 3 -> 4 -> 5     =>      1 -> 4 -> 3 -> 2 -> 5
- L         C    R
- 1 -> 3 -> 2 -> 4 -> 5
- 1 -> 3 -> 4 -> 2 -> 5
- 1 -> 4 -> 3 -> 2 -> 5
- 
- L    C
- 3 -> 5
- 5 -> 3
- */
-//void reverse_linked_list(ListNode* head, int left, int right) {
-//  // Dummy node to handle cases where left = 1
-//  ListNode* dummy_node = new ListNode(0);
-//  dummy_node->next = head;
-//  ListNode* left_node = dummy_node;
-//
-//  for(int counter = 0; counter < left - 1; ++counter) {
-//    left_node = left_node->next;
-//  }
-//
-//  ListNode* current_node = left_node->next;
-//
-//  for(int counter = 0; counter < right - left; ++counter) {
-//    auto right_node = current_node->next; // 3
-//    current_node->next = right_node->next; // 2 -> 4
-//    right_node->next = left_node->next; // 3 -> 2
-//    left_node->next = right_node; // 1 -> 3
-//  }
-//
-//  return dummy_node->next;
-//}
-void invoke_reverse_linked_list() {
-  // Modify the following function to use our own linked list wrapper instead
-//  reverse_linked_list(head_node, 2, 4);
-}
-
-/*ListNode* add_two_linked_list_number(ListNode* l1, ListNode* l2) {
-  ListNode* output = nullptr, *new_node = nullptr;
-  int total = 0, val1 = 0, val2 = 0;
-  int carry_over = 0;
-  while(l1 || l2) {
-    val1 = val2 = 0;
-    if(l1) {
-      val1 = l1->val;
-      l1 = l1->next;
-    }
-    if(l2) {
-      val2 = l2->val;
-      l2 = l2->next;
-    }
-    auto sum = val1 + val2 + carry_over;
-    carry_over = 0;
-    if(sum >= 10) {
-      carry_over = sum / 10;
-      sum %= 10;
-    }
-
-    if(new_node) {
-      if((!l1 || !l2)) {
-        new_node->next = new ListNode(sum);
-        if(!l1 && !l2 && carry_over != 0) {
-          new_node->next->next = new ListNode(carry_over);
-          break;
-        }
-      } else {
-        new_node->next = new ListNode(sum);
-      }
-      new_node = new_node->next;
-    } else {
-      new_node = new ListNode(sum);
-      if(!l1 && !l2 && carry_over != 0) {
-        new_node->next = new ListNode(carry_over);
-      }
-      output = new_node;
-    }
-  }
-
-  return output == nullptr ? new ListNode(0) : output;
-}*/
 void invoke_add_two_linked_list_numbers() {
   // Call the above method which was done on LeetCode.
   // We will have to modify the used linked list to run locally
@@ -650,6 +569,37 @@ void invoke_merge_k_sorted_lists() {
   for(auto& linkedlist: linkedlists) {
     destroy_linkedlist(linkedlist);
   }
+}
+
+/*
+Input: [1,2,3,4,5] => [5,4,3,2,1]
+ c    p
+ 1 -> 2 -> 3 -> 4 -> 5
+ 2 -> 1 -> 3 -> 4 -> 5
+
+ 3 -> 2 -> 1 -> 4 -> 5
+ 4 -> 3 -> 2 -> 1 -> 5
+ 5 -> 4 -> 3 -> 2 -> 1
+
+ curent // 1 ->
+ previous //
+ while current:
+*/
+SLinkedList* reverse_linked_list(SLinkedList* head) {
+  return nullptr;
+}
+void invoke_reverse_linked_list() {
+  SLinkedList* head = new SLinkedList(1);
+  head->next = new SLinkedList(2);
+  head->next->next = new SLinkedList(3);
+  head->next->next->next = new SLinkedList(4);
+  head->next->next->next->next = new SLinkedList(5);
+  auto* output = reverse_linked_list(head);
+  while(output) {
+    std::cout<<output->value<<" -> ";
+    output = output->next;
+  }
+  destroy_linkedlist(head);
 }
 
 void test_linked_list() {

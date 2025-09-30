@@ -677,4 +677,9 @@ void invoke_top_k_frequent_elements();
 */
 void invoke_3_sum_closest();
 
+/*
+2221. Find Triangular Sum of an Array: https://leetcode.com/problems/find-triangular-sum-of-an-array
+*/
+void invoke_find_triangular_sum_of_an_array();
+
 #endif /* NUMBER_HPP */

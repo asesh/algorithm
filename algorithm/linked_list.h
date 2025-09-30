@@ -149,9 +149,6 @@ protected:
 	DataType value;
 };
 
-void invoke_reverse_linked_list();
-CSingleLinkedList<int>&& reverse_linked_list(const CSingleLinkedList<int>& input_linked_list);
-
 /*
 2. Add Two Numbers: https://leetcode.com/problems/add-two-numbers/
 */
@@ -216,6 +213,11 @@ void invoke_convert_binary_number_in_a_linkedlist_to_integer();
 23. Merge k Sorted Lists: https://leetcode.com/problems/merge-k-sorted-lists
 */
 void invoke_merge_k_sorted_lists();
+
+/*
+206. Reverse Linked List: https://leetcode.com/problems/reverse-linked-list
+*/
+void invoke_reverse_linked_list();
 
 void test_linked_list();
 

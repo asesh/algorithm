@@ -4513,3 +4513,37 @@ void invoke_find_triangular_sum_of_an_array() {
   std::vector<int> input = {1,2,3,4,5};
   std::cout<<"2221. Find Triangular Sum of an Array: "<<find_triangular_sum_of_an_array(input);
 }
+
+/*
+Input: [73,74,75,71,69,72,76,73] => [1,1,4,2,1,1,0,0]
+ 
+Input: [75,71,69,72,76,73] => [4,2,1,1,0,0]
+                *
+ 0  1  2  3  4  5
+ 75 71 69 72 76 73
+ stack:  76 75
+ result:
+*/
+std::vector<int> daily_temperatures(std::vector<int>& input) {
+  std::vector<int> result(input.size());
+  std::stack<int> monotonic;
+  
+  for(int index = 0; index < input.size(); ++index) {
+    while(!monotonic.empty() && input[index] > input[monotonic.top()]) {
+      result[monotonic.top()] = index - monotonic.top();
+      monotonic.pop();
+    }
+    
+    monotonic.push(index);
+  }
+  
+  return result;
+}
+void invoke_daily_temperatures() {
+  std::vector<int> input = {73,74,75,71,69,72,76,73};
+  auto result = daily_temperatures(input);
+  std::cout<<"739. Daily Temperatures: ";
+  for(auto& number: result) {
+    std::cout<<number<<", ";
+  }
+}

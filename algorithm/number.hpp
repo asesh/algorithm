@@ -682,4 +682,9 @@ void invoke_3_sum_closest();
 */
 void invoke_find_triangular_sum_of_an_array();
 
+/*
+739. Daily Temperatures: https://leetcode.com/problems/daily-temperatures
+*/
+void invoke_daily_temperatures();
+
 #endif /* NUMBER_HPP */

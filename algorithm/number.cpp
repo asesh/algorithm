@@ -4584,12 +4584,12 @@ int coin_change_ii_td(std::vector<int>& coins, int index, int amount, std::vecto
 }
 /*
 Input: amount: 5, coins: [1,2,5] => 4
- coin | Amount
+ coin | Amount (current_amount)
  -    | 1  0  0  0  0  0
  1    | 1  1  1  1  1  1
- 2    |
- 5    |
- dp[current_amount] += dp[]
+ 2    | 1  1  2  2  3  3
+ 5    | 1  1  2  2  3  4
+ dp[current_amount] += dp[current_amount - coin]
 */
 int coin_change_ii_bu(std::vector<int>& coins, int amount) {
   std::vector<uint64_t> dp(amount + 1);

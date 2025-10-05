@@ -219,6 +219,11 @@ void invoke_merge_k_sorted_lists();
 */
 void invoke_reverse_linked_list();
 
+/*
+142. Linked List Cycle II: https://leetcode.com/problems/linked-list-cycle-ii
+*/
+void invoke_linked_list_cycle_ii();
+
 void test_linked_list();
 
 void test_doubly_linked_list();

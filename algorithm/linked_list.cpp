@@ -602,6 +602,55 @@ void invoke_reverse_linked_list() {
   destroy_linkedlist(head);
 }
 
+/*
+Input: head: [3,2,0,-4], pos: 1
+ Floyd's Tortoise and Hare algorithm:
+ e
+                f
+                s
+ 3 -> 2 -> 0 -> 4
+      ^----------|
+
+Input: head: [1,2,3,4], pos: 0
+ e
+           f
+           s
+ 1 -> 2 -> 3 -> 4
+ ^---------------
+*/
+SLinkedList* linked_list_cycle_ii(SLinkedList* head) {
+  SLinkedList* slow = head, *fast = head, *entry = head;
+  while(fast && fast->next && fast->next->next) {
+    slow = slow->next;
+    fast = fast->next->next;
+    if(slow == fast) {
+      while(entry != slow) {
+        entry = entry->next;
+        slow = slow->next;
+      }
+      return slow;
+    }
+  }
+  return nullptr;
+}
+void invoke_linked_list_cycle_ii() {
+  SLinkedList* head = new SLinkedList(3);
+  head->next = new SLinkedList(2);
+  head->next->next = new SLinkedList(0);
+  head->next->next->next = new SLinkedList(4);
+  head->next->next->next->next = head->next;
+  auto* cycle_node = linked_list_cycle_ii(head);
+  std::cout<<"142. Linked List Cycle II: "<<(cycle_node != nullptr ? cycle_node->value : -1);
+  // Deallocation
+  while(head && head->value != 4) {
+    auto* temp = head;
+    head = head->next;
+    delete temp;
+    temp = nullptr;
+  }
+  delete head;
+}
+
 void test_linked_list() {
   SLinkedList* dummy = new SLinkedList(-1);
   

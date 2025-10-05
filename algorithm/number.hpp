@@ -687,4 +687,9 @@ void invoke_find_triangular_sum_of_an_array();
 */
 void invoke_daily_temperatures();
 
+/*
+518. Coin Change II: https://leetcode.com/problems/coin-change-ii
+*/
+void invoke_coin_change_ii();
+
 #endif /* NUMBER_HPP */

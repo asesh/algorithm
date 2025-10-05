@@ -4522,7 +4522,7 @@ Input: [75,71,69,72,76,73] => [4,2,1,1,0,0]
  0  1  2  3  4  5
  75 71 69 72 76 73
  stack:  76 75
- result:
+ result: 1 1 4 2 1 1
 */
 std::vector<int> daily_temperatures(std::vector<int>& input) {
   std::vector<int> result(input.size());
@@ -4546,4 +4546,66 @@ void invoke_daily_temperatures() {
   for(auto& number: result) {
     std::cout<<number<<", ";
   }
+}
+
+/*
+Input: amount: 5, coins: [1,2,5] => 4
+ 1 1 1 1 1
+ 1 1 1 2
+ 2 2 1
+ 1 2 2
+
+Input: amount: 6, coins: [2,1] => 4
+ 2 2 2
+ 2 2 1 1
+ 1 1 1 1 1 1
+ 1 1 1 1 2
+*/
+int coin_change_ii_td(std::vector<int>& coins, int index, int amount, std::vector<std::vector<int>>& memo) {
+  if(amount == 0) {
+    return 1;
+  }
+  
+  if(index >= coins.size()) {
+    return 0;
+  }
+  
+  if(memo[index][amount] != -1) {
+    return memo[index][amount];
+  }
+  
+  if(coins[index] > amount) {
+    return memo[index][amount] = coin_change_ii_td(coins, index + 1, amount, memo);
+  }
+  
+  memo[index][amount] = coin_change_ii_td(coins, index + 1, amount, memo) + coin_change_ii_td(coins, index, amount - coins[index], memo);
+  
+  return memo[index][amount];
+}
+/*
+Input: amount: 5, coins: [1,2,5] => 4
+ coin | Amount
+ -    | 1  0  0  0  0  0
+ 1    | 1  1  1  1  1  1
+ 2    |
+ 5    |
+ dp[current_amount] += dp[]
+*/
+int coin_change_ii_bu(std::vector<int>& coins, int amount) {
+  std::vector<uint64_t> dp(amount + 1);
+  dp[0] = 1;
+  
+  for(auto& coin: coins) { // 1, 2, 5
+    for(int current_coin = coin; current_coin <= amount; ++current_coin) { // coin -> target amount (5)
+      dp[current_coin] += dp[current_coin - coin];
+    }
+  }
+  
+  return dp[amount];
+}
+void invoke_coin_change_ii() {
+  int amount = 5;
+  std::vector<int> coins = {1,2,5};
+//  std::vector<std::vector<int>> memo(coins.size(), std::vector<int>(amount + 1, -1));
+  std::cout<<"518. Coin Change II: "<<coin_change_ii_bu(coins, amount); //coin_change_ii_td(coins, 0, amount, memo);
 }

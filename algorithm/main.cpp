@@ -19,7 +19,9 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_linked_list_cycle_ii();
+  invoke_target_sum();
+  
+//  invoke_linked_list_cycle_ii();
   
 //  invoke_coin_change_ii();
   

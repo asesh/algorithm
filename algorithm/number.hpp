@@ -227,12 +227,6 @@ void invoke_rotate_array();
 void invoke_reverse_integer();
 
 /*
-4. Median of Two Sorted Arrays: https://leetcode.com/problems/median-of-two-sorted-arrays/description/
- https://www.algoexpert.io/questions/median-of-two-sorted-arrays
-*/
-void invoke_median_of_two_sorted_arrays();
-
-/*
 122. Best Time to Buy and Sell Stock II https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii
 */
 void invoke_best_time_to_buy_and_sell_stock_ii();
@@ -691,5 +685,25 @@ void invoke_daily_temperatures();
 518. Coin Change II: https://leetcode.com/problems/coin-change-ii
 */
 void invoke_coin_change_ii();
+
+/*
+
+*/
+void invoke_adjacent_increasing_subarrays_detection_ii();
+
+/*
+494. Target Sum: https://leetcode.com/problems/target-sum
+*/
+void invoke_target_sum();
+
+/*
+4. Median of Two Sorted Arrays: https://leetcode.com/problems/median-of-two-sorted-arrays/description/
+*/
+void invoke_median_of_two_sorted_arrays();
+
+/*
+3370. Smallest Number With All Set Bits: https://leetcode.com/problems/smallest-number-with-all-set-bits
+*/
+void invoke_smallest_number_with_all_set_bits();
 
 #endif /* NUMBER_HPP */

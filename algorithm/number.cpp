@@ -916,27 +916,6 @@ void invoke_reverse_integer() {
 }
 
 /*
-Input: nums1: [1,3], nums2: [2] => Output: 2.0
- 
-Input: nums1: [1,2], nums2: [3,4] => Output: 2.50000
- 
-Input: nums1: [1,3,4,5], nums: [2,3,6,7] => Output: 3.50000
-Process:
- Total elements: 8 -> even
- mid_index = ((8/2)-1) => [3+1]/2 = 7/2 = 3.5
- 
-nums1: [4,5,6,7], nums2: [0,1,2,3]
-*/
-double median_of_two_sorted_arrays(std::vector<int>& nums1, std::vector<int>& nums2) {
-  double output = 0.0;
-  return output;
-}
-void invoke_median_of_two_sorted_arrays() {
-  std::vector<int> nums1 = {1,2}, nums2 = {3,4};
-  std::cout<<"The median of two sorted array is: "<<median_of_two_sorted_arrays(nums1, nums2);
-}
-
-/*
 prices = [7,1,5,3,6,4]; Output = 5-1 + 6-3 => 7
 prices = [1,2,3,4,5]; Output = 5-1 => 4
 prices = [7,6,4,3,1]; Output = 0
@@ -4608,4 +4587,173 @@ void invoke_coin_change_ii() {
   std::vector<int> coins = {1,2,5};
 //  std::vector<std::vector<int>> memo(coins.size(), std::vector<int>(amount + 1, -1));
   std::cout<<"518. Coin Change II: "<<coin_change_ii_bu(coins, amount); //coin_change_ii_td(coins, 0, amount, memo);
+}
+
+/*
+Input: [4,4,5,6,5,6,7] => 3
+   l
+       r
+ 4 4 5 6 5 6 7
+     *
+ 0 1 2 3 4 5 6
+*/
+int adjacent_increasing_subarrays_detection_ii(std::vector<int>& input) {
+  int result = 0;
+  
+  return result;
+}
+void invoke_adjacent_increasing_subarrays_detection_ii() {
+  std::vector<int> input = {4,4,5,6,5,6,7};
+  std::cout<<"3350. Adjacent Increasing Subarrays Detection II: "<<adjacent_increasing_subarrays_detection_ii(input);
+}
+
+/*
+Input: [1,1,1,1], target: 2 => 4
+ +1 + 1 + 1 - 1
+ +1 - 1 + 1 + 1
+ +1 + 1 - 1 + 1
+ -1 + 1 + 1 + 1
+
+Input: [1,1,1], target: 1 => 3
+ 1
+   +1 - 1 *
+   -1 + 1 *
+    1 + 1 X
+ -1
+    +1 + 1
+ Memo:
+ -1, -1, -1,  3, -1, -1, -1
+ -1, -1,  1, -1,  2, -1, -1
+ -1,  0, -1,  1, -1,  1, -1
+ 
+Input: [1, 1, 1, 1, 1], target: 3 => 5
+ - => -ve sign
+    -
+       -
+          -
+             -
+ 1  1  1  1  1
+*/
+int target_sum_td(std::vector<int>& input, int target, int current_index, int current_sum, int total_sum, std::vector<std::vector<int>>& memo) {
+  if(current_index == input.size()) {
+    if(current_sum == target) {
+      return 1;
+    }
+  } else {
+    if(memo[current_index][current_sum + total_sum] != -1) {
+      return memo[current_index][current_sum + total_sum];
+    }
+    
+    auto add = target_sum_td(input, target, current_index + 1, current_sum + input[current_index], total_sum, memo);
+    auto sub = target_sum_td(input, target, current_index + 1, current_sum - input[current_index], total_sum, memo);
+    
+    memo[current_index][current_sum + total_sum] = add + sub;
+    return memo[current_index][current_sum + total_sum];
+  }
+  
+  return 0;
+}
+int target_sum_bu(std::vector<int>& input, int target) {
+  return 0;
+}
+int target_sum(std::vector<int>& input, int target) {
+  // Using TD with memoization
+//  auto sum = std::accumulate(input.begin(), input.end(), 0);
+//  std::vector<std::vector<int>> memo(input.size(), std::vector<int>(sum * 2 + 1, -1));
+//  return target_sum_td(input, target, 0, 0, sum, memo);
+  
+  // Using BU
+  return target_sum_bu(input, target);
+}
+void invoke_target_sum() {
+  int target = 3;
+  std::vector<int> input = {1,1,1,1,1};
+  std::cout<<"494. Target Sum: "<<target_sum(input, target);
+}
+
+/*
+Input: [1,3,5],[2,4] => 3
+ total: 5, mid: 5/2 = 2.5
+   f
+ 1 3 5
+ s
+ 2 4
+
+Input: [1,3,8],[2,6,9] -> 1 2 3 6 8 9
+ total: 6, mid: 6/2 = 3 - 1 = 2
+     F
+ 1 3 8
+   S
+ 2 6 9
+ 
+Input: [1,2,3,5,6,7],[4]
+ counter: 0 -> 3
+     l
+ 1 2 3 5 6 7
+ r
+ 4
+
+Input: [1,2][3,4] => 5/2 = 2.5
+ total: 4, mid: 4/2 = 2 - 1 = 1
+     l
+ 1 2
+ r
+ 3 4
+
+Input: [-10,-9,-8],[1,2] => -8.0
+ 1 2 -8 -9 -10
+        l
+ -10 -9 -8
+ r
+ 1 2
+*/
+double median_of_two_sorted_arrays(std::vector<int>& nums1, std::vector<int>& nums2) {
+  double output = 0.0;
+  
+  // Using two-pointers methods
+  
+  return output;
+}
+void invoke_median_of_two_sorted_arrays() {
+  std::vector<int> nums1 = {-10,-9,-8}, nums2 = {1,2};
+  std::cout<<"The median of two sorted array is: "<<median_of_two_sorted_arrays(nums1, nums2);
+}
+
+/*
+Input: 5 => 7
+ 5: 101
+ 6: 110
+ 7: 111
+ 
+Input: 2
+ 2: 10 => 3
+ 3: 11
+
+Input: 10 => 15
+ 10: 1010
+ 15: 1111
+
+Input: 3 => 3
+ 3: 11 => 3
+ 4: 100
+ 1* 2^1 + 1* 2^0
+*/
+int smallest_number_with_all_set_bits(int number) {
+  int inter = 0,  result = 0;
+
+  while(number > 0) { // 0
+    inter = (inter * 10) + 1; // 11
+    number >>= 1; // 0
+  }
+
+  int power = 0;
+  while(inter > 0) { // 1
+    result += std::pow(2, power++); // 3
+    inter /= 10; // 0
+  }
+
+  return result;
+}
+void invoke_smallest_number_with_all_set_bits() {
+  std::cout<<"3370. Smallest Number With All Set Bits: "<<smallest_number_with_all_set_bits(4);
 }

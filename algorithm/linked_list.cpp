@@ -651,6 +651,47 @@ void invoke_linked_list_cycle_ii() {
   delete head;
 }
 
+/*
+Input: nums = [1], head = [1,2,1,2,1,2] => 2 -> 2 -> 2
+      c
+      h
+ *         *         *
+ 1 -> 2 -> 1 -> 2 -> 1 -> 2
+ */
+SLinkedList* delete_nodes_from_linked_list_present_in_array(std::vector<int>& nums, SLinkedList* head) {
+  std::unordered_set<int> set(nums.begin(), nums.end());
+  
+  while(head && set.contains(head->value)) {
+    head = head->next;
+  }
+  
+  SLinkedList* current = head;
+  while(current && current->next) {
+    while(current->next && set.contains(current->next->value)) {
+      current->next = current->next->next;
+    }
+    current = current->next;
+  }
+  
+  return head;
+}
+void invoke_delete_nodes_from_linked_list_present_in_array() {
+  std::vector<int> nums = {1};
+  SLinkedList* head = new SLinkedList(1);
+  head->next = new SLinkedList(2);
+  head->next->next = new SLinkedList(1);
+  head->next->next->next = new SLinkedList(2);
+  head->next->next->next->next = new SLinkedList(1);
+  head->next->next->next->next->next = new SLinkedList(2);
+  auto* new_head = delete_nodes_from_linked_list_present_in_array(nums, head);
+  std::cout<<"3217. Delete Nodes From Linked List Present in Array: ";
+  while(new_head) {
+    std::cout<<new_head->value<<" -> ";
+    new_head = new_head->next;
+  }
+  destroy_linkedlist(head);
+}
+
 void test_linked_list() {
   SLinkedList* dummy = new SLinkedList(-1);
   

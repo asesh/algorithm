@@ -224,6 +224,11 @@ void invoke_reverse_linked_list();
 */
 void invoke_linked_list_cycle_ii();
 
+/*
+3217. Delete Nodes From Linked List Present in Array: https://leetcode.com/problems/delete-nodes-from-linked-list-present-in-array
+*/
+void invoke_delete_nodes_from_linked_list_present_in_array();
+
 void test_linked_list();
 
 void test_doubly_linked_list();

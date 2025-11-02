@@ -19,7 +19,9 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_target_sum();
+  invoke_delete_nodes_from_linked_list_present_in_array();
+  
+//  invoke_target_sum();
   
 //  invoke_linked_list_cycle_ii();
   

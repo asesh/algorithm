@@ -4613,6 +4613,14 @@ Input: [1,1,1,1], target: 2 => 4
  +1 - 1 + 1 + 1
  +1 + 1 - 1 + 1
  -1 + 1 + 1 + 1
+ 
+Input: [1, 1, 1, 1, 1], target: 3 => 5
+  - => -ve sign
+     -
+        -
+           -
+              -
+  1  1  1  1  1
 
 Input: [1,1,1], target: 1 => 3
  Recursion tree:
@@ -4636,6 +4644,7 @@ Input: [1,1,1], target: 1 => 3
  |  |  |-- +1 (1)*
  |  |  |
  |  |  |-- -1 (-1)
+ |  |  |
  |  |-- -1 (-2)
  |     |
  |     |-- +1 (-1)
@@ -4645,14 +4654,6 @@ Input: [1,1,1], target: 1 => 3
  -1, -1, -1,  3, -1, -1, -1
  -1, -1,  1, -1,  2, -1, -1
  -1,  0, -1,  1, -1,  1, -1
- 
-Input: [1, 1, 1, 1, 1], target: 3 => 5
- - => -ve sign
-    -
-       -
-          -
-             -
- 1  1  1  1  1
 */
 int target_sum_td(std::vector<int>& input, int target, int current_index, int current_sum, int total_sum, std::vector<std::vector<int>>& memo) {
   if(current_index == input.size()) {
@@ -4776,4 +4777,37 @@ int smallest_number_with_all_set_bits(int number) {
 }
 void invoke_smallest_number_with_all_set_bits() {
   std::cout<<"3370. Smallest Number With All Set Bits: "<<smallest_number_with_all_set_bits(4);
+}
+
+/*
+Input: colors = "aaabbbabbbb", neededTime = [3,5,10,7,5,3,5,5,4,8,1]
+                    s
+                      c
+ a a a  b b b a b b b b
+ 3 5 10 7 5 3 5 5 4 8 1
+ 0 1 2  3 4 5 6 7 8 9 10
+*/
+int minimum_time_to_make_rope_colorful(std::string& colors, std::vector<int>& needed_time) {
+  int result = 0;
+  int start = 0, current = 1;
+
+  while(current < colors.size()) {
+    if(colors[start] == colors[current]) {
+      result += std::min(needed_time[start], needed_time[current]);
+
+      if(needed_time[start] < needed_time[current]) {
+        start = current;
+      }
+    } else {
+      start = current;
+    }
+    ++current;
+  }
+
+  return result;
+}
+void invoke_minimum_time_to_make_rope_colorful() {
+  std::string colors = "aaabbbabbbb";
+  std::vector<int> needed_time = {3,5,10,7,5,3,5,5,4,8,1};
+  std::cout<<"1578. Minimum Time to Make Rope Colorful: "<<minimum_time_to_make_rope_colorful(colors, needed_time);
 }

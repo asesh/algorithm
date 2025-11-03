@@ -706,4 +706,9 @@ void invoke_median_of_two_sorted_arrays();
 */
 void invoke_smallest_number_with_all_set_bits();
 
+/*
+1578. Minimum Time to Make Rope Colorful: https://leetcode.com/problems/minimum-time-to-make-rope-colorful
+*/
+void invoke_minimum_time_to_make_rope_colorful();
+
 #endif /* NUMBER_HPP */

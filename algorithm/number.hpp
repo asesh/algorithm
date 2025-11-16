@@ -711,4 +711,9 @@ void invoke_smallest_number_with_all_set_bits();
 */
 void invoke_minimum_time_to_make_rope_colorful();
 
+/*
+1513. Number of Substrings With Only 1s: https://leetcode.com/problems/number-of-substrings-with-only-1s
+*/
+void invoke_number_of_substrings_with_only_1s();
+
 #endif /* NUMBER_HPP */

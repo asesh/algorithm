@@ -20,11 +20,11 @@
 
 int main(int argc, const char* argv[]) {
   
-  invoke_minimum_time_to_make_rope_colorful();
+//  invoke_minimum_time_to_make_rope_colorful();
   
 //  invoke_delete_nodes_from_linked_list_present_in_array();
   
-//  invoke_target_sum();
+  invoke_target_sum();
   
 //  invoke_linked_list_cycle_ii();
   

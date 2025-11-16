@@ -4624,9 +4624,9 @@ Input: [1, 1, 1, 1, 1], target: 3 => 5
 
 Input: [1,1,1], target: 1 => 3
  Recursion tree:
- |-- +1
+ |-- +1 (1)
  |  |
- |  |-- +1
+ |  |-- +1 (2)
  |  |  |
  |  |  |-- +1 (3)
  |  |  |
@@ -4637,7 +4637,7 @@ Input: [1,1,1], target: 1 => 3
  |     |-- +1 (1)*
  |     |
  |     |-- -1 (-1)
- |-- -1
+ |-- -1 (-1)
  |  |
  |  |-- +1 (0)
  |  |  |
@@ -4650,10 +4650,12 @@ Input: [1,1,1], target: 1 => 3
  |     |-- +1 (-1)
  |     |
  |     |-- -1 (-3)
- Memo:
- -1, -1, -1,  3, -1, -1, -1
- -1, -1,  1, -1,  2, -1, -1
- -1,  0, -1,  1, -1,  1, -1
+ Memo table:
+ index
+     0   1   2   3   4   5   6 (sum)
+ 0 {-1, -1, -1,  3, -1, -1, -1},
+ 1 {-1, -1,  1, -1,  2, -1, -1},
+ 2 {-1,  0, -1,  1, -1,  1, -1}
 */
 int target_sum_td(std::vector<int>& input, int target, int current_index, int current_sum, int total_sum, std::vector<std::vector<int>>& memo) {
   if(current_index == input.size()) {
@@ -4668,6 +4670,8 @@ int target_sum_td(std::vector<int>& input, int target, int current_index, int cu
     auto add = target_sum_td(input, target, current_index + 1, current_sum + input[current_index], total_sum, memo);
     auto sub = target_sum_td(input, target, current_index + 1, current_sum - input[current_index], total_sum, memo);
     
+    std::cout<<"ci: "<<current_index<<", ct: "<<(current_sum + total_sum)<<", s: "<<(add + sub)<<std::endl;
+    
     memo[current_index][current_sum + total_sum] = add + sub;
     return memo[current_index][current_sum + total_sum];
   }
@@ -4675,21 +4679,24 @@ int target_sum_td(std::vector<int>& input, int target, int current_index, int cu
   return 0;
 }
 int target_sum_bu(std::vector<int>& input, int target) {
-  return 0;
+  auto total_sum = std::accumulate(input.begin(), input.end(), 0);
+  std::vector<std::vector<int>> bu(input.size(), std::vector<int>(input.size() * 2));
+  
+  return bu[0][0];
 }
 int target_sum(std::vector<int>& input, int target) {
   // Using TD with memoization
-//  auto sum = std::accumulate(input.begin(), input.end(), 0);
-//  std::vector<std::vector<int>> memo(input.size(), std::vector<int>(sum * 2 + 1, -1));
-//  return target_sum_td(input, target, 0, 0, sum, memo);
+  auto sum = std::accumulate(input.begin(), input.end(), 0);
+  std::vector<std::vector<int>> memo(input.size(), std::vector<int>(sum * 2 + 1, -1));
+  return target_sum_td(input, target, 0, 0, sum, memo);
   
   // Using BU
-  return target_sum_bu(input, target);
+//  return target_sum_bu(input, target);
 }
 void invoke_target_sum() {
-  int target = 3;
-  std::vector<int> input = {1,1,1,1,1};
-  std::cout<<"494. Target Sum: "<<target_sum(input, target);
+  int target = 1; // 3
+  std::vector<int> input = {1,1,1}; // {1,1,1,1,1}
+  std::cout<<"494. Target Sum: "<<std::endl<<target_sum(input, target);
 }
 
 /*
@@ -4810,4 +4817,33 @@ void invoke_minimum_time_to_make_rope_colorful() {
   std::string colors = "aaabbbabbbb";
   std::vector<int> needed_time = {3,5,10,7,5,3,5,5,4,8,1};
   std::cout<<"1578. Minimum Time to Make Rope Colorful: "<<minimum_time_to_make_rope_colorful(colors, needed_time);
+}
+
+/*
+Input: 1111 => 10
+ 1   : 4
+ 11  : 3
+ 111 : 2
+ 1111: 1
+       f
+ 1 1 1 1
+ 1: 1 + 1 + 1 + 1
+ 2: 1 + 1 + 1
+ 3: 2
+ 4: 1
+ result: 10
+ count:  4
+*/
+int number_of_substrings_with_only_1s(std::string& input) {
+  int result = 0, count = 0, mod = 1e9 + 7;
+  for(int index = 0; index < input.length(); ++index) {
+    count = input[index] == '1' ? count + 1 : 0;
+    result = (result + count) % mod;
+  }
+  
+  return result;
+}
+void invoke_number_of_substrings_with_only_1s() {
+  std::string input = "1111";
+  std::cout<<"1513. Number of Substrings With Only 1s: "<<number_of_substrings_with_only_1s(input);
 }

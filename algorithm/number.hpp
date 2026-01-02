@@ -716,4 +716,19 @@ void invoke_minimum_time_to_make_rope_colorful();
 */
 void invoke_number_of_substrings_with_only_1s();
 
+/*
+76. Minimum Window Substring: https://leetcode.com/problems/minimum-window-substring
+*/
+void invoke_minimum_window_substring();
+
+/*
+1262. Greatest Sum Divisible by Three: https://leetcode.com/problems/greatest-sum-divisible-by-three/
+*/
+void invoke_greatest_sum_divisible_by_three();
+
+/*
+840. Magic Squares In Grid: https://leetcode.com/problems/magic-squares-in-grid
+*/
+void invoke_magic_squares_in_grid();
+
 #endif /* NUMBER_HPP */

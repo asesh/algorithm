@@ -4670,7 +4670,7 @@ int target_sum_td(std::vector<int>& input, int target, int current_index, int cu
     auto add = target_sum_td(input, target, current_index + 1, current_sum + input[current_index], total_sum, memo);
     auto sub = target_sum_td(input, target, current_index + 1, current_sum - input[current_index], total_sum, memo);
     
-    std::cout<<"ci: "<<current_index<<", ct: "<<(current_sum + total_sum)<<", s: "<<(add + sub)<<std::endl;
+//    std::cout<<"ci: "<<current_index<<", ct: "<<(current_sum + total_sum)<<", s: "<<(add + sub)<<std::endl;
     
     memo[current_index][current_sum + total_sum] = add + sub;
     return memo[current_index][current_sum + total_sum];
@@ -4686,12 +4686,12 @@ int target_sum_bu(std::vector<int>& input, int target) {
 }
 int target_sum(std::vector<int>& input, int target) {
   // Using TD with memoization
-  auto sum = std::accumulate(input.begin(), input.end(), 0);
-  std::vector<std::vector<int>> memo(input.size(), std::vector<int>(sum * 2 + 1, -1));
-  return target_sum_td(input, target, 0, 0, sum, memo);
+//  auto sum = std::accumulate(input.begin(), input.end(), 0);
+//  std::vector<std::vector<int>> memo(input.size(), std::vector<int>(sum * 2 + 1, -1));
+//  return target_sum_td(input, target, 0, 0, sum, memo);
   
   // Using BU
-//  return target_sum_bu(input, target);
+  return target_sum_bu(input, target);
 }
 void invoke_target_sum() {
   int target = 1; // 3
@@ -4846,4 +4846,196 @@ int number_of_substrings_with_only_1s(std::string& input) {
 void invoke_number_of_substrings_with_only_1s() {
   std::string input = "1111";
   std::cout<<"1513. Number of Substrings With Only 1s: "<<number_of_substrings_with_only_1s(input);
+}
+
+/*
+Input: s: ADOBECODEBANC, t: ABC => BANC
+ s         c
+       s             c
+                   s     c*
+ A D O B E C O D E B A N C
+ result: ADOBEC CODEBA BANC
+
+Input: s: ABBBABC, t: ABC => ABC
+ f           s
+   f         s
+       f     s
+         f   s*
+ A B B B A B C
+ result: ABBBABC
+
+Input: s: a, t: aa
+ a
+
+ 1 2 3 4 5 6 7 8 9...
+ 0 0 A B C 0 0 0 0
+ 0 0 1 1 1 0 0 0 0
+*/
+std::string minimum_window_substring(std::string input, std::string target) {
+  std::vector<int> memo(128);
+  for(auto& character: target) {
+    memo[character]++;
+  }
+  
+  return "";
+}
+void invoke_minimum_window_substring() {
+  std::cout<<"76. Minimum Window Substring: "<<minimum_window_substring("ABBBABC", "ABC");
+}
+
+/*
+Input: [1,1,2] => 3
+ 0 1 2
+ 1 1 2
+ Recursion tree:
+ 0
+ |--1 -> 0:1
+ |  |
+ |  |--1 -> 1:2
+ |  |  |
+ |  |  |--2 -> 2:4
+ |  |  |
+ |  |--2 -> 2:3*
+ |  |
+ |--1 -> 1:1
+ |  |
+ |  |--2 -> 2:3
+ |  |
+ |--2 -> 2:2
+ 
+Input: [2,1,3,4] => 9
+  *   * *
+  2 1 3 4
+  Recursion tree:
+  0
+  |
+  |--2 -> 0:2
+  |  |
+  |  |--1 -> 1:3*
+  |  |  |
+  |  |  |--3 -> 2:6*
+  |  |  |  |
+  |  |  |  |--4 -> 3:10
+  |  |  |
+  |  |  |--4 -> 3: 7
+  |  |  |
+  |  |--3 -> 2:5
+  |  |  |
+  |  |  |--4 -> 3:9**
+  |  |
+  |--1 -> 1:1
+  ...
+ 
+Input: [3,6,5,1,8] => 18
+ * *   * *
+ 3 6 5 1 8
+ 
+Input: [2,6,2,2,7] => 15
+ * *     *
+ 2 6 2 2 7
+ 
+Input: [2,19,6,16,5,10,7,4,11,6] => 84
+   *  * *  * *  * * *  *
+ 2 19 6 16 5 10 7 4 11 6
+*/
+void greatest_sum_divisible_by_three_td(std::vector<int>& nums, int index, int sum, int& result, std::vector<std::vector<int>>& memo) {
+  if(index >= nums.size()) {
+    return;
+  }
+  
+  int current_number = nums[index];
+  int current_sum = current_number + sum;
+
+  greatest_sum_divisible_by_three_td(nums, index + 1, 0, result, memo); // 10
+  greatest_sum_divisible_by_three_td(nums, index + 1, current_sum, result, memo); // 10
+  greatest_sum_divisible_by_three_td(nums, index + 2, current_sum, result, memo); //
+  greatest_sum_divisible_by_three_td(nums, index + 3, current_sum, result, memo); //
+  
+  if(current_sum >= 3 && current_sum % 3 == 0) {
+    result = std::max(result, current_sum);
+  } else if(current_number >= 3 && current_number % 3 == 0) {
+    result = std::max(result, current_number);
+  }
+}
+int greatest_sum_divisible_by_three_bu(std::vector<int>& nums) {
+  return 0;
+}
+void invoke_greatest_sum_divisible_by_three() {
+  int result = 0;
+  std::vector<int> input = {2,6,2,2,7}; // {2,1,3,4}, {3,6,5,1,8};
+  std::vector<std::vector<int>> memo(input.size(), std::vector<int>(input.size() * 2, -1));
+  greatest_sum_divisible_by_three_td(input, 0, 0, result, memo);
+  std::cout<<"1262. Greatest Sum Divisible by Three: "<<result<<std::endl;
+}
+
+/*
+Input: [4,3,8,4],[9,5,1,9],[2,7,6,2] => 1
+ [4 3 8 4]    [4 3 8]
+ [9 5 1 9] => [9 5 1]
+ [2 7 6 2]    [2 7 6]
+
+Input: [7,0,5],[2,4,6],[3,8,1] => 0
+ [7 0 5]
+ [2 4 6]
+ [3 8 1]
+
+Input: [2,4,9,2],[4,3,5,7],[9,8,1,6] => 1
+ [2 4 9 2]    [4 9 2]
+ [4 3 5 7] => [3 5 7]
+ [9 8 1 6]    [8 1 6]
+*/
+bool magic_squares_in_grid_is_magic(std::vector<std::vector<int>>& grid, int row, int column) {
+  int antidiag_sum = grid[row - 1][column - 1] + grid[row][column] + grid[row - 2][column - 2];
+  int diag_sum = grid[row - 1][column - 1] + grid[row - 2][column] + grid[row][column - 2];
+
+  if (grid[row - 1][column - 1] != 5 || antidiag_sum != diag_sum) {
+    return false;
+  }
+
+  std::vector<int> count(10);
+  for(int current_row = row - 2; current_row <= row; ++current_row) {
+    for(int current_column = column - 2; current_column <= column; ++current_column) {
+      int current_number = grid[current_row][current_column];
+      if(current_number < 1 || current_number > 9 || count[current_number]) {
+        return false;
+      }
+
+      count[current_number]++;
+    }
+  }
+
+  for(int current_row = row - 2; current_row <= row; ++current_row) {
+    if(diag_sum != grid[current_row][column - 2] + grid[current_row][column - 1] + grid[current_row][column]) {
+      return false;
+    }
+  }
+  for(int current_column = column - 2; current_column <= column; ++current_column) {
+    if(diag_sum != grid[row - 2][current_column] + grid[row - 1][current_column] + grid[row][current_column]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+int magic_squares_in_grid(std::vector<std::vector<int>>& grid) {
+  int result = 0;
+
+  int total_rows = grid.size(), total_columns = grid[0].size();
+  if (total_rows < 3 || total_columns < 3) {
+    return result;
+  }
+
+  for (int row = 2; row < total_rows; ++row) {
+    for (int column = 2; column < total_columns; ++column) {
+      if(magic_squares_in_grid_is_magic(grid, row, column)) {
+        ++result;
+      }
+    }
+  }
+  
+  return result;
+}
+void invoke_magic_squares_in_grid() {
+  std::vector<std::vector<int>> grid = {{2,4,9,2},{4,3,5,7},{9,8,1,6}};
+  std::cout<<"840. Magic Squares In Grid: "<<magic_squares_in_grid(grid);
 }

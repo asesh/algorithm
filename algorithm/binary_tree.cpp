@@ -730,3 +730,58 @@ void invoke_convert_sorted_array_to_binary_search_tree() {
   std::cout<<"108. Convert Sorted Array to Binary Search Tree: "<<root_node->value;
   destroy(root_node);
 }
+
+/*
+              3             1: 3
+       5            1       2: 6
+   6       2     0     8    3: 16
+         7   4              4: 11
+
+               3            1: 3
+        5           1       2: 6
+     6     2     0     8    3: 16
+  10  10  7  4              4: 31
+*/
+int maximium_level_sum_of_a_binary_tree(CBinaryTree<int32_t>* root) {
+  int result = 0, current_level = 0, max_sum = INT_MIN;
+  std::queue<CBinaryTree<int32_t>*> nodes;
+  nodes.push(root);
+  while(!nodes.empty()) {
+    ++current_level;
+    int nodes_count = nodes.size();
+
+    int level_sum = 0;
+    for(int count = 0; count < nodes_count; ++count) {
+      auto* current_node = nodes.front();
+      nodes.pop();
+
+      level_sum += current_node->value;
+
+      if(current_node->left) {
+        nodes.push(current_node->left);
+      }
+      if(current_node->right) {
+        nodes.push(current_node->right);
+      }
+    }
+    if(level_sum > max_sum) {
+      max_sum = level_sum;
+      result = current_level;
+    }
+  }
+
+  return result;
+}
+void invoke_maximium_level_sum_of_a_binary_tree() {
+  CBinaryTree<int32_t>* root = new CBinaryTree<int32_t>(3);
+  root->left = new CBinaryTree<int32_t>(5);
+  root->right = new CBinaryTree<int32_t>(1);
+  root->left->left = new CBinaryTree<int32_t>(6);
+  root->left->right = new CBinaryTree<int32_t>(2);
+  root->left->right->left = new CBinaryTree<int32_t>(7);
+  root->left->right->right = new CBinaryTree<int32_t>(4);
+  root->right->left = new CBinaryTree<int32_t>(0);
+  root->right->right = new CBinaryTree<int32_t>(8);
+  std::cout<<"1161. Maximum Level Sum of a Binary Tree: "<<maximium_level_sum_of_a_binary_tree(root);
+  destroy(root);
+}

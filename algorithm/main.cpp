@@ -19,10 +19,11 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
+  invoke_maximium_level_sum_of_a_binary_tree();
   
 //  invoke_magic_squares_in_grid();
   
-  invoke_greatest_sum_divisible_by_three();
+//  invoke_greatest_sum_divisible_by_three();
   
 //  invoke_minimum_window_substring();
   

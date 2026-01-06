@@ -272,4 +272,9 @@ void invoke_minimum_absolute_difference_in_bst();
 */
 void invoke_convert_sorted_array_to_binary_search_tree();
 
+/*
+1161. Maximum Level Sum of a Binary Tree: https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree
+*/
+void invoke_maximium_level_sum_of_a_binary_tree();
+
 #endif /* BINARY_TREE_HPP */

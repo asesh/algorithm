@@ -277,4 +277,9 @@ void invoke_convert_sorted_array_to_binary_search_tree();
 */
 void invoke_maximium_level_sum_of_a_binary_tree();
 
+/*
+865. Smallest Subtree with all the Deepest Nodes: https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes
+*/
+void invoke_smallest_subtree_with_all_the_deepest_nodes();
+
 #endif /* BINARY_TREE_HPP */

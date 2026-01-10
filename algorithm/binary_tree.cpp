@@ -785,3 +785,32 @@ void invoke_maximium_level_sum_of_a_binary_tree() {
   std::cout<<"1161. Maximum Level Sum of a Binary Tree: "<<maximium_level_sum_of_a_binary_tree(root);
   destroy(root);
 }
+
+int smallest_subtree_with_all_the_deepest_nodes_dfs(CBinaryTree<int32_t>* current_node, int current_depth, int& max_depth, CBinaryTree<int32_t>*& result) {
+  max_depth = std::max(max_depth, current_depth);
+
+  if(!current_node) {
+    return current_depth;
+  }
+
+  int left = smallest_subtree_with_all_the_deepest_nodes_dfs(current_node->left, current_depth + 1, max_depth, result);
+  int right = smallest_subtree_with_all_the_deepest_nodes_dfs(current_node->right, current_depth + 1, max_depth, result);
+  if(left == max_depth && right == max_depth) {
+    result = current_node;
+  }
+
+  return std::max(left, right);
+}
+void invoke_smallest_subtree_with_all_the_deepest_nodes() {
+  CBinaryTree<int32_t>* root = new CBinaryTree<int32_t>(0);
+  root->left = new CBinaryTree<int32_t>(1);
+  root->right = new CBinaryTree<int32_t>(3);
+  root->left->right = new CBinaryTree<int32_t>(2);
+  root->right->left = new CBinaryTree<int32_t>(4);
+  
+  int max_depth = 0;
+  CBinaryTree<int32_t>* result = root;
+  smallest_subtree_with_all_the_deepest_nodes_dfs(root, 0, max_depth, result);
+  result->traverse_preorder(result);
+  destroy(root);
+}

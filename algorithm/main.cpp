@@ -19,7 +19,9 @@
 #include "tree.hpp"
 
 int main(int argc, const char* argv[]) {
-  invoke_maximium_level_sum_of_a_binary_tree();
+  invoke_smallest_subtree_with_all_the_deepest_nodes();
+  
+//  invoke_maximium_level_sum_of_a_binary_tree();
   
 //  invoke_magic_squares_in_grid();
   
